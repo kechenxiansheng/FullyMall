@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+fade 淡化效果
+-->
+<fade android:duration="500"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

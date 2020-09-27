@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+ dimens.xml 专门定义尺寸的xml
+-->
+<resources>
+    <dimen name="dp_60">55dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>

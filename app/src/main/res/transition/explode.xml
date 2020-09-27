@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+fade 爆炸效果
+-->
+<explode android:duration="300"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ 自定义dialog的边框布局
+
+ corners 的radius 设置圆角角度大小
+ stroke 标签设置边框颜色和粗细
+ solid  标签设置背景的颜色
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <corners android:radius="4dp"/>
+
+    <!--<stroke android:color="@color/colorGrey" android:width="1dp"/>-->
+    <solid android:color="#7ac7cc"/>
+
+</shape>

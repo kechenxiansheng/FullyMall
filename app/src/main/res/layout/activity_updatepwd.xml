@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#40000000"
+    android:gravity="center"
+    tools:context=".activity.UpdatepwdActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="#cce9e5"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/login_title_bg"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="#c7f1f4"
+                android:gravity="center"
+                android:layout_margin="10dp"
+                android:textColor="@color/colorBlack"
+                android:text="修改密码"
+                android:textSize="25sp" />
+            <TextView
+                android:id="@+id/tv_update_back"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/login_background_button"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="关闭"
+                android:textColor="@color/colorBlack" />
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/colorBlack"
+                android:text="新密码："
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_update_password1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:inputType="numberPassword"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/iv_update_lock"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
+                android:background="@mipmap/ic_secure"
+                android:padding="5dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="95dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/colorBlack"
+                android:text="确认密码："
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/et_update_password2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:inputType="numberPassword"
+                android:layout_weight="1"
+                android:layout_marginEnd="40dp"
+                />
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_update_tips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@color/colorLightBlue"
+            android:textColor="@color/colorAccent"
+
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLightBlue2"
+            android:orientation="horizontal"
+            >
+            <EditText
+                android:id="@+id/et_update_phoneNum"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:layout_weight="0.8"
+                android:inputType="phone"
+                android:hint="输入绑定的手机号码"
+                />
+            <TextView
+                android:id="@+id/tv_update_get_yzm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="10dp"
+                android:textSize="16sp"
+                android:padding="5dp"
+                android:background="@drawable/login_background_button"
+                android:textColor="@color/colorBlack"
+                android:text="获取验证码"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorLightBlue2"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_gravity="center"
+                android:textSize="16sp"
+                android:textColor="#000"
+                android:padding="2dp"
+                android:text="填写验证码："/>
+            <EditText
+                android:id="@+id/et_update_yzm"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginEnd="10dp"
+                android:layout_gravity="center"
+                android:inputType="number"
+                android:text=""/>
+            <View
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorLightBlue"
+            >
+            <Button
+                android:id="@+id/bt_update_sure_and_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/login_background_button"
+                android:text="确认修改"
+                android:textSize="23sp"
+                android:layout_margin="10dp"
+                android:padding="3dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

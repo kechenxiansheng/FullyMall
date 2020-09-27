@@ -1,0 +1,91 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
+
+//SMSSDK 短信验证框架
+MobSDK {
+    appKey "30372cad57f9c"
+    appSecret "6196be020b19b998b3c984704792276c"
+    SMSSDK {
+        autoSMS true
+    }
+}
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.cm.fm.mall"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.2.22"    //规则，10进1
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    signingConfigs {
+        config {
+            storeFile file("E:/androidstudioworkspace/keystore/keystore.jks")
+            storePassword "billbook"
+            keyAlias "BillBook"
+            keyPassword "billbook"
+        }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+    }
+
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                // 生成指定名称的apk
+                outputFileName = "FullyMall.apk"
+            }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    //如果libs目录添加了 so 文件，需要添加此设置
+    sourceSets {
+        main {
+            jniLibs.srcDirs 'libs'
+            jni.srcDirs = []
+        }
+    }
+}
+
+def releaseTime() {
+    return new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone("UTC+8"))
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:2.0.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'org.litepal.android:core:1.6.1'
+    //图片加载框架
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    implementation 'com.facebook.fresco:fresco:0.12.0'
+    //网络请求框架
+    implementation 'com.squareup.okhttp3:okhttp:3.12.6'
+    //分包
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.alibaba:fastjson:1.2.47'
+    //轮播图
+    implementation 'com.youth.banner:banner:1.4.8'
+    //权限处理框架
+//    implementation 'com.permissionx.guolindev:permissionx:1.4.0'
+    implementation 'com.permissionx.guolindev:permission-support:1.4.0'
+}

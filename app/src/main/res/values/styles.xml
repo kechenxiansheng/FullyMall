@@ -1,0 +1,86 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="ApplicationStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <!--Toolbar颜色-->
+        <!--<item name="colorPrimary">@android:color/holo_blue_bright</item>-->
+        <!-- 状态栏颜色 -->
+        <item name="colorPrimaryDark">@color/colorLightBlue8</item>
+        <!-- 布局顶到屏幕边缘，会与状态栏重叠 -->
+        <!--<item name="android:windowTranslucentNavigation">true</item>-->
+        <!-- 状态栏背景透明 -->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+        <!-- 防止白色状态栏导致文字看不见的问题 -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <!-- 状态栏颜色 -->
+        <!--<item name="android:statusBarColor">@color/colorLightBlue</item>-->
+
+    </style>
+
+    <!-- Dialog样式-->
+    <style name="DialogTheme" parent="@android:style/Theme.Dialog">
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 遮罩层 -->
+        <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+
+
+    <!-- TODO 自定义activity的style（被设置的activity如果使用的是appcompat包下的，透明度设置会无效，需要直接继承Activity）   Translucent (半)透明-->
+    <style name="ActStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- activity背景透明 （透明度、不要title、窗口是否透明、透明窗口动画效果 -->
+        <item name="android:windowBackground">@color/transparent_background</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+
+        <!-- 防止白色状态栏导致文字看不见的问题 -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <!-- 状态栏颜色 -->
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/colorLightBlue8</item>
+        <!-- 动画效果 -->
+        <!--<item name="android:windowExitTransition" tools:targetApi="lollipop">@transition/fade</item>  &lt;!&ndash; 退出动画,淡化 &ndash;&gt;-->
+        <!--<item name="android:windowEnterAnimation">@transition/fade</item>    &lt;!&ndash; 进入动画,淡化 &ndash;&gt;-->
+        <!--<item name="android:windowReenterTransition" tools:targetApi="lollipop">@transition/fade</item>   &lt;!&ndash; 再次进入动画,淡化 &ndash;&gt;-->
+    </style>
+
+    <!-- activity 背景透明 -->
+    <style name="transparent_activity">
+        <item name="android:windowBackground">@color/transparent_background</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Translucent</item>
+    </style>
+
+    <!-- 闪屏activity 状态栏颜色适配 -->
+    <style name="splash_activity" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- 防止白色状态栏导致文字看不见的问题 -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <!-- 状态栏颜色 -->
+        <item name="android:statusBarColor" tools:targetApi="lollipop">@color/colorSplash</item>
+    </style>
+
+    <style name="ApplicationStyle.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="ApplicationStyle.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

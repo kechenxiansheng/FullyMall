@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    TODO android:descendantFocusability="blocksDescendants"
+    TODO 防止当listview 子item 中有Button，ImageButton，CheckBox等控件时，ListView.setOnItemClickListener(new …) 事件没有效果，点击Item没有反应。
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <RelativeLayout
+        android:id="@+id/rl_shopping_product"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        >
+        <ImageView
+            android:id="@+id/iv_shopping_product_image"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="10dp"
+            android:src="@mipmap/ic_launcher"
+            />
+        <TextView
+            android:id="@+id/tv_shopping_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/iv_shopping_product_image"
+            android:layout_marginStart="10dp"
+            android:text="商品名"
+            />
+        <TextView
+            android:id="@+id/tv_shopping_product_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:layout_toEndOf="@+id/iv_shopping_product_image"
+            android:layout_below="@+id/tv_shopping_product_name"
+            android:layout_marginStart="10dp"
+            android:textSize="12sp"
+            android:text="商品描述"
+            android:maxLines="2"
+            />
+        <TextView
+            android:id="@+id/tv_shopping_product_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/iv_shopping_product_image"
+            android:layout_below="@+id/tv_shopping_product_description"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="1dp"
+            android:textSize="10sp"
+            android:textColor="@color/colorOrange1"
+            android:text="价格"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_shopping_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical"
+        >
+        <Button
+            android:id="@+id/bt_shopping_delete"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:background="@mipmap/ic_delete_bg"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/add_product_bt_bg"
+            android:layout_gravity="center"
+            >
+            <ImageView
+                android:id="@+id/iv_shopping_reduce"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="3dp"
+                android:src="@mipmap/ic_jian_bg2"
+                />
+            <TextView
+                android:id="@+id/tv_shopping_buyNum"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:background="@drawable/textview_border"
+                android:gravity="center"
+                android:textSize="15sp"
+                android:layout_margin="3dp"
+                android:padding="2dp"
+                android:text="1"/>
+            <ImageView
+                android:id="@+id/iv_shopping_add"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="3dp"
+                android:src="@mipmap/ic_jia_bg2"
+                />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

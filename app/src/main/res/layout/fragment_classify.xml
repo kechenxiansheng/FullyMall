@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- DrawerLayout 抽屉布局，前面为内容，后面是显示在左侧的菜单 -->
+<!--         android:descendantFocusability="blocksDescendants"   -->
+    <!--<LinearLayout-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:id="@+id/drawer_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical"-->
+        <!--&gt;-->
+        <!--<ImageView-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@mipmap/icon_dog"-->
+            <!--/>-->
+       <!--<TextView-->
+           <!--android:layout_width="match_parent"-->
+           <!--android:layout_height="match_parent"-->
+           <!--android:gravity="center_horizontal"-->
+           <!--android:textSize="20sp"-->
+           <!--android:textStyle="bold"-->
+           <!--android:textColor="@color/colorOrange1"-->
+           <!--android:text="本页功能，主人正在加班加点写哦！"-->
+           <!--/>-->
+    <!--</LinearLayout>-->
+
+<!-- catalog 条目 -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        >
+
+        <ListView
+            android:id="@+id/ll_classify_left_menu"
+            android:layout_weight="0.3"
+            android:layout_width="0dp"
+            android:background="@color/colorLightBlue8"
+            android:layout_height="match_parent"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorGrey"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            >
+
+            <ListView
+                android:id="@+id/ll_classify_right_data"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

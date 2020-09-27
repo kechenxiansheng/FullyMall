@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F6F6F6"
+    tools:context=".activity.SplashActivity">
+    <!--
+    作为启动的闪屏图片，本身可以尽可能的小，这样在不同的屏幕上适配时，如果图片不足可以直接填充相同背景色，以防止图片本身被拉伸变形
+    -->
+    <ImageView
+        android:id="@+id/tv_splash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/splash1"/>
+</RelativeLayout>

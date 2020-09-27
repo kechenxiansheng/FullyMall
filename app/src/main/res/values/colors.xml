@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent2">#eac2d0</color>
+    <color name="colorLightBlue">#d1f9fc</color>
+    <color name="colorLightBlue1">#e0f5f9</color>
+    <color name="colorLightBlue2">#c7f1f4</color>
+    <color name="colorLightBlue3">#67b3b9</color>
+    <color name="colorLightBlue4">#86d0d6</color>
+    <color name="colorLightBlue5">#0e6d74</color>
+    <color name="colorLightBlue6">#74c7de</color>
+    <color name="colorLightBlue7">#2a9ebe</color>
+    <color name="colorLightBlue8">#c7f1f4</color>
+    <color name="colorLightBlue9">#6bb5ba</color>
+    <color name="colorLightBlue10">#58a9d7</color>
+    <color name="colorLightBlue11">#a0ebfd</color>
+
+    <color name="colorOrange1">#ca6d3b</color>
+    <color name="colorOrange2">#FF8A00</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGrey">#c0c0c0</color>
+
+    <color name="colorSplash">#F6F6F6</color>
+
+    <!-- 透明度 -->
+    <color name="transparent_background">#40000000</color>
+</resources>

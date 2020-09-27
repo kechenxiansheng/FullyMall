@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/colorLightBlue8"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:background="@color/colorLightBlue11"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_head_back"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/colorLightBlue8"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="返回"
+            android:textColor="#000" />
+
+    </LinearLayout>
+
+
+    <!--
+    android:scaleType="fitCenter"  将原图按比例缩放到 ImageView 的大小
+    -->
+    <ImageView
+        android:id="@+id/iv_show_head"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:scaleType="fitCenter"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+    <LinearLayout
+        android:id="@+id/ll_change_method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        >
+        <TextView
+            android:id="@+id/tv_take_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/head_background"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:text="拍照"
+            />
+        <TextView
+            android:id="@+id/tv_photo_album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/head_background"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:text="相册"
+            />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_change_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/head_background"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlack"
+        android:text="更换头像"
+        />
+</LinearLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <!-- 数据库名称 数据库版本号 -->
+    <dbname value="fullymall"/>
+    <!--
+        <version value="1"/>
+
+        表增加一个属性，并新增一个类型表。直接修改数据库版本号以及添加映射即可
+    -->
+    <version value="4"/>
+
+    <!-- 数据库需要映射的类 -->
+    <list>
+        <!--<mapping class="com.cm.fm.mall.bean.ProductMsg"/>-->
+        <mapping class="com.cm.fm.mall.bean.ShoppingProduct"/>
+        <mapping class="com.cm.fm.mall.bean.UserInfo"/>
+        <mapping class="com.cm.fm.mall.bean.SearchHistory"/>
+        <mapping class="com.cm.fm.mall.bean.AddressInfo"/>
+    </list>
+</litepal>

@@ -1,0 +1,190 @@
+{
+  "code": 0,
+  "data": [{
+    "type": "手机数码",
+    "dataList": [{
+      "childType": "品牌",
+      "childDataList": [{
+        "name": "华为",
+        "image": ""
+      }, {
+        "name": "荣耀",
+        "image": ""
+      }, {
+        "name": "小米",
+        "image": ""
+      }, {
+        "name": "OPPO",
+        "image": ""
+      }, {
+        "name": "VIVO",
+        "image": ""
+      }, {
+        "name": "魅族",
+        "image": ""
+      }, {
+        "name": "一加",
+        "image": ""
+      }, {
+        "name": "诺基亚",
+        "image": ""
+      }, {
+        "name": "努比亚",
+        "image": ""
+      }]
+    }, {
+      "childType": "手机",
+      "childDataList": [{
+        "name": "5G手机",
+        "image": ""
+      }, {
+        "name": "游戏手机",
+        "image": ""
+      }, {
+        "name": "长续航手机",
+        "image": ""
+      }, {
+        "name": "拍照手机",
+        "image": ""
+      }, {
+        "name": "全面屏手机",
+        "image": ""
+      }, {
+        "name": "以旧换新",
+        "image": ""
+      }, {
+        "name": "手机配件",
+        "image": ""
+      }, {
+        "name": "手机服务",
+        "image": ""
+      }]
+    }, {
+      "childType": "影音摄影",
+      "childDataList": [{
+        "name": "单反相机",
+        "image": ""
+      }, {
+        "name": "微单相机",
+        "image": ""
+      }, {
+        "name": "数码相机",
+        "image": ""
+      }, {
+        "name": "摄影机",
+        "image": ""
+      }]
+    }]
+  },
+    {
+      "type": "男装",
+      "dataList": [{
+        "childType": "T恤",
+        "childDataList": [{
+          "name": "纯色",
+          "image": ""
+        }, {
+          "name": "纯棉",
+          "image": ""
+        }, {
+          "name": "宽松",
+          "image": ""
+        }, {
+          "name": "polo",
+          "image": ""
+        }, {
+          "name": "联名",
+          "image": ""
+        }]
+      }, {
+        "childType": "休闲裤",
+        "childDataList": [{
+          "name": "五分裤",
+          "image": ""
+        }, {
+          "name": "工装",
+          "image": ""
+        }, {
+          "name": "商务休闲裤",
+          "image": ""
+        }, {
+          "name": "九分裤",
+          "image": ""
+        }, {
+          "name": "冰丝",
+          "image": ""
+        }]
+      }, {
+        "childType": "衬衫",
+        "childDataList": [{
+          "name": "商务",
+          "image": ""
+        }, {
+          "name": "格子",
+          "image": ""
+        }, {
+          "name": "条纹",
+          "image": ""
+        }, {
+          "name": "短袖",
+          "image": ""
+        }, {
+          "name": "牛仔",
+          "image": ""
+        }]
+      }]
+    },
+    {
+      "type": "女装",
+      "dataList": [{
+        "childType": "上衣",
+        "childDataList": [{
+          "name": "基础通勤T",
+          "image": ""
+        }, {
+          "name": "娃娃领衬衫",
+          "image": ""
+        }, {
+          "name": "街头潮流T",
+          "image": ""
+        }, {
+          "name": "雪纺衫",
+          "image": ""
+        }, {
+          "name": "吊带背心",
+          "image": ""
+        }]
+      }, {
+        "childType": "裙装",
+        "childDataList": [{
+          "name": "雪纺连衣裙",
+          "image": ""
+        }, {
+          "name": "衬衫连衣裙",
+          "image": ""
+        }, {
+          "name": "碎花连衣裙",
+          "image": ""
+        }, {
+          "name": "背带裙",
+          "image": ""
+        }, {
+          "name": "百褶裙",
+          "image": ""
+        }]
+      }, {
+        "childType": "裤装",
+        "childDataList": [{
+          "name": "直筒裤",
+          "image": ""
+        }, {
+          "name": "运动裤",
+          "image": ""
+        }, {
+          "name": "哈伦裤",
+          "image": ""
+        }]
+      }]
+    }
+  ]
+}

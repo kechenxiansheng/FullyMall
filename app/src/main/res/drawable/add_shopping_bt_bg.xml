@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 设置按钮按下去的效果，实际上就是不同的图片
+     selector：根节点，其下可有多个item标签，智慧选择符合的item显示
+     corners:   设置圆角
+     state_pressed：true，被按下
+     -->
+    <item android:state_pressed="true" >
+        <shape>
+            <corners android:radius="90dp"/>
+            <solid android:color="@color/colorLightBlue7"/>
+        </shape>
+    </item>
+    <item android:state_pressed="false" >
+        <shape>
+            <corners android:radius="90dp"/>
+            <solid android:color="@color/colorLightBlue4"/>
+        </shape>
+    </item>
+
+
+</selector>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorLightBlue8"
+       >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal"
+            android:layout_marginEnd="10dp"
+            >
+                <ImageButton
+                    android:id="@+id/ib_back"
+                    android:layout_marginStart="10dp"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@mipmap/bg_back2"
+                    />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@color/colorWhite"
+                    android:layout_weight="1"
+                    >
+
+                        <!--
+                        换行 替换为 搜索：同时设置这两个属性
+                        android:imeOptions="actionSearch"
+                        android:singleLine="true"
+                        -->
+                        <EditText
+                            android:id="@+id/et_search_msg"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:focusable="true"
+                            android:hint="商品搜索"
+                            android:layout_weight="1"
+                            android:imeOptions="actionSearch"
+                            android:singleLine="true"
+                            android:textSize="14sp"
+                            />
+
+                </LinearLayout>
+                <ImageButton
+                    android:id="@+id/ib_search"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@color/colorLightBlue8"
+                    android:src="@mipmap/search"
+                    />
+        </LinearLayout>
+
+
+
+
+</LinearLayout>
