@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Scroller;
 
+import com.cm.fm.mall.util.Utils;
+
 
 /**
  * 自定义滑动按钮
@@ -159,7 +161,7 @@ public class SlideButton extends View {
         setClickable(true);
         mPaint = new Paint();
         mScroller = new Scroller(context);
-        view_height_int = dip2px(context, VIEW_HEIGHT);
+        view_height_int = Utils.dip2px(context, VIEW_HEIGHT);
         strokeLineColor_int = Color.parseColor(StrokeLineColor);
         strokeNoCheckedSolidColor_int = Color.parseColor(StrokeSolidColor);
         circleStrokeColor_int = Color.parseColor(CircleStrokeColor);
@@ -361,13 +363,6 @@ public class SlideButton extends View {
         }
     }
 
-    /**
-     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
-     */
-    public static int dip2px(Context context, float dpValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
 
 
     //状态改变监听

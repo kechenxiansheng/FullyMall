@@ -1,4 +1,4 @@
-package com.cm.fm.mall.fragment;
+package com.cm.fm.mall.fragment.menu;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -26,6 +26,7 @@ import com.cm.fm.mall.activity.ShoppingCartActivity;
 import com.cm.fm.mall.activity.UserSelfActivity;
 import com.cm.fm.mall.bean.UserInfo;
 import com.cm.fm.mall.dialog.AgreementDialog;
+import com.cm.fm.mall.fragment.BaseFragment;
 import com.cm.fm.mall.util.CheckUpdateUtil;
 import com.cm.fm.mall.util.LogUtil;
 import com.cm.fm.mall.util.NetWorkUtil;

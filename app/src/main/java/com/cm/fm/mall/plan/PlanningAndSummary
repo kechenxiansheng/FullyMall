@@ -20,7 +20,7 @@
 
 报错：
 2020-09-16 10:40:47
-    Caused by: java.lang.IllegalArgumentException: Binary XML file line #123: Duplicate id 0x7f09020d, tag null, or parent id 0x7f09007c with another fragment for com.cm.fm.mall.fragment.UserFragment
+    Caused by: java.lang.IllegalArgumentException: Binary XML file line #123: Duplicate id 0x7f09020d, tag null, or parent id 0x7f09007c with another fragment for com.cm.fm.mall.fragment.menu.UserFragment
 解决：
  //根据fragment数量设置viewpager预加载的页卡数，默认为1
  vp_menu_content.setOffscreenPageLimit(4);

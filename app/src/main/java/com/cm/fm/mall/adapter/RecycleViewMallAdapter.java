@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
+import com.cm.fm.mall.activity.CommodityActivity;
 import com.cm.fm.mall.activity.ProductActivity;
 import com.cm.fm.mall.bean.ProductMsg;
 import com.cm.fm.mall.util.ResourceUtils;
@@ -42,7 +43,8 @@ public class RecycleViewMallAdapter extends RecyclerView.Adapter<RecycleViewMall
                 //TODO 获取到具体商品后跳转到商品详情界面
                 int position =  viewHolder.getLayoutPosition(); //获取当前item的id
                 ProductMsg product = productLists.get(position);
-                Utils.getInstance().startActivityData(context,ProductActivity.class,product);
+//                Utils.getInstance().startActivityData(context,ProductActivity.class,product);
+                Utils.getInstance().startActivityData(context,CommodityActivity.class,product);
 //                Utils.getInstance().tips(context,"点击了："+ product.getProductName());
             }
         });

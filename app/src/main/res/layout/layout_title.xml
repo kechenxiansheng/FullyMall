@@ -15,8 +15,9 @@
                 <ImageButton
                     android:id="@+id/ib_back"
                     android:layout_marginStart="10dp"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:background="@mipmap/bg_back2"
                     />
                 <LinearLayout
@@ -49,8 +50,8 @@
                 </LinearLayout>
                 <ImageButton
                     android:id="@+id/ib_search"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center_vertical"
                     android:background="@color/colorLightBlue8"
                     android:src="@mipmap/search"

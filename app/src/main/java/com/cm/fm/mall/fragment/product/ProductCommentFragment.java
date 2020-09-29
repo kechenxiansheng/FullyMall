@@ -1,11 +1,14 @@
-package com.cm.fm.mall.fragment;
+package com.cm.fm.mall.fragment.product;
 
 import android.view.View;
 
-public class ProductDetailFragment extends BaseFragment {
+import com.cm.fm.mall.R;
+import com.cm.fm.mall.fragment.BaseFragment;
+
+public class ProductCommentFragment extends BaseFragment {
     @Override
     public int getResource() {
-        return 0;
+        return R.layout.fragment_product_comment;
     }
 
     @Override

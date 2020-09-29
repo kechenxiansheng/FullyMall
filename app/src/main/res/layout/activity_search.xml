@@ -25,8 +25,8 @@
             />
         <ImageButton
             android:id="@+id/ib_delete_all"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:background="@color/colorLightBlue"
             android:src="@mipmap/ic_delete_bg"
             />

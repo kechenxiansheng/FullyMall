@@ -3,26 +3,17 @@ package com.cm.fm.mall.adapter;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.activity.ProductActivity;
-import com.cm.fm.mall.bean.ProductMsg;
-import com.cm.fm.mall.fragment.MallFragment;
 import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.ResourceUtils;
 import com.cm.fm.mall.util.Utils;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 商城页导航栏适配器

@@ -34,9 +34,10 @@
                     />
                 <TextView
                     android:id="@+id/tv_address_cur_tag"
-                    android:layout_width="wrap_content"
+                    android:layout_width="28dp"
                     android:layout_height="wrap_content"
                     android:background="@color/colorAccent"
+                    android:gravity="center"
                     android:layout_toEndOf="@+id/tv_user_phone"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="10dp"

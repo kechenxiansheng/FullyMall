@@ -1,11 +1,8 @@
-package com.cm.fm.mall.fragment;
+package com.cm.fm.mall.fragment.menu;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +10,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.activity.ClassifyButtonActivity;
@@ -22,16 +18,13 @@ import com.cm.fm.mall.activity.ShoppingCartActivity;
 import com.cm.fm.mall.adapter.RecycleViewMallAdapter;
 import com.cm.fm.mall.adapter.RecycleViewMallGuideAdapter;
 import com.cm.fm.mall.bean.ProductMsg;
-import com.cm.fm.mall.util.CheckUpdateUtil;
+import com.cm.fm.mall.fragment.BaseFragment;
 import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.NetWorkUtil;
 import com.cm.fm.mall.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import static android.content.Context.INPUT_METHOD_SERVICE;
 
 
 /**

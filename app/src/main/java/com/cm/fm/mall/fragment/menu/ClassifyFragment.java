@@ -1,4 +1,4 @@
-package com.cm.fm.mall.fragment;
+package com.cm.fm.mall.fragment.menu;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,6 +15,7 @@ import com.cm.fm.mall.adapter.ClassifyLeftMenuAdapter;
 import com.cm.fm.mall.adapter.ClassifyRightDataAdapter;
 import com.cm.fm.mall.adapter.ClassifyRightDataItemAdapter;
 import com.cm.fm.mall.bean.ClassifyCategory;
+import com.cm.fm.mall.fragment.BaseFragment;
 import com.cm.fm.mall.util.LogUtil;
 
 import java.io.BufferedReader;

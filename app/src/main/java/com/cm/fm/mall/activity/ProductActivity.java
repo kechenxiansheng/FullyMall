@@ -2,21 +2,11 @@ package com.cm.fm.mall.activity;
 
 import android.annotation.TargetApi;
 import android.content.ContentValues;
-import android.content.Intent;
-import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.transition.Transition;
-import android.transition.TransitionInflater;
-import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,7 +24,6 @@ import org.litepal.tablemanager.Connector;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 展示商品详情的界面
@@ -62,7 +51,7 @@ public class ProductActivity extends BaseActivity implements View.OnClickListene
         Utils.getInstance().actUseAnim(context,R.transition.fade);
         //去掉Activity上面的状态栏 (注意这句话放的位置一定要放在setContentView之前)
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_product);
+        setContentView(R.layout.fragment_product_info);
 
         tv_image_tips = findViewById(R.id.tv_image_tips);   //viewpager的当前item提示
         vp_product = findViewById(R.id.vp_product);         //展示商品图片的viewpager

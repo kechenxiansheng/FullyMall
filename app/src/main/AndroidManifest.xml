@@ -68,8 +68,7 @@
         <activity
             android:name=".activity.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/ActStyle"
-            />
+            android:theme="@style/ActStyle" />
         <activity
             android:name=".activity.RegisterActivity"
             android:screenOrientation="portrait"
@@ -85,6 +84,9 @@
         <activity
             android:name=".activity.ProductActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".activity.CommodityActivity"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".activity.ShoppingCartActivity"
             android:launchMode="singleTask"
@@ -95,9 +97,9 @@
         <activity
             android:name=".activity.HeadPortraitActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.ClassifyButtonActivity"
-            android:screenOrientation="portrait"
-            />
+        <activity
+            android:name=".activity.ClassifyButtonActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
@@ -123,8 +125,8 @@
         -->
         <activity
             android:name=".activity.AddressDetailActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activity.SettlementActivity"
             android:screenOrientation="portrait" />
@@ -159,6 +161,7 @@
         <!-- <activity android:name=".activity.LocationActivity" -->
         <!-- android:screenOrientation="portrait" -->
         <!-- /> -->
+
 
     </application>
 

@@ -1,4 +1,4 @@
-package com.cm.fm.mall.fragment;
+package com.cm.fm.mall.fragment.menu;
 
 
 import android.content.Context;
@@ -17,6 +17,7 @@ import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.cm.fm.mall.R;
+import com.cm.fm.mall.fragment.BaseFragment;
 import com.cm.fm.mall.util.LogUtil;
 import com.cm.fm.mall.util.MallConstant;
 import com.youth.banner.Banner;

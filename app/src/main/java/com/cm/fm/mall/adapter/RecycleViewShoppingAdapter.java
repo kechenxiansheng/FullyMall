@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
+import com.cm.fm.mall.activity.CommodityActivity;
 import com.cm.fm.mall.activity.ProductActivity;
 import com.cm.fm.mall.activity.ShoppingCartActivity;
 import com.cm.fm.mall.bean.ProductMsg;
@@ -87,7 +88,8 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
                 LogUtil.d(tag,"cur_product:"+product.toString());
                 ProductMsg productMsg = new ProductMsg(product.getProductID(),product.getProductName(),product.getProductDescription(),product.getType(),
                         product.getPrice(),product.getInventory(),product.getExtension());
-                Utils.getInstance().startActivityData(context,ProductActivity.class,productMsg);
+//                Utils.getInstance().startActivityData(context,ProductActivity.class,productMsg);
+                Utils.getInstance().startActivityData(context,CommodityActivity.class,productMsg);
             }
         });
         return viewHolder;
