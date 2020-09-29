@@ -49,7 +49,9 @@ public class CheckUpdateUtil {
     public void checkUpdate(final Context context, final int actId){
         LogUtil.d(tag,"checkUpdate start");
         //handler 在子线程中使用，需要创建 Looper 环境：Looper.prepare() Looper.loop();
-        Looper.prepare();
+        if(!Utils.getInstance().isMainThread()){
+            Looper.prepare();
+        }
         handler = new Handler(new Handler.Callback() {
             @Override
             public boolean handleMessage(Message msg) {
@@ -91,7 +93,11 @@ public class CheckUpdateUtil {
                 LogUtil.e(tag,"checkUpdate end");
             }
         }).start();
-        Looper.loop();
+
+        if(!Utils.getInstance().isMainThread()){
+            Looper.loop();
+        }
+
     }
 
     /**

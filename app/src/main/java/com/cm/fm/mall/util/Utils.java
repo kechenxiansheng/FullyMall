@@ -19,6 +19,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.os.Build;
+import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -225,5 +226,12 @@ public class Utils {
     public static int dip2px(Context context, float dpValue) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
+    }
+
+    /**
+     * 判断是否在主线程中
+     */
+    public boolean isMainThread(){
+        return Looper.getMainLooper() == Looper.myLooper();
     }
 }
