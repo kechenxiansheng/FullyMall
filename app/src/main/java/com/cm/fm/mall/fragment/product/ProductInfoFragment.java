@@ -7,6 +7,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,8 +16,10 @@ import android.widget.TextView;
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.activity.ShoppingCartActivity;
 import com.cm.fm.mall.adapter.ViewPagerAdapter;
+import com.cm.fm.mall.bean.AddressInfo;
 import com.cm.fm.mall.bean.ProductMsg;
 import com.cm.fm.mall.bean.ShoppingProduct;
+import com.cm.fm.mall.dialog.AddressPageDialog;
 import com.cm.fm.mall.fragment.BaseFragment;
 import com.cm.fm.mall.util.LogUtil;
 import com.cm.fm.mall.util.ResourceUtils;
@@ -29,13 +33,17 @@ import java.util.List;
 
 /**
  * 商品信息页
+ * 周期 onCreate - onCreateView - onActivityCreated - onStart - onResume
  */
 public class ProductInfoFragment extends BaseFragment implements View.OnClickListener {
     Activity context;
     ViewPager vp_product;
-    ImageView bt_reduce,bt_add;
-    TextView tv_product_msg,tv_price,tv_inventory,tv_shopping_car,tv_image_tips,tv_buyNum;
+    ImageView bt_reduce,bt_add,bt_choose_address;
+    TextView tv_product_msg,tv_price,tv_inventory,tv_shopping_car,tv_image_tips,tv_buyNum,tv_obtain_address,tv_buy_now;
     LinearLayout ll_go_to_shopping_car;
+
+    AddressInfo choosedInfo = new AddressInfo();        //选择的地址信息
+    boolean haveDefaultAddress = false;                 //是否设置了默认地址
     List<View> views = new ArrayList<>();   //存放展示图片的list
     int[] images = {R.mipmap.p5,R.mipmap.p4,R.mipmap.p2,R.mipmap.p7};
 
@@ -66,17 +74,22 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
         vp_product = view.findViewById(R.id.vp_product);         //展示商品图片的viewpager
         bt_reduce = view.findViewById(R.id.bt_reduce);           //减按钮
         bt_add = view.findViewById(R.id.bt_add);                 //加按钮
+        tv_obtain_address = view.findViewById(R.id.tv_obtain_address);  //配送地址
+        bt_choose_address = view.findViewById(R.id.bt_choose_address);  //选择地址的按钮
         tv_product_msg = view.findViewById(R.id.tv_product_msg); //商品描述
         tv_price = view.findViewById(R.id.tv_price);             //商品价格
         tv_inventory = view.findViewById(R.id.tv_inventory);     //库存数量
         tv_buyNum = view.findViewById(R.id.tv_buyNum);           //购买数量
         tv_shopping_car = view.findViewById(R.id.tv_shopping_car);   //加入购物车按钮
+        tv_buy_now = view.findViewById(R.id.tv_buy_now);         //立即购买按钮
         ll_go_to_shopping_car = view.findViewById(R.id.ll_go_to_shopping_car);   //去购物车界面按钮
 
         bt_reduce.setOnClickListener(this);
         bt_add.setOnClickListener(this);
+        bt_choose_address.setOnClickListener(this);
         tv_shopping_car.setOnClickListener(this);
         ll_go_to_shopping_car.setOnClickListener(this);
+        tv_buy_now.setOnClickListener(this);
         //默认空值
         tv_product_msg.setText("");
         tv_price.setText("￥");
@@ -87,8 +100,8 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
             tv_product_msg.setText(productMsg.getProductDescription());
             tv_price.setText("￥"+productMsg.getPrice());
             tv_inventory.setText(String.valueOf(productMsg.getInventory()));
-            //商品信息初始化
-            initPicture(productMsg);
+            //数据初始化（包括商品和默认地址的显示）
+            initData(productMsg);
         }
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(views);
@@ -159,6 +172,17 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
                 buyNum = Integer.parseInt(tv_buyNum.getText().toString());
                 LogUtil.d(tag,"buyNum_add:"+buyNum);
                 break;
+            case R.id.bt_choose_address:
+                //点击选择地址按钮
+                AddressPageDialog dialog = new AddressPageDialog(context,choosedInfo, new AddressPageDialog.ChooseListener() {
+                    @Override
+                    public void chooseResult(AddressInfo info) {
+                        choosedInfo = info;
+                        tv_obtain_address.setText(String.format("%s%s", choosedInfo.getAddress(), choosedInfo.getStreet()));
+                    }
+                });
+                dialog.show();
+                break;
             case R.id.tv_shopping_car:
                 //加入购物车
                 //用户选择的当前商品的购买数量
@@ -172,11 +196,16 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
                 //跳转到购物车界面
                 Utils.getInstance().startActivity(context,ShoppingCartActivity.class);
                 break;
+            case R.id.tv_buy_now:
+                //立即购买
+                Utils.getInstance().tips(context,"点击了立即购买");
+                break;
         }
     }
-    //添加商品图片
-    public void initPicture(ProductMsg productMsg){
-        LogUtil.d(tag,"initPicture");
+    //添加商品图片，显示默认地址
+    public void initData(ProductMsg productMsg){
+        LogUtil.d(tag,"initData");
+        /** 商品数据初始化 */
         ViewPager.LayoutParams layoutParams = new ViewPager.LayoutParams();
         //长宽继承父布局的值
         layoutParams.width = ViewPager.LayoutParams.MATCH_PARENT;
@@ -194,6 +223,26 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
             views.add(imageView);
         }
         LogUtil.d(tag,"initPicture views size :" + views.size());
+
+        /** 显示默认地址 */
+        List<AddressInfo> addressInfos = DataSupport.findAll(AddressInfo.class);
+        if(addressInfos.size()!=0){
+            for (AddressInfo info:addressInfos) {
+                if(info.isDefault()){
+                    haveDefaultAddress = true;
+                    choosedInfo = info;
+                    tv_obtain_address.setText(String.format("%s%s", info.getAddress(), info.getStreet()));
+                    break;
+                }
+            }
+            //如果没有设置默认地址，显示第一条地址
+            if(!haveDefaultAddress){
+                choosedInfo = addressInfos.get(0);
+                tv_obtain_address.setText(String.format("%s%s", addressInfos.get(0).getAddress(), addressInfos.get(0).getStreet()));
+            }
+        }
+
+
     }
     //保存数据
     public void saveProductData(int buyNum){
@@ -234,6 +283,44 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
             LogUtil.d(tag,"saveProductData save buyNum");
         }
         LogUtil.d(tag,"saveProductData product:"+product.toString());
+    }
+
+    public void setDialogAnima(View view){
+        /**
+         * fromXType
+         * fromXValue
+         * toXType
+         * toXValue
+         * fromYType
+         * fromYValue
+         * toYType
+         * toYValue
+         */
+        Animation animation = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, 0.0f,
+                Animation.RELATIVE_TO_SELF, 1.0f,
+                Animation.RELATIVE_TO_SELF, 0.0f);
+        animation.setDuration(500);
+        animation.setFillAfter(true);
+        animation.setFillEnabled(true);
+        view.startAnimation(animation);
+        //动画监听
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
     }
 
     @Override

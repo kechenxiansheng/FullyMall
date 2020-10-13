@@ -64,6 +64,27 @@
         <!--<item name="android:windowReenterTransition" tools:targetApi="lollipop">@transition/fade</item>   &lt;!&ndash; 再次进入动画,淡化 &ndash;&gt;-->
     </style>
 
+
+    <!-- 选择地址的activity style -->
+    <style name="BottomAddressPageStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- 动画 -->
+        <item name="android:windowEnterAnimation">@anim/anim_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_bottom_out</item>
+
+        <!-- activity背景透明 （透明度、不要title、背景透明、边框 -->
+        <item name="android:windowBackground">@color/transparent_background2</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowFrame">@null</item>
+
+        <!-- 防止白色状态栏导致文字看不见的问题 -->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <!-- 状态栏颜色 -->
+        <!--<item name="android:statusBarColor" tools:targetApi="lollipop">@color/colorLightBlue8</item>-->
+    </style>
+
+
+
     <!-- activity 背景透明 -->
     <style name="transparent_activity">
         <item name="android:windowBackground">@color/transparent_background</item>

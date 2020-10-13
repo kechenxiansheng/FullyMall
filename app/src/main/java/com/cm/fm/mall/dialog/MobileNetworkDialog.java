@@ -32,11 +32,14 @@ public class MobileNetworkDialog extends Dialog implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         View tip_view = View.inflate(context,R.layout.layout_network_tip,null);
         setContentView(tip_view);
-        //TODO 通过 Window 设置在整个窗口显示在底部
+        //显示在底部
         Window window = getWindow();
+        window.setGravity(Gravity.CENTER);
+        window.setBackgroundDrawableResource(android.R.color.transparent);  //背景透明
+        //设置listview的高宽
         WindowManager.LayoutParams params = window.getAttributes();
-        params.y = 50;  //相当于设置了  android:layout_marginBottom="25dp"
-        params.gravity = Gravity.BOTTOM;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(params);
 
         tv_cancel_update = tip_view.findViewById(R.id.tv_cancel_update);

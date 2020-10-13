@@ -16,7 +16,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
-        versionName "1.2.22"    //规则，10进1
+        versionName "1.2.25"    //规则，10进1
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

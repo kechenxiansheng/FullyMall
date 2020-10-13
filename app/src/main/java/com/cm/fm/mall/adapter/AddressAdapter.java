@@ -57,6 +57,7 @@ public class AddressAdapter extends BaseAdapter {
         if (view == null) {
             holder = new ViewHolder();
             view = View.inflate(context, R.layout.layout_address_listview, null);
+
             holder.tv_user_name = view.findViewById(R.id.tv_user_name);
             holder.tv_user_phone = view.findViewById(R.id.tv_user_phone);
             holder.tv_address_cur_tag = view.findViewById(R.id.tv_address_cur_tag);

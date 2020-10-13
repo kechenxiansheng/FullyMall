@@ -27,4 +27,5 @@
 
     <!-- 透明度 -->
     <color name="transparent_background">#40000000</color>
+    <color name="transparent_background2">#00000000</color>
 </resources>

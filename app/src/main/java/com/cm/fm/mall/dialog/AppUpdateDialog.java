@@ -37,12 +37,14 @@ public class AppUpdateDialog extends Dialog implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         View view = View.inflate(context,R.layout.layout_update_tip_dialog,null);
         setContentView(view);
-        //TODO 通过 Window 设置在整个窗口显示在底部
+        //显示在底部
         Window window = getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setBackgroundDrawableResource(android.R.color.transparent);  //背景透明
+        //设置listview的高宽
         WindowManager.LayoutParams params = window.getAttributes();
-//        params.x = 10;  //相当于设置了  android:layout_marginStart="10dp"
-        params.y = 50;  //相当于设置了  android:layout_marginBottom="25dp",这是针对屏幕的绝对位置，所以效果和布局中设置有差别
-        params.gravity = Gravity.BOTTOM;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.width = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(params);
 
 

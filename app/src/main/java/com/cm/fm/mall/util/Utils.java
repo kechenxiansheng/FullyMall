@@ -116,7 +116,7 @@ public class Utils {
     public void tips(Context activity,String msg) {
         Toast.makeText(activity,msg,Toast.LENGTH_SHORT).show();
     }
-    //通知
+    /** 通知 */
     public void sendNotification(Context context, String channelId, String title, String contentText, int notificationId ){
         NotificationManager manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification.Builder builder = null;

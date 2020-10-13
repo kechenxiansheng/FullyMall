@@ -1,0 +1,11 @@
+
+as中更新：
+    vcs -> update -> 选择默认设置
+
+as中上传：
+    方式一
+        1、提交：vcs -> git ->commit
+        2、push：vcs ->git -> push
+    方式二
+        1、提交：项目右键 -> git -> commit directory
+        2、push：项目右键 -> git -> repository -> push

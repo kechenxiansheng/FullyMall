@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_test"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="@drawable/bottom_address_bg"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_address_page_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textSize="18sp"
+            android:text="配送至"
+            android:textColor="@color/colorBlack"
+            android:layout_centerInParent="true"
+            />
+        <ImageView
+            android:id="@+id/iv_address_page_close"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/bg_delete"
+            android:layout_marginEnd="10dp"
+            />
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_address_page"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:id="@+id/tv_other_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:background="@drawable/add_shopping_bt_bg"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="其他地址"/>
+</LinearLayout>
