@@ -69,11 +69,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/add_address_bt_bg"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="3dp"
             android:textSize="18sp"
             android:layout_marginEnd="15dp"
-            android:textColor="@color/colorLightBlue5"
+            android:textColor="@color/colorBlack"
             android:text="去结算"/>
     </LinearLayout>
 
