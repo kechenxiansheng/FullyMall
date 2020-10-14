@@ -174,13 +174,15 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
                 break;
             case R.id.bt_choose_address:
                 //点击选择地址按钮
-                AddressPageDialog dialog = new AddressPageDialog(context,choosedInfo, new AddressPageDialog.ChooseListener() {
+                AddressPageDialog dialog = new AddressPageDialog(context,R.style.BottomAddressDialogStyle,choosedInfo, new AddressPageDialog.ChooseListener() {
                     @Override
                     public void chooseResult(AddressInfo info) {
                         choosedInfo = info;
                         tv_obtain_address.setText(String.format("%s%s", choosedInfo.getAddress(), choosedInfo.getStreet()));
                     }
                 });
+                //点击布局外，隐藏dialog
+                dialog.setCanceledOnTouchOutside(true);
                 dialog.show();
                 break;
             case R.id.tv_shopping_car:

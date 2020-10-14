@@ -40,7 +40,6 @@ public class AppUpdateDialog extends Dialog implements View.OnClickListener {
         //显示在底部
         Window window = getWindow();
         window.setGravity(Gravity.BOTTOM);
-        window.setBackgroundDrawableResource(android.R.color.transparent);  //背景透明
         //设置listview的高宽
         WindowManager.LayoutParams params = window.getAttributes();
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;

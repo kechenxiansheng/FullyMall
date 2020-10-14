@@ -42,7 +42,7 @@
         <!-- 模糊 -->
         <item name="android:backgroundDimEnabled">true</item>
         <!-- 遮罩层 -->
-        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:backgroundDimAmount">0.4</item>
     </style>
 
 
@@ -65,22 +65,22 @@
     </style>
 
 
-    <!-- 选择地址的activity style -->
-    <style name="BottomAddressPageStyle" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- 选择地址的dialog style -->
+    <style name="BottomAddressDialogStyle" parent="Animation.AppCompat.Dialog">
         <!-- 动画 -->
         <item name="android:windowEnterAnimation">@anim/anim_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/anim_bottom_out</item>
 
-        <!-- activity背景透明 （透明度、不要title、背景透明、边框 -->
-        <item name="android:windowBackground">@color/transparent_background2</item>
-        <item name="android:windowNoTitle">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 半透明 -->
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowFrame">@null</item>
-
-        <!-- 防止白色状态栏导致文字看不见的问题 -->
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
-        <!-- 状态栏颜色 -->
-        <!--<item name="android:statusBarColor" tools:targetApi="lollipop">@color/colorLightBlue8</item>-->
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 模糊（灰度） -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 遮罩层，控制遮罩层灰度为30% -->
+        <item name="android:backgroundDimAmount">0.4</item>
     </style>
 
 

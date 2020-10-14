@@ -213,6 +213,8 @@ public class UserFragment extends BaseFragment implements View.OnClickListener {
             case R.id.ll_user_agreement:
                 //用户协议
                 AgreementDialog dialog = new AgreementDialog(context,R.style.DialogTheme);
+                //点击布局外，隐藏dialog
+                dialog.setCanceledOnTouchOutside(true);
                 dialog.show();
                 break;
              case R.id.ll_user_check:

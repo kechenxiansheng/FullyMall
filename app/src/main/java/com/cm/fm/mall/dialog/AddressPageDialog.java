@@ -43,11 +43,11 @@ public class AddressPageDialog extends Dialog implements View.OnClickListener {
 
     private String tag = "TAG_AddressPageDialog";
 
-    public AddressPageDialog(@NonNull Context context,AddressInfo info,ChooseListener chooseListener) {
-        super(context);
+    public AddressPageDialog(Context context, int themeResId, AddressInfo choosedInfo, ChooseListener listener) {
+        super(context, themeResId);
         this.context = context;
-        this.choosedInfo = info;
-        this.listener = chooseListener;
+        this.choosedInfo = choosedInfo;
+        this.listener = listener;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class AddressPageDialog extends Dialog implements View.OnClickListener {
         //显示在底部
         Window window = getWindow();
         window.setGravity(Gravity.BOTTOM);
-        window.setBackgroundDrawable(null);
+        window.setBackgroundDrawableResource(android.R.color.transparent);  //背景透明
         //设置listview的高宽
         WindowManager.LayoutParams params = window.getAttributes();
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;
