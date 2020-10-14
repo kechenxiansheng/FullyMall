@@ -2,6 +2,7 @@ package com.cm.fm.mall.fragment.product;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.activity.ShoppingCartActivity;
+import com.cm.fm.mall.activity.UserSelfActivity;
 import com.cm.fm.mall.adapter.ViewPagerAdapter;
 import com.cm.fm.mall.bean.AddressInfo;
 import com.cm.fm.mall.bean.ProductMsg;
@@ -39,18 +41,18 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
     Activity context;
     ViewPager vp_product;
     ImageView bt_reduce,bt_add,bt_choose_address;
-    TextView tv_product_msg,tv_price,tv_inventory,tv_shopping_car,tv_image_tips,tv_buyNum,tv_obtain_address,tv_buy_now;
+    TextView tv_product_msg,tv_price,tv_inventory,tv_shopping_car,tv_image_tips,tv_buyNum,tv_obtain_address,tv_buy_now,tv_cur_NumOfType;
     LinearLayout ll_go_to_shopping_car;
 
     AddressInfo choosedInfo = new AddressInfo();        //选择的地址信息
     boolean haveDefaultAddress = false;                 //是否设置了默认地址
     List<View> views = new ArrayList<>();   //存放展示图片的list
     int[] images = {R.mipmap.p5,R.mipmap.p4,R.mipmap.p2,R.mipmap.p7};
-
+    List<ShoppingProduct> shoppingProducts = new ArrayList<>();
     ProductMsg productMsg; //当前展示的商品实体类
 
     private String tag ="TAG_ProductInfoFragment";
-
+    private int PRODUCT_INFO_FRAGMENT_ACTIVITY_ID = 1000;
     @Override
     public int getResource() {
         return R.layout.fragment_product_info;
@@ -70,6 +72,7 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void init(View view) {
         context = getActivity();
+
         tv_image_tips = view.findViewById(R.id.tv_image_tips);   //viewpager的当前item提示
         vp_product = view.findViewById(R.id.vp_product);         //展示商品图片的viewpager
         bt_reduce = view.findViewById(R.id.bt_reduce);           //减按钮
@@ -80,6 +83,7 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
         tv_price = view.findViewById(R.id.tv_price);             //商品价格
         tv_inventory = view.findViewById(R.id.tv_inventory);     //库存数量
         tv_buyNum = view.findViewById(R.id.tv_buyNum);           //购买数量
+        tv_cur_NumOfType = view.findViewById(R.id.tv_cur_NumOfType);   //当前购买的种类数量
         tv_shopping_car = view.findViewById(R.id.tv_shopping_car);   //加入购物车按钮
         tv_buy_now = view.findViewById(R.id.tv_buy_now);         //立即购买按钮
         ll_go_to_shopping_car = view.findViewById(R.id.ll_go_to_shopping_car);   //去购物车界面按钮
@@ -103,6 +107,8 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
             //数据初始化（包括商品和默认地址的显示）
             initData(productMsg);
         }
+        //展示加入购物车的商品种类的数量
+        showNumOfType();
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(views);
         vp_product.setAdapter(adapter);
@@ -148,6 +154,19 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
             vp_product.setLayoutParams(params);
         }
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 1000:
+                if(resultCode == Activity.RESULT_OK){
+                    showNumOfType();
+                }
+                break;
+        }
+    }
+
     @Override
     public void onClick(View v) {
         int buyNum;     //购买数量
@@ -189,14 +208,16 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
                 //加入购物车
                 //用户选择的当前商品的购买数量
                 buyNum = Integer.parseInt(tv_buyNum.getText().toString());
-                LogUtil.d(tag,"buyNum_shopping_cart:"+buyNum);
+                LogUtil.d(tag,"buyNum : "+buyNum);
                 //保存数据
                 saveProductData(buyNum);
-                Utils.getInstance().tips(context,"加入成功！");
+                //重新查询加入购物车的商品
+                showNumOfType();
                 break;
             case R.id.ll_go_to_shopping_car:
                 //跳转到购物车界面
-                Utils.getInstance().startActivity(context,ShoppingCartActivity.class);
+                Intent intent = new Intent(getActivity(),ShoppingCartActivity.class);
+                startActivityForResult(intent,1000);
                 break;
             case R.id.tv_buy_now:
                 //立即购买
@@ -251,7 +272,7 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
         //创建数据库和表
         Connector.getDatabase();
         LogUtil.d(tag,"saveProductData productMsg :"+productMsg.toString());
-        //保存购买商品(正常情况下应该保存在服务器)
+        //保存购买的商品(正常情况下应该保存在服务器)
         ShoppingProduct product = new ShoppingProduct();
         product.setProductID(productMsg.getProductID());
         product.setProductName(productMsg.getProductName());
@@ -260,17 +281,18 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
         product.setExtension(productMsg.getExtension());
         product.setInventory(productMsg.getInventory());
         //保存商品前，查询数据库是否有与当前 相同的商品，有，则直接数量相加
+//        DataSupport.find(ShoppingProduct.class,productMsg.getProductID())
         List<ShoppingProduct> savedShoppingProducts = DataSupport.select
                 ("id","productID","productName","productDescription","type","price","inventory","buyNum","extension")
                 .where("productID=?",productMsg.getProductID()+"").find(ShoppingProduct.class);
         //总的购买数量
         LogUtil.d(tag,"saveProductData buyNum :"+buyNum);
         int curBuyProductNum = buyNum;
-//        LogUtil.d(tag,"saveProductData size: "+savedShoppingProducts.size());
-        if(savedShoppingProducts.size()!= 0){
+        LogUtil.d(tag,"saveProductData size: "+savedShoppingProducts.size());
+        if(savedShoppingProducts.size() > 0){
             //加上商品在数据库已保存的购买数量
             for (ShoppingProduct product1 :savedShoppingProducts) {
-//                LogUtil.d(tag,"saveProductData get data :"+ product1.toString());
+                LogUtil.d(tag,"saveProductData 当前数据 :"+ product1.toString());
                 curBuyProductNum += product1.getBuyNum();
             }
             product.setBuyNum(curBuyProductNum);
@@ -282,9 +304,15 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
             //数据库没有当前商品，直接保存购买数量及相关信息
             product.setBuyNum(buyNum);
             product.save();
-            LogUtil.d(tag,"saveProductData save buyNum");
+            LogUtil.d(tag,"saveProductData save buyNum success");
         }
-        LogUtil.d(tag,"saveProductData product:"+product.toString());
+        LogUtil.d(tag,"saveProductData product info : "+product.toString());
+    }
+
+    public void showNumOfType(){
+        shoppingProducts = DataSupport.findAll(ShoppingProduct.class);
+        //显示购物车中物品种类的数量
+        tv_cur_NumOfType.setText(String.valueOf(shoppingProducts.size()));
     }
 
     public void setDialogAnima(View view){

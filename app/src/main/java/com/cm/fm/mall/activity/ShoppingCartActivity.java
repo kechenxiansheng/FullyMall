@@ -15,6 +15,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -87,7 +88,19 @@ public class ShoppingCartActivity extends BaseActivity implements View.OnClickLi
         rv_shopping_cart_list.addItemDecoration(itemDecoration);
 
     }
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //物理返回键关闭本页，也需要回传数据
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            setResult(RESULT_OK);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        setResult(RESULT_OK);
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -151,4 +164,5 @@ public class ShoppingCartActivity extends BaseActivity implements View.OnClickLi
             }
         }
     }
+
 }

@@ -28,9 +28,10 @@ import org.litepal.crud.DataSupport;
 
 import java.util.List;
 
-public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleViewShoppingAdapter.MyViewHolder> {
+public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleViewShoppingAdapter.MyViewHolder> implements View.OnClickListener {
     private List<ShoppingProduct> productLists;
     private Activity context;
+    private MyViewHolder viewHolder;
     private final String tag = "TAG_RVShoppingAdapter";
 
     public RecycleViewShoppingAdapter(List<ShoppingProduct> productLists, Activity context) {
@@ -43,55 +44,14 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
         //加载子view视图，创建viewholder
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_shopping_cart_recycview_item,viewGroup,false);
-        final MyViewHolder viewHolder = new MyViewHolder(view);
-        viewHolder.iv_shopping_reduce.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int curBuyNum =  Integer.parseInt(viewHolder.tv_shopping_buyNum.getText().toString());
-                curBuyNum--;
-                if(curBuyNum <= 1){
-                    curBuyNum = 1;
-                }
-                viewHolder.tv_shopping_buyNum.setText(String.valueOf(curBuyNum));
-                int position =  viewHolder.getLayoutPosition();
-                saveNewBuyNum(curBuyNum,productLists.get(position).getId());
-            }
-        });
-        viewHolder.iv_shopping_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int curBuyNum =  Integer.parseInt(viewHolder.tv_shopping_buyNum.getText().toString());
-                curBuyNum++;
-                viewHolder.tv_shopping_buyNum.setText(String.valueOf(curBuyNum));
-                int position =  viewHolder.getLayoutPosition();
-                saveNewBuyNum(curBuyNum,productLists.get(position).getId());
-            }
-        });
+        viewHolder = new MyViewHolder(view);
+
+        viewHolder.iv_shopping_reduce.setOnClickListener(this);
+        viewHolder.iv_shopping_add.setOnClickListener(this);
         //删除选择的商品
-        viewHolder.bt_shopping_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShoppingProduct del_product = productLists.get(i);
-                LogUtil.d(tag,"del_product:"+del_product.toString());
-                DataSupport.delete(ShoppingProduct.class,del_product.getId());
-                //更新adapter
-                productLists = DataSupport.findAll(ShoppingProduct.class);
-                notifyDataSetChanged();
-                updateTotal();
-            }
-        });
+        viewHolder.bt_shopping_delete.setOnClickListener(this);
         //点击商品item跳转至商品页面
-        viewHolder.rl_shopping_product.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ShoppingProduct product = productLists.get(i);
-                LogUtil.d(tag,"cur_product:"+product.toString());
-                ProductMsg productMsg = new ProductMsg(product.getProductID(),product.getProductName(),product.getProductDescription(),product.getType(),
-                        product.getPrice(),product.getInventory(),product.getExtension());
-//                Utils.getInstance().startActivityData(context,ProductActivity.class,productMsg);
-                Utils.getInstance().startActivityData(context,CommodityActivity.class,productMsg);
-            }
-        });
+        viewHolder.rl_shopping_product.setOnClickListener(this);
         return viewHolder;
     }
 
@@ -112,6 +72,51 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
     @Override
     public int getItemCount() {
         return productLists.size();
+    }
+
+    @Override
+    public void onClick(View v) {
+        //当前购买数量
+        int curBuyNum =  Integer.parseInt(viewHolder.tv_shopping_buyNum.getText().toString());
+        //当前 item 索引
+        int position =  viewHolder.getLayoutPosition();
+        switch (v.getId()){
+            case R.id.iv_shopping_reduce:
+                //点击减
+                curBuyNum--;
+                if(curBuyNum <= 1){
+                    curBuyNum = 1;
+                }
+                viewHolder.tv_shopping_buyNum.setText(String.valueOf(curBuyNum));
+                saveNewBuyNum(curBuyNum,productLists.get(position).getId());
+                break;
+            case R.id.iv_shopping_add:
+                //点击加
+                curBuyNum++;
+                viewHolder.tv_shopping_buyNum.setText(String.valueOf(curBuyNum));
+                saveNewBuyNum(curBuyNum,productLists.get(position).getId());
+                break;
+            case R.id.bt_shopping_delete:
+                //点击删除
+//               int position = viewHolder.getLayoutPosition();
+                ShoppingProduct del_product = productLists.get(position);
+                LogUtil.d(tag,"del_product:"+del_product.toString());
+                DataSupport.delete(ShoppingProduct.class,del_product.getId());
+                //更新adapter
+                update();
+                updateTotal();
+                break;
+            case R.id.rl_shopping_product:
+                //点击item跳转
+//                int position = viewHolder.getLayoutPosition();
+                ShoppingProduct product = productLists.get(position);
+                LogUtil.d(tag,"cur_product:"+product.toString());
+                ProductMsg productMsg = new ProductMsg(product.getProductID(),product.getProductName(),product.getProductDescription(),product.getType(),
+                        product.getPrice(),product.getInventory(),product.getExtension());
+//                Utils.getInstance().startActivityData(context,ProductActivity.class,productMsg);
+                Utils.getInstance().startActivityData(context,CommodityActivity.class,productMsg);
+                break;
+        }
     }
 
 
@@ -135,6 +140,13 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
 
     }
 
+    public void update(){
+        List<ShoppingProduct> products = DataSupport.findAll(ShoppingProduct.class);
+        productLists.clear();
+        productLists.addAll(products);
+        notifyDataSetChanged();
+    }
+
     public void saveNewBuyNum(int curBuyNum,int id){
         LogUtil.d(tag,"saveNewBuyNum,curBuyNum:"+curBuyNum+",id:"+id);
 
@@ -144,10 +156,10 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
         DataSupport.update(ShoppingProduct.class,values, id);
         LogUtil.d(tag,"saveNewBuyNum 2");
         //上面数据有变化，所以更新list，并刷新适配器
-        productLists = DataSupport.findAll(ShoppingProduct.class);
-        notifyDataSetChanged();
+        update();
         updateTotal();
     }
+
     //修改总金额数据
     public void updateTotal(){
         int total =0;

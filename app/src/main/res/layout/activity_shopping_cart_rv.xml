@@ -44,13 +44,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorLightBlue8"
-        android:padding="10dp"
+        android:padding="8dp"
         android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="总金额："
-            android:textSize="18sp"
+            android:textSize="14sp"
             />
         <TextView
             android:id="@+id/tv_sum_money"
@@ -73,7 +73,7 @@
             android:paddingEnd="10dp"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:layout_marginEnd="15dp"
             android:textColor="@color/colorBlack"
             android:text="去结算"/>

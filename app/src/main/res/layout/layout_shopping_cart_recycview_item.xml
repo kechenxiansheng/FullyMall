@@ -85,16 +85,18 @@
                 android:layout_marginStart="3dp"
                 android:src="@mipmap/ic_jian_bg2"
                 />
+
             <TextView
                 android:id="@+id/tv_shopping_buyNum"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
                 android:background="@drawable/textview_border"
                 android:gravity="center"
-                android:textSize="15sp"
-                android:layout_margin="3dp"
-                android:padding="2dp"
-                android:text="1"/>
+                android:padding="3dp"
+                android:text="1"
+                android:textSize="15sp" />
             <ImageView
                 android:id="@+id/iv_shopping_add"
                 android:layout_width="18dp"
