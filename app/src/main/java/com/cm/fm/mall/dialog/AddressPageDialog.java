@@ -79,7 +79,6 @@ public class AddressPageDialog extends Dialog implements View.OnClickListener {
         lv_address_page.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Utils.getInstance().tips(context,infoList.get(position).toString());
                 AddressPageDialog.this.dismiss();
                 listener.chooseResult(infoList.get(position));
             }
@@ -90,7 +89,6 @@ public class AddressPageDialog extends Dialog implements View.OnClickListener {
     private void initData(){
         infoList.clear();
         List<AddressInfo> list = DataSupport.findAll(AddressInfo.class);
-        LogUtil.d(tag,"list size : " + list.size());
         if(list.size()>0){
             for (AddressInfo info: list) {
                 if(info.isDefault()){
@@ -101,7 +99,7 @@ public class AddressPageDialog extends Dialog implements View.OnClickListener {
             }
             infoList.addAll(list);
         }
-        LogUtil.d(tag,"infoList size : " + infoList.size());
+//        LogUtil.d(tag,"infoList size : " + infoList.size());
     }
 
     @Override
@@ -113,7 +111,9 @@ public class AddressPageDialog extends Dialog implements View.OnClickListener {
                 break;
             case R.id.tv_other_address:
                 //跳转到地址页
-                Utils.getInstance().startActivity((Activity) context,AddressActivity.class);
+                Utils.getInstance().startActivityForResultAnimation((Activity) context,AddressActivity.class,1001);
+                //TODO 跳转后隐藏dialog（）
+                this.dismiss();
                 break;
         }
     }

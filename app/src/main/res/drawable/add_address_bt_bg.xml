@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
     <!--
-     gradient 梯度：设置颜色梯度，即渐变色
+     gradient 渐变：设置颜色梯度，即渐变色
+     corners radius 设置四个角的角度，也可使用其他属性分开设置四个角的角度
      angle 角度：指渐变色旋转角度(只能以 90 递增，比如：0,90,180)
      -->
-    <item>
-        <shape>
-            <corners android:radius="90dp"/>
-            <gradient
-                android:angle="270"
-                android:startColor="@color/colorOrange4"
-                android:centerColor="@color/colorOrange3"
-                android:endColor="@color/colorOrange2" >
-            </gradient>
-        </shape>
-    </item>
-</layer-list>
+    <corners android:radius="90dp"/>
+    <gradient
+        android:angle="270"
+        android:startColor="@color/colorOrange4"
+        android:centerColor="@color/colorOrange3"
+        android:endColor="@color/colorOrange2" >
+    </gradient>
+</shape>

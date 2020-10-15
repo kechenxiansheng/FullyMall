@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -79,7 +80,19 @@ public class AddressActivity extends BaseActivity implements View.OnClickListene
         }
 
     }
-
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        //物理返回键关闭本页，也需要回传数据
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            setResult(RESULT_OK);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        setResult(RESULT_OK);
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -89,6 +102,7 @@ public class AddressActivity extends BaseActivity implements View.OnClickListene
                 break;
             case R.id.address_back:
                 context.finish();
+                setResult(RESULT_OK);
                 break;
         }
     }
@@ -97,8 +111,6 @@ public class AddressActivity extends BaseActivity implements View.OnClickListene
         list.clear();
         List<AddressInfo> data = DataSupport.findAll(AddressInfo.class);
         if(data.size()>0){
-//            list.addAll(data);
-
             //将数据倒序存入list
             for(int i = data.size()-1; i>=0; i--){
                 list.add(data.get(i));

@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:gravity="center"
-            android:text="提示：以防配送给大家带来不便，收货人信息请认真填写"
+            android:text="提示：为避免配送给您带来不便，收货人信息请认真填写"
             android:textColor="#afabab"
             />
     </LinearLayout>

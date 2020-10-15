@@ -37,6 +37,7 @@ public class AddressAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
+//        LogUtil.d(tag,"地址数量：" + list.size());
         return list.size();
     }
 
@@ -69,7 +70,7 @@ public class AddressAdapter extends BaseAdapter {
         }
         final AddressInfo addressInfo = list.get(position);
 
-//        LogUtil.d(tag,"cur_addressInfo: " + addressInfo.toString());
+//        LogUtil.d(tag,"当前地址 : " + addressInfo.toString());
         holder.tv_user_name.setText(addressInfo.getUsername());
         //隐藏手机号的中间4位
         String phoneNum = addressInfo.getPhone();
@@ -95,7 +96,6 @@ public class AddressAdapter extends BaseAdapter {
                 holder.tv_address_cur_tag.setBackgroundColor(context.getResources().getColor(R.color.colorLightBlue10));
             }
         }
-
 
         //点击编辑按钮
         holder.iv_edit_address.setOnClickListener(new View.OnClickListener() {

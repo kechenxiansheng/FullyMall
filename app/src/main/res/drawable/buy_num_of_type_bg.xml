@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
  自定义dialog的边框布局
+ shape oval 椭圆
 
- corners 的radius 设置圆角角度大小
+ corners radius 设置四个角的角度，也可使用其他属性分开设置四个角的角度
  stroke 边框颜色和粗细
  solid  背景的颜色
+ size 设置大小（并不一定有效，显示效果由view决定，如果view的宽高为 wrap_content，并且内容时机大小不超过size设置的时候才会生效，类似于 minWidth 和 minHeight）
 -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval"
@@ -16,5 +18,5 @@
     <solid android:color="@color/colorLightBlue8"/>
     <!-- 边距 -->
     <padding android:bottom="1dp" android:left="1dp" android:right="1dp" android:top="1dp"/>
-    <size android:width="1dp" android:height="1dp"/>
+    <size android:width="10dp" android:height="10dp"/>
 </shape>

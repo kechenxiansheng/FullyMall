@@ -3,7 +3,7 @@
 
     <!-- 设置按钮按下去的效果，实际上就是不同的图片
      selector：根节点，其下可有多个item标签，智慧选择符合的item显示
-     corners:   设置圆角
+      corners radius 设置四个角的角度，也可使用其他属性分开设置四个角的角度
      state_pressed：true，被按下
      -->
 

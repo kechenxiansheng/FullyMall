@@ -79,7 +79,7 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <!-- 模糊（灰度） -->
         <item name="android:backgroundDimEnabled">true</item>
-        <!-- 遮罩层，控制遮罩层灰度为30% -->
+        <!-- 遮罩层，控制遮罩层灰度为40% -->
         <item name="android:backgroundDimAmount">0.4</item>
     </style>
 

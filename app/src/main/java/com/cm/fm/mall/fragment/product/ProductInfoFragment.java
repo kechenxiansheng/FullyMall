@@ -50,9 +50,9 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
     int[] images = {R.mipmap.p5,R.mipmap.p4,R.mipmap.p2,R.mipmap.p7};
     List<ShoppingProduct> shoppingProducts = new ArrayList<>();
     ProductMsg productMsg; //当前展示的商品实体类
-
+    AddressPageDialog dialog;
     private String tag ="TAG_ProductInfoFragment";
-    private int PRODUCT_INFO_FRAGMENT_ACTIVITY_ID = 1000;
+    private static int PRODUCT_INFO_FRAGMENT_ACTIVITY_ID = 1000;
     @Override
     public int getResource() {
         return R.layout.fragment_product_info;
@@ -72,28 +72,8 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
     @Override
     public void init(View view) {
         context = getActivity();
-
-        tv_image_tips = view.findViewById(R.id.tv_image_tips);   //viewpager的当前item提示
-        vp_product = view.findViewById(R.id.vp_product);         //展示商品图片的viewpager
-        bt_reduce = view.findViewById(R.id.bt_reduce);           //减按钮
-        bt_add = view.findViewById(R.id.bt_add);                 //加按钮
-        tv_obtain_address = view.findViewById(R.id.tv_obtain_address);  //配送地址
-        bt_choose_address = view.findViewById(R.id.bt_choose_address);  //选择地址的按钮
-        tv_product_msg = view.findViewById(R.id.tv_product_msg); //商品描述
-        tv_price = view.findViewById(R.id.tv_price);             //商品价格
-        tv_inventory = view.findViewById(R.id.tv_inventory);     //库存数量
-        tv_buyNum = view.findViewById(R.id.tv_buyNum);           //购买数量
-        tv_cur_NumOfType = view.findViewById(R.id.tv_cur_NumOfType);   //当前购买的种类数量
-        tv_shopping_car = view.findViewById(R.id.tv_shopping_car);   //加入购物车按钮
-        tv_buy_now = view.findViewById(R.id.tv_buy_now);         //立即购买按钮
-        ll_go_to_shopping_car = view.findViewById(R.id.ll_go_to_shopping_car);   //去购物车界面按钮
-
-        bt_reduce.setOnClickListener(this);
-        bt_add.setOnClickListener(this);
-        bt_choose_address.setOnClickListener(this);
-        tv_shopping_car.setOnClickListener(this);
-        ll_go_to_shopping_car.setOnClickListener(this);
-        tv_buy_now.setOnClickListener(this);
+        //布局初始化
+        initLayout(view);
         //默认空值
         tv_product_msg.setText("");
         tv_price.setText("￥");
@@ -155,13 +135,46 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
         }
     }
 
+    public void initLayout(View view){
+        tv_image_tips = view.findViewById(R.id.tv_image_tips);   //viewpager的当前item提示
+        vp_product = view.findViewById(R.id.vp_product);         //展示商品图片的viewpager
+        bt_reduce = view.findViewById(R.id.bt_reduce);           //减按钮
+        bt_add = view.findViewById(R.id.bt_add);                 //加按钮
+        tv_obtain_address = view.findViewById(R.id.tv_obtain_address);  //配送地址
+        bt_choose_address = view.findViewById(R.id.bt_choose_address);  //选择地址的按钮
+        tv_product_msg = view.findViewById(R.id.tv_product_msg); //商品描述
+        tv_price = view.findViewById(R.id.tv_price);             //商品价格
+        tv_inventory = view.findViewById(R.id.tv_inventory);     //库存数量
+        tv_buyNum = view.findViewById(R.id.tv_buyNum);           //购买数量
+        tv_cur_NumOfType = view.findViewById(R.id.tv_cur_NumOfType);   //当前购买的种类数量
+        tv_shopping_car = view.findViewById(R.id.tv_shopping_car);   //加入购物车按钮
+        tv_buy_now = view.findViewById(R.id.tv_buy_now);         //立即购买按钮
+        ll_go_to_shopping_car = view.findViewById(R.id.ll_go_to_shopping_car);   //去购物车界面按钮
+
+        bt_reduce.setOnClickListener(this);
+        bt_add.setOnClickListener(this);
+        bt_choose_address.setOnClickListener(this);
+        tv_shopping_car.setOnClickListener(this);
+        ll_go_to_shopping_car.setOnClickListener(this);
+        tv_buy_now.setOnClickListener(this);
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        LogUtil.d(tag,"requestCode : " + requestCode +",resultCode : " + resultCode);
         switch (requestCode){
             case 1000:
                 if(resultCode == Activity.RESULT_OK){
                     showNumOfType();
+                }
+                break;
+            case 1001:
+                if(resultCode == Activity.RESULT_OK){
+                    if(dialog!=null && dialog.isShowing()){
+                        dialog.dismiss();
+                    }
+                    showDialog();
                 }
                 break;
         }
@@ -193,16 +206,10 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
                 break;
             case R.id.bt_choose_address:
                 //点击选择地址按钮
-                AddressPageDialog dialog = new AddressPageDialog(context,R.style.BottomAddressDialogStyle,choosedInfo, new AddressPageDialog.ChooseListener() {
-                    @Override
-                    public void chooseResult(AddressInfo info) {
-                        choosedInfo = info;
-                        tv_obtain_address.setText(String.format("%s%s", choosedInfo.getAddress(), choosedInfo.getStreet()));
-                    }
-                });
-                //点击布局外，隐藏dialog
-                dialog.setCanceledOnTouchOutside(true);
-                dialog.show();
+                if(dialog!=null && dialog.isShowing()){
+                    dialog.dismiss();
+                }
+                showDialog();
                 break;
             case R.id.tv_shopping_car:
                 //加入购物车
@@ -217,13 +224,25 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
             case R.id.ll_go_to_shopping_car:
                 //跳转到购物车界面
                 Intent intent = new Intent(getActivity(),ShoppingCartActivity.class);
-                startActivityForResult(intent,1000);
+                startActivityForResult(intent,PRODUCT_INFO_FRAGMENT_ACTIVITY_ID);
                 break;
             case R.id.tv_buy_now:
                 //立即购买
                 Utils.getInstance().tips(context,"点击了立即购买");
                 break;
         }
+    }
+    public void  showDialog(){
+        dialog = new AddressPageDialog(context,R.style.BottomAddressDialogStyle,choosedInfo, new AddressPageDialog.ChooseListener() {
+            @Override
+            public void chooseResult(AddressInfo info) {
+                choosedInfo = info;
+                tv_obtain_address.setText(String.format("%s%s", choosedInfo.getAddress(), choosedInfo.getStreet()));
+            }
+        });
+        //点击布局外，隐藏dialog
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.show();
     }
     //添加商品图片，显示默认地址
     public void initData(ProductMsg productMsg){

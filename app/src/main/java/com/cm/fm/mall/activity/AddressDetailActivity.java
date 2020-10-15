@@ -355,7 +355,11 @@ public class AddressDetailActivity extends BaseActivity implements View.OnClickL
         }
         return super.onKeyDown(keyCode, event);
     }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        setResult(RESULT_OK);
+    }
     //默认地址，滑动按钮滑动、点击监听
     @Override
     public void onCheckedChangeListener(boolean isChecked) {
