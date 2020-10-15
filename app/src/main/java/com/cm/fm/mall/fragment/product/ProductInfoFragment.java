@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -40,7 +41,7 @@ import java.util.List;
 public class ProductInfoFragment extends BaseFragment implements View.OnClickListener {
     Activity context;
     ViewPager vp_product;
-    ImageView bt_reduce,bt_add,bt_choose_address;
+    ImageView bt_reduce,bt_add,bt_choose_address,iv_product_cart;
     TextView tv_product_msg,tv_price,tv_inventory,tv_shopping_car,tv_image_tips,tv_buyNum,tv_obtain_address,tv_buy_now,tv_cur_NumOfType;
     LinearLayout ll_go_to_shopping_car;
 
@@ -88,7 +89,7 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
             initData(productMsg);
         }
         //展示加入购物车的商品种类的数量
-        showNumOfType();
+        showNumOfType(false);
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(views);
         vp_product.setAdapter(adapter);
@@ -146,6 +147,7 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
         tv_price = view.findViewById(R.id.tv_price);             //商品价格
         tv_inventory = view.findViewById(R.id.tv_inventory);     //库存数量
         tv_buyNum = view.findViewById(R.id.tv_buyNum);           //购买数量
+        iv_product_cart = view.findViewById(R.id.iv_product_cart);   //购物车图片
         tv_cur_NumOfType = view.findViewById(R.id.tv_cur_NumOfType);   //当前购买的种类数量
         tv_shopping_car = view.findViewById(R.id.tv_shopping_car);   //加入购物车按钮
         tv_buy_now = view.findViewById(R.id.tv_buy_now);         //立即购买按钮
@@ -166,15 +168,7 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
         switch (requestCode){
             case 1000:
                 if(resultCode == Activity.RESULT_OK){
-                    showNumOfType();
-                }
-                break;
-            case 1001:
-                if(resultCode == Activity.RESULT_OK){
-                    if(dialog!=null && dialog.isShowing()){
-                        dialog.dismiss();
-                    }
-                    showDialog();
+                    showNumOfType(false);
                 }
                 break;
         }
@@ -219,7 +213,8 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
                 //保存数据
                 saveProductData(buyNum);
                 //重新查询加入购物车的商品
-                showNumOfType();
+                showNumOfType(true);
+
                 break;
             case R.id.ll_go_to_shopping_car:
                 //跳转到购物车界面
@@ -328,48 +323,35 @@ public class ProductInfoFragment extends BaseFragment implements View.OnClickLis
         LogUtil.d(tag,"saveProductData product info : "+product.toString());
     }
 
-    public void showNumOfType(){
-        shoppingProducts = DataSupport.findAll(ShoppingProduct.class);
-        //显示购物车中物品种类的数量
-        tv_cur_NumOfType.setText(String.valueOf(shoppingProducts.size()));
-    }
+    public void showNumOfType(boolean isAdd){
+        if(isAdd){
+            //点击购物车添加抖动动画
+            Animation animation = AnimationUtils.loadAnimation(context,R.anim.anim_shopping_cart);
+            animation.setFillAfter(true);
+            animation.setFillEnabled(true);
+            iv_product_cart.startAnimation(animation);
+            animation.setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                }
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    shoppingProducts = DataSupport.findAll(ShoppingProduct.class);
+                    //显示购物车中物品种类的数量
+                    tv_cur_NumOfType.setText(String.valueOf(shoppingProducts.size()));
+                }
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+            });
 
-    public void setDialogAnima(View view){
-        /**
-         * fromXType
-         * fromXValue
-         * toXType
-         * toXValue
-         * fromYType
-         * fromYValue
-         * toYType
-         * toYValue
-         */
-        Animation animation = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 0.0f,
-                Animation.RELATIVE_TO_SELF, 0.0f,
-                Animation.RELATIVE_TO_SELF, 1.0f,
-                Animation.RELATIVE_TO_SELF, 0.0f);
-        animation.setDuration(500);
-        animation.setFillAfter(true);
-        animation.setFillEnabled(true);
-        view.startAnimation(animation);
-        //动画监听
-        animation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
+        } else {
+            shoppingProducts = DataSupport.findAll(ShoppingProduct.class);
+            //显示购物车中物品种类的数量
+            tv_cur_NumOfType.setText(String.valueOf(shoppingProducts.size()));
+        }
 
-            }
 
-            @Override
-            public void onAnimationEnd(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
     }
 
     @Override

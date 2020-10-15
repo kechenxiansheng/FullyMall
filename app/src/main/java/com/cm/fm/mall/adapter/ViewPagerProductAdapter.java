@@ -17,7 +17,9 @@ import com.cm.fm.mall.fragment.product.ProductCommentFragment;
 import com.cm.fm.mall.fragment.product.ProductDetailFragment;
 import com.cm.fm.mall.fragment.product.ProductInfoFragment;
 import com.cm.fm.mall.util.LogUtil;
-
+/**
+ * 商品页 viewpager 适配器
+ */
 public class ViewPagerProductAdapter extends FragmentStatePagerAdapter {
     Activity context;
     String[] titles;

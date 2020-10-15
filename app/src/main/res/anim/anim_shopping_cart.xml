@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    rotate 四大动画之 旋转动画
+
+    fromDegrees   动画开始时的角度
+    toDegrees     动画结束时物件的旋转角度,正代表顺时针
+    pivotX    属性为动画相对于物件的X坐标的开始位置
+    pivotY    属性为动画相对于物件的Y坐标的开始位置
+    repeatCount 重复次数，默认为0
+    repeatMode 重复模式，默认重头开始
+    -->
+<!-- 一右下角为圆点抖动 -->
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="200"
+    android:fromDegrees="-10"
+    android:toDegrees="0"
+    android:pivotX="80%"
+    android:pivotY="0"
+    android:repeatCount="1"
+    />

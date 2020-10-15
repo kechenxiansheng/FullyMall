@@ -4,7 +4,9 @@ import android.view.View;
 
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.fragment.BaseFragment;
-
+/**
+ * 商品的详情页
+ */
 public class ProductDetailFragment extends BaseFragment {
     @Override
     public int getResource() {
