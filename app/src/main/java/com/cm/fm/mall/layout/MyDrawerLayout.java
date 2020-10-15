@@ -5,6 +5,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.util.AttributeSet;
 
 /**
+ * 自定义抽屉控件
  * 重写 onMeasure 方法防止 DrawerLayout 作为非布局文件的绝对父布局时，宽高设置为match_parent，wrap_content 报错的问题
  * （ DrawerLayout must be measured with MeasureSpec.EXACTLY ）
  */
