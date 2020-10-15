@@ -72,17 +72,21 @@ public class AddressPageDialog extends Dialog implements View.OnClickListener {
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(params);
 
-        pageAdapter = new AddressPageAdapter((Activity) context,choosedInfo,infoList);
-        lv_address_page.setAdapter(pageAdapter);
-        pageAdapter.notifyDataSetChanged();
-        //地址 listview 点击监听
-        lv_address_page.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AddressPageDialog.this.dismiss();
-                listener.chooseResult(infoList.get(position));
-            }
-        });
+        if(infoList.size()==0){
+            tv_other_address.setText("添加地址");
+        }else {
+            pageAdapter = new AddressPageAdapter((Activity) context,choosedInfo,infoList);
+            lv_address_page.setAdapter(pageAdapter);
+            pageAdapter.notifyDataSetChanged();
+            //地址 listview 点击监听
+            lv_address_page.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    AddressPageDialog.this.dismiss();
+                    listener.chooseResult(infoList.get(position));
+                }
+            });
+        }
 
     }
 
