@@ -54,6 +54,14 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
         //当前商品
         final ShoppingProduct product = productLists.get(i);
 //        LogUtil.d(tag,"product : " + product.toString());
+        //初始化子item视图
+        viewHolder.iv_shopping_product_image.setImageResource(ResourceUtils.getMipmapId(context,product.getExtension()));
+        viewHolder.tv_shopping_product_name.setText(product.getProductName());
+        viewHolder.tv_shopping_product_description.setText(product.getProductDescription());
+        viewHolder.tv_shopping_buyNum.setText(Integer.valueOf(product.getBuyNum())+"");
+        viewHolder.tv_shopping_product_price.setText("￥"+product.getPrice());
+
+
         //点击减
         viewHolder.iv_shopping_reduce.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +80,7 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
         viewHolder.iv_shopping_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                curBuyNum =  Integer.parseInt(viewHolder.tv_shopping_buyNum.getText().toString());
                 curBuyNum++;
                 viewHolder.tv_shopping_buyNum.setText(String.valueOf(curBuyNum));
                 saveNewBuyNum(curBuyNum,product.getId());
@@ -100,12 +109,6 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
             }
         });
 
-        //初始化子item视图
-        viewHolder.iv_shopping_product_image.setImageResource(ResourceUtils.getMipmapId(context,product.getExtension()));
-        viewHolder.tv_shopping_product_name.setText(product.getProductName());
-        viewHolder.tv_shopping_product_description.setText(product.getProductDescription());
-        viewHolder.tv_shopping_buyNum.setText(Integer.valueOf(product.getBuyNum())+"");
-        viewHolder.tv_shopping_product_price.setText("￥"+product.getPrice());
 
     }
 
@@ -197,7 +200,6 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
         ContentValues values = new ContentValues();
         values.put("buyNum",curBuyNum);
         DataSupport.update(ShoppingProduct.class,values, id);
-        LogUtil.d(tag,"saveNewBuyNum 2");
         //上面数据有变化，所以更新list，并刷新适配器
         update();
         updateTotal();
