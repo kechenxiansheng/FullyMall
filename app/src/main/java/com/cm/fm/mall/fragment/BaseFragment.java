@@ -32,8 +32,8 @@ public abstract class BaseFragment extends Fragment {
         //加载视图
         View view = LayoutInflater.from(getActivity()).inflate(getResource(), container, false);
         LogUtil.d(tag,"cur view is null ? " + (view==null));
-        init(view);
         loadingData();
+        init(view);
         return view;
     }
 
