@@ -76,19 +76,56 @@
                        android:src="@mipmap/bt_classify2"
                        />
                 </RelativeLayout>
-
-
             </android.support.design.widget.AppBarLayout>
-            <!-- 内容
-               设置了 layout_behavior 的控件滑动时，就会触发设置了 layout_scrollFlags 的控件发生状态的改变
-            -->
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_products"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                >
+                <LinearLayout
+                    android:id="@+id/ll_today_honey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="10dp"
+                    >
+                    <ImageView
+                        android:id="@+id/iv_close_honey"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@mipmap/bg_delete"
+                        android:visibility="gone"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:padding="5dp"
+                        android:textColor="@color/colorOrange2"
+                        android:text="今日蜜语"
+                        />
 
+                    <ViewFlipper
+                        android:id="@+id/vf_honey_talk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        />
+                </LinearLayout>
+
+                <!-- 内容
+                   设置了 layout_behavior 的控件滑动时，就会触发设置了 layout_scrollFlags 的控件发生状态的改变
+                -->
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_products"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </android.support.v7.widget.RecyclerView>
+            </LinearLayout>
 
             <!--
                 购物车悬浮按钮

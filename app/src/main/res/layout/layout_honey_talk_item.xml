@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:src="@mipmap/fighting_icon"
+        android:layout_marginStart="5dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="5dp"
+        />
+    <TextView
+        android:id="@+id/tv_honey_talk_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:lines="2"
+        android:ellipsize="end"
+        android:textColor="@color/colorOrange2"
+        />
+</LinearLayout>

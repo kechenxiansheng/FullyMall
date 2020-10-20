@@ -7,9 +7,12 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.ViewFlipper;
 
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.activity.ClassifyButtonActivity;
@@ -34,12 +37,14 @@ public class MallFragment extends BaseFragment implements View.OnClickListener {
     public static MallFragment instance;
     RecyclerView rv_products,rv_guide_bar;
     FloatingActionButton bt_shopping_cart;
-    LinearLayout ll_mall_search;
-    ImageView iv_classify_bt;
+    LinearLayout ll_mall_search,ll_today_honey;
+    ViewFlipper vf_honey_talk;
+    ImageView iv_classify_bt,iv_close_honey;
     public RecycleViewMallAdapter adapter;
     public RecycleViewMallGuideAdapter guideAdapter;
     public List<ProductMsg> productMsgs = new ArrayList<>();
     public List<String> titles = new ArrayList<>();
+    public List<String> talks = new ArrayList<>();
     public static final int MAIN_ACTIVITY_ID = 1;
     private final int PERMISSION_REQUEST_CODE = 100;
     private final String tag = "TAG_MallFragment";
@@ -63,16 +68,21 @@ public class MallFragment extends BaseFragment implements View.OnClickListener {
         LogUtil.d(tag,"init");
         context = getActivity();
         //初始化视图
+        iv_close_honey = view.findViewById(R.id.iv_close_honey);
         iv_classify_bt = view.findViewById(R.id.iv_classify_bt);
         ll_mall_search = view.findViewById(R.id.ll_mall_search);
+        ll_today_honey = view.findViewById(R.id.ll_today_honey);
         rv_guide_bar = view.findViewById(R.id.rv_guide_bar);
         rv_products = view.findViewById(R.id.rv_products);
+        vf_honey_talk = view.findViewById(R.id.vf_honey_talk);
         bt_shopping_cart = view.findViewById(R.id.bt_shopping_cart);
         //引导栏点击事件监听
         ll_mall_search.setOnClickListener(this);
+        ll_today_honey.setOnClickListener(this);
         //购物车点击监听
         bt_shopping_cart.setOnClickListener(this);
         iv_classify_bt.setOnClickListener(this);
+        iv_close_honey.setOnClickListener(this);
         //初始化导航栏标题和数据
         initTitles();
         initAllData();
@@ -91,6 +101,18 @@ public class MallFragment extends BaseFragment implements View.OnClickListener {
         rv_guide_bar.setLayoutManager(titleManager);
         rv_guide_bar.setAdapter(guideAdapter);
 
+        /** 今日蜜语 */
+        for(int i = 0; i < talks.size();i++){
+            View cview = LayoutInflater.from(context).inflate(R.layout.layout_honey_talk_item, null);
+            TextView tv_honey_talk_msg = cview.findViewById(R.id.tv_honey_talk_msg);
+            tv_honey_talk_msg.setText(talks.get(i));
+            vf_honey_talk.addView(cview);
+        }
+        vf_honey_talk.startFlipping();
+        vf_honey_talk.setInAnimation(context,R.anim.anim_today_honey_talk_in);
+        vf_honey_talk.setOutAnimation(context,R.anim.anim_today_honey_talk_out);
+        vf_honey_talk.setAutoStart(true);       //自动加载下一个view
+        vf_honey_talk.setFlipInterval(8000);    //轮播时间，毫秒
 
         /** 数据 */
         adapter = new RecycleViewMallAdapter(productMsgs,context);
@@ -144,6 +166,10 @@ public class MallFragment extends BaseFragment implements View.OnClickListener {
             case R.id.iv_classify_bt:
                 //点击顶部菜单栏的 分类图标
                 Utils.getInstance().startActivity(context,ClassifyButtonActivity.class);
+                break;
+            case R.id.iv_close_honey:
+                //点击今日蜜语的关闭
+                ll_today_honey.setVisibility(View.GONE);
                 break;
         }
     }
@@ -255,6 +281,17 @@ public class MallFragment extends BaseFragment implements View.OnClickListener {
         titles.add("化妆品");
         titles.add("酒水");
         titles.add("办公用品");
+
+        talks.clear();
+        talks.add("今天的不开心就到此为止吧，明天依然光芒万丈！");
+        talks.add("没有什么退路，只有咬牙坚持走下去的路。");
+        talks.add("今天的你依旧帅气如初！");
+        talks.add("谁都会犯错误，所以人们才会在铅笔的另一头装上橡皮。");
+        talks.add("愿十年之后的自己会感谢当初努力奋斗的你。");
+        talks.add("日子再甜,也没有你甜！");
+        talks.add("喜欢阿羡也喜欢李现，但更喜欢你现（出现）！");
+        talks.add("知识不能替代友谊，比起失去你，我宁愿做个白痴！");
+        talks.add("世界上最温暖的两个字是，从你口中说出的：晚安。");
 
     }
     public void search(String searchContent){

@@ -64,7 +64,7 @@ public class DetailPictureAdapter extends BaseAdapter {
         int width = size.get(0);
         ViewGroup.LayoutParams layoutParams = holder.iv_detail_picture.getLayoutParams();
         layoutParams.width = (int) (width*0.95);
-        layoutParams.height = (int) (width*0.95);
+//        layoutParams.height = (int) (width*0.95);
         holder.iv_detail_picture.setLayoutParams(layoutParams);
 
         /** 使用 Glide 加载图片 */
