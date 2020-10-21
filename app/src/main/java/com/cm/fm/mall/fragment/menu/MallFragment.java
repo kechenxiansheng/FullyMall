@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
@@ -37,7 +38,8 @@ public class MallFragment extends BaseFragment implements View.OnClickListener {
     public static MallFragment instance;
     RecyclerView rv_products,rv_guide_bar;
     FloatingActionButton bt_shopping_cart;
-    LinearLayout ll_mall_search,ll_today_honey;
+    LinearLayout ll_mall_search;
+    RelativeLayout rl_today_honey;
     ViewFlipper vf_honey_talk;
     ImageView iv_classify_bt,iv_close_honey;
     public RecycleViewMallAdapter adapter;
@@ -71,14 +73,13 @@ public class MallFragment extends BaseFragment implements View.OnClickListener {
         iv_close_honey = view.findViewById(R.id.iv_close_honey);
         iv_classify_bt = view.findViewById(R.id.iv_classify_bt);
         ll_mall_search = view.findViewById(R.id.ll_mall_search);
-        ll_today_honey = view.findViewById(R.id.ll_today_honey);
+        rl_today_honey = view.findViewById(R.id.rl_today_honey);
         rv_guide_bar = view.findViewById(R.id.rv_guide_bar);
         rv_products = view.findViewById(R.id.rv_products);
         vf_honey_talk = view.findViewById(R.id.vf_honey_talk);
         bt_shopping_cart = view.findViewById(R.id.bt_shopping_cart);
         //引导栏点击事件监听
         ll_mall_search.setOnClickListener(this);
-        ll_today_honey.setOnClickListener(this);
         //购物车点击监听
         bt_shopping_cart.setOnClickListener(this);
         iv_classify_bt.setOnClickListener(this);
@@ -112,7 +113,7 @@ public class MallFragment extends BaseFragment implements View.OnClickListener {
         vf_honey_talk.setInAnimation(context,R.anim.anim_today_honey_talk_in);
         vf_honey_talk.setOutAnimation(context,R.anim.anim_today_honey_talk_out);
         vf_honey_talk.setAutoStart(true);       //自动加载下一个view
-        vf_honey_talk.setFlipInterval(8000);    //轮播时间，毫秒
+        vf_honey_talk.setFlipInterval(6500);    //轮播时间，毫秒
 
         /** 数据 */
         adapter = new RecycleViewMallAdapter(productMsgs,context);
@@ -169,7 +170,7 @@ public class MallFragment extends BaseFragment implements View.OnClickListener {
                 break;
             case R.id.iv_close_honey:
                 //点击今日蜜语的关闭
-                ll_today_honey.setVisibility(View.GONE);
+                rl_today_honey.setVisibility(View.GONE);
                 break;
         }
     }

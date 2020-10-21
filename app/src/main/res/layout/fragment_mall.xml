@@ -83,39 +83,51 @@
                 android:orientation="vertical"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 >
-                <LinearLayout
-                    android:id="@+id/ll_today_honey"
+                <RelativeLayout
+                    android:id="@+id/rl_today_honey"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="10dp"
                     >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:weightSum="1"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:padding="5dp"
+                            android:textColor="@color/colorOrange2"
+                            android:text="今日蜜语"
+                            />
+
+                        <ViewFlipper
+                            android:id="@+id/vf_honey_talk"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:layout_gravity="center_vertical"
+                            />
+                    </LinearLayout>
                     <ImageView
                         android:id="@+id/iv_close_honey"
                         android:layout_width="15dp"
                         android:layout_height="15dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_gravity="center_vertical"
-                        android:src="@mipmap/bg_delete"
-                        android:visibility="gone"
+                        android:src="@mipmap/honey_close"
                         />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:padding="5dp"
-                        android:textColor="@color/colorOrange2"
-                        android:text="今日蜜语"
-                        />
+                </RelativeLayout>
 
-                    <ViewFlipper
-                        android:id="@+id/vf_honey_talk"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        />
-                </LinearLayout>
 
                 <!-- 内容
                    设置了 layout_behavior 的控件滑动时，就会触发设置了 layout_scrollFlags 的控件发生状态的改变

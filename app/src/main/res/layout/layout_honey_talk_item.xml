@@ -9,7 +9,6 @@
         android:layout_width="30dp"
         android:layout_height="20dp"
         android:src="@mipmap/fighting_icon"
-        android:layout_marginStart="5dp"
         android:layout_gravity="center"
         android:layout_marginEnd="5dp"
         />
@@ -17,6 +16,7 @@
         android:id="@+id/tv_honey_talk_msg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
         android:padding="3dp"
         android:layout_gravity="center"
         android:gravity="center"
