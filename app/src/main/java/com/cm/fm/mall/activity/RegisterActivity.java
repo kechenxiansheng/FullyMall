@@ -62,10 +62,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
         //告知页面，使用动画
         Utils.getInstance().actUseAnim(context,R.transition.fade);
         setContentView(R.layout.activity_register);
-        context = this;
         et_register_account = findViewById(R.id.et_register_account);
         et_register_password = findViewById(R.id.et_register_password);
         tv_register_back = findViewById(R.id.tv_register_back);
