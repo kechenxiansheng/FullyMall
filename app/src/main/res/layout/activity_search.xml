@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.SearchActivity">
+    tools:context=".view.activity.SearchActivity">
     <!-- 搜索框 -->
     <include layout="@layout/layout_title" />
     <LinearLayout
@@ -32,7 +32,7 @@
             />
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -14,14 +14,14 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <android.support.v4.view.ViewPager
+                <androidx.viewpager.widget.ViewPager
                     android:id="@+id/vp_product"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:layout_margin="10dp"
                     android:layout_centerInParent="true"
                     >
-                </android.support.v4.view.ViewPager>
+                </androidx.viewpager.widget.ViewPager>
                 <TextView
                     android:id="@+id/tv_image_tips"
                     android:layout_width="wrap_content"

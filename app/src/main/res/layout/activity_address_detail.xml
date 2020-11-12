@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.AddressDetailActivity">
+    tools:context=".view.activity.AddressDetailActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -191,7 +191,7 @@
             <!--app:tabIndicatorColor="@null"-->
             <!--app:tabIndicatorHeight="0dp"-->
             <!--android:layout_height="wrap_content"/>-->
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_tag_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -215,7 +215,7 @@
                 android:textSize="16sp"
                 android:text="默认地址"
                 />
-            <com.cm.fm.mall.layout.SlideButton
+            <com.cm.fm.mall.view.customview.SlideButton
                 android:id="@+id/sb_default_address"
                 android:layout_centerVertical="true"
                 android:layout_alignParentEnd="true"

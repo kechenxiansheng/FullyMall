@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- DrawerLayout 抽屉布局，前面为内容，后面是显示在左侧的菜单 -->
 <!--         android:descendantFocusability="blocksDescendants"   -->
-    <com.cm.fm.mall.layout.MyDrawerLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <android.support.design.widget.CoordinatorLayout
+    <!--<com.cm.fm.mall.view.customview.MyDrawerLayout-->
+        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--&gt;-->
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <android.support.design.widget.AppBarLayout
+            <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorLightBlue8"
@@ -20,7 +22,7 @@
                    scroll  表示跟随 recycleview 一起向上滚动
                    enterAlways 表示跟随 recycleview 一起向下滚动
                 -->
-                <android.support.v7.widget.Toolbar
+                <androidx.appcompat.widget.Toolbar
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_scrollFlags="scroll|enterAlways"
@@ -51,7 +53,7 @@
                             android:hint="商品搜索"
                             />
                     </LinearLayout>
-                </android.support.v7.widget.Toolbar>
+                </androidx.appcompat.widget.Toolbar>
 
                 <View
                     android:layout_width="match_parent"
@@ -63,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <!-- 导航栏 -->
-                    <android.support.v7.widget.RecyclerView
+                    <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_guide_bar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -76,7 +78,7 @@
                        android:src="@mipmap/bt_classify2"
                        />
                 </RelativeLayout>
-            </android.support.design.widget.AppBarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -132,11 +134,11 @@
                 <!-- 内容
                    设置了 layout_behavior 的控件滑动时，就会触发设置了 layout_scrollFlags 的控件发生状态的改变
                 -->
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_products"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                </android.support.v7.widget.RecyclerView>
+                </androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
 
             <!--
@@ -149,7 +151,7 @@
                 //28之后 图片显示异常，顾名思义，设置图片大小时使用
                 app:maxImageSize="@dimen/dp_60"
            -->
-            <android.support.design.widget.FloatingActionButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/bt_shopping_cart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -164,15 +166,7 @@
                 app:fabSize="normal"
                 app:maxImageSize="@dimen/dp_60"
                 />
-        </android.support.design.widget.CoordinatorLayout>
-
-        <fragment
-            android:id="@+id/user_fragment"
-            android:name="com.cm.fm.mall.fragment.menu.UserFragment"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            />
-    </com.cm.fm.mall.layout.MyDrawerLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <!--</com.cm.fm.mall.view.customview.MyDrawerLayout>-->
 
 

@@ -10,14 +10,14 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.FileProvider;
 
 import com.cm.fm.mall.BuildConfig;
 import com.cm.fm.mall.util.LogUtil;
 import com.cm.fm.mall.util.Utils;
 
 import java.io.File;
+
+import androidx.core.content.FileProvider;
 
 import static android.content.Context.MODE_PRIVATE;
 

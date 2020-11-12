@@ -3,11 +3,11 @@
 external-path 指定uri共享 ，name 属性随便填，path 表示文件路径
 
 <root-path/> 代表设备的根目录new File("/");
-<files-path/> 代表context.getFilesDir()
-<cache-path/> 代表context.getCacheDir()
-<external-path/> 代表Environment.getExternalStorageDirectory()
-<external-files-path>代表context.getExternalFilesDirs()
-<external-cache-path>代表getExternalCacheDirs()
+<files-path/> 代表　context.getFilesDir()
+<cache-path/> 代表　context.getCacheDir()
+<external-path/> 代表　Environment.getExternalStorageDirectory()
+<external-files-path>　代表　context.getExternalFilesDirs()
+<external-cache-path>　代表　getExternalCacheDirs()
 
 -->
 <paths xmlns:android="http://schemas.android.com/apk/res/android">

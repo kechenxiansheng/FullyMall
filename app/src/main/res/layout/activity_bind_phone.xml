@@ -26,7 +26,7 @@
                 android:layout_centerInParent="true"
                 android:text="绑定手机"
                 android:padding="10dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="#000"
                 android:layout_marginTop="5dp"
@@ -63,19 +63,21 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="0.8"
                 android:inputType="phone"
+                android:textSize="14sp"
                 android:hint="此处输入手机号码"
                 />
+
             <TextView
                 android:id="@+id/tv_register_get_yzm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:layout_marginEnd="10dp"
-                android:textSize="16sp"
-                android:padding="5dp"
                 android:background="@drawable/register_yzm_bg"
+                android:text="验证码"
                 android:textColor="#000"
-                android:text="获取验证码"/>
+                android:textSize="14sp" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,19 +90,28 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:layout_gravity="center"
-                android:textSize="16sp"
+                android:textSize="15sp"
                 android:textColor="#000"
                 android:padding="2dp"
-                android:text="填写验证码："/>
+                android:text="验证码："/>
             <EditText
                 android:id="@+id/et_register_yzm"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:layout_marginEnd="10dp"
                 android:layout_gravity="center"
+                android:gravity="center"
                 android:inputType="number"
                 android:text=""/>
+            <TextView
+                android:id="@+id/tv_code_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:hint="（请填写验证码）"
+                />
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -116,7 +127,7 @@
             android:padding="10dp"
             android:gravity="center"
             android:textColor="#000"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:background="@drawable/register_yzm_bg"
             android:text="绑定"/>
     </LinearLayout>

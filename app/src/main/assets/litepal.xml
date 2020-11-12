@@ -11,10 +11,10 @@
 
     <!-- 数据库需要映射的类 -->
     <list>
-        <!--<mapping class="com.cm.fm.mall.bean.ProductMsg"/>-->
-        <mapping class="com.cm.fm.mall.bean.ShoppingProduct"/>
-        <mapping class="com.cm.fm.mall.bean.UserInfo"/>
-        <mapping class="com.cm.fm.mall.bean.SearchHistory"/>
-        <mapping class="com.cm.fm.mall.bean.AddressInfo"/>
+        <!--<mapping class="com.cm.fm.mall.model.bean.ProductMsg"/>-->
+        <mapping class="com.cm.fm.mall.model.bean.ShoppingProduct"/>
+        <mapping class="com.cm.fm.mall.model.bean.UserInfo"/>
+        <mapping class="com.cm.fm.mall.model.bean.SearchHistory"/>
+        <mapping class="com.cm.fm.mall.model.bean.AddressInfo"/>
     </list>
 </litepal>

@@ -8,12 +8,12 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.view.View;
 import android.webkit.MimeTypeMap;
 
 import com.cm.fm.mall.BuildConfig;
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.dialog.AppUpdateDialog;
+import com.cm.fm.mall.model.constant.MallConstant;
+import com.cm.fm.mall.view.dialog.AppUpdateDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;

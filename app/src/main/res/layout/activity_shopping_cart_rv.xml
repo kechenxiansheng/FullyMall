@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activity.ShoppingCartActivity">
+    tools:context=".view.activity.ShoppingCartActivity">
 
     <TextView
         android:id="@+id/tv_user_shopping_cart"
@@ -34,12 +34,12 @@
         android:visibility="gone"
         />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_shopping_cart_list"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

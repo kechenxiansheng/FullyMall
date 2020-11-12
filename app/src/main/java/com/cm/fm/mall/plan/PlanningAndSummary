@@ -14,13 +14,15 @@
              右侧：3/4 占比：三列自定义样式的 recycleview 瀑布流展示稍细的类别。点击类别跳转至 当前类型所有商品的新界面activity（新界面头部带搜索框，下方没有菜单栏）
              底部：直接引入菜单栏)
     7.3 发现按钮：内容待定
+
+
 1、安装apk时报错 android.os.FileUriExposedException: file:///storage/emulated/0/
    需要配置 filepath，
 
 
 报错：
 2020-09-16 10:40:47
-    Caused by: java.lang.IllegalArgumentException: Binary XML file line #123: Duplicate id 0x7f09020d, tag null, or parent id 0x7f09007c with another fragment for com.cm.fm.mall.fragment.menu.UserFragment
+    Caused by: java.lang.IllegalArgumentException: Binary XML file line #123: Duplicate id 0x7f09020d, tag null, or parent id 0x7f09007c with another fragment for com.cm.fm.mall.view.fragment.menu.UserFragment
 解决：
  //根据fragment数量设置viewpager预加载的页卡数，默认为1
  vp_menu_content.setOffscreenPageLimit(4);

@@ -259,12 +259,12 @@
             android:padding="5dp"
             android:text="样品图"
             />
-        <com.cm.fm.mall.customview.ListViewForScrollView
+        <com.cm.fm.mall.view.customview.ListViewForScrollView
             android:id="@+id/lv_detail_picture"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
-        </com.cm.fm.mall.customview.ListViewForScrollView>
+        </com.cm.fm.mall.view.customview.ListViewForScrollView>
     </LinearLayout>
 
 </ScrollView>

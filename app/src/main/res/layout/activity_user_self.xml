@@ -7,7 +7,7 @@
     android:background="@color/colorLightBlue8"
     android:padding="20dp"
     android:orientation="vertical"
-    tools:context=".activity.UserSelfActivity">
+    tools:context=".view.activity.UserSelfActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -156,7 +156,7 @@
             android:layout_gravity="center"
             android:textColor="#000"
             android:text=""
-            android:hint="点击后方按钮绑定手机"
+            android:hint="点击右侧按钮绑定手机"
             />
         <TextView
             android:id="@+id/tv_bind_phone_num"
@@ -165,8 +165,8 @@
             android:layout_gravity="center"
             android:background="@color/colorLightBlue11"
             android:textColor="@color/colorBlack"
-            android:padding="3dp"
-            android:text="绑定"/>
+            android:padding="5dp"
+            android:text="绑"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"

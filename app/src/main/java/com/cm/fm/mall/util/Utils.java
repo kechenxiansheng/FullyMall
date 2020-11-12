@@ -1,6 +1,5 @@
 package com.cm.fm.mall.util;
 
-import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityOptions;
@@ -9,19 +8,18 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
+import android.hardware.Camera;
 import android.os.Build;
 import android.os.Looper;
-import android.support.v4.app.NotificationCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
@@ -30,20 +28,13 @@ import android.view.Window;
 import android.widget.Toast;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.activity.LoginActivity;
-import com.cm.fm.mall.activity.RegisterActivity;
-import com.cm.fm.mall.activity.ShoppingCartActivity;
-import com.cm.fm.mall.bean.AddressInfo;
-import com.cm.fm.mall.bean.ProductMsg;
-import com.permissionx.guolindev.PermissionX;
-import com.permissionx.guolindev.callback.ForwardToSettingsCallback;
-import com.permissionx.guolindev.callback.RequestCallback;
-import com.permissionx.guolindev.request.ForwardScope;
+import com.cm.fm.mall.model.bean.AddressInfo;
+import com.cm.fm.mall.model.bean.ProductMsg;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import androidx.core.app.NotificationCompat;
 
 
 public class Utils {
@@ -56,7 +47,7 @@ public class Utils {
         return utils;
     }
     //activity跳转
-    public void startActivityCloseOther(Activity curAct, Class targetAct){
+    public void startActivityCloseSelf(Activity curAct, Class targetAct){
         Intent intent = new Intent(curAct, targetAct);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         curAct.startActivity(intent);
@@ -233,5 +224,19 @@ public class Utils {
      */
     public boolean isMainThread(){
         return Looper.getMainLooper() == Looper.myLooper();
+    }
+
+    /**
+     * 判断是否支持拍照功能
+     * @param activity
+     * @return
+     */
+    public boolean hasCamera(Activity activity){
+        PackageManager pm = activity.getPackageManager();
+        boolean hasACamera = pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)         //后置摄像头
+                || pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)             //前置摄像头
+                || Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD
+                || Camera.getNumberOfCameras() > 0;
+        return hasACamera;
     }
 }

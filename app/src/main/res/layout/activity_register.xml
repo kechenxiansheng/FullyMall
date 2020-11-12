@@ -2,7 +2,7 @@
 <!--
     android:background="#a3dfcc"
 -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,6 +11,7 @@
     >
 
     <LinearLayout
+        android:id="@+id/ll_register_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -43,7 +44,7 @@
                 android:padding="5dp"
                 android:text="关闭"
                 android:textColor="#000" />
-    </RelativeLayout>
+        </RelativeLayout>
 
 
         <LinearLayout
@@ -125,6 +126,17 @@
         </LinearLayout>
 
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/pb_progress_reg"
+        style="?android:progressBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/colorWhite"
+        android:layout_below="@+id/ll_register_parent"
+        android:layout_marginTop="-20dp"
+        android:visibility="invisible"
+        />
 
-
-</LinearLayout>
+</RelativeLayout>

@@ -2,13 +2,15 @@ package com.cm.fm.mall;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
+
 
 //import com.baidu.mapapi.SDKInitializer;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.mob.MobSDK;
 
 import org.litepal.LitePal;
+
+import androidx.multidex.MultiDex;
 
 public class MyApplication extends Application {
     //提供一个全局的context

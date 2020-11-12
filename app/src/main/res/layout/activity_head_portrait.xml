@@ -75,17 +75,17 @@
             android:text="相册"
             />
     </LinearLayout>
-    <TextView
-        android:id="@+id/tv_change_photo"
+    <ToggleButton
+        android:id="@+id/tb_change_photo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:background="@drawable/head_background"
-        android:gravity="center"
-        android:layout_margin="10dp"
         android:padding="10dp"
+        android:layout_margin="10dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:textColor="@color/colorBlack"
-        android:text="更换头像"
+        android:textOn="确定更换"
+        android:textOff="更换头像"
         />
 </LinearLayout>
