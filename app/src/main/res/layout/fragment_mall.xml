@@ -146,7 +146,8 @@
                 app:backgroundTint="#ffffff"            背景色
                 app:rippleColor="#057b17"               点击后的背景色
                 app:borderWidth="0dp"
-                android:elevation="6dp"                 阴影背景大小
+                android:elevation="1dp"                 正常阴影背景大小
+                app:pressedTranslationZ="3dp"           按下时阴影背景大小
                 app:fabSize="normal"                    normal模式，尺寸需要56x56大小的图片
                 //28之后 图片显示异常，顾名思义，设置图片大小时使用
                 app:maxImageSize="@dimen/dp_60"

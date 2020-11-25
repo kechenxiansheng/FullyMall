@@ -6,6 +6,7 @@ import android.app.ActivityOptions;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -30,6 +31,7 @@ import android.widget.Toast;
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.model.bean.AddressInfo;
 import com.cm.fm.mall.model.bean.ProductMsg;
+import com.cm.fm.mall.view.activity.ShoppingCartActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,10 +127,19 @@ public class Utils {
         builder.setContentTitle(title);
         builder.setContentText(contentText);
         builder.setWhen(System.currentTimeMillis());
-        builder.setSmallIcon(R.mipmap.icon_dog);
+        builder.setSmallIcon(R.mipmap.red_tip);
         builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(),R.mipmap.icon_dog));
         builder.setAutoCancel(true);
         builder.setDefaults(NotificationCompat.DEFAULT_ALL);    //通知使用系统默认配置（音效，震动，呼吸灯等）
+
+        //设置点击跳转
+        Intent intent = new Intent(context,ShoppingCartActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //相当于将activity设置为 singleTask
+        PendingIntent hangPendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        /** 大于21，使用悬挂式通知 */
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            builder.setFullScreenIntent(hangPendingIntent, true);
+        }
         assert manager != null;
         manager.notify(notificationId,builder.build());
     }

@@ -107,7 +107,7 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
         //改变背景色
         View tabview = (View)tab.getCustomView().getParent();
         tabview.setBackgroundColor(getResources().getColor(R.color.colorLightBlue11));
-        //展示fragment
+        //展示选中的页卡fragment
         showFragment(tab.getPosition());
     }
     @Override
@@ -202,7 +202,7 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
          * */
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             exit();
-            //处理了此事件返回true（即不让下一级处理此事件）
+            //处理了此事件返回true（即不传递给上一级，事件分发机制，谁返回true谁处理）
             return true;
         }
         return super.onKeyDown(keyCode, event);

@@ -111,9 +111,9 @@ public class ShoppingCartActivity extends BaseMVPActivity<ShoppingCartPresenter>
                     rv_shopping_cart_list.setVisibility(View.GONE);
                     iv_tip_des.setVisibility(View.VISIBLE);
                     tv_sum_money.setText("￥0.0");
-                    return;
+//                    return;
                 }
-                Utils.getInstance().tips(context,"提示：购买成功！");
+//                Utils.getInstance().tips(context,"提示：购买成功！");
                 Utils.getInstance().sendNotification(context,"buy_suc","FullyMall","您的订单已发货！",400);
                 break;
         }

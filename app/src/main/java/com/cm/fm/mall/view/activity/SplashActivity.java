@@ -23,7 +23,7 @@ public class SplashActivity extends BaseActivity {
     }
     //给闪屏图片添加一个2秒的动画
     public void appendAnimation(){
-        AlphaAnimation animation = new AlphaAnimation(0.0f,1.0f);
+        AlphaAnimation animation = new AlphaAnimation(0.0f,1.0f);   //透明度，完全透明到完全不透明
         animation.setRepeatCount(0);
         animation.setRepeatMode(Animation.REVERSE); //重复动画的模式，
         animation.setDuration(1500);

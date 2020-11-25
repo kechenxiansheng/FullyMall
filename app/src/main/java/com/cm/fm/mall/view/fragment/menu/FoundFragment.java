@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,6 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
     private ImageButton ib_play,ib_cycle;
     private TextView tv_cur_time,tv_max_time;
     private String tag = "TAG_FoundFragment";
-    private boolean isPlay = true;      //是否正在播放
     private boolean isLoaded = false;   //是否加载完成
     private List<Integer> imagePath = new ArrayList<>();
     private List<String> textLists = new ArrayList<>();
@@ -114,21 +114,58 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
         setVideo();
 
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(tag,"onStart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(tag,"onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //此时此方法不会执行，因为是跟随activity的。所以不可在此处暂停视频播放
+        Log.d(tag,"onPause");
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        /** 如果当前fragment不可见了（切换走了），则暂停播放视频 */
+        Log.d(tag,"onHiddenChanged,hidden : " + hidden);
+        if(hidden){
+            if(vv_video.isPlaying()){
+                vv_video.pause();
+                ib_play.setBackground(getResources().getDrawable(R.mipmap.bg_play2));
+            }
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(tag,"onStop");
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ib_play:
                 if(isLoaded){
-                    if(isPlay){
-                        //暂停播放，并切换为播放背景
+                    if(vv_video.isPlaying()){
+                        //暂停播放
                         vv_video.pause();
                         ib_play.setBackground(getResources().getDrawable(R.mipmap.bg_play2));
-                        isPlay = false;
                     }else {
-                        //继续播放，并切换为暂停背景
+                        //继续播放
                         vv_video.start();
                         ib_play.setBackground(getResources().getDrawable(R.mipmap.bg_pause2));
-                        isPlay = true;
                     }
                 }
                 break;
@@ -141,7 +178,6 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
                     sb_seekbar.setProgress(0);
                     tv_cur_time.setText("00:00");
                     ib_play.setBackground(getResources().getDrawable(R.mipmap.bg_play2));
-                    isPlay = false;
                 }
                 break;
         }
@@ -234,7 +270,7 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
         //暂停播放，并切换为播放背景
         ib_play.setBackground(getResources().getDrawable(R.mipmap.bg_play2));
         vv_video.pause();
-        isPlay = false;
+
     }
 
     //时间处理
