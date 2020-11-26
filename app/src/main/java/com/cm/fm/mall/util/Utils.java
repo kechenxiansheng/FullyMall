@@ -114,9 +114,9 @@ public class Utils {
         NotificationManager manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification.Builder builder = null;
         if(Build.VERSION.SDK_INT >= 26){
-            NotificationChannel channel = new NotificationChannel(channelId,channelId + "_name",NotificationManager.IMPORTANCE_HIGH);
+            NotificationChannel channel = new NotificationChannel(channelId,channelId,NotificationManager.IMPORTANCE_HIGH);
             if (manager != null) {
-                //创建 channel
+                //创建 channel（手机通知设置中可以看到此channel）
                 manager.createNotificationChannel(channel);
             }
             //api 大于26 必须加上channelId

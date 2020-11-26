@@ -114,7 +114,7 @@ public class ShoppingCartActivity extends BaseMVPActivity<ShoppingCartPresenter>
 //                    return;
                 }
 //                Utils.getInstance().tips(context,"提示：购买成功！");
-                Utils.getInstance().sendNotification(context,"buy_suc","FullyMall","您的订单已发货！",400);
+                Utils.getInstance().sendNotification(context,"订单发货提醒","FullyMall","您的订单已发货！",400);
                 break;
         }
     }

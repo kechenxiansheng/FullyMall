@@ -89,7 +89,6 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 //进度值改变时回调
-
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
@@ -98,13 +97,20 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 //TODO 停止拖动回调方法
-                //获取当前进度值
-                int progress = seekBar.getProgress();
-                if(vv_video.isPlaying()){
+                if(isLoaded){
+                    if(vv_video.isPlaying()){
+                        ib_play.setBackground(getResources().getDrawable(R.mipmap.bg_play2));
+                    }else {
+                        ib_play.setBackground(getResources().getDrawable(R.mipmap.bg_pause2));
+                    }
                     //设置当前播放位置
-                    vv_video.seekTo(progress);
+                    vv_video.seekTo(seekBar.getProgress());
+                    //一定要加，如果没有获取焦点，播放位置会有问题
+                    vv_video.requestFocus();
                     tv_cur_time.setText(timeFormat(vv_video.getCurrentPosition()));
+                    vv_video.start();
                 }
+
             }
         });
 

@@ -290,7 +290,7 @@ public class SlideButton extends View {
             mPaint.setColor(circleStrokeColor_int);
             mPaint.setStyle(Paint.Style.STROKE);
             mPaint.setStrokeWidth(circleStrokeWidth);
-            canvas.drawCircle(circle_x, centerY, circleRadiusNew, mPaint);
+            canvas.drawCircle(circle_x, centerY, circleRadiusNew, mPaint);  //前两个参数指圆心距离屏幕原点的x、y轴距离，radius 则是半径
         }
     }
 
