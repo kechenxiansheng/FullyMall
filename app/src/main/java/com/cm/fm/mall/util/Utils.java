@@ -100,6 +100,14 @@ public class Utils {
         curAct.startActivity(intent);
         curAct.finish();
     }
+    /** 跳转,并关闭其他所有的activity */
+    public void startActivityCloseAll(Activity curAct, Class targetAct){
+        Intent intent = new Intent(curAct,targetAct);
+        /** Intent.FLAG_ACTIVITY_CLEAR_TASK 会清除之前所有的activity，并且需要搭配 Intent.FLAG_ACTIVITY_NEW_TASK 一起使用 */
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        curAct.startActivity(intent);
+        curAct.finish();
+    }
     //activity跳转,并关闭发起跳转的activity
     public void startActivityCloseAnimation(Activity curAct, Class targetAct){
         Intent intent = new Intent(curAct,targetAct);

@@ -19,32 +19,8 @@
                     android:layout_height="wrap_content"
                     app:layout_scrollFlags="scroll|enterAlways"
                     >
-                    <!-- 搜索栏 -->
-                    <LinearLayout
-                        android:id="@+id/ll_mall_search"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:background="@color/colorWhite"
-                        android:layout_marginEnd="20dp"
-                        >
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="5dp"
-                            android:background="@mipmap/bg_search"
-                            />
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="10dp"
-                            android:padding="5dp"
-                            android:hint="商品搜索"
-                            />
-                    </LinearLayout>
+                    <!-- 顶部搜索栏 -->
+                    <include layout="@layout/top_search_button" />
                 </androidx.appcompat.widget.Toolbar>
 
                 <View

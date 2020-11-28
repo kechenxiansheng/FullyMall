@@ -29,7 +29,7 @@ import java.util.List;
  * 商城页 顶部分类按钮跳转页
  */
 public class ClassifyButtonJumpActivity extends BaseActivity {
-    private LinearLayout ll_classify_search;
+    private LinearLayout ll_mall_search;
     private ListView ll_classify_left_menu,ll_classify_right_data;         //左侧分类主条目菜单,右侧分条目数据
     private Activity context;
     private List<String> leftMenuList = new ArrayList<>();                      //左侧菜单集合
@@ -47,7 +47,7 @@ public class ClassifyButtonJumpActivity extends BaseActivity {
         //初始化数据
         initData();
 
-        ll_classify_search = findViewById(R.id.ll_classify_search);
+        ll_mall_search = findViewById(R.id.ll_mall_search);
         ll_classify_left_menu = findViewById(R.id.ll_classify_left_menu);
         ll_classify_right_data = findViewById(R.id.ll_classify_right_data);
         //左侧菜单适配器
@@ -101,7 +101,7 @@ public class ClassifyButtonJumpActivity extends BaseActivity {
                 }
             }
         });
-        ll_classify_search.setOnClickListener(new View.OnClickListener() {
+        ll_mall_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //跳转至搜索页面

@@ -15,30 +15,8 @@
         android:paddingEnd="10dp"
         android:paddingBottom="1dp"
         >
-        <LinearLayout
-            android:id="@+id/ll_classify_search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/colorWhite"
-            >
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="5dp"
-                android:background="@mipmap/bg_search"
-                />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:padding="5dp"
-                android:hint="商品搜索"
-                />
-        </LinearLayout>
+        <!-- 顶部搜索栏 -->
+        <include layout="@layout/top_search_button" />
 
     </LinearLayout>
 

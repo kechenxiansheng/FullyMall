@@ -100,13 +100,16 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 this.finish();
                 return;
             }else if( activityId == ShoppingCartActivity.SHOPPING_CART_ACTIVITY_ID){
-                /** 购物车界面过来的请求，并关闭之前的购物车界面 */
-                ActivityCollector.removeActivity(ShoppingCartActivity.context);
+                /** 购物车界面过来的请求（只是未登录），登陆成功直接关闭*/
+//                ActivityCollector.finishOneActivity(ShoppingCartActivity.class.getName());
+//                Utils.getInstance().startActivityClose(this,ShoppingCartActivity.class);
+                this.finish();
+                return;
             }
             /** 关闭之前的MainActivity */
-            ActivityCollector.removeActivity(MainActivity.context);
+//            ActivityCollector.finishOneActivity(MainActivity.class.getName());
             /** 任何位置只要是 先注册在登录的都直接回到商城主界面 */
-            Utils.getInstance().startActivityClose(this,MainActivity.class);
+            Utils.getInstance().startActivityCloseAll(this,MainActivity.class);
         }else if(code == MallConstant.FAIL){
             tv_login_tips.setText(msg);
             tv_login_tips.setTextColor(getResources().getColor(R.color.colorAccent));

@@ -178,9 +178,9 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
             case R.id.ib_cycle:
                 //重新开始播放
                 if(isLoaded){
-//                    vv_video.resume();
                     vv_video.seekTo(0);
                     vv_video.pause();
+                    vv_video.requestFocus();
                     sb_seekbar.setProgress(0);
                     tv_cur_time.setText("00:00");
                     ib_play.setBackground(getResources().getDrawable(R.mipmap.bg_play2));

@@ -43,9 +43,11 @@ public class ActivityCollector {
      * @Param activityName 类名
      * */
     public static void finishOneActivity(String activityName){
+        Log.d(TAG,"activityName : " + activityName);
         //在activities集合中找到类名与指定类名相同的Activity就关闭
         for (Activity activity : activityList){
-            String name= activity.getClass().getName();//activity的包名+类名
+            String name = activity.getClass().getName();//activity的包名+类名
+            Log.d(TAG,"name : " + name);    //com.cm.fm.mall.view.activity.MainActivity
             if(name.equals(activityName)){
                 if(activity.isFinishing()){
                     //当前activity如果已经Finish，则只从activities清除就好了
