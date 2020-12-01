@@ -106,8 +106,6 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 this.finish();
                 return;
             }
-            /** 关闭之前的MainActivity */
-//            ActivityCollector.finishOneActivity(MainActivity.class.getName());
             /** 任何位置只要是 先注册在登录的都直接回到商城主界面 */
             Utils.getInstance().startActivityCloseAll(this,MainActivity.class);
         }else if(code == MallConstant.FAIL){
