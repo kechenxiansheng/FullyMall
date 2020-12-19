@@ -13,6 +13,7 @@ import com.cm.fm.mall.base.BaseMVPActivity;
 import com.cm.fm.mall.contract.activity.AddressContract;
 import com.cm.fm.mall.model.adapter.AddressAdapter;
 import com.cm.fm.mall.model.bean.AddressInfo;
+import com.cm.fm.mall.model.constant.MallConstant;
 import com.cm.fm.mall.presenter.activity.AddressPresenter;
 import com.cm.fm.mall.util.LogUtil;
 import com.cm.fm.mall.util.Utils;
@@ -22,9 +23,11 @@ import org.litepal.crud.DataSupport;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 收货地址 展示页
+ */
 public class AddressActivity extends BaseMVPActivity<AddressPresenter> implements AddressContract.View,View.OnClickListener {
-    private final int REQUEST_CODE = 700;
-    public static final int REQUEST_CODE_EDIT = 701;
+
     ListView lv_user_address;
     ImageView address_back;
     LinearLayout ll_add_address;
@@ -72,8 +75,8 @@ public class AddressActivity extends BaseMVPActivity<AddressPresenter> implement
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
-            case REQUEST_CODE:
-            case REQUEST_CODE_EDIT:
+            case MallConstant.ADDRESS_ACTIVITY_REQUEST_CODE:
+            case MallConstant.ADDRESS_ACTIVITY_REQUEST_CODE_EDIT:
                 if(resultCode == RESULT_OK){
                     initList();
                     adapter.notifyDataSetChanged();
@@ -100,7 +103,7 @@ public class AddressActivity extends BaseMVPActivity<AddressPresenter> implement
         switch (v.getId()){
             case R.id.ll_add_address:
                 //新加地址
-                Utils.getInstance().startActivityForResultAnimation(context,AddressDetailActivity.class,REQUEST_CODE);
+                Utils.getInstance().startActivityForResultAnimation(context,AddressDetailActivity.class,MallConstant.ADDRESS_ACTIVITY_REQUEST_CODE);
                 break;
             case R.id.address_back:
                 context.finish();

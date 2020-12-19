@@ -1,10 +1,8 @@
 package com.cm.fm.mall.view.fragment.product;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
-
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -14,27 +12,27 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.base.BasePresenter;
-import com.cm.fm.mall.presenter.fragment.product.ProductInfoPresenter;
-import com.cm.fm.mall.view.activity.ShoppingCartActivity;
+import com.cm.fm.mall.base.BaseMVPFragment;
 import com.cm.fm.mall.model.adapter.ViewPagerAdapter;
 import com.cm.fm.mall.model.bean.AddressInfo;
 import com.cm.fm.mall.model.bean.ProductMsg;
 import com.cm.fm.mall.model.bean.ShoppingProduct;
-import com.cm.fm.mall.view.dialog.AddressPageDialog;
-import com.cm.fm.mall.base.BaseMVPFragment;
+import com.cm.fm.mall.model.constant.MallConstant;
+import com.cm.fm.mall.presenter.fragment.product.ProductInfoPresenter;
 import com.cm.fm.mall.util.LogUtil;
 import com.cm.fm.mall.util.ResourceUtils;
 import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.view.activity.ShoppingCartActivity;
+import com.cm.fm.mall.view.dialog.AddressPageDialog;
 
 import org.litepal.crud.DataSupport;
-import org.litepal.tablemanager.Connector;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
+
 
 /**
  * 商品信息页
@@ -55,7 +53,6 @@ public class ProductInfoFragment extends BaseMVPFragment<ProductInfoPresenter> i
     private ProductMsg productMsg; //当前展示的商品实体类
     private AddressPageDialog dialog;
     private String tag ="TAG_ProductInfoFragment";
-    private static int PRODUCT_INFO_FRAGMENT_ACTIVITY_ID = 1000;
     @Override
     public int initLayout() {
         return R.layout.fragment_product_info;
@@ -159,7 +156,7 @@ public class ProductInfoFragment extends BaseMVPFragment<ProductInfoPresenter> i
         super.onActivityResult(requestCode, resultCode, data);
         LogUtil.d(tag,"requestCode : " + requestCode +",resultCode : " + resultCode);
         switch (requestCode){
-            case 1000:
+            case MallConstant.PRODUCT_INFO_FRAGMENT_SHOPPING_CART_REQUEST_CODE:
                 if(resultCode == Activity.RESULT_OK){
                     //显示商品种类的数量
                     showNumOfType(false);
@@ -214,7 +211,7 @@ public class ProductInfoFragment extends BaseMVPFragment<ProductInfoPresenter> i
             case R.id.ll_go_to_shopping_car:
                 //跳转到购物车界面
                 Intent intent = new Intent(getActivity(),ShoppingCartActivity.class);
-                startActivityForResult(intent,PRODUCT_INFO_FRAGMENT_ACTIVITY_ID);
+                startActivityForResult(intent,MallConstant.PRODUCT_INFO_FRAGMENT_SHOPPING_CART_REQUEST_CODE);
                 break;
             case R.id.tv_buy_now:
                 //立即购买

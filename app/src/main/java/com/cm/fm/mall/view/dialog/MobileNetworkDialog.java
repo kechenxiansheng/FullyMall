@@ -33,13 +33,16 @@ public class MobileNetworkDialog extends Dialog implements View.OnClickListener 
         setContentView(tip_view);
         //居中显示
         Window window = getWindow();
-        window.setGravity(Gravity.CENTER);
-        window.setBackgroundDrawableResource(android.R.color.transparent);  //背景透明
-        //设置listview的高宽
-        WindowManager.LayoutParams params = window.getAttributes();
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        window.setAttributes(params);
+        if (window != null) {
+            window.setGravity(Gravity.CENTER);
+            window.setBackgroundDrawableResource(android.R.color.transparent);  //背景透明
+            //设置listview的高宽
+            WindowManager.LayoutParams params = window.getAttributes();
+            params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            params.width = WindowManager.LayoutParams.MATCH_PARENT;
+            window.setAttributes(params);
+        }
+
 
         tv_cancel_update = tip_view.findViewById(R.id.tv_cancel_update);
         tv_sure_update = tip_view.findViewById(R.id.tv_sure_update);

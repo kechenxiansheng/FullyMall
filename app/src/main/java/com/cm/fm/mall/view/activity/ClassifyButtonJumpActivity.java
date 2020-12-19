@@ -38,7 +38,6 @@ public class ClassifyButtonJumpActivity extends BaseActivity {
     private int currentItem;            //当前的选项索引
 
     private String tag = "TAG_ClassifyButtonJumpActivity";
-    private final int PERMISSION_REQUEST_CODE = 110;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -34,8 +34,8 @@ android {
             signingConfig signingConfigs.config
         }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled false     //是否混淆
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'  //默认的混淆配置
             signingConfig signingConfigs.config
         }
     }

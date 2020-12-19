@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
+import com.cm.fm.mall.model.constant.MallConstant;
 import com.cm.fm.mall.view.activity.AddressActivity;
 import com.cm.fm.mall.view.activity.AddressDetailActivity;
 import com.cm.fm.mall.model.bean.AddressInfo;
@@ -72,7 +73,7 @@ public class AddressAdapter extends BaseAdapter {
             phoneNum = phoneNum.substring(0,3)+"****"+phoneNum.substring(7,phoneNum.length());
         }
         holder.tv_user_phone.setText(phoneNum);
-        holder.tv_address_detail.setText(addressInfo.getAddress()+addressInfo.getStreet());
+        holder.tv_address_detail.setText(String.format("%s%s", addressInfo.getAddress(), addressInfo.getStreet()));
 
         //设置默认地址
         if(addressInfo.getTag() == null || addressInfo.getTag().isEmpty()){
@@ -91,11 +92,11 @@ public class AddressAdapter extends BaseAdapter {
             }
         }
 
-        //点击编辑按钮
+        /** 点击编辑按钮 */
         holder.iv_edit_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.getInstance().startActivityDataForResult(context,AddressDetailActivity.class,AddressActivity.REQUEST_CODE_EDIT,addressInfo);
+                Utils.getInstance().startActivityDataForResult(context,AddressDetailActivity.class,MallConstant.ADDRESS_ACTIVITY_REQUEST_CODE_EDIT,addressInfo);
             }
         });
         return view;

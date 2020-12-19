@@ -95,11 +95,11 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
             /** UserFragment 点击的登陆 */
             int activityId = getIntent().getIntExtra("activityId", 0);
             LogUtil.d(tag,"activityId:"+ activityId);
-            if (activityId == UserFragment.USER_FRAGMENT_ACTIVITY_ID) {
+            if (activityId == MallConstant.USER_FRAGMENT_ACTIVITY_ID) {
                 setResult(RESULT_OK);
                 this.finish();
                 return;
-            }else if( activityId == ShoppingCartActivity.SHOPPING_CART_ACTIVITY_ID){
+            }else if( activityId == MallConstant.SHOPPING_CART_ACTIVITY_ACTIVITY_ID){
                 /** 购物车界面过来的请求（只是未登录），登陆成功直接关闭*/
 //                ActivityCollector.finishOneActivity(ShoppingCartActivity.class.getName());
 //                Utils.getInstance().startActivityClose(this,ShoppingCartActivity.class);

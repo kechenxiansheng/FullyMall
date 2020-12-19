@@ -31,10 +31,6 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPresenter> impleme
     private Button bt_register_btn;
     private ImageView iv_register_imageView_lock;
 
-    private final int USER_TYPE_IS_LOGIN = 1;
-    private final int USER_TYPE_NOT_LOGIN = 0;
-    public static final int REGISTER_ACTIVITY_ID = 3;
-
     private boolean TypeIsPassword = true;
     private final String tag = "TAG_RegisterActivity";
     @Override

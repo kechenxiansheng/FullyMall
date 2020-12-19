@@ -16,6 +16,7 @@ import com.cm.fm.mall.base.BaseMVPActivity;
 import com.cm.fm.mall.contract.activity.AddressDetailContract;
 import com.cm.fm.mall.model.adapter.RecycleViewTagAdapter;
 import com.cm.fm.mall.model.bean.AddressInfo;
+import com.cm.fm.mall.model.constant.MallConstant;
 import com.cm.fm.mall.presenter.activity.AddressDetailPresenter;
 import com.cm.fm.mall.util.LogUtil;
 import com.cm.fm.mall.util.ResourceUtils;
@@ -37,6 +38,9 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * 地址信息详页
+ */
 public class AddressDetailActivity extends BaseMVPActivity<AddressDetailPresenter> implements AddressDetailContract.View,View.OnClickListener,SlideButton.SlideButtonOnCheckedListener{
     private Activity context;
     private ImageView iv_address_back,iv_address_book,iv_delete_address;
@@ -52,7 +56,6 @@ public class AddressDetailActivity extends BaseMVPActivity<AddressDetailPresente
     private String selected_tag_text = "";                  //当前选择的标签
     private boolean isDefaultAddress = false;               //是否是默认地址
 
-    private final int CONTACT_CODE = 901;
     private String tag = "TAG_AddressDetailAct";
     @Override
     protected int initLayout() {
@@ -186,7 +189,7 @@ public class AddressDetailActivity extends BaseMVPActivity<AddressDetailPresente
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
-            case CONTACT_CODE:
+            case MallConstant.ADDRESS_DETAIL_ACTIVITY_CONTACT_CODE:
                 if(data != null){
                     List<String> contactInfo = mPresenter.getContactM(data);
                     //显示联系人姓名、电话
@@ -295,7 +298,7 @@ public class AddressDetailActivity extends BaseMVPActivity<AddressDetailPresente
                         //allGranted 是否全部已授权    grantedList 已授权的权限集合        deniedList 已拒绝的权限集合
                         if(allGranted){
                             //打开通讯录
-                            mPresenter.openContactM(AddressDetailActivity.this,CONTACT_CODE);
+                            mPresenter.openContactM(AddressDetailActivity.this,MallConstant.ADDRESS_DETAIL_ACTIVITY_CONTACT_CODE);
                         }
                     }
                 });

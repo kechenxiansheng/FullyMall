@@ -12,6 +12,7 @@ import com.cm.fm.mall.base.BaseMVPActivity;
 import com.cm.fm.mall.contract.activity.ShoppingCartContract;
 import com.cm.fm.mall.model.adapter.RecycleViewShoppingAdapter;
 import com.cm.fm.mall.model.bean.ShoppingProduct;
+import com.cm.fm.mall.model.constant.MallConstant;
 import com.cm.fm.mall.presenter.activity.ShoppingCartPresenter;
 import com.cm.fm.mall.util.LogUtil;
 import com.cm.fm.mall.util.Utils;
@@ -32,7 +33,6 @@ public class ShoppingCartActivity extends BaseMVPActivity<ShoppingCartPresenter>
     private ImageView iv_tip_des;
     private RecyclerView rv_shopping_cart_list;
     private RecycleViewShoppingAdapter shoppingAdapter;
-    public static final int SHOPPING_CART_ACTIVITY_ID = 4;
     private final String tag = "TAG_ShoppingCart";
 
     private List<ShoppingProduct> products = new ArrayList<>();
@@ -96,7 +96,7 @@ public class ShoppingCartActivity extends BaseMVPActivity<ShoppingCartPresenter>
                 break;
             case 1:
                 //游客状态去登陆
-                Utils.getInstance().startActivity(this,LoginActivity.class,SHOPPING_CART_ACTIVITY_ID);
+                Utils.getInstance().startActivity(this,LoginActivity.class,MallConstant.SHOPPING_CART_ACTIVITY_ACTIVITY_ID);
                 break;
             case 0:
                 //购买成功,删除购物车数据

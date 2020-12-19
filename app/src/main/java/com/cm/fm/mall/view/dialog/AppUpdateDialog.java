@@ -39,12 +39,15 @@ public class AppUpdateDialog extends Dialog implements View.OnClickListener {
         setContentView(view);
         //显示在底部
         Window window = getWindow();
-        window.setGravity(Gravity.BOTTOM);
-        //设置listview的高宽
-        WindowManager.LayoutParams params = window.getAttributes();
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        window.setAttributes(params);
+        if (window != null) {
+            window.setGravity(Gravity.BOTTOM);
+            //设置listview的高宽
+            WindowManager.LayoutParams params = window.getAttributes();
+            params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            params.width = WindowManager.LayoutParams.MATCH_PARENT;
+            window.setAttributes(params);
+        }
+
 
 
         tv_cur_version_name = view.findViewById(R.id.tv_cur_version_name);

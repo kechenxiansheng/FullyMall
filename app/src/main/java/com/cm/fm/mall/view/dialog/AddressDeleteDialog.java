@@ -35,9 +35,13 @@ public class AddressDeleteDialog extends Dialog implements View.OnClickListener 
         setContentView(tip_view);
         //TODO 通过 Window 设置在整个窗口显示在中间
         Window window = getWindow();
-        WindowManager.LayoutParams params = window.getAttributes();
-        params.gravity = Gravity.CENTER;
-        window.setAttributes(params);
+        if (window != null) {
+            /** 窗口不可见时，window为null */
+            WindowManager.LayoutParams params = window.getAttributes();
+            params.gravity = Gravity.CENTER;
+            window.setAttributes(params);
+        }
+
 
         tv_mobile_network = tip_view.findViewById(R.id.tv_mobile_network);
         tv_cancel_update = tip_view.findViewById(R.id.tv_cancel_update);

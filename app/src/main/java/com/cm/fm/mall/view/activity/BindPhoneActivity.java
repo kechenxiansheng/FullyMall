@@ -40,7 +40,7 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
 
     @Override
     protected void activityAnim() {
-        //告知页面，使用动画
+        //使用进出场动画
         Utils.getInstance().actUseAnim(context,R.transition.fade);
     }
 
@@ -99,7 +99,7 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
                 SMSSDK.getVerificationCode(USER_COUNTRY,phoneNum);
                 //清空提示
                 tv_code_tip.setText("");
-                //倒计时
+                //倒计时(单位：毫秒)
                 BindPhoneActivity.TimeCount timeCount = new BindPhoneActivity.TimeCount(60000,1000);
                 timeCount.start();
                 break;
@@ -126,7 +126,7 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
         SMSSDK.unregisterEventHandler(eventHandler);
     }
 
-    //验证码倒计时60秒
+    /** 验证码倒计时60秒 */
     class TimeCount extends CountDownTimer {
         public TimeCount(long millisInFuture,long countDownInterval) {
             super(millisInFuture, countDownInterval);

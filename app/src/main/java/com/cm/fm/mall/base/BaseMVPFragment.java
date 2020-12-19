@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 /**
  * 碎片父类
+ * 模板方法设计模式
  */
 public abstract class BaseMVPFragment<P extends BasePresenter> extends Fragment implements IBaseView {
     private String tag = "TAG_BaseMVPFragment";

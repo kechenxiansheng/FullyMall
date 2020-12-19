@@ -36,9 +36,12 @@ public class AgreementDialog extends Dialog {
         setContentView(view);
         //TODO 通过 Window 设置在整个窗口居中显示
         Window window = getWindow();
-        WindowManager.LayoutParams params = window.getAttributes();
-        params.gravity = Gravity.CENTER;
-        window.setAttributes(params);
+        if (window != null) {
+            WindowManager.LayoutParams params = window.getAttributes();
+            params.gravity = Gravity.CENTER;
+            window.setAttributes(params);
+        }
+
 
         tv_msg = view.findViewById(R.id.tv_msg);
 

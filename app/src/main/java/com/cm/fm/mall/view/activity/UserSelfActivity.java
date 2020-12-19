@@ -13,6 +13,7 @@ import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BaseMVPActivity;
 import com.cm.fm.mall.contract.activity.UserSelfContract;
 import com.cm.fm.mall.model.bean.UserInfo;
+import com.cm.fm.mall.model.constant.MallConstant;
 import com.cm.fm.mall.presenter.activity.UserSelfPresenter;
 import com.cm.fm.mall.util.LogUtil;
 import com.cm.fm.mall.util.Utils;
@@ -25,7 +26,6 @@ import java.util.List;
 public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> implements UserSelfContract.View,View.OnClickListener {
     private Activity context;
     private final String tag = "TAG_UserSelfActivity";
-    public static final int USER_SELF_ACTIVITY_ID = 5;
 
     private EditText et_userself_name,et_userself_nickname;
     private RadioButton rb_userself_sex_man,rb_userself_sex_woman;
@@ -101,7 +101,7 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
         super.onActivityResult(requestCode, resultCode, data);
         LogUtil.d(tag, "onActivityResult requestCode:" + requestCode + ",resultCode:" + resultCode + ",data:" + data);
         switch (requestCode) {
-            case 500:
+            case MallConstant.BIND_PHONE_ACTIVITY_REQUEST_CODE:
                 //TODO 显示手机号
                 if (resultCode == Activity.RESULT_OK) {
                     userInfoList = DataSupport.findAll(UserInfo.class);
@@ -116,8 +116,7 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
             case R.id.tv_bind_phone_num:
                 //绑定手机
                 Intent intent = new Intent(context,BindPhoneActivity.class);
-                intent.putExtra("activityId",USER_SELF_ACTIVITY_ID);
-                startActivityForResult(intent,500);
+                startActivityForResult(intent,MallConstant.BIND_PHONE_ACTIVITY_REQUEST_CODE);
                 break;
             case R.id.tv_userself_update:
                 if(!SURE_UPDATE){
@@ -180,7 +179,9 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
             String maskNumber = "";
             if(phoneNum!=null){
                 tv_bind_phone_num.setText("更改");
-                maskNumber = phoneNum.substring(0,3)+"****"+phoneNum.substring(7,phoneNum.length());
+                if(phoneNum.length() == 11){
+                    maskNumber = phoneNum.substring(0,3)+"****"+phoneNum.substring(7,phoneNum.length());
+                }
             }
             tv_userself_phone.setText(maskNumber);
             int sexNum = userInfo.getSex();

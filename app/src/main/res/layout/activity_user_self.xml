@@ -166,7 +166,7 @@
             android:background="@color/colorLightBlue11"
             android:textColor="@color/colorBlack"
             android:padding="5dp"
-            android:text="绑"/>
+            android:text="绑定"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"

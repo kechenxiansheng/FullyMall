@@ -61,13 +61,16 @@ public class AddressPageDialog extends Dialog implements View.OnClickListener {
         initData();
         //显示在底部
         Window window = getWindow();
-        window.setGravity(Gravity.BOTTOM);
-        window.setBackgroundDrawableResource(android.R.color.transparent);  //背景透明
-        //设置listview的高宽
-        WindowManager.LayoutParams params = window.getAttributes();
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        window.setAttributes(params);
+        if (window != null) {
+            window.setGravity(Gravity.BOTTOM);
+            window.setBackgroundDrawableResource(android.R.color.transparent);  //背景透明
+            //设置listview的高宽
+            WindowManager.LayoutParams params = window.getAttributes();
+            params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+            params.width = WindowManager.LayoutParams.MATCH_PARENT;
+            window.setAttributes(params);
+        }
+
 
         if(infoList.size()==0){
             tv_other_address.setText("添加地址");

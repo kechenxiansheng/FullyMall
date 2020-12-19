@@ -32,7 +32,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
+/**
+ * 发现页面
+ * */
 public class FoundFragment extends BaseMVPFragment implements View.OnClickListener {
     private Context _context;
     private Banner b_banner;

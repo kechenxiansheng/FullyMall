@@ -55,8 +55,6 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
     private List<UserInfo> userInfos;
     private boolean typeOflogin;        //true 登陆（文本显示的注销）  false 注销（文本显示的登陆）
 
-    public static final int USER_FRAGMENT_ACTIVITY_ID = 150;      //本页activityId
-
     private ImageView iv_head_portrait; //头像
 
     private TextView tv_nick_name,tv_tips_login_logout;          //昵称、点击登陆(注销)、绑定电话的描述、绑定手机
@@ -126,13 +124,13 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
         super.onActivityResult(requestCode, resultCode, data);
         LogUtil.d(tag,"onActivityResult requestCode:"+requestCode+",resultCode:"+resultCode+",data:"+data);
         switch (requestCode){
-            case 153:
+            case MallConstant.USER_FRAGMENT_HEAD_PORTRAIT_REQUEST_CODE:
                 //TODO 头像页回调
                 if(resultCode == Activity.RESULT_OK){
                    showHeadPhoto();
                 }
                 break;
-            case 152:
+            case MallConstant.USER_FRAGMENT_USER_SELF_REQUEST_CODE:
                 //TODO 个人资料回调
                 if(resultCode == Activity.RESULT_OK){
                     userInfos.clear();
@@ -141,7 +139,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                     tv_nick_name.setText(userInfos.get(0).getNickName());
                 }
                 break;
-            case 151:
+            case MallConstant.USER_FRAGMENT_LOGIN_REQUEST_CODE:
                 //TODO 登陆回调
                 if(resultCode == Activity.RESULT_OK){
                     userInfos.clear();
@@ -188,9 +186,9 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                     return;
                 }
                 Intent intent_head = new Intent(context,HeadPortraitActivity.class);
-                intent_head.putExtra("activityId",USER_FRAGMENT_ACTIVITY_ID);
+                intent_head.putExtra("activityId",MallConstant.USER_FRAGMENT_ACTIVITY_ID);
                 //最后一个参数是 activity切换动画使用
-                startActivityForResult(intent_head,153,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
+                startActivityForResult(intent_head,MallConstant.USER_FRAGMENT_HEAD_PORTRAIT_REQUEST_CODE,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
                 break;
             case R.id.ll_user_info:
                 //资料
@@ -198,7 +196,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                 if(userInfos.size()!=0 && userInfos.get(0).getUserType()==1){
                     Intent intent_upate = new Intent(getActivity(),UserSelfActivity.class);
                     //最后一个参数是 activity切换动画使用
-                    startActivityForResult(intent_upate,152,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
+                    startActivityForResult(intent_upate,MallConstant.USER_FRAGMENT_USER_SELF_REQUEST_CODE,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
                     return;
                 }
                 Utils.getInstance().tips(context,"请登录！");
@@ -228,7 +226,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                     Utils.getInstance().tips(context,"请打开网络");
                     return;
                 }
-                 CheckUpdateUtil.getInstance().checkUpdate(context,USER_FRAGMENT_ACTIVITY_ID);
+                 CheckUpdateUtil.getInstance().checkUpdate(context,MallConstant.USER_FRAGMENT_ACTIVITY_ID);
                 break;
             case R.id.tv_tips_login_logout:
                 if(!typeOflogin){
@@ -240,9 +238,9 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                         //有用户数据，但是没登陆，进行登录
                         //这里的文本显示处理 已在ActivityForResult中处理
                         Intent intent2 = new Intent(getActivity(),LoginActivity.class);
-                        intent2.putExtra("activityId",USER_FRAGMENT_ACTIVITY_ID);
+                        intent2.putExtra("activityId",MallConstant.USER_FRAGMENT_ACTIVITY_ID);
                         //最后一个参数是 activity切换动画使用
-                        startActivityForResult(intent2,151,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
+                        startActivityForResult(intent2,MallConstant.USER_FRAGMENT_LOGIN_REQUEST_CODE,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
                     }
                 }else {
                     //登陆状态，切换为注销状态，清空昵称，替换为默认头像

@@ -13,6 +13,7 @@ import android.widget.ViewFlipper;
 
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BasePresenter;
+import com.cm.fm.mall.model.constant.MallConstant;
 import com.cm.fm.mall.presenter.fragment.MallPresenter;
 import com.cm.fm.mall.view.activity.ClassifyButtonJumpActivity;
 import com.cm.fm.mall.view.activity.SearchActivity;
@@ -50,8 +51,6 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
     private List<ProductMsg> productMsgs = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
     private List<String> talks = new ArrayList<>();
-    public static final int MAIN_ACTIVITY_ID = 1;
-    private final int PERMISSION_REQUEST_CODE = 100;
     private final String tag = "TAG_MallFragment";
     private Activity context;
 
@@ -142,7 +141,7 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
-            case 101:
+            case MallConstant.MALL_FRAGMENT_SEARCH_REQUEST_CODE:
                 if(resultCode == Activity.RESULT_OK){
                     String msg = data.getStringExtra("search_msg");
                     //搜索商品
@@ -157,8 +156,8 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
             case R.id.ll_mall_search:
                 //跳转至搜索页面
                 Intent intent = new Intent(context,SearchActivity.class);
-                intent.putExtra("activityId",PERMISSION_REQUEST_CODE);
-                startActivityForResult(intent,101);
+                intent.putExtra("activityId",MallConstant.MALL_FRAGMENT_PERMISSION_REQUEST_CODE);
+                startActivityForResult(intent,MallConstant.MALL_FRAGMENT_SEARCH_REQUEST_CODE);
                 break;
             case R.id.bt_shopping_cart:
                 //点击了购物车

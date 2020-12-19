@@ -39,7 +39,6 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
     ClassifyFragment classifyFragment;
     FoundFragment foundFragment;
     UserFragment userFragment;
-    ViewPager vp_menu_content;
     TabLayout tl_menu_bar;
     FrameLayout fl_data_center;
 
@@ -63,8 +62,8 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
     }
     public void initView(){
         fl_data_center = findViewById(R.id.fl_data_center);       //内容布局
-        tl_menu_bar = findViewById(R.id.tl_menu_bar);               //底部菜单
-        appUpdate();
+        tl_menu_bar = findViewById(R.id.tl_menu_bar);             //底部菜单
+        tl_menu_bar.setSelectedTabIndicator(0);                   //隐藏 TabLayout 下划线
         /** TabLayout 模式 滑动（MODE_SCROLLABLE）和固定（MODE_FIXED） */
         tl_menu_bar.setTabMode(TabLayout.MODE_FIXED);
         //TabLayout 设置 item 图标和标题
@@ -88,6 +87,7 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
         //点击监听
         tl_menu_bar.addOnTabSelectedListener(this);
 
+        appUpdate();
     }
 
     private void appUpdate(){
@@ -172,8 +172,11 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
                 }
                 break;
         }
-//        transaction.commit();     无效，或者视图显示不出来，但时数据和日志会打印
-        transaction.commitAllowingStateLoss();
+
+        transaction.commit();     //需搭配 executePendingTransactions() 一起使用，来保证立即执行
+        fragmentManager.executePendingTransactions();
+
+//        transaction.commitAllowingStateLoss();
     }
     //隐藏fragment
     private void hideFragment(FragmentTransaction transaction) {

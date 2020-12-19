@@ -22,6 +22,7 @@ import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BaseMVPActivity;
 import com.cm.fm.mall.contract.activity.HeadPortraitContract;
 import com.cm.fm.mall.model.bean.UserInfo;
+import com.cm.fm.mall.model.constant.MallConstant;
 import com.cm.fm.mall.presenter.activity.HeadPortraitPresenter;
 import com.cm.fm.mall.util.LogUtil;
 import com.cm.fm.mall.util.Utils;
@@ -52,10 +53,6 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
     private ToggleButton tb_change_photo;
     private Bitmap bitmap;      //新头像位图
 
-    public static final int HEAD_PORTRAIT_ACTIVITY_ID = 6;
-    private static final int TAKE_PHOTO = 602;
-    private static final int ALBUM_CODE = 601;
-    private static final int PERMISSION_CODE = 600;
     private final String tag = "TAG_HeadActivity";
 
     private Uri imageUri;
@@ -139,7 +136,7 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
         super.onActivityResult(requestCode, resultCode, data);
         LogUtil.d(tag,"requestCode:"+requestCode+"  resultCode:"+resultCode+"  data:"+(data==null));
         switch (requestCode ){
-            case TAKE_PHOTO:
+            case MallConstant.HEAD_PORTRAIT_ACTIVITY_TAKE_PHOTO:
                 if(resultCode == Activity.RESULT_OK){
                     /** 将拍摄的照片显示出来 */
                     if(imageUri != null){
@@ -151,7 +148,7 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
                     }
                 }
                 break;
-            case ALBUM_CODE:
+            case MallConstant.HEAD_PORTRAIT_ACTIVITY_ALBUM_CODE:
                 /** 处理相册选择的照片，并显示出来 */
                 if(resultCode == RESULT_OK){
                     if(data != null){
@@ -229,12 +226,12 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
                             //allGranted 是否全部已授权    grantedList 已授权的权限集合        deniedList 已拒绝的权限集合
                             if(allGranted){
                                 //权限通过则打开相机
-                                imageUri = mPresenter.takePhoto(context,TAKE_PHOTO);
+                                imageUri = mPresenter.takePhoto(context,MallConstant.HEAD_PORTRAIT_ACTIVITY_TAKE_PHOTO);
                             }
                         }
                     });
         }else {
-            imageUri = mPresenter.takePhoto(context,TAKE_PHOTO);
+            imageUri = mPresenter.takePhoto(context,MallConstant.HEAD_PORTRAIT_ACTIVITY_TAKE_PHOTO);
         }
 
     }
@@ -256,7 +253,7 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
                         //allGranted 是否全部已授权    grantedList 已授权的权限集合        deniedList 已拒绝的权限集合
                         if(allGranted){
                             //权限通过则打开相册
-                            mPresenter.openAlbum(context,ALBUM_CODE);
+                            mPresenter.openAlbum(context,MallConstant.HEAD_PORTRAIT_ACTIVITY_ALBUM_CODE);
                         }
                     }
                 });
