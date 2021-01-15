@@ -107,7 +107,8 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 return;
             }
             /** 任何位置只要是 先注册在登录的都直接回到商城主界面 */
-            Utils.getInstance().startActivityCloseAll(this,MainActivity.class);
+//            Utils.getInstance().startActivityCloseAll(this,MainActivity.class);
+            Utils.getInstance().startActivityClose(this,MainActivity.class);
         }else if(code == MallConstant.FAIL){
             tv_login_tips.setText(msg);
             tv_login_tips.setTextColor(getResources().getColor(R.color.colorAccent));

@@ -27,7 +27,7 @@ public class ProductMsg implements Parcelable {
         this.extension = extension;
     }
 
-    //反序列化
+
     private ProductMsg(Parcel in) {
         productID = in.readInt();
         productName = in.readString();
@@ -36,8 +36,10 @@ public class ProductMsg implements Parcelable {
         price = in.readDouble();
         inventory = in.readInt();
         extension = in.readString();
+        /** 此处反序列化时，如果对象也是一个可序列化的，那么需要传入当前线程的上下文类加载器，否则会报错 找不到类 */
+        //示例 addressInfo = in.readParcelable(Thread.currentThread().getContextClassLoader());
     }
-
+    //反序列化
     public static final Creator<ProductMsg> CREATOR = new Creator<ProductMsg>() {
         @Override
         public ProductMsg createFromParcel(Parcel in) {
@@ -49,6 +51,23 @@ public class ProductMsg implements Parcelable {
             return new ProductMsg[size];
         }
     };
+    //返回当前内容的内容描述（大部分情况返回0，当有文件描述符时，返回 1 ：CONTENTS_FILE_DESCRIPTOR）
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    //序列化
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.productID);
+        dest.writeString(this.productName);
+        dest.writeString(this.productDescription);
+        dest.writeString(this.type);
+        dest.writeDouble(this.price);
+        dest.writeInt(this.inventory);
+        dest.writeString(this.extension);
+    }
 
     public int getProductID() {
         return productID;
@@ -119,20 +138,5 @@ public class ProductMsg implements Parcelable {
                 '}';
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
 
-    //序列化
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.productID);
-        dest.writeString(this.productName);
-        dest.writeString(this.productDescription);
-        dest.writeString(this.type);
-        dest.writeDouble(this.price);
-        dest.writeInt(this.inventory);
-        dest.writeString(this.extension);
-    }
 }

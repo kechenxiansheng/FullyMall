@@ -129,6 +129,7 @@ public class CheckUpdateUtil {
                     AppUpdateDialog tipDialog = new AppUpdateDialog(context,R.style.DialogTheme,newVersionName,content);
                     tipDialog.show();
                 }else if(vName >= Integer.valueOf(newVersionName.replace(".",""))){
+                    //用户中心界面点击检查更新，最新版本时弹一个提示
                     if(actId == 150){
                         Utils.getInstance().tips(context,"已是最新版本");
                     }

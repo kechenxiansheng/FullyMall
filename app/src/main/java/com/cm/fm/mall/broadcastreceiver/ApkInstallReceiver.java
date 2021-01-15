@@ -1,7 +1,5 @@
 package com.cm.fm.mall.broadcastreceiver;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -52,7 +50,7 @@ public class ApkInstallReceiver extends BroadcastReceiver {
     private void installApk(Context context) {
         LogUtil.e(tag,"installApk start");
         Intent intent = new Intent(Intent.ACTION_VIEW);
-        // 由于没有在Activity环境下启动Activity,设置下面的标签
+        // 由于没有在Activity环境下启动Activity,设置下面的标签，表示启动一个新的activity任务
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (Build.VERSION.SDK_INT >= 26) {
             //TODO 如果在8.0以上，使用FileProvider，并先判断是否已经打开安装文件的权限

@@ -19,6 +19,8 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.hardware.Camera;
+import android.hardware.camera2.CameraAccessException;
+import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -33,7 +35,9 @@ import com.cm.fm.mall.model.bean.AddressInfo;
 import com.cm.fm.mall.model.bean.ProductMsg;
 import com.cm.fm.mall.view.activity.ShoppingCartActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import androidx.core.app.NotificationCompat;
@@ -103,7 +107,9 @@ public class Utils {
     /** 跳转,并关闭其他所有的activity */
     public void startActivityCloseAll(Activity curAct, Class targetAct){
         Intent intent = new Intent(curAct,targetAct);
-        /** Intent.FLAG_ACTIVITY_CLEAR_TASK 会清除之前所有的activity，并且需要搭配 Intent.FLAG_ACTIVITY_NEW_TASK 一起使用 */
+        /** Intent.FLAG_ACTIVITY_CLEAR_TASK 会清除之前所有的activity，并且需要搭配 Intent.FLAG_ACTIVITY_NEW_TASK 一起使用
+         *  Intent.FLAG_ACTIVITY_NEW_TASK 其实是将activity 的启动模式定义为 singleTask 模式
+         * */
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         curAct.startActivity(intent);
         curAct.finish();
@@ -182,7 +188,7 @@ public class Utils {
     }
 
     /**
-     * 加测参数是否有空
+     * 检测参数是否有空
      * @param params
      * @return 检测结果 true（没有空值）false（有空值）
      */
@@ -199,8 +205,8 @@ public class Utils {
 
     /**
      * activity 进入，退出，再次进入使用动画
-     * @param activity 当前activityd
-     * @param transitionId 是用的动画资源id （R.transition.fade）
+     * @param activity 当前activity
+     * @param transitionId 动画资源id （R.transition.fade）
      */
     public void actUseAnim(Activity activity,int transitionId){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -256,6 +262,33 @@ public class Utils {
                 || pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)             //前置摄像头
                 || Build.VERSION.SDK_INT < Build.VERSION_CODES.GINGERBREAD
                 || Camera.getNumberOfCameras() > 0;
+        /*
+        android 21 开始 Camera.getNumberOfCameras() 定义为过时，可使用 CameraManager.getCameraIdList() 代替
+        */
+//        CameraManager mManager = (CameraManager)activity.getSystemService(Context.CAMERA_SERVICE);
+//        String[] mCameraIds = null;
+//        try {
+//            if (mManager != null) {
+//                mCameraIds = mManager.getCameraIdList();
+//            }
+//        } catch (CameraAccessException e) {
+//            e.printStackTrace();
+//        }
+
         return hasACamera;
+    }
+
+    /**
+     * 时间格式
+     * @param format    转换的格式
+     * @param date      需要转换的时间
+     * @return          指定格式的时间字符串
+     */
+    public static String convertDate(String format,Date date){
+        if(TextUtils.isEmpty(format)){
+            return "";
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
+        return dateFormat.format(date);
     }
 }

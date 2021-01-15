@@ -23,6 +23,9 @@ import org.litepal.crud.DataSupport;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 资料卡
+ */
 public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> implements UserSelfContract.View,View.OnClickListener {
     private Activity context;
     private final String tag = "TAG_UserSelfActivity";
@@ -38,8 +41,7 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
     @Override
     protected void activityAnim() {
         super.activityAnim();
-
-        //告知页面，使用动画
+        //使用动画
         Utils.getInstance().actUseAnim(context,R.transition.fade);
     }
 

@@ -21,7 +21,6 @@ public class AddressInfo extends DataSupport implements Parcelable {
     public AddressInfo() {
     }
 
-    //反序列化
     protected AddressInfo(Parcel in) {
         id = in.readInt();
         username = in.readString();
@@ -31,7 +30,7 @@ public class AddressInfo extends DataSupport implements Parcelable {
         address = in.readString();
         street = in.readString();
     }
-
+    //反序列化
     public static final Creator<AddressInfo> CREATOR = new Creator<AddressInfo>() {
         @Override
         public AddressInfo createFromParcel(Parcel in) {
@@ -43,6 +42,7 @@ public class AddressInfo extends DataSupport implements Parcelable {
             return new AddressInfo[size];
         }
     };
+    //返回当前内容的内容描述（大部分情况返回0，当有文件描述符时，返回 1 ：CONTENTS_FILE_DESCRIPTOR）
     @Override
     public int describeContents() {
         return 0;
