@@ -112,13 +112,12 @@
             >
 
             <TextView
-                android:id="@+id/tv_login_tips"
+                android:id="@+id/tv_login_register"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|start"
                 android:layout_weight="1"
-                android:text=""
-                android:textColor="@color/colorOrange1"
+                android:text="注册账号>>"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
@@ -129,8 +128,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|end"
-                android:text="忘记密码？"
-                android:textColor="@color/colorOrange1"
+                android:text="修改密码>>"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginEnd="10dp"
@@ -141,6 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorLightBlue"
+            android:orientation="vertical"
             >
             <Button
                 android:id="@+id/btn_login"
@@ -149,9 +148,12 @@
                 android:layout_gravity="center"
                 android:background="@drawable/login_background_button"
                 android:text="登陆"
-                android:textSize="23sp"
-                android:layout_margin="10dp"
+                android:textSize="18sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:padding="3dp" />
+
         </LinearLayout>
 
     </LinearLayout>

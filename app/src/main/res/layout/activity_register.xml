@@ -84,7 +84,6 @@
                 android:layout_marginStart="10dp"
                 android:textColor="#000"
                 android:text="密码："
-
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -112,17 +111,51 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorLightBlue"
+            android:orientation="vertical"
             >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:padding="3dp"
+                    android:gravity="start"
+                    android:layout_marginStart="10dp"
+                    android:text="已有账号？ "
+                    />
+                <TextView
+                    android:id="@+id/tv_register_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:padding="3dp"
+                    android:gravity="end"
+                    android:textSize="14sp"
+
+                    android:layout_marginEnd="10dp"
+                    android:text="直接登陆>>"
+                    />
+
+            </RelativeLayout>
             <Button
                 android:id="@+id/bt_register_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/login_background_button"
-                android:text="注册"
-                android:textSize="21sp"
-                android:layout_margin="10dp"
+                android:text="注册并登陆"
+                android:textSize="18sp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:padding="3dp" />
+
+
         </LinearLayout>
 
     </LinearLayout>

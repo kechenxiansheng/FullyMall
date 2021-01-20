@@ -45,6 +45,7 @@ public class MallConstant {
     public static final int USER_FRAGMENT_LOGIN_REQUEST_CODE = 151;
     public static final int USER_FRAGMENT_USER_SELF_REQUEST_CODE = 152;
     public static final int USER_FRAGMENT_HEAD_PORTRAIT_REQUEST_CODE = 153;
+    public static final int USER_FRAGMENT_REGISTER_REQUEST_CODE = 154;
     //BindPhoneActivity
     public static final int BIND_PHONE_ACTIVITY_REQUEST_CODE = 500;
     //HeadPortraitActivity

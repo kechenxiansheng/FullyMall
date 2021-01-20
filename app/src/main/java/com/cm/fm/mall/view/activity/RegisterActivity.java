@@ -1,6 +1,7 @@
 package com.cm.fm.mall.view.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +28,7 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPresenter> impleme
     private ProgressBar pb_progress;
     private EditText et_register_account;
     private EditText et_register_password;
-    private TextView tv_register_back;
+    private TextView tv_register_back,tv_register_login;
     private Button bt_register_btn;
     private ImageView iv_register_imageView_lock;
 
@@ -49,6 +50,7 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPresenter> impleme
         et_register_account = findViewById(R.id.et_register_account);
         et_register_password = findViewById(R.id.et_register_password);
         tv_register_back = findViewById(R.id.tv_register_back);
+        tv_register_login = findViewById(R.id.tv_register_login);
         pb_progress = findViewById(R.id.pb_progress_reg);
         //TODO 密码框默认是密文类型，密文需与 TYPE_CLASS_TEXT 一起设置才生效
         et_register_password.setInputType( InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
@@ -60,6 +62,8 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPresenter> impleme
         //点击注册
         bt_register_btn.setOnClickListener(this);
         tv_register_back.setOnClickListener(this);
+        //直接登陆
+        tv_register_login.setOnClickListener(this);
     }
 
     @Override
@@ -72,7 +76,10 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPresenter> impleme
     public void OnRegisterResult(int code, String msg) {
         switch (code){
             case MallConstant.SUCCESS:
-                Utils.getInstance().startActivityClose(context,LoginActivity.class);
+//                Utils.getInstance().startActivityClose(context,LoginActivity.class);
+                //注册成功，直接回传 UserFragment 状态
+                setResult(RESULT_OK);
+                this.finish();
                 break;
             case MallConstant.FAIL:
                 Utils.getInstance().tips(context,msg);
@@ -121,6 +128,15 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPresenter> impleme
                 }
                 mPresenter.registerP(account,password);
                 break;
+            case R.id.tv_register_login:
+                //点击直接登陆
+                /**先将结果返回给 UserFragment ，让fragment自行拉起 loginActivity。
+                 * 否则直接在注册页拉起登录页，暂时没法将结果通知给fragment
+                 */
+                Intent intent = new Intent();
+                intent.putExtra("type","login");
+                setResult(RESULT_OK,intent);
+                context.finish();
             case R.id.tv_register_back:
                 context.finish();
                 break;

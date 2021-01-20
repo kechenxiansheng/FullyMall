@@ -1,6 +1,8 @@
 package com.cm.fm.mall.view.activity;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -27,14 +29,13 @@ import androidx.annotation.NonNull;
  * 注意：继承 BaseMVPActivity 时，需要传泛型类，绑定登陆的 presenter
  */
 public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements LoginContract.View,View.OnClickListener {
+    private Activity activity;
     private ProgressBar pb_progress;
     private EditText editText_account;
     private EditText editText_password;
     private Button btn_login;
     private ImageView imageView_lock;
-    private TextView tv_login_tips,tv_forget_pwd,tv_login_back;
-
-    public static final int USER_TYPE_IS_LOGIN = 1;
+    private TextView tv_login_register,tv_forget_pwd,tv_login_back;
 
     private boolean TypeIsPassword = true;
     private final String tag = "TAG_LoginActivity";
@@ -48,7 +49,7 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
     protected void initView() {
         editText_account = findViewById(R.id.account);
         editText_password = findViewById(R.id.password);
-        tv_login_tips = findViewById(R.id.tv_login_tips);    //账号密码错误提示
+        tv_login_register = findViewById(R.id.tv_login_register);    //账号密码错误提示
         tv_forget_pwd = findViewById(R.id.tv_forget_pwd);
         tv_login_back = findViewById(R.id.tv_login_back);
         pb_progress = findViewById(R.id.pb_progress_login);
@@ -76,11 +77,12 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
     @Override
     protected void activityAnim() {
         //动画
-        Utils.getInstance().actUseAnim(this,R.transition.fade);
+        Utils.getInstance().actUseAnim(activity,R.transition.fade);
     }
 
     @Override
     protected int initLayout() {
+        activity = this;
         return R.layout.activity_login;
     }
 
@@ -90,10 +92,12 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
     @Override
     public void OnLoginResult(int code,String msg) {
         if(code == MallConstant.SUCCESS){
-            /** UserFragment 点击的登陆 */
             int activityId = getIntent().getIntExtra("activityId", 0);
             LogUtil.d(tag,"activityId:"+ activityId);
             if (activityId == MallConstant.USER_FRAGMENT_ACTIVITY_ID) {
+                /** UserFragment 检测到本地有缓存时，点击的登陆
+                 * 以及在注册页直接点击登陆过来的请求
+                 * */
                 setResult(RESULT_OK);
                 this.finish();
                 return;
@@ -104,11 +108,11 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 this.finish();
                 return;
             }
-            /** 任何位置只要是 先注册在登录的都直接回到商城主界面 */
+            /** 其他登陆 */
             Utils.getInstance().startActivityClose(this,MainActivity.class);
+//            Utils.getInstance().startActivityWithData(activity,MainActivity.class,"fragmentId", String.valueOf(3));
         }else if(code == MallConstant.FAIL){
-            tv_login_tips.setText(msg);
-            tv_login_tips.setTextColor(getResources().getColor(R.color.colorAccent));
+            Utils.getInstance().tips(activity,msg);
         }
 
     }
@@ -154,6 +158,9 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 break;
             case R.id.tv_forget_pwd:
                 Utils.getInstance().startActivityClose(this,UpdatePwdActivity.class);
+                break;
+            case R.id.tv_login_register:
+                Utils.getInstance().startActivityClose(this,RegisterActivity.class);
                 break;
             case R.id.tv_login_back:
                 this.finish();

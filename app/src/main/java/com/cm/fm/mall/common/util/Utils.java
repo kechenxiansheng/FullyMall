@@ -20,6 +20,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.hardware.Camera;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.transition.Transition;
@@ -64,6 +65,18 @@ public class Utils {
         Intent intent = new Intent(curAct,targetAct);
         curAct.startActivity(intent);
     }
+
+    //activity跳转
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public void startActivityWithData(Activity curAct, Class targetAct,String key,String data){
+        Bundle bundle = new Bundle();
+        bundle.putString(key,data);
+        Intent intent = new Intent(curAct,targetAct);
+        intent.putExtras(bundle);
+        curAct.startActivity(intent);
+        curAct.finish();
+    }
+
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void startActivityAnimation(Activity curAct, Class targetAct){
         Intent intent = new Intent(curAct,targetAct);

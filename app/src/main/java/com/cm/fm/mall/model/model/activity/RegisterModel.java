@@ -11,6 +11,9 @@ import com.cm.fm.mall.common.util.LogUtil;
 import com.cm.fm.mall.common.util.VerifyTask;
 
 import org.json.JSONObject;
+import org.litepal.crud.DataSupport;
+
+import java.util.List;
 
 
 /**
@@ -34,9 +37,12 @@ public class RegisterModel implements RegisterContract.Model {
                     JSONObject resJson = new JSONObject(response);
                     int code = resJson.getInt("code");
                     String msg = resJson.getString("msg");
-                    String content = resJson.getString("content");
                     if(code == 0){
-                        /** 新账号缓存在本地 */
+                        /** 新账号缓存在本地
+                         * 本地缓存只保证存在一个账号信息，所以注册账号后，直接清除本地上一次的缓存
+                         * */
+                        int deleteAll = DataSupport.deleteAll(UserInfo.class);
+                        LogUtil.d(tag,"last user cache delete: " + deleteAll);
                         UserInfo userInfo = new UserInfo();
                         userInfo.setName(account);
                         userInfo.setNickName(account);      //注册时昵称默认为账号

@@ -1,7 +1,9 @@
 package com.cm.fm.mall.view.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,6 +67,7 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
         tl_menu_bar.setSelectedTabIndicator(0);                   //隐藏 TabLayout 下划线
         /** TabLayout 模式 滑动（MODE_SCROLLABLE）和固定（MODE_FIXED） */
         tl_menu_bar.setTabMode(TabLayout.MODE_FIXED);
+        tl_menu_bar.setTabGravity(TabLayout.GRAVITY_FILL);         //平分屏幕宽度展示
         //TabLayout 设置 item 图标和标题
         for(int i = 0;i<titles.length;i++){
             tab = tl_menu_bar.newTab();
@@ -87,6 +90,18 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
         tl_menu_bar.addOnTabSelectedListener(this);
 
         appUpdate();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LogUtil.d(tag,"onPause");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LogUtil.d(tag,"onResume");
     }
 
     private void appUpdate(){

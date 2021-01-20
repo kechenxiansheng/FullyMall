@@ -37,20 +37,21 @@ public class LoginModel implements LoginContract.Model {
                     JSONObject resJson = new JSONObject(response);
                     int code = resJson.getInt("code");
                     String msg = resJson.getString("msg");
-                    String content = resJson.getString("content");
                     if(code == 0){
-                        /** 修改本地缓存账号的状态 */
+                        /** 修改当前账号在本地缓存的状态 */
                         List<UserInfo> userInfos = DataSupport.select("name","password")
                                 .where("name=?",account)
                                 .find(UserInfo.class);
                         LogUtil.d(tag,"login userInfos size:"+userInfos.size());
                         if(userInfos.size()!=0){
-                            //缓存不为空，修改状态为在线
+                            /* 当前账号有缓存，修改状态为在线 */
                             UserInfo userInfo = userInfos.get(0);
                             userInfo.setUserType(MallConstant.USER_TYPE_IS_LOGIN);
                             userInfo.save();
                         }else {
-                            /* 本地缓存为空，进行缓存 */
+                            /* 当前账号本地没有缓存，先清除之前的缓存，在将当前账号缓存在本地 */
+                            int deleteAll = DataSupport.deleteAll(UserInfo.class);
+                            LogUtil.d(tag,"last user cache delete: " + deleteAll);
                             UserInfo userInfo = new UserInfo();
                             userInfo.setName(account);
                             userInfo.setNickName(account);      //注册时昵称默认为账号

@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +34,7 @@ import com.cm.fm.mall.common.util.Utils;
 import org.litepal.crud.DataSupport;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.Nullable;
@@ -50,7 +52,7 @@ import static android.os.Environment.DIRECTORY_PICTURES;
 public class UserFragment extends BaseMVPFragment<UserPresenter> implements View.OnClickListener {
     private Activity context;
 
-    private List<UserInfo> userInfos;
+    private List<UserInfo> userInfos = new ArrayList<>();
     private boolean typeOflogin;        //true 登陆（文本显示的注销）  false 注销（文本显示的登陆）
 
     private ImageView iv_head_portrait; //头像
@@ -93,8 +95,9 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
         ll_user_check.setOnClickListener(this);
         ll_user_shopping_cart.setOnClickListener(this);
         ll_user_agreement.setOnClickListener(this);
+
         //先查询玩家信息
-        userInfos = DataSupport.findAll(UserInfo.class);
+        refreshUserInfo();
         //展示头像
         showHeadPhoto();
         if(userInfos.size() != 0 && userInfos.get(0).getUserType()==1){
@@ -131,8 +134,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
             case MallConstant.USER_FRAGMENT_USER_SELF_REQUEST_CODE:
                 //TODO 个人资料回调
                 if(resultCode == Activity.RESULT_OK){
-                    userInfos.clear();
-                    userInfos = DataSupport.findAll(UserInfo.class);
+                    refreshUserInfo();
                     LogUtil.d(tag,"change nickname. userInfos:"+userInfos);
                     tv_nick_name.setText(userInfos.get(0).getNickName());
                 }
@@ -140,8 +142,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
             case MallConstant.USER_FRAGMENT_LOGIN_REQUEST_CODE:
                 //TODO 登陆回调
                 if(resultCode == Activity.RESULT_OK){
-                    userInfos.clear();
-                    userInfos = DataSupport.findAll(UserInfo.class);
+                    refreshUserInfo();
                     LogUtil.d(tag,"login success. userInfos:"+userInfos);
                     //显示头像、昵称
                     tv_nick_name.setText(userInfos.get(0).getNickName());
@@ -150,6 +151,19 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                     //展示头像
                     showHeadPhoto();
                     tv_tips_login_logout.setText(getResources().getString(R.string.user_logout_des));
+                }
+                break;
+            case MallConstant.USER_FRAGMENT_REGISTER_REQUEST_CODE:
+                //注册页面的回调
+                if(data!=null){
+                    String type = data.getStringExtra("type");
+                    LogUtil.d(tag,"type : " + type);
+                    if("login".equals(type)){
+                        //打开登陆页面
+                        Intent intent = new Intent(context,LoginActivity.class);
+                        intent.putExtra("activityId",MallConstant.USER_FRAGMENT_ACTIVITY_ID);
+                        startActivityForResult(intent,MallConstant.USER_FRAGMENT_LOGIN_REQUEST_CODE,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
+                    }
                 }
                 break;
         }
@@ -190,7 +204,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                 break;
             case R.id.ll_user_info:
                 //资料
-                userInfos = DataSupport.findAll(UserInfo.class);
+                refreshUserInfo();
                 if(userInfos.size()!=0 && userInfos.get(0).getUserType()==1){
                     Intent intent_upate = new Intent(getActivity(),UserSelfActivity.class);
                     //最后一个参数是 activity切换动画使用
@@ -229,19 +243,22 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
             case R.id.tv_tips_login_logout:
                 if(!typeOflogin){
                     //注销状态，根据注册/登陆结果切换为登录状态
+                    LogUtil.d(tag,"点击了登陆");
                     if(userInfos.size()==0){
                         //没有用户数据先注册
-                        Utils.getInstance().startActivity(context,RegisterActivity.class);
-                    }else if(userInfos.get(0).getUserType()==0){
+                        Intent intent = new Intent(context,RegisterActivity.class);
+                        startActivityForResult(intent,MallConstant.USER_FRAGMENT_REGISTER_REQUEST_CODE,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
+                    }else {
                         //有用户数据，但是没登陆，进行登录
                         //这里的文本显示处理 已在ActivityForResult中处理
-                        Intent intent2 = new Intent(getActivity(),LoginActivity.class);
+                        Intent intent2 = new Intent(context,LoginActivity.class);
                         intent2.putExtra("activityId",MallConstant.USER_FRAGMENT_ACTIVITY_ID);
                         //最后一个参数是 activity切换动画使用
                         startActivityForResult(intent2,MallConstant.USER_FRAGMENT_LOGIN_REQUEST_CODE,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
                     }
                 }else {
                     //登陆状态，切换为注销状态，清空昵称，替换为默认头像
+                    LogUtil.d(tag,"点击了注销");
                     tv_nick_name.setText("");
                     userInfos.get(0).setUserType(0);    // 0 游客
                     userInfos.get(0).save();
@@ -256,5 +273,13 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
 
                 break;
         }
+    }
+
+    //刷新用户信息
+    private void refreshUserInfo(){
+        if(userInfos.size() != 0 ){
+            userInfos.clear();
+        }
+        userInfos = DataSupport.findAll(UserInfo.class);
     }
 }

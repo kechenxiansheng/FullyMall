@@ -132,13 +132,14 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
     @Override
     public void onResume() {
         super.onResume();
+        //此时此方法只会在所属 activity 的执行onResume时才会调用。
         Log.d(tag,"onResume");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        //此时此方法不会执行，因为是跟随activity的。所以不可在此处暂停视频播放
+        //此时此方法只会在所属 activity 的执行onResume时才会调用。所以不可在此处暂停视频播放
         Log.d(tag,"onPause");
     }
 
