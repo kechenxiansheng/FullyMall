@@ -14,9 +14,9 @@ import com.cm.fm.mall.R;
 import com.cm.fm.mall.view.activity.CommodityActivity;
 import com.cm.fm.mall.model.bean.ProductMsg;
 import com.cm.fm.mall.model.bean.ShoppingProduct;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.ResourceUtils;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.ResourceUtils;
+import com.cm.fm.mall.common.util.Utils;
 
 import org.litepal.crud.DataSupport;
 

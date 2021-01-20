@@ -8,7 +8,7 @@ import com.cm.fm.mall.model.bean.ProductMsg;
 import com.cm.fm.mall.view.fragment.product.ProductCommentFragment;
 import com.cm.fm.mall.view.fragment.product.ProductDetailFragment;
 import com.cm.fm.mall.view.fragment.product.ProductInfoFragment;
-import com.cm.fm.mall.util.LogUtil;
+import com.cm.fm.mall.common.util.LogUtil;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 import com.cm.fm.mall.BuildConfig;
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.util.CheckUpdateUtil;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.NetWorkUtil;
+import com.cm.fm.mall.common.util.CheckUpdateUtil;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.NetWorkUtil;
 
 /**
  * 更新弹框

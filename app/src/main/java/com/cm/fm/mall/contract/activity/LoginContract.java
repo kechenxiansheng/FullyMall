@@ -1,9 +1,9 @@
 package com.cm.fm.mall.contract.activity;
 
 
+import com.cm.fm.mall.common.Callback;
 import com.cm.fm.mall.base.IBaseModel;
 import com.cm.fm.mall.base.IBaseView;
-import com.cm.fm.mall.base.ResponseCallback;
 
 /**
  * 登陆的契约类
@@ -12,7 +12,7 @@ import com.cm.fm.mall.base.ResponseCallback;
  */
 public interface LoginContract {
     interface Model extends IBaseModel {
-        void loginM(String account,String password, ResponseCallback callback);
+        void loginM(String account,String password, Callback callback);
     }
 
     interface View extends IBaseView {

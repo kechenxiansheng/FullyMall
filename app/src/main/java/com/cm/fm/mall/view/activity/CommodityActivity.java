@@ -11,7 +11,7 @@ import com.cm.fm.mall.contract.activity.CommodityContract;
 import com.cm.fm.mall.model.adapter.ViewPagerProductAdapter;
 import com.cm.fm.mall.model.bean.ProductMsg;
 import com.cm.fm.mall.presenter.activity.CommodityPresenter;
-import com.cm.fm.mall.util.LogUtil;
+import com.cm.fm.mall.common.util.LogUtil;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.viewpager.widget.ViewPager;

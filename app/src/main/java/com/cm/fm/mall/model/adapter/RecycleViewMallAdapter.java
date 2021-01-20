@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.view.activity.CommodityActivity;
 import com.cm.fm.mall.model.bean.ProductMsg;
-import com.cm.fm.mall.util.ResourceUtils;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.ResourceUtils;
+import com.cm.fm.mall.common.util.Utils;
 
 import java.util.List;
 

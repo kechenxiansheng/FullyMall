@@ -1,9 +1,9 @@
 package com.cm.fm.mall.model.model.activity;
 
-import com.cm.fm.mall.base.ResponseCallback;
+import com.cm.fm.mall.common.Callback;
 import com.cm.fm.mall.contract.activity.UpdatePwdContract;
 import com.cm.fm.mall.model.bean.UserInfo;
-import com.cm.fm.mall.util.LogUtil;
+import com.cm.fm.mall.common.util.LogUtil;
 
 import org.litepal.crud.DataSupport;
 
@@ -13,7 +13,7 @@ public class UpdatePwdModel implements UpdatePwdContract.Model{
     private String tag = "TAG_UpdatePwdModel";
 
     @Override
-    public void savePwdM(String password, ResponseCallback callback) {
+    public void savePwdM(String password, Callback callback) {
         //保存用户信息
         List<UserInfo> userInfos = DataSupport.findAll(UserInfo.class);
         if(userInfos.size()!=0){

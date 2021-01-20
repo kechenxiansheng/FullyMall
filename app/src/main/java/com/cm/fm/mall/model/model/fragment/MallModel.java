@@ -2,7 +2,7 @@ package com.cm.fm.mall.model.model.fragment;
 
 import com.cm.fm.mall.contract.fragment.MallContract;
 import com.cm.fm.mall.model.bean.ProductMsg;
-import com.cm.fm.mall.util.LogUtil;
+import com.cm.fm.mall.common.util.LogUtil;
 
 import java.util.Iterator;
 import java.util.List;

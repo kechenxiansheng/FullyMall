@@ -2,7 +2,7 @@ package com.cm.fm.mall.model.model.activity;
 
 import com.cm.fm.mall.contract.activity.AddressDetailContract;
 import com.cm.fm.mall.model.bean.AddressInfo;
-import com.cm.fm.mall.util.LogUtil;
+import com.cm.fm.mall.common.util.LogUtil;
 
 import org.litepal.crud.DataSupport;
 

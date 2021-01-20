@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.Utils;
 
 import java.util.List;
 

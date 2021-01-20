@@ -1,4 +1,4 @@
-package com.cm.fm.mall.util;
+package com.cm.fm.mall.common.util;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

@@ -10,8 +10,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.ResourceUtils;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.ResourceUtils;
 
 /**
  * TODO 暂时用不到了，删除功能加载底薪详情页面了

@@ -2,7 +2,6 @@ package com.cm.fm.mall.contract.activity;
 
 import com.cm.fm.mall.base.IBaseModel;
 import com.cm.fm.mall.base.IBaseView;
-import com.cm.fm.mall.base.ResponseCallback;
 import com.cm.fm.mall.model.bean.UserInfo;
 
 import java.util.List;

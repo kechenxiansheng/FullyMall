@@ -1,6 +1,6 @@
 package com.cm.fm.mall.model.model.activity;
 
-import com.cm.fm.mall.base.ResponseCallback;
+import com.cm.fm.mall.common.Callback;
 import com.cm.fm.mall.contract.activity.ShoppingCartContract;
 import com.cm.fm.mall.model.bean.ShoppingProduct;
 import com.cm.fm.mall.model.bean.UserInfo;
@@ -18,7 +18,7 @@ public class ShoppingCartModel implements ShoppingCartContract.Model {
     }
 
     @Override
-    public void checkLoginM(ResponseCallback callback) {
+    public void checkLoginM(Callback callback) {
         List<UserInfo> userInfos = DataSupport.findAll(UserInfo.class);
         if(userInfos.size()==0){
             //说明是首次使用app，去注册

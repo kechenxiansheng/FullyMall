@@ -17,7 +17,7 @@ import com.cm.fm.mall.R;
 import com.cm.fm.mall.view.activity.AddressActivity;
 import com.cm.fm.mall.model.adapter.AddressPageAdapter;
 import com.cm.fm.mall.model.bean.AddressInfo;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.Utils;
 
 import org.litepal.crud.DataSupport;
 

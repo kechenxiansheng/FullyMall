@@ -15,7 +15,7 @@ import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BaseActivity;
 import com.cm.fm.mall.model.adapter.RecycleViewHistoryAdapter;
 import com.cm.fm.mall.model.bean.SearchHistory;
-import com.cm.fm.mall.util.LogUtil;
+import com.cm.fm.mall.common.util.LogUtil;
 
 import org.litepal.crud.DataSupport;
 

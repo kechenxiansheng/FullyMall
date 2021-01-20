@@ -3,7 +3,7 @@ package com.cm.fm.mall.view.activity;
 import android.app.Activity;
 import android.util.Log;
 
-import com.cm.fm.mall.util.LogUtil;
+import com.cm.fm.mall.common.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;

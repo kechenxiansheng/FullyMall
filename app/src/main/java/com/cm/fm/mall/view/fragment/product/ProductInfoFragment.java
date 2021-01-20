@@ -17,11 +17,11 @@ import com.cm.fm.mall.model.adapter.ViewPagerAdapter;
 import com.cm.fm.mall.model.bean.AddressInfo;
 import com.cm.fm.mall.model.bean.ProductMsg;
 import com.cm.fm.mall.model.bean.ShoppingProduct;
-import com.cm.fm.mall.model.constant.MallConstant;
+import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.presenter.fragment.product.ProductInfoPresenter;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.ResourceUtils;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.ResourceUtils;
+import com.cm.fm.mall.common.util.Utils;
 import com.cm.fm.mall.view.activity.ShoppingCartActivity;
 import com.cm.fm.mall.view.dialog.AddressPageDialog;
 

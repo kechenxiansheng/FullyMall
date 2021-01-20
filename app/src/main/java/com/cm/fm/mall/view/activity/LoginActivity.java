@@ -2,7 +2,6 @@ package com.cm.fm.mall.view.activity;
 
 
 import android.content.res.Configuration;
-import android.os.LocaleList;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,11 +14,10 @@ import android.widget.TextView;
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BaseMVPActivity;
 import com.cm.fm.mall.contract.activity.LoginContract;
-import com.cm.fm.mall.model.constant.MallConstant;
+import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.presenter.activity.LoginPresenter;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.Utils;
-import com.cm.fm.mall.view.fragment.menu.UserFragment;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.Utils;
 
 import androidx.annotation.NonNull;
 
@@ -107,7 +105,6 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 return;
             }
             /** 任何位置只要是 先注册在登录的都直接回到商城主界面 */
-//            Utils.getInstance().startActivityCloseAll(this,MainActivity.class);
             Utils.getInstance().startActivityClose(this,MainActivity.class);
         }else if(code == MallConstant.FAIL){
             tv_login_tips.setText(msg);

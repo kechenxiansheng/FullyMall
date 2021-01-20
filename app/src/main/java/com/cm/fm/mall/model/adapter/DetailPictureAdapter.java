@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.Utils;
 
 import java.util.List;
 

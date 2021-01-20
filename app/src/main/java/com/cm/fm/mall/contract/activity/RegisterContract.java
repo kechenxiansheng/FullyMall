@@ -1,15 +1,15 @@
 package com.cm.fm.mall.contract.activity;
 
+import com.cm.fm.mall.common.Callback;
 import com.cm.fm.mall.base.IBaseModel;
 import com.cm.fm.mall.base.IBaseView;
-import com.cm.fm.mall.base.ResponseCallback;
 
 /**
  * 注册的契约类
  */
 public interface RegisterContract {
     interface Model extends IBaseModel {
-        void registerM(String account,String password, ResponseCallback callback);
+        void registerM(String account,String password, Callback callback);
     }
 
     interface View extends IBaseView {

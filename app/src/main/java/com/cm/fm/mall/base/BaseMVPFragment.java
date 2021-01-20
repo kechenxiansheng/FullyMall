@@ -6,12 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.cm.fm.mall.base.IBaseView;
-import com.cm.fm.mall.util.LogUtil;
-import com.facebook.drawee.backends.pipeline.Fresco;
+import com.cm.fm.mall.common.util.LogUtil;
 
 import androidx.fragment.app.Fragment;
 

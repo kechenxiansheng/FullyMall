@@ -1,7 +1,7 @@
 package com.cm.fm.mall.presenter.activity;
 
 import com.cm.fm.mall.base.BasePresenter;
-import com.cm.fm.mall.base.ResponseCallback;
+import com.cm.fm.mall.common.Callback;
 import com.cm.fm.mall.contract.activity.ShoppingCartContract;
 import com.cm.fm.mall.model.bean.ShoppingProduct;
 import com.cm.fm.mall.model.model.activity.ShoppingCartModel;
@@ -41,7 +41,7 @@ public class ShoppingCartPresenter extends BasePresenter<ShoppingCartContract.Mo
     @Override
     public void checkLoginP() {
         if(isViewBind()){
-            getModel().checkLoginM(new ResponseCallback() {
+            getModel().checkLoginM(new Callback() {
                 @Override
                 public void success(Object response) {
                     int code = (int) response;
@@ -50,11 +50,6 @@ public class ShoppingCartPresenter extends BasePresenter<ShoppingCartContract.Mo
 
                 @Override
                 public void fail(String info) {
-
-                }
-
-                @Override
-                public void error(String error) {
 
                 }
             });

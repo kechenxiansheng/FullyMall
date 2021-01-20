@@ -16,10 +16,10 @@ import android.provider.MediaStore;
 
 import com.cm.fm.mall.base.BasePresenter;
 import com.cm.fm.mall.contract.activity.HeadPortraitContract;
-import com.cm.fm.mall.model.constant.MallConstant;
+import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.model.model.activity.HeadPortraitModel;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.Utils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -166,7 +166,7 @@ public class HeadPortraitPresenter extends BasePresenter<HeadPortraitContract.Mo
     /** 保存拍摄的或者选择的照片 */
     @Override
     public void savePhoto(Bitmap bitmap) {
-        String path = getContext().getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + MallConstant.photo_name;
+        String path = getContext().getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + MallConstant.PHOTO_NAME;
         LogUtil.d(tag,"savePhoto path:"+path);
         File headPhoto = new File(path);
         if(headPhoto.exists()){

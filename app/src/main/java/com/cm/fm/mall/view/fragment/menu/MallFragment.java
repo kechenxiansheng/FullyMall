@@ -12,8 +12,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.base.BasePresenter;
-import com.cm.fm.mall.model.constant.MallConstant;
+import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.presenter.fragment.MallPresenter;
 import com.cm.fm.mall.view.activity.ClassifyButtonJumpActivity;
 import com.cm.fm.mall.view.activity.SearchActivity;
@@ -22,12 +21,11 @@ import com.cm.fm.mall.model.adapter.RecycleViewMallAdapter;
 import com.cm.fm.mall.model.adapter.RecycleViewMallGuideAdapter;
 import com.cm.fm.mall.model.bean.ProductMsg;
 import com.cm.fm.mall.base.BaseMVPFragment;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.Utils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import androidx.recyclerview.widget.GridLayoutManager;

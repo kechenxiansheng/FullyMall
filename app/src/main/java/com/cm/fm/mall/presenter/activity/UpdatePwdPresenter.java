@@ -3,9 +3,9 @@ package com.cm.fm.mall.presenter.activity;
 import android.util.Log;
 
 import com.cm.fm.mall.base.BasePresenter;
-import com.cm.fm.mall.base.ResponseCallback;
+import com.cm.fm.mall.common.Callback;
 import com.cm.fm.mall.contract.activity.UpdatePwdContract;
-import com.cm.fm.mall.model.constant.MallConstant;
+import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.model.model.activity.UpdatePwdModel;
 
 public class UpdatePwdPresenter extends BasePresenter<UpdatePwdContract.Model,UpdatePwdContract.View> implements UpdatePwdContract.Presenter{
@@ -26,7 +26,7 @@ public class UpdatePwdPresenter extends BasePresenter<UpdatePwdContract.Model,Up
         if(isViewBind()){
             getView().showLoading();
             /** 调用 model 类的 savePwd 方法，处理数据 */
-            getModel().savePwdM(password, new ResponseCallback() {
+            getModel().savePwdM(password, new Callback() {
                 @Override
                 public void success(Object response) {
                     getView().hideLoading();
@@ -37,12 +37,6 @@ public class UpdatePwdPresenter extends BasePresenter<UpdatePwdContract.Model,Up
                 @Override
                 public void fail(String info) {
                     getView().OnCheckResult(MallConstant.FAIL,info);
-                    getView().hideLoading();
-                }
-                @Override
-                public void error(String error) {
-                    Log.d(tag,"register error: " + error);
-                    getView().OnCheckResult(MallConstant.ERROR,"");
                     getView().hideLoading();
                 }
             });

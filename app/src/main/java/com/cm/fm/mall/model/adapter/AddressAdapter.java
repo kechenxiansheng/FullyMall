@@ -8,11 +8,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.model.constant.MallConstant;
-import com.cm.fm.mall.view.activity.AddressActivity;
+import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.view.activity.AddressDetailActivity;
 import com.cm.fm.mall.model.bean.AddressInfo;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.Utils;
 
 import java.util.List;
 

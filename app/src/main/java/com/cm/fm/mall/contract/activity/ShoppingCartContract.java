@@ -2,7 +2,7 @@ package com.cm.fm.mall.contract.activity;
 
 import com.cm.fm.mall.base.IBaseModel;
 import com.cm.fm.mall.base.IBaseView;
-import com.cm.fm.mall.base.ResponseCallback;
+import com.cm.fm.mall.common.Callback;
 import com.cm.fm.mall.model.bean.ShoppingProduct;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.List;
 public interface ShoppingCartContract {
     interface Model extends IBaseModel {
         List<ShoppingProduct> queryAllShoppingCartProducts();
-        void checkLoginM(ResponseCallback callback);
+        void checkLoginM(Callback callback);
     }
 
     interface View extends IBaseView {

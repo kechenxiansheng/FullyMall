@@ -13,10 +13,10 @@ import android.widget.Toast;
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BaseMVPActivity;
 import com.cm.fm.mall.contract.activity.RegisterContract;
-import com.cm.fm.mall.model.constant.MallConstant;
+import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.presenter.activity.RegisterPresenter;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.Utils;
 /**
  * 注册页面
  *  1、activityId : 3
@@ -75,7 +75,7 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPresenter> impleme
                 Utils.getInstance().startActivityClose(context,LoginActivity.class);
                 break;
             case MallConstant.FAIL:
-                Toast.makeText(context,msg,Toast.LENGTH_SHORT).show();
+                Utils.getInstance().tips(context,msg);
                 break;
         }
 

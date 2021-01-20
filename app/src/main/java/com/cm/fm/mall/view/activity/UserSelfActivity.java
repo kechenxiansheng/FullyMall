@@ -13,10 +13,10 @@ import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BaseMVPActivity;
 import com.cm.fm.mall.contract.activity.UserSelfContract;
 import com.cm.fm.mall.model.bean.UserInfo;
-import com.cm.fm.mall.model.constant.MallConstant;
+import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.presenter.activity.UserSelfPresenter;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.Utils;
 
 import org.litepal.crud.DataSupport;
 

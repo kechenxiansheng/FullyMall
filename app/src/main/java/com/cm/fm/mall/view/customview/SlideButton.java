@@ -10,7 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Scroller;
 
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.Utils;
 
 import androidx.annotation.Nullable;
 

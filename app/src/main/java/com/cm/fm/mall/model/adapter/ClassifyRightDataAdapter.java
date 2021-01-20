@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.model.bean.ClassifyCategory;
 import com.cm.fm.mall.view.customview.GridViewForScrollView;
-import com.cm.fm.mall.util.LogUtil;
+import com.cm.fm.mall.common.util.LogUtil;
 
 import java.util.List;
 

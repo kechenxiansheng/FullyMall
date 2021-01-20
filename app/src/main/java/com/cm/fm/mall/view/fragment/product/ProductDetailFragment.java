@@ -8,8 +8,8 @@ import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BasePresenter;
 import com.cm.fm.mall.model.adapter.DetailPictureAdapter;
 import com.cm.fm.mall.base.BaseMVPFragment;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.model.constant.MallConstant;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.MallConstant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +44,7 @@ public class ProductDetailFragment extends BaseMVPFragment {
     @Override
     public void initDataFront() {
         for (int i = 1 ; i < 7 ;i++){
-            list.add(MallConstant.detail_picture_url + "P_ProductDetail" + i + MallConstant.detail_picture_url_end);
+            list.add(MallConstant.DETAIL_PICTURE_URL + "P_ProductDetail" + i + MallConstant.DETAIL_PICTURE_URL_END);
         }
         LogUtil.d(tag,"list data 1 : "+list.get(0));
     }

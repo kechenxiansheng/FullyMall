@@ -1,46 +1,61 @@
 package com.cm.fm.mall.model.model.activity;
 
-import com.cm.fm.mall.base.ResponseCallback;
+import android.text.TextUtils;
+
+import com.cm.fm.mall.common.Callback;
+import com.cm.fm.mall.common.HttpCallback;
 import com.cm.fm.mall.contract.activity.RegisterContract;
 import com.cm.fm.mall.model.bean.UserInfo;
-import com.cm.fm.mall.model.constant.MallConstant;
+import com.cm.fm.mall.common.MallConstant;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.VerifyTask;
 
-import org.litepal.crud.DataSupport;
+import org.json.JSONObject;
 
-import java.util.List;
 
 /**
  * 注册的数据模型类
  */
 public class RegisterModel implements RegisterContract.Model {
     private String tag = "TAG_RegisterModel";
-    private final int USER_TYPE_IS_LOGIN = 1;
-    private final int USER_TYPE_NOT_LOGIN = 0;
+
     @Override
-    public void registerM(String account, String password, ResponseCallback callback) {
+    public void registerM(final String account, final String password, final Callback callback) {
         /** 去服务器验证账号密码，并通过回调返回请求的结果 */
-        try {
-            //demo 直接使用的 litePal 存储数据
-            List<UserInfo> userInfos = DataSupport.select("name","password")
-                    .where("name=?",account)
-                    .find(UserInfo.class);
-            if(userInfos.size()!=0){
-                callback.fail("账号已存在");
-            }else {
-                //保存数据
-                UserInfo userInfo = new UserInfo();
-                userInfo.setName(account);
-                userInfo.setNickName(account);      //注册时昵称默认为账号
-                userInfo.setPassword(password);
-                userInfo.setUserType(USER_TYPE_NOT_LOGIN);
-                boolean res = userInfo.save();
-                if(res){
-                    callback.success(MallConstant.SUCCESS);
+        VerifyTask verifyTask = new VerifyTask(MallConstant.REGISTER_VERIFY_URL,account, password, new HttpCallback() {
+            @Override
+            public void response(String response) {
+                LogUtil.d(tag,"register verify: " + response);
+                if(TextUtils.isEmpty(response)){
+                    callback.fail("注册失败");
+                    return;
+                }
+                try {
+                    JSONObject resJson = new JSONObject(response);
+                    int code = resJson.getInt("code");
+                    String msg = resJson.getString("msg");
+                    String content = resJson.getString("content");
+                    if(code == 0){
+                        /** 新账号缓存在本地 */
+                        UserInfo userInfo = new UserInfo();
+                        userInfo.setName(account);
+                        userInfo.setNickName(account);      //注册时昵称默认为账号
+                        userInfo.setPassword(password);
+                        userInfo.setUserType(MallConstant.USER_TYPE_NOT_LOGIN);
+                        boolean res = userInfo.save();
+                        LogUtil.d(tag,"register cache: " + res);
+                        callback.success(MallConstant.SUCCESS);
+                        return;
+                    }
+                    //注册失败
+                    callback.fail(msg);
+                }catch (Exception e){
+                    LogUtil.e(tag,"其他错误");
+                    callback.fail("注册失败");
+                    e.printStackTrace();
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            callback.error("请稍后再试");
-        }
+        });
+        verifyTask.execute();
     }
 }

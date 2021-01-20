@@ -14,9 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.base.BasePresenter;
-import com.cm.fm.mall.model.constant.MallConstant;
-import com.cm.fm.mall.presenter.fragment.ClassifyPresenter;
+import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.presenter.fragment.UserPresenter;
 import com.cm.fm.mall.view.activity.AddressActivity;
 import com.cm.fm.mall.view.activity.HeadPortraitActivity;
@@ -27,10 +25,10 @@ import com.cm.fm.mall.view.activity.UserSelfActivity;
 import com.cm.fm.mall.model.bean.UserInfo;
 import com.cm.fm.mall.view.dialog.AgreementDialog;
 import com.cm.fm.mall.base.BaseMVPFragment;
-import com.cm.fm.mall.util.CheckUpdateUtil;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.NetWorkUtil;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.CheckUpdateUtil;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.NetWorkUtil;
+import com.cm.fm.mall.common.util.Utils;
 
 import org.litepal.crud.DataSupport;
 
@@ -159,7 +157,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
     //展示头像
     private void showHeadPhoto(){
         // File.separator 文件目录间隔符
-        String path = context.getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + MallConstant.photo_name;
+        String path = context.getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + MallConstant.PHOTO_NAME;
         LogUtil.d(tag,"get photo path : " + path);
         File file = new File(path);
         Bitmap bitmap;

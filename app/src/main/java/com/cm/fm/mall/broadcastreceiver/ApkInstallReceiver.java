@@ -10,8 +10,8 @@ import android.os.Build;
 import android.os.Environment;
 
 import com.cm.fm.mall.BuildConfig;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.Utils;
 
 import java.io.File;
 

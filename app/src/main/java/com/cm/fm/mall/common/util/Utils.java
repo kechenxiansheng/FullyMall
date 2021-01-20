@@ -1,4 +1,4 @@
-package com.cm.fm.mall.util;
+package com.cm.fm.mall.common.util;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -19,8 +19,6 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.hardware.Camera;
-import android.hardware.camera2.CameraAccessException;
-import android.hardware.camera2.CameraManager;
 import android.os.Build;
 import android.os.Looper;
 import android.text.TextUtils;
@@ -121,7 +119,13 @@ public class Utils {
         curAct.finish();
     }
     public void tips(Context activity,String msg) {
+        if(!isMainThread()){
+            Looper.prepare();
+        }
         Toast.makeText(activity,msg,Toast.LENGTH_SHORT).show();
+        if(!isMainThread()){
+            Looper.loop();
+        }
     }
     /** 通知 */
     public void sendNotification(Context context, String channelId, String title, String contentText, int notificationId ){

@@ -1,4 +1,4 @@
-package com.cm.fm.mall.util;
+package com.cm.fm.mall.common.util;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -120,7 +120,7 @@ public class HttpUtils {
 		try {
 			String paramsEncoded = "";
 			if (params != null) {
-				paramsEncoded = urlParamsFormat(params, "UTF-8");
+				paramsEncoded = urlParamsFormatToJson(params, "UTF-8");
 			}
 
 			url = new URL(urlStr);
@@ -130,7 +130,8 @@ public class HttpUtils {
 				httpsURLConnection.setDoInput(true);
 				httpsURLConnection.setDoOutput(true);
 				httpsURLConnection.setRequestMethod("POST");
-				httpsURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+//				httpsURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+				httpURLConnection.setRequestProperty("Content-Type", "application/json");
 				httpsURLConnection.setRequestProperty("Charset", "utf-8");
 				DataOutputStream dop = new DataOutputStream(httpsURLConnection.getOutputStream());
 				dop.writeBytes(paramsEncoded);
@@ -154,7 +155,8 @@ public class HttpUtils {
 				httpURLConnection.setDoInput(true);
 				httpURLConnection.setDoOutput(true);
 				httpURLConnection.setRequestMethod("POST");
-				httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+//				httpURLConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+				httpURLConnection.setRequestProperty("Content-Type", "application/json");
 				httpURLConnection.setRequestProperty("Charset", "utf-8");
 				DataOutputStream dop = new DataOutputStream(httpURLConnection.getOutputStream());
 				dop.writeBytes(paramsEncoded);
@@ -222,4 +224,32 @@ public class HttpUtils {
 		return sb.toString();
 	}
 
+	/**
+	 * Returns a String that is suitable for use as an
+	 * application/x-www-form-urlencoded list of parameters in an HTTP PUT or
+	 * HTTP POST.
+	 *
+	 * @param params
+	 * @param charset
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
+	public static String urlParamsFormatToJson(Map<String, String> params, String charset) throws UnsupportedEncodingException {
+		final StringBuilder sb = new StringBuilder();
+		sb.append("{");
+		for (String key : params.keySet()) {
+			final String val = params.get(key);
+			if (!TextUtils.isEmpty(key) && !TextUtils.isEmpty(val)) {
+				final String encodedName = URLEncoder.encode(key, charset);
+				final String encodedValue = URLEncoder.encode(val, charset);
+				if(sb.length() > 1){
+					sb.append(",");
+				}
+				sb.append("'").append(encodedName).append("':'").append(encodedValue).append("'");
+			}
+		}
+		sb.append("}");
+		LogUtil.d(tag,"params : " + sb.toString());
+		return sb.toString();
+	}
 }

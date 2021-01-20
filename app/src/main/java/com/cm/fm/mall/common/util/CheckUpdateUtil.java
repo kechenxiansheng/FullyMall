@@ -1,4 +1,4 @@
-package com.cm.fm.mall.util;
+package com.cm.fm.mall.common.util;
 
 import android.app.DownloadManager;
 import android.content.Context;
@@ -12,7 +12,7 @@ import android.webkit.MimeTypeMap;
 
 import com.cm.fm.mall.BuildConfig;
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.model.constant.MallConstant;
+import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.view.dialog.AppUpdateDialog;
 
 import org.json.JSONException;
@@ -66,7 +66,7 @@ public class CheckUpdateUtil {
             public void run() {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url(MallConstant.version_url)
+                        .url(MallConstant.VERSION_URL)
                         .build();
                 Response response =null;
                 try {
@@ -153,7 +153,7 @@ public class CheckUpdateUtil {
         if(apk_file.exists()){
             apk_file.delete();
         }
-        Uri uri = Uri.parse(MallConstant.apk_url);
+        Uri uri = Uri.parse(MallConstant.APK_URL);
         DownloadManager downloadManager = (DownloadManager) context.getSystemService(DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(uri);
         // 设置允许使用的网络类型，这里是移动网络和wifi都可以

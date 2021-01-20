@@ -12,8 +12,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.model.bean.ClassifyCategory;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.MallConstant;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.Utils;
 
 import java.util.List;
 
@@ -76,8 +77,8 @@ public class ClassifyRightDataItemAdapter extends BaseAdapter {
                 .placeholder(R.mipmap.loading)      //加载前的占位图
 //                .diskCacheStrategy(DiskCacheStrategy.NONE)  //禁用Glide的缓存功能
                 .error(R.mipmap.error_bg);        //错误展示图
-        String uri ="http://119.27.160.230:8080/image/icon/icon_dog.png";
-        Glide.with(context).load(uri).apply(options).into(viewHold.iv_item_album);
+
+        Glide.with(context).load(MallConstant.CLASSIFY_ICON).apply(options).into(viewHold.iv_item_album);
 
         viewHold.ll_item_title.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,15 +1,13 @@
 package com.cm.fm.mall.presenter.fragment.product;
 
 import android.app.Activity;
-import android.content.ContentValues;
 
 import com.cm.fm.mall.base.BasePresenter;
 import com.cm.fm.mall.contract.fragment.product.ProductInfoContract;
 import com.cm.fm.mall.model.bean.ProductMsg;
-import com.cm.fm.mall.model.bean.ShoppingProduct;
 import com.cm.fm.mall.model.model.fragment.product.ProductInfoModel;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.Utils;
 
 
 import java.util.List;

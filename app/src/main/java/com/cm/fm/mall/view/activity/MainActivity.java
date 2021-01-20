@@ -15,15 +15,14 @@ import com.cm.fm.mall.view.fragment.menu.ClassifyFragment;
 import com.cm.fm.mall.view.fragment.menu.FoundFragment;
 import com.cm.fm.mall.view.fragment.menu.MallFragment;
 import com.cm.fm.mall.view.fragment.menu.UserFragment;
-import com.cm.fm.mall.util.CheckUpdateUtil;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.NetWorkUtil;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.CheckUpdateUtil;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.NetWorkUtil;
+import com.cm.fm.mall.common.util.Utils;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
 
 /**

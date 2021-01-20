@@ -5,7 +5,7 @@ import android.content.ContentValues;
 import com.cm.fm.mall.contract.fragment.product.ProductInfoContract;
 import com.cm.fm.mall.model.bean.ProductMsg;
 import com.cm.fm.mall.model.bean.ShoppingProduct;
-import com.cm.fm.mall.util.LogUtil;
+import com.cm.fm.mall.common.util.LogUtil;
 
 import org.litepal.crud.DataSupport;
 import org.litepal.tablemanager.Connector;

@@ -2,11 +2,11 @@ package com.cm.fm.mall.contract.activity;
 
 import com.cm.fm.mall.base.IBaseModel;
 import com.cm.fm.mall.base.IBaseView;
-import com.cm.fm.mall.base.ResponseCallback;
+import com.cm.fm.mall.common.Callback;
 
 public interface UpdatePwdContract {
     interface Model extends IBaseModel {
-        void savePwdM(String password,ResponseCallback callback);
+        void savePwdM(String password,Callback callback);
     }
 
     interface View extends IBaseView {

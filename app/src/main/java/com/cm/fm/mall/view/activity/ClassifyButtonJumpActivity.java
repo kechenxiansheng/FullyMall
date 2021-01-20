@@ -16,8 +16,8 @@ import com.cm.fm.mall.base.BaseActivity;
 import com.cm.fm.mall.model.adapter.ClassifyLeftMenuAdapter;
 import com.cm.fm.mall.model.adapter.ClassifyRightDataAdapter;
 import com.cm.fm.mall.model.bean.ClassifyCategory;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.Utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

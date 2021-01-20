@@ -7,8 +7,8 @@ import android.widget.ImageView;
 
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BaseActivity;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.Utils;
 
 public class SplashActivity extends BaseActivity {
 

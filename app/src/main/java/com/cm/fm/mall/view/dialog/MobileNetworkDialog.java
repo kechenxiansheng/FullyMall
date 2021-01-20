@@ -10,8 +10,8 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.util.CheckUpdateUtil;
-import com.cm.fm.mall.util.LogUtil;
+import com.cm.fm.mall.common.util.CheckUpdateUtil;
+import com.cm.fm.mall.common.util.LogUtil;
 
 /**
  * 移动网络弹框

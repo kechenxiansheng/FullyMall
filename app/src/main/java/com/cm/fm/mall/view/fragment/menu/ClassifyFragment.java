@@ -1,8 +1,6 @@
 package com.cm.fm.mall.view.fragment.menu;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.res.AssetManager;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -15,11 +13,8 @@ import com.cm.fm.mall.model.adapter.ClassifyRightDataAdapter;
 import com.cm.fm.mall.model.bean.ClassifyCategory;
 import com.cm.fm.mall.base.BaseMVPFragment;
 import com.cm.fm.mall.presenter.fragment.ClassifyPresenter;
-import com.cm.fm.mall.util.LogUtil;
+import com.cm.fm.mall.common.util.LogUtil;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 

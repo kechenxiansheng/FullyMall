@@ -20,8 +20,8 @@ import com.bumptech.glide.Glide;
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BaseMVPFragment;
 import com.cm.fm.mall.base.BasePresenter;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.model.constant.MallConstant;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.MallConstant;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -242,7 +242,7 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
         vv_video.setLayoutParams(params);
 
         //根据路径加载视频,直接播放
-        vv_video.setVideoPath(MallConstant.video_url);
+        vv_video.setVideoPath(MallConstant.VIDEO_URL);
         vv_video.setMediaController(new MediaController(_context));
         //默认播放，并设置为暂停背景
         ib_play.setBackground(getResources().getDrawable(R.mipmap.bg_pause2));

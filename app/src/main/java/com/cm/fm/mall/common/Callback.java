@@ -1,10 +1,9 @@
-package com.cm.fm.mall.base;
+package com.cm.fm.mall.common;
 
 /**
  * 服务器验证响应的回调
  */
-public interface ResponseCallback {
+public interface Callback {
     void success(Object response);
     void fail(String info);
-    void error(String error);
 }
