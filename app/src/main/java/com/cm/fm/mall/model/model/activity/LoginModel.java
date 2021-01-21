@@ -14,7 +14,9 @@ import com.cm.fm.mall.common.util.VerifyTask;
 import org.json.JSONObject;
 import org.litepal.crud.DataSupport;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 登陆的数据模型类
@@ -25,7 +27,10 @@ public class LoginModel implements LoginContract.Model {
     @Override
     public void loginM(final String account,final String password, final Callback callback) {
         /** 去服务器验证账号密码，并通过回调返回请求的结果 */
-        VerifyTask verifyTask = new VerifyTask(MallConstant.LOGIN_VERIFY_URL,account, password, new HttpCallback() {
+        Map<String,String> map = new HashMap<>();
+        map.put("account",account);
+        map.put("password",password);
+        VerifyTask verifyTask = new VerifyTask(MallConstant.LOGIN_VERIFY_URL,map, new HttpCallback() {
             @Override
             public void response(String response) {
                 LogUtil.d(tag,"login verify: " + response);

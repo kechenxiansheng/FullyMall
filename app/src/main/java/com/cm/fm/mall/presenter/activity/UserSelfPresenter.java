@@ -1,6 +1,8 @@
 package com.cm.fm.mall.presenter.activity;
 
 import com.cm.fm.mall.base.BasePresenter;
+import com.cm.fm.mall.common.Callback;
+import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.contract.activity.UserSelfContract;
 import com.cm.fm.mall.model.bean.UserInfo;
 import com.cm.fm.mall.model.model.activity.UserSelfModel;
@@ -27,10 +29,19 @@ public class UserSelfPresenter extends BasePresenter<UserSelfContract.Model,User
     }
 
     @Override
-    public boolean updateUserInfo(UserInfo userInfo,String name,int sex) {
+    public void updateUserInfo(UserInfo userInfo) {
         if(isViewBind()){
-            return getModel().updateUserInfo(userInfo,name,sex);
+            getModel().updateUserInfo(userInfo, new Callback() {
+                @Override
+                public void success(Object response) {
+                    getView().OnUpdateResult(MallConstant.SUCCESS,response.toString());
+                }
+
+                @Override
+                public void fail(String info) {
+                    getView().OnUpdateResult(MallConstant.FAIL,info);
+                }
+            });
         }
-        return false;
     }
 }

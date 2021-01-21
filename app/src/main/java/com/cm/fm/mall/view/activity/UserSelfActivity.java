@@ -29,6 +29,7 @@ import java.util.List;
 public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> implements UserSelfContract.View,View.OnClickListener {
     private Activity context;
     private final String tag = "TAG_UserSelfActivity";
+    private String phoneNum;
 
     private EditText et_userself_name,et_userself_nickname;
     private RadioButton rb_userself_sex_man,rb_userself_sex_woman;
@@ -96,7 +97,25 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
         return new UserSelfPresenter();
     }
 
-
+    @Override
+    public void OnUpdateResult(int code, String msg) {
+        LogUtil.d(tag,"code : " + code + "msg : " + msg );
+        switch (code){
+            case MallConstant.SUCCESS:
+                tv_userself_sure_update.setVisibility(View.GONE);
+                //修改按钮 提示语改回默认的 修改信息
+                tv_userself_update.setText("修改信息");
+                et_userself_nickname.setFocusableInTouchMode(false);
+                et_userself_nickname.setFocusable(false);
+                et_userself_nickname.setBackground(null);
+                setResult(RESULT_OK);
+                this.finish();
+                break;
+            case MallConstant.FAIL:
+                Utils.getInstance().tips(context,msg);
+                break;
+        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -150,18 +169,12 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
                     Utils.getInstance().tips(context,"提示：昵称不能为空！");
                     return;
                 }
-                boolean res = mPresenter.updateUserInfo(userInfoList.get(0),nickName,sexNum[0]);
-                LogUtil.d(tag,"userInfo save result : " + res);
-                if(res){
-                    tv_userself_sure_update.setVisibility(View.GONE);
-                    //修改按钮 提示语改回默认的 修改信息
-                    tv_userself_update.setText("修改信息");
-                    et_userself_nickname.setFocusableInTouchMode(false);
-                    et_userself_nickname.setFocusable(false);
-                    et_userself_nickname.setBackground(null);
-                    setResult(RESULT_OK);
-                }
-
+                UserInfo userInfo = userInfoList.get(0);
+                userInfo.setNickName(nickName);
+                userInfo.setPhoneNumber(phoneNum);
+                userInfo.setSex(sexNum[0]);
+                //更新信息
+                mPresenter.updateUserInfo(userInfo);
                 break;
             case R.id.tv_userself_back:
                 context.finish();
@@ -176,10 +189,10 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
             //给视图填充数据
             et_userself_name.setText(userInfo.getName());
             et_userself_nickname.setText(userInfo.getNickName());
-            String phoneNum = userInfo.getPhoneNumber();
+            phoneNum = userInfo.getPhoneNumber();
             LogUtil.d(tag,"phoneNum:"+phoneNum);
             String maskNumber = "";
-            if(phoneNum!=null){
+            if(!TextUtils.isEmpty(phoneNum)){
                 tv_bind_phone_num.setText("更改");
                 if(phoneNum.length() == 11){
                     maskNumber = phoneNum.substring(0,3)+"****"+phoneNum.substring(7,phoneNum.length());
