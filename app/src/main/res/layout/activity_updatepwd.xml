@@ -112,6 +112,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="如果您尚未绑定手机，请到 我的-资料 进行绑定，否则无法修改密码"
             android:background="@color/colorLightBlue2"
             android:textColor="@color/colorAccent"
 

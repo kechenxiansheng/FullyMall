@@ -22,11 +22,11 @@ public class UpdatePwdPresenter extends BasePresenter<UpdatePwdContract.Model,Up
     }
 
     @Override
-    public void savePwdP(String password) {
+    public void savePwdP(String account,String password) {
         if(isViewBind()){
             getView().showLoading();
             /** 调用 model 类的 savePwd 方法，处理数据 */
-            getModel().savePwdM(password, new Callback() {
+            getModel().savePwdM(account,password, new Callback() {
                 @Override
                 public void success(Object response) {
                     getView().hideLoading();

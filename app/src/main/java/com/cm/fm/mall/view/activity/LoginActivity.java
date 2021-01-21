@@ -138,7 +138,7 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 String account = editText_account.getText().toString();
                 String password = editText_password.getText().toString();
                 if(TextUtils.isEmpty(account) || TextUtils.isEmpty(password)){
-                    Utils.getInstance().tips(this,"提示：账号密码不能为空！");
+                    Utils.getInstance().tips(this,"账号密码不能为空！");
                     return;
                 }
                 mPresenter.loginP(account,password);
@@ -157,7 +157,13 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 }
                 break;
             case R.id.tv_forget_pwd:
-                Utils.getInstance().startActivityClose(this,UpdatePwdActivity.class);
+                //修改密码前提是账号已录入
+                String account2 = editText_account.getText().toString();
+                if(TextUtils.isEmpty(account2)){
+                    Utils.getInstance().tips(this,"请先完善账号");
+                    return;
+                }
+                Utils.getInstance().startActivityWithData(this,UpdatePwdActivity.class,"account",account2);
                 break;
             case R.id.tv_login_register:
                 Utils.getInstance().startActivityClose(this,RegisterActivity.class);

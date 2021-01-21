@@ -19,6 +19,8 @@ public class MallConstant {
     public final static String REGISTER_VERIFY_URL = "http://119.27.160.230:8888/fmserver/user/register";
     /** 登陆验证 */
     public final static String LOGIN_VERIFY_URL = "http://119.27.160.230:8888/fmserver/user/login";
+    /** 更新用户信息 */
+    public final static String UPDATE_USER_INFO_URL = "http://119.27.160.230:8888/fmserver/user/updateUserInfo";
 
     /** 商品详情图片地址 */
     public final static String DETAIL_PICTURE_URL = "http://119.27.160.230:8888/resource/product/detail/";   //再加上 图片数量的 .png

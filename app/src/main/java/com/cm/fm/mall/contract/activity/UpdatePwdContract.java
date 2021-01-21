@@ -6,7 +6,7 @@ import com.cm.fm.mall.common.Callback;
 
 public interface UpdatePwdContract {
     interface Model extends IBaseModel {
-        void savePwdM(String password,Callback callback);
+        void savePwdM(String account,String password,Callback callback);
     }
 
     interface View extends IBaseView {
@@ -15,6 +15,6 @@ public interface UpdatePwdContract {
 
     interface Presenter{
         //保存新密码
-        void savePwdP(String password);
+        void savePwdP(String account,String password);
     }
 }

@@ -32,6 +32,7 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
     Button bt_update_sure_and_login;
     private Handler mHandler;
     private EventHandler eventHandler;
+    private String account;
 
     private boolean TypeIsPassword = true;
     private final String tag = "TAG_UpdatepwdActivity";
@@ -54,6 +55,8 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
     @Override
     protected int initLayout() {
         context = this;
+        account = getIntent().getStringExtra("account");
+        LogUtil.d(tag,"account : "+account);
         return R.layout.activity_updatepwd;
     }
     @Override
@@ -92,7 +95,7 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
                 Utils.getInstance().startActivityClose(context,LoginActivity.class);
                 break;
             case MallConstant.FAIL:
-                Utils.getInstance().tips(context,"密码修改失败");
+                Utils.getInstance().tips(context,msg);
                 break;
         }
     }
@@ -185,8 +188,8 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
                     if(data.toString().contains("error")){
                         tv_update_tips.setText("验证码错误");
                     }else {
-                        //保存新密码
-                        mPresenter.savePwdP(et_update_password1.getText().toString());
+                        /** 修改并保存新密码 */
+                        mPresenter.savePwdP(account,et_update_password1.getText().toString());
                     }
 
                 }else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
