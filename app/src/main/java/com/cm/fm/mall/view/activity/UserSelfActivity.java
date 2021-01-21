@@ -37,7 +37,7 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
     private RadioGroup rg_userself_sex;
     private boolean SURE_UPDATE = false;    //false 此时确认修改按钮是隐藏状态  true 修改按钮按钮是显示状态
     private List<UserInfo> userInfoList = new ArrayList<>();
-    final int[] sexNum = {1};
+    final int[] sexNum = {3};
 
     @Override
     protected void activityAnim() {
@@ -83,10 +83,11 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton radioButton = group.findViewById(checkedId);
                 String sex = radioButton.getText().toString();
+                LogUtil.d(tag,"sex : " +sex);
                 if("男".equals(sex)){
-                    sexNum[0] = 1;
-                }else if("女".equals(sex)){
                     sexNum[0] = 2;
+                }else if("女".equals(sex)){
+                    sexNum[0] = 1;
                 }
             }
         });
@@ -99,7 +100,7 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
 
     @Override
     public void OnUpdateResult(int code, String msg) {
-        LogUtil.d(tag,"code : " + code + "msg : " + msg );
+        LogUtil.d(tag,"OnUpdateResult : " + code + " , " + msg );
         switch (code){
             case MallConstant.SUCCESS:
                 tv_userself_sure_update.setVisibility(View.GONE);
@@ -181,6 +182,13 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
                 break;
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        setResult(RESULT_OK);
+    }
+
     private void queryUserInfo(){
         userInfoList = mPresenter.queryUserInfo();
         if(userInfoList != null && userInfoList.size() != 0){
@@ -200,9 +208,9 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
             }
             tv_userself_phone.setText(maskNumber);
             int sexNum = userInfo.getSex();
-            if(sexNum==1){
+            if(sexNum==2){
                 rb_userself_sex_man.setChecked(true);
-            }else if(sexNum==2) {
+            }else if(sexNum==1) {
                 rb_userself_sex_woman.setChecked(true);
             }
         }

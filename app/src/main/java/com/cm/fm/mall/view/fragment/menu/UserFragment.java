@@ -281,5 +281,6 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
             userInfos.clear();
         }
         userInfos = DataSupport.findAll(UserInfo.class);
+        LogUtil.d(tag,"cur_user : " + userInfos.get(0));
     }
 }

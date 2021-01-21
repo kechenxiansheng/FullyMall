@@ -18,7 +18,7 @@ public class UserInfo extends DataSupport {
     private String buySumMoney;     //花费总金额
     private String levelInfo;       //购买等级
     private String extension;
-    private int sex;                //性别    1 男  2 女
+    private int sex;                //性别    1 女  2 男  3 保密  4未知（后两个按钮暂时未添加）
     private Date date;              //出生日期
     private int userType;           //用户类型。1 登录状态  0 游客状态
     private List<String> address = new ArrayList<>();   //用户收货地址

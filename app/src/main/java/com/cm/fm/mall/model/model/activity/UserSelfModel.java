@@ -27,7 +27,7 @@ public class UserSelfModel implements UserSelfContract.Model {
     }
 
     @Override
-    public void updateUserInfo(UserInfo userInfo, final Callback callback) {
+    public void updateUserInfo(final UserInfo userInfo, final Callback callback) {
         final Map<String,String> params = new HashMap<>();
         params.put("account",userInfo.getName());
         params.put("nickName",userInfo.getNickName());
@@ -42,6 +42,8 @@ public class UserSelfModel implements UserSelfContract.Model {
                     int code = jsonObject.getInt("code");
                     String msg = jsonObject.getString("msg");
                     if(code==0){
+                        //本地缓存
+                        userInfo.save();
                         callback.success("保存成功");
                         return;
                     }

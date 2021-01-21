@@ -134,6 +134,7 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_login:
+                //登陆验证
                 LogUtil.d(tag,"onClick login_btn");
                 String account = editText_account.getText().toString();
                 String password = editText_password.getText().toString();
@@ -144,6 +145,7 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 mPresenter.loginP(account,password);
                 break;
             case R.id.imageView_lock:
+                //明文密文切换
                 if(TypeIsPassword){
                     //如果当前 密码框 是密文类型，就替换为 文本明文 类型，并替换背景图片
                     editText_password.setInputType( InputType.TYPE_CLASS_TEXT);
@@ -157,7 +159,7 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 }
                 break;
             case R.id.tv_forget_pwd:
-                //修改密码前提是账号已录入
+                //修改密码，前提是账号已录入
                 String account2 = editText_account.getText().toString();
                 if(TextUtils.isEmpty(account2)){
                     Utils.getInstance().tips(this,"请先完善账号");
@@ -166,6 +168,7 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 Utils.getInstance().startActivityWithData(this,UpdatePwdActivity.class,"account",account2);
                 break;
             case R.id.tv_login_register:
+                //注册
                 Utils.getInstance().startActivityClose(this,RegisterActivity.class);
                 break;
             case R.id.tv_login_back:

@@ -44,6 +44,11 @@ public class LoginModel implements LoginContract.Model {
                     String msg = resJson.getString("msg");
                     if(code == 0){
                         /** 修改当前账号在本地缓存的状态 */
+                        String content = resJson.getString("content");
+                        JSONObject contentJson = new JSONObject(content);
+                        String nickName = contentJson.getString("nickName");
+                        int gender = contentJson.getInt("gender");
+                        String phone = contentJson.getString("phone");
                         List<UserInfo> userInfos = DataSupport.select("name","password")
                                 .where("name=?",account)
                                 .find(UserInfo.class);
@@ -51,6 +56,9 @@ public class LoginModel implements LoginContract.Model {
                         if(userInfos.size()!=0){
                             /* 当前账号有缓存，修改状态为在线 */
                             UserInfo userInfo = userInfos.get(0);
+                            userInfo.setNickName(nickName);
+                            userInfo.setSex(gender);
+                            userInfo.setPhoneNumber(phone);
                             userInfo.setUserType(MallConstant.USER_TYPE_IS_LOGIN);
                             userInfo.save();
                         }else {
@@ -59,7 +67,9 @@ public class LoginModel implements LoginContract.Model {
                             LogUtil.d(tag,"last user cache delete: " + deleteAll);
                             UserInfo userInfo = new UserInfo();
                             userInfo.setName(account);
-                            userInfo.setNickName(account);      //注册时昵称默认为账号
+                            userInfo.setNickName(TextUtils.isEmpty(nickName)?account:nickName);
+                            userInfo.setSex(gender);
+                            userInfo.setPhoneNumber(phone);
                             userInfo.setPassword(password);
                             userInfo.setUserType(MallConstant.USER_TYPE_IS_LOGIN);
                             boolean res = userInfo.save();
