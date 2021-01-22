@@ -65,6 +65,7 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
         imageView_lock.setOnClickListener(this);
         tv_forget_pwd.setOnClickListener(this);
         btn_login.setOnClickListener(this);
+        tv_login_register.setOnClickListener(this);
     }
 
     @Override
@@ -168,8 +169,12 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 Utils.getInstance().startActivityWithData(this,UpdatePwdActivity.class,"account",account2);
                 break;
             case R.id.tv_login_register:
-                //注册
-                Utils.getInstance().startActivityClose(this,RegisterActivity.class);
+                //点击了注册。回传UserFragment ，让fragmrnt自己拉起注册页面
+//                Utils.getInstance().startActivityClose(this,RegisterActivity.class);
+                Intent intent = new Intent();
+                intent.putExtra("type","register");
+                setResult(RESULT_OK,intent);
+                this.finish();
                 break;
             case R.id.tv_login_back:
                 this.finish();

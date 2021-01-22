@@ -45,6 +45,7 @@ public class RegisterModel implements RegisterContract.Model {
                     if(code == 0){
                         /** 新账号缓存在本地
                          * 本地缓存只保证存在一个账号信息，所以注册账号后，直接清除本地上一次的缓存
+                         * 新账号注册后，直接登陆，状态改为在线
                          * */
                         int deleteAll = DataSupport.deleteAll(UserInfo.class);
                         LogUtil.d(tag,"last user cache delete: " + deleteAll);
@@ -52,7 +53,7 @@ public class RegisterModel implements RegisterContract.Model {
                         userInfo.setName(account);
                         userInfo.setNickName(account);      //注册时昵称默认为账号
                         userInfo.setPassword(password);
-                        userInfo.setUserType(MallConstant.USER_TYPE_NOT_LOGIN);
+                        userInfo.setUserType(MallConstant.USER_TYPE_IS_LOGIN);
                         boolean res = userInfo.save();
                         LogUtil.d(tag,"register cache: " + res);
                         callback.success(MallConstant.SUCCESS);

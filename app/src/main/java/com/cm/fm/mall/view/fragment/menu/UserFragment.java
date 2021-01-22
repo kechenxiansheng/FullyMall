@@ -40,6 +40,7 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 
+import static android.app.Activity.RESULT_OK;
 import static android.os.Environment.DIRECTORY_PICTURES;
 
 /**
@@ -127,43 +128,68 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
         LogUtil.d(tag,"onActivityResult requestCode:"+requestCode+",resultCode:"+resultCode+",data:"+data);
         switch (requestCode){
             case MallConstant.USER_FRAGMENT_HEAD_PORTRAIT_REQUEST_CODE:
-                //TODO 头像页回调
-                if(resultCode == Activity.RESULT_OK){
+                /** 头像页回调 */
+                if(resultCode == RESULT_OK){
                    showHeadPhoto();
                 }
                 break;
             case MallConstant.USER_FRAGMENT_USER_SELF_REQUEST_CODE:
-                //TODO 个人资料回调
-                if(resultCode == Activity.RESULT_OK){
+                /** 个人资料回调 */
+                if(resultCode == RESULT_OK){
                     refreshUserInfo();
                     LogUtil.d(tag,"change nickname. userInfos:"+userInfos);
                     tv_nick_name.setText(userInfos.get(0).getNickName());
                 }
                 break;
             case MallConstant.USER_FRAGMENT_LOGIN_REQUEST_CODE:
-                //TODO 登陆回调
-                if(resultCode == Activity.RESULT_OK){
-                    refreshUserInfo();
-                    LogUtil.d(tag,"login success. userInfos:"+userInfos);
-                    //显示头像、昵称
-                    tv_nick_name.setText(userInfos.get(0).getNickName());
-                    //已经登录，文本显示修改为注销
-                    typeOflogin = true;
-                    //展示头像
-                    showHeadPhoto();
-                    tv_tips_login_logout.setText(getResources().getString(R.string.user_logout_des));
+                /** 登陆回调 */
+                if(resultCode == RESULT_OK){
+                    if(data!=null){
+                        //登陆页点击了注册场景走这步
+                        String type = data.getStringExtra("type");
+                        LogUtil.d(tag,"type : " + type);
+                        if("register".equals(type)){
+                            //打开注册页面
+                            Intent intent = new Intent(context,RegisterActivity.class);
+                            intent.putExtra("activityId",MallConstant.USER_FRAGMENT_ACTIVITY_ID);
+                            startActivityForResult(intent,MallConstant.USER_FRAGMENT_REGISTER_REQUEST_CODE,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
+                        }
+                    }else{
+                        //直接登陆场景走这步
+                        refreshUserInfo();
+                        LogUtil.d(tag,"login success. userInfos:"+userInfos);
+                        //显示头像、昵称
+                        tv_nick_name.setText(userInfos.get(0).getNickName());
+                        //已经登录，文本显示修改为注销
+                        typeOflogin = true;
+                        //展示头像
+                        showHeadPhoto();
+                        tv_tips_login_logout.setText(getResources().getString(R.string.user_logout_des));
+                    }
                 }
                 break;
             case MallConstant.USER_FRAGMENT_REGISTER_REQUEST_CODE:
-                //注册页面的回调
-                if(data!=null){
-                    String type = data.getStringExtra("type");
-                    LogUtil.d(tag,"type : " + type);
-                    if("login".equals(type)){
-                        //打开登陆页面
-                        Intent intent = new Intent(context,LoginActivity.class);
-                        intent.putExtra("activityId",MallConstant.USER_FRAGMENT_ACTIVITY_ID);
-                        startActivityForResult(intent,MallConstant.USER_FRAGMENT_LOGIN_REQUEST_CODE,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
+                /** 注册页面的回调 */
+                if(resultCode == RESULT_OK){
+                    if(data!=null){
+                        //点击了登陆场景走这步
+                        String type = data.getStringExtra("type");
+                        LogUtil.d(tag,"type : " + type);
+                        if("login".equals(type)){
+                            //打开登陆页面
+                            Intent intent = new Intent(context,LoginActivity.class);
+                            intent.putExtra("activityId",MallConstant.USER_FRAGMENT_ACTIVITY_ID);
+                            startActivityForResult(intent,MallConstant.USER_FRAGMENT_LOGIN_REQUEST_CODE,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
+                        }
+                    }else {
+                        //直接注册场景走这步。直接登陆，显示用户信息
+                        refreshUserInfo();
+                        if(userInfos.size() != 0 && userInfos.get(0).getUserType()==1){
+                            tv_nick_name.setText(userInfos.get(0).getNickName());
+                            //已经登录,文本显示修改为注销
+                            typeOflogin = true;
+                            tv_tips_login_logout.setText(getResources().getString(R.string.user_logout_des));
+                        }
                     }
                 }
                 break;
