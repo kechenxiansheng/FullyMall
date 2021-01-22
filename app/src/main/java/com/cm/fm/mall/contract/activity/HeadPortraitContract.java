@@ -7,15 +7,17 @@ import android.net.Uri;
 
 import com.cm.fm.mall.base.IBaseModel;
 import com.cm.fm.mall.base.IBaseView;
+import com.cm.fm.mall.common.Callback;
 
 public interface HeadPortraitContract {
 
     interface Model extends IBaseModel {
-
+        void saveHeadPortrait(String account,Bitmap bitmap,Callback callback);
     }
 
     interface View extends IBaseView {
         void OnShowImage(Bitmap bitmap);
+        void OnSavePhotoResult(int code,String msg);
     }
 
     interface Presenter{
@@ -26,6 +28,6 @@ public interface HeadPortraitContract {
         //拍照
         Uri takePhoto(Activity activity, int code);
         //保存照片
-        void savePhoto(Bitmap bitmap);
+        void savePhoto(String account,Bitmap bitmap);
     }
 }

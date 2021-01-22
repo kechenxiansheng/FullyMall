@@ -13,18 +13,18 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import com.cm.fm.mall.base.BasePresenter;
+import com.cm.fm.mall.common.Callback;
+import com.cm.fm.mall.common.util.ImageUtil;
 import com.cm.fm.mall.contract.activity.HeadPortraitContract;
 import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.model.model.activity.HeadPortraitModel;
 import com.cm.fm.mall.common.util.LogUtil;
 import com.cm.fm.mall.common.util.Utils;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -165,31 +165,49 @@ public class HeadPortraitPresenter extends BasePresenter<HeadPortraitContract.Mo
     }
     /** 保存拍摄的或者选择的照片 */
     @Override
-    public void savePhoto(Bitmap bitmap) {
-        String path = getContext().getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + MallConstant.PHOTO_NAME;
-        LogUtil.d(tag,"savePhoto path:"+path);
-        File headPhoto = new File(path);
-        if(headPhoto.exists()){
-            boolean delete = headPhoto.delete();
-            LogUtil.d(tag,"savePhoto delete old photo : " + delete);
-        }
-        BufferedOutputStream outputStream = null;
-        try {
-            outputStream = new BufferedOutputStream(new FileOutputStream(headPhoto));
-            //第二个参数 压缩比重，图片存储在磁盘上的大小会根据这个值变化。值越小存储在磁盘的图片文件越小（如果是 PNG 格式，第二个参数无效）
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-            LogUtil.d(tag,"savePhoto end");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                if(outputStream!=null){
-                    outputStream.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+    public void savePhoto(String account,final Bitmap bitmap) {
+        //保存在服务器
+        getModel().saveHeadPortrait(account, bitmap, new Callback() {
+            @Override
+            public void success(Object response) {
+                Log.d(tag,"response : " + response.toString());
+//                String path = getContext().getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + MallConstant.PHOTO_NAME;
+//                LogUtil.d(tag,"savePhoto path:"+path);
+//                File headPhoto = new File(path);
+//                if(headPhoto.exists()){
+//                    boolean delete = headPhoto.delete();
+//                    LogUtil.d(tag,"savePhoto delete old photo : " + delete);
+//                }
+//                BufferedOutputStream outputStream = null;
+//                try {
+//                    outputStream = new BufferedOutputStream(new FileOutputStream(headPhoto));
+//                    //第二个参数 压缩比重，图片存储在磁盘上的大小会根据这个值变化。值越小存储在磁盘的图片文件越小（如果是 PNG 格式，第二个参数无效）
+//                    bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
+//                    LogUtil.d(tag,"savePhoto end");
+//                } catch (FileNotFoundException e) {
+//                    e.printStackTrace();
+//                }finally {
+//                    try {
+//                        if(outputStream!=null){
+//                            outputStream.close();
+//                        }
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+
+                //本地进行缓存
+                ImageUtil.saveHeadCache(bitmap);
+                //通知activity 头像更换，保存成功
+                getView().OnSavePhotoResult(MallConstant.SUCCESS,"");
             }
-        }
+
+            @Override
+            public void fail(String info) {
+                getView().OnSavePhotoResult(MallConstant.FAIL,info);
+            }
+        });
+
     }
 
 
@@ -219,7 +237,7 @@ public class HeadPortraitPresenter extends BasePresenter<HeadPortraitContract.Mo
             //设置固定大小
             bitmap = ThumbnailUtils.extractThumbnail(bitmap,300,300);
             LogUtil.d(tag,"bitmap is null ? " + (bitmap==null));
-            bitmap = Utils.getInstance().createCircleBitmap(bitmap);
+            bitmap = ImageUtil.createCircleBitmap(bitmap);
             getView().OnShowImage(bitmap);
         }else {
             LogUtil.d(tag,"imagePath 为空");

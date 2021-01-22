@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.common.MallConstant;
+import com.cm.fm.mall.common.util.ImageUtil;
 import com.cm.fm.mall.presenter.fragment.UserPresenter;
 import com.cm.fm.mall.view.activity.AddressActivity;
 import com.cm.fm.mall.view.activity.HeadPortraitActivity;
@@ -56,6 +57,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
     private boolean typeOflogin;        //true 登陆（文本显示的注销）  false 注销（文本显示的登陆）
 
     private ImageView iv_head_portrait; //头像
+    private String account;             //当前用户账号
 
     private TextView tv_nick_name,tv_tips_login_logout;          //昵称、点击登陆(注销)、绑定电话的描述、绑定手机
     private LinearLayout ll_user_info,ll_user_order,ll_user_address,ll_user_check,ll_user_shopping_cart,ll_user_agreement;    //个人信息、订单信息、地址信息、检查更新、购物车/用户协议
@@ -105,7 +107,6 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
             //已经登录,文本显示修改为注销
             typeOflogin = true;
             tv_tips_login_logout.setText(getResources().getString(R.string.user_logout_des));
-
         }
     }
 
@@ -179,11 +180,11 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
             //已经登录，有头像直接展示
             LogUtil.d(tag,"photo name :"+file.getName());
             bitmap = BitmapFactory.decodeFile(path);
-            bitmap = Utils.getInstance().createCircleBitmap(bitmap);
+            bitmap = ImageUtil.createCircleBitmap(bitmap);
         }else {
             //使用默认图片
             bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.head_photo);
-            bitmap = Utils.getInstance().createCircleBitmap(bitmap);
+            bitmap = ImageUtil.createCircleBitmap(bitmap);
         }
         iv_head_portrait.setImageBitmap(bitmap);
     }
@@ -198,7 +199,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                     return;
                 }
                 Intent intent_head = new Intent(context,HeadPortraitActivity.class);
-                intent_head.putExtra("activityId",MallConstant.USER_FRAGMENT_ACTIVITY_ID);
+                intent_head.putExtra("account",account);
                 //最后一个参数是 activity切换动画使用
                 startActivityForResult(intent_head,MallConstant.USER_FRAGMENT_HEAD_PORTRAIT_REQUEST_CODE,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
                 break;
@@ -267,7 +268,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                     tv_tips_login_logout.setText(getResources().getString(R.string.user_login_des));
                     //使用默认图片
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.head_photo);
-                    bitmap = Utils.getInstance().createCircleBitmap(bitmap);
+                    bitmap = ImageUtil.createCircleBitmap(bitmap);
                     iv_head_portrait.setImageBitmap(bitmap);
                 }
 
@@ -281,6 +282,10 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
             userInfos.clear();
         }
         userInfos = DataSupport.findAll(UserInfo.class);
-        LogUtil.d(tag,"cur_user : " + userInfos.get(0));
+        if(userInfos.size()!=0){
+            LogUtil.d(tag,"cur_user : " + userInfos.get(0));
+            account = userInfos.get(0).getName();
+        }
+
     }
 }

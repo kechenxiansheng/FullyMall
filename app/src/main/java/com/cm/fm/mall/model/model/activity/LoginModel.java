@@ -1,10 +1,12 @@
 package com.cm.fm.mall.model.model.activity;
 
 
+import android.graphics.Bitmap;
 import android.text.TextUtils;
 
 import com.cm.fm.mall.common.Callback;
 import com.cm.fm.mall.common.HttpCallback;
+import com.cm.fm.mall.common.util.ImageUtil;
 import com.cm.fm.mall.contract.activity.LoginContract;
 import com.cm.fm.mall.model.bean.UserInfo;
 import com.cm.fm.mall.common.MallConstant;
@@ -14,9 +16,17 @@ import com.cm.fm.mall.common.util.VerifyTask;
 import org.json.JSONObject;
 import org.litepal.crud.DataSupport;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static android.os.Environment.DIRECTORY_PICTURES;
+import static com.cm.fm.mall.MyApplication.getContext;
 
 /**
  * 登陆的数据模型类
@@ -49,6 +59,8 @@ public class LoginModel implements LoginContract.Model {
                         String nickName = contentJson.getString("nickName");
                         int gender = contentJson.getInt("gender");
                         String phone = contentJson.getString("phone");
+                        String headPortrait = contentJson.getString("headPortrait");
+
                         List<UserInfo> userInfos = DataSupport.select("name","password")
                                 .where("name=?",account)
                                 .find(UserInfo.class);
@@ -75,6 +87,9 @@ public class LoginModel implements LoginContract.Model {
                             boolean res = userInfo.save();
                             LogUtil.d(tag,"login cache: " + res);
                         }
+                        if(!TextUtils.isEmpty(headPortrait)){
+                            ImageUtil.saveHeadCache(ImageUtil.stringToBitmap(headPortrait));
+                        }
                         callback.success(MallConstant.SUCCESS);
                         return;
                     }
@@ -89,4 +104,6 @@ public class LoginModel implements LoginContract.Model {
         verifyTask.execute();
 
     }
+
+
 }

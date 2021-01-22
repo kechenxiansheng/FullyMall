@@ -175,34 +175,7 @@ public class Utils {
         manager.notify(notificationId,builder.build());
     }
 
-    /** 裁剪成圆形图片 */
-    public Bitmap createCircleBitmap(Bitmap resource) {
-        //获取图片的宽度
-        int width = resource.getWidth();
-        int height = resource.getHeight();
 
-        int r =0;
-        if (width < height){
-            r = width;
-        }else {
-            r = height;
-        }
-        //创建一个与原bitmap一样宽度的正方形bitmap
-        Bitmap roundBitmap = Bitmap.createBitmap(r, r, Bitmap.Config.ARGB_8888);
-        //以该bitmap为底，创建一块画布
-        Canvas canvas = new Canvas(roundBitmap);
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);//抗锯齿
-        RectF rectF = new RectF(0,0,r,r);
-        //画圆
-        canvas.drawRoundRect(rectF, r/2, r/2, paint);
-        //设置画笔为取交集模式
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        //裁剪图片
-        canvas.drawBitmap(resource, null, rectF, paint);
-
-        return roundBitmap;
-    }
 
     /**
      * 检测参数是否有空

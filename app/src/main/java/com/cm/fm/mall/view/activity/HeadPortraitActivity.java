@@ -20,6 +20,7 @@ import android.widget.ToggleButton;
 
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BaseMVPActivity;
+import com.cm.fm.mall.common.util.ImageUtil;
 import com.cm.fm.mall.contract.activity.HeadPortraitContract;
 import com.cm.fm.mall.model.bean.UserInfo;
 import com.cm.fm.mall.common.MallConstant;
@@ -52,11 +53,19 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
     private TextView tv_take_photo,tv_photo_album,tv_head_back;
     private ToggleButton tb_change_photo;
     private Bitmap bitmap;      //新头像位图
+    private String account;
 
     private final String tag = "TAG_HeadActivity";
 
     private Uri imageUri;
     List<UserInfo> userInfos;       //用户信息，暂时未使用
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        account = getIntent().getStringExtra("account");
+        LogUtil.d(tag,"cur_account : " + account);
+    }
 
     @Override
     protected void activityAnim() {
@@ -85,6 +94,7 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
         tv_take_photo.setOnClickListener(this);
         tv_photo_album.setOnClickListener(this);
         tv_head_back.setOnClickListener(this);
+        //更换头像
         tb_change_photo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -94,7 +104,7 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
                     ll_change_method.setVisibility(View.GONE);
                     /** 保存图片 */
                     if(bitmap != null){
-                        mPresenter.savePhoto(bitmap);
+                        mPresenter.savePhoto(account,bitmap);
                     }
                 }else {
                     ll_change_method.setVisibility(View.VISIBLE);
@@ -104,19 +114,33 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
     }
 
     @Override
+    public void OnSavePhotoResult(int code, String msg) {
+        switch (code){
+            case MallConstant.SUCCESS:
+                LogUtil.d(tag,"头像更换成功");
+                setResult(RESULT_OK);
+                context.finish();
+                break;
+            case MallConstant.FAIL:
+                Utils.getInstance().tips(context,msg);
+                break;
+        }
+    }
+
+    @Override
     protected void initDataEnd() {
         super.initDataEnd();
         //有头像直接展示
         String path = getExternalFilesDir(DIRECTORY_PICTURES)+"/head_photo.jpg";
         if (new File(path).exists()){
             Bitmap bitmap = BitmapFactory.decodeFile(path);
-            bitmap = Utils.getInstance().createCircleBitmap(bitmap);
+            bitmap = ImageUtil.createCircleBitmap(bitmap);
             iv_show_head.setImageBitmap(bitmap);
             iv_show_head.setScaleType(ImageView.ScaleType.CENTER_CROP);//将原图按比例放大至 ImageView 大小
         }else {
             //使用默认图片
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.head_photo);
-            bitmap = Utils.getInstance().createCircleBitmap(bitmap);
+            bitmap = ImageUtil.createCircleBitmap(bitmap);
             iv_show_head.setImageBitmap(bitmap);
         }
     }
@@ -168,7 +192,7 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
         }
         //设置固定大小
         bitmap = ThumbnailUtils.extractThumbnail(bitmap,300,300);
-        bitmap = Utils.getInstance().createCircleBitmap(bitmap);
+        bitmap = ImageUtil.createCircleBitmap(bitmap);
 
         return bitmap;
     }
