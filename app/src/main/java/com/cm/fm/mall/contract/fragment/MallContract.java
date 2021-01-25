@@ -14,10 +14,10 @@ public interface MallContract {
     }
 
     interface View extends IBaseView {
-
+        void OnSearchResult(int code,List<ProductMsg> productMsgs);
     }
 
     interface Presenter{
-        List<ProductMsg> search(List<ProductMsg> productMsgs,String searchContent);
+        void search(List<ProductMsg> productMsgs,String searchContent);
     }
 }

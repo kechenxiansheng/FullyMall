@@ -1,13 +1,21 @@
 package com.cm.fm.mall.presenter.fragment;
 
+import android.util.Log;
+
 import com.cm.fm.mall.base.BasePresenter;
+import com.cm.fm.mall.common.MallConstant;
+import com.cm.fm.mall.common.util.LogUtil;
 import com.cm.fm.mall.contract.fragment.MallContract;
 import com.cm.fm.mall.model.bean.ProductMsg;
 import com.cm.fm.mall.model.model.fragment.MallModel;
 
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 public class MallPresenter extends BasePresenter<MallContract.Model,MallContract.View> implements MallContract.Presenter {
+    private String tag = "TAG_MallPresenter";
+
     @Override
     protected MallContract.Model createModule() {
         return new MallModel();
@@ -19,10 +27,24 @@ public class MallPresenter extends BasePresenter<MallContract.Model,MallContract
     }
 
     @Override
-    public List<ProductMsg> search(List<ProductMsg> productMsgs,String searchContent) {
+    public void search(List<ProductMsg> productMsgs,String searchContent) {
         if(isViewBind()){
-            return getModel().search(productMsgs,searchContent);
+            searchContent = searchContent.trim().toLowerCase();
+            Iterator<ProductMsg> iterator = productMsgs.iterator();
+            while (iterator.hasNext()){
+                ProductMsg productMsg =  iterator.next();
+                //TODO 适配器只监听原有的数据list，所以此处筛选，商品类型、商品名、商品描述中都不包含用户搜索的内容 的商品进行删除
+                if(!productMsg.getType().toLowerCase().trim().contains(searchContent) && !productMsg.getProductName().toLowerCase().trim().contains(searchContent)
+                        && !productMsg.getProductDescription().toLowerCase().trim().contains(searchContent)){
+                    iterator.remove();
+                }
+            }
+            LogUtil.d(tag,"productMsgs size:"+productMsgs.size());
+            LogUtil.d(tag,"productMsgs:"+productMsgs);
+
+            getView().OnSearchResult(MallConstant.SUCCESS, productMsgs);
+        }else {
+            getView().OnSearchResult(MallConstant.FAIL, null);
         }
-        return null;
     }
 }
