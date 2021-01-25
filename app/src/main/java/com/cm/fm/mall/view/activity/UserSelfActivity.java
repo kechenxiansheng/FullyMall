@@ -138,6 +138,7 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
             case R.id.tv_bind_phone_num:
                 //绑定手机
                 Intent intent = new Intent(context,BindPhoneActivity.class);
+                intent.putExtra("account",userInfoList.get(0).getName());
                 startActivityForResult(intent,MallConstant.BIND_PHONE_ACTIVITY_REQUEST_CODE);
                 break;
             case R.id.tv_userself_update:

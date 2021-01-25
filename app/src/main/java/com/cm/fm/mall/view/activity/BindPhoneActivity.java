@@ -29,12 +29,16 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
     private TextView tv_register_get_yzm,tv_code_tip;
     private Handler mHandler;
     private EventHandler eventHandler;
+    private String account;
+    private String phone;
 
     private final String tag = "TAG_BindPhoneActivity";
     private final String USER_COUNTRY = "86";
     @Override
     protected int initLayout() {
         context = this;
+        account = getIntent().getStringExtra("account");
+        LogUtil.d(tag,"account : " + account);
         return R.layout.activity_bind_phone;
     }
 
@@ -172,9 +176,9 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
                         // 国家代码，如“86”
                         String country = (String) phoneMap.get("country");
                         // 手机号码，如“13800138000”
-                        String phone = (String) phoneMap.get("phone");
+                        phone = (String) phoneMap.get("phone");
                         //保存手机号
-                        mPresenter.savePhoneP(phone);
+                        mPresenter.savePhoneP(account,phone);
                     }else {
                         LogUtil.d(tag,"验证码错误");
                         tv_code_tip.setText("验证码错误");

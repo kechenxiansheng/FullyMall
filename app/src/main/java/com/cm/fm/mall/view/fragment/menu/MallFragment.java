@@ -283,8 +283,9 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
         if("clear".equals(type) ){
             productMsgs.clear();
         }
-        //每次只加载 15 条数据
-        for(int i = 1; i <= 15 ;i++){
+        //每次只加载 20 条数据
+        for(int i = 1; i <= 20 ;i++){
+            //生成随机数（0-数组长度减一）
             int nameIndex = (int)Math.round(Math.random()* (nameArray.length-1));
             int desIndex = (int)Math.round(Math.random()* (desArray.length-1));
             int priceIndex = (int)Math.round(Math.random()* (priceAray.length-1));
@@ -317,7 +318,8 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
         talks.add("世界上最温暖的两个字是，从你口中说出的：晚安。");
     }
 
-    //注意：此处返回对象 products 就是  productMsgs 对象，内部用的迭代器删除数据，用 == 号，equals 判断两个对象，都是true
+    //注意：此处返回对象 products 就是  productMsgs 对象，直接适配器刷新即可
+    //内部用的迭代器删除数据，用 == 号，equals 判断两个对象，都是true
     @Override
     public void OnSearchResult(int code, List<ProductMsg> products) {
         LogUtil.d(tag,"code: "+code +",products: " + products );

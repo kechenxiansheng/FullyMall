@@ -6,7 +6,7 @@ import com.cm.fm.mall.common.Callback;
 
 public interface BindPhoneContract {
     interface Model extends IBaseModel {
-        void savePhoneM(String phoneNum, Callback callback);
+        void savePhoneM(String account,String phoneNum, Callback callback);
     }
 
     interface View extends IBaseView {
@@ -14,6 +14,6 @@ public interface BindPhoneContract {
     }
 
     interface Presenter{
-        void savePhoneP(String password);
+        void savePhoneP(String account,String password);
     }
 }

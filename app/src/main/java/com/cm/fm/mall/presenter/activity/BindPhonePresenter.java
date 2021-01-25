@@ -23,11 +23,11 @@ public class BindPhonePresenter extends BasePresenter<BindPhoneContract.Model,Bi
     }
 
     @Override
-    public void savePhoneP( final String phoneNum) {
+    public void savePhoneP(final String account, final String phoneNum) {
         if(isViewBind()){
             getView().showLoading();
             /** 调用 model 类的 bindPhone 方法，处理数据 */
-            getModel().savePhoneM(phoneNum, new Callback() {
+            getModel().savePhoneM(account,phoneNum, new Callback() {
                 @Override
                 public void success(Object response) {
                     getView().hideLoading();
