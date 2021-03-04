@@ -1,5 +1,5 @@
-//package com.cm.fm.mall.view.activity;
-//
+package com.cm.fm.mall.view.activity;
+
 //import android.Manifest;
 //import android.annotation.TargetApi;
 //import android.content.pm.PackageManager;
@@ -23,14 +23,16 @@
 //import com.baidu.mapapi.map.MapView;
 //import com.baidu.mapapi.map.MyLocationData;
 //import com.baidu.mapapi.model.LatLng;
-//import com.cm.fm.mall.MyApplication;
-//import com.cm.fm.mall.R;
-//import com.cm.fm.mall.common.util.LogUtil;
-//import com.cm.fm.mall.common.util.Utils;
-//
-//import java.util.ArrayList;
-//
-//public class LocationActivity extends AppCompatActivity {
+import com.cm.fm.mall.MyApplication;
+import com.cm.fm.mall.R;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.Utils;
+
+import java.util.ArrayList;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class LocationActivity extends AppCompatActivity {
 //    private String tag = "TAG_LocationActivity";
 //    private final int SDK_PERMISSION_REQUEST = 800;
 //    private String permissionInfo = "";
@@ -230,4 +232,4 @@
 //
 //        }
 //    }
-//}
+}

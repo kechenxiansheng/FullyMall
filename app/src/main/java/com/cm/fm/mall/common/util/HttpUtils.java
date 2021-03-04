@@ -41,7 +41,7 @@ public class HttpUtils {
 				paramsEncoded = urlParamsFormat(params, "UTF-8");
 			}
 			String fullUrl = "";
-			if(paramsEncoded != "")
+			if(!paramsEncoded.equals(""))
 				fullUrl = urlStr + "?" + paramsEncoded;
 			else
 				fullUrl = urlStr;

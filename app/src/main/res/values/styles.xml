@@ -104,4 +104,20 @@
     <style name="ApplicationStyle.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="ApplicationStyle.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+
+
+    <!-- 练习：
+        将相同的样式抽出来定义，在需要的组件中引用，以减少重复的布局代码
+        引用方式：style="@style/btn_style_test"
+     -->
+    <style name="btn_style_test">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
 </resources>

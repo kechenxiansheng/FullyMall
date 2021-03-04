@@ -17,9 +17,13 @@ android {
         targetSdkVersion 29
         versionCode 1
 //        versionName "1.3.04"    //规则，10进1
-        versionName "2.0.09"    //规则，10进1
+        versionName "2.1.01"    //规则，10进1
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+        //ndk指定适配的CPU架构。不配置时，默认支持所有cpu
+//        ndk {
+//            abiFilters 'armeabi','armeabi-v7a','arm64-v8a'
+//        }
     }
     signingConfigs {
         config {
@@ -34,8 +38,15 @@ android {
             signingConfig signingConfigs.config
         }
         release {
-            minifyEnabled false     //是否混淆
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'  //默认的混淆配置
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+            //是否混淆
+            minifyEnabled true
+            //默认的混淆配置
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名
             signingConfig signingConfigs.config
         }
     }

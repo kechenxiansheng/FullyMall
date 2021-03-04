@@ -36,7 +36,7 @@ public class MobileNetworkDialog extends Dialog implements View.OnClickListener 
         if (window != null) {
             window.setGravity(Gravity.CENTER);
             window.setBackgroundDrawableResource(android.R.color.transparent);  //背景透明
-            //设置listview的高宽
+            //设置高宽
             WindowManager.LayoutParams params = window.getAttributes();
             params.height = WindowManager.LayoutParams.WRAP_CONTENT;
             params.width = WindowManager.LayoutParams.MATCH_PARENT;

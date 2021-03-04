@@ -80,7 +80,7 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
     @Override
     public int initLayout() {
         LogUtil.d(tag,"getResource");
-        return R.layout.fragment_mall2;
+        return R.layout.fragment_mall;
     }
 
     @Override
