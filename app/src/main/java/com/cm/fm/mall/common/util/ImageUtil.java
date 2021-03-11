@@ -82,8 +82,9 @@ public class ImageUtil {
             LogUtil.e(tag,"save error.bitmap is null");
             return;
         }
-        //本地缓存路径
+        //本地缓存路径（缓存在外部存储的-External）
         String path = getContext().getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + MallConstant.PHOTO_NAME;
+        //path: /storage/emulated/0/Android/data/com.cm.fm.mall/files/Pictures/head_photo.jpg
         LogUtil.d(tag,"savePhoto path:"+path);
         File headPhoto = new File(path);
         if(headPhoto.exists()){

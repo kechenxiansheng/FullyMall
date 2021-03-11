@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+installLocation 程序安装的位置，三个值：internalOnly、auto、preferExternal
+internalOnly：（默认值）只允许安装在内置内存中
+auto：内置内存和SD卡可互相转移
+preferExternal：优先安装在SD卡中
+-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.cm.fm.mall">
+    package="com.cm.fm.mall"
+    android:installLocation="auto"
+    >
     <!-- 相机权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
 
