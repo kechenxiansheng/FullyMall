@@ -9,7 +9,7 @@
     repeatCount 重复次数，默认为0
     repeatMode 重复模式，默认重头开始
     -->
-<!-- 一右下角为圆点抖动 -->
+<!-- 一右下角为圆点，抖动 -->
 <rotate xmlns:android="http://schemas.android.com/apk/res/android"
     android:duration="200"
     android:fromDegrees="-10"

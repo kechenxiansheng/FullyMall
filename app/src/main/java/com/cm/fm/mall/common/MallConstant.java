@@ -6,24 +6,26 @@ package com.cm.fm.mall.common;
 public class MallConstant {
     /** 头像名称 */
     public final static String PHOTO_NAME = "head_photo.jpg";
+    /** 服务器url */
+    public static final String serverUrl = "http://119.27.160.230:8888";
     /** apk下载地址 */
-    public final static String APK_URL = "http://119.27.160.230:8888/apk/FullyMall.apk";
+    public final static String APK_URL = serverUrl + "/apk/FullyMall.apk";
     /** 版本检测地址 */
-    public final static String VERSION_URL = "http://119.27.160.230:8888/app_version.json";
+    public final static String VERSION_URL = serverUrl + "/app_version.json";
     /** 视频地址 */
-    public final static String VIDEO_URL = "http://119.27.160.230:8888/resource/video/yc.mp4";
+    public final static String VIDEO_URL = serverUrl + "/resource/video/yc.mp4";
     /** 分类页 临时图片 */
-    public final static String CLASSIFY_ICON ="http://119.27.160.230:8888/resource/image/icon/icon_dog.png";
+    public final static String CLASSIFY_ICON = serverUrl + "/resource/image/icon/icon_dog.png";
 
     /** 注册验证 */
-    public final static String REGISTER_VERIFY_URL = "http://119.27.160.230:8888/fmserver/user/register";
+    public final static String REGISTER_VERIFY_URL = serverUrl + "/fmserver/user/register";
     /** 登陆验证 */
-    public final static String LOGIN_VERIFY_URL = "http://119.27.160.230:8888/fmserver/user/login";
+    public final static String LOGIN_VERIFY_URL = serverUrl + "/fmserver/user/login";
     /** 更新用户信息 */
-    public final static String UPDATE_USER_INFO_URL = "http://119.27.160.230:8888/fmserver/user/updateUserInfo";
+    public final static String UPDATE_USER_INFO_URL = serverUrl + "/fmserver/user/updateUserInfo";
 
     /** 商品详情图片地址 */
-    public final static String DETAIL_PICTURE_URL = "http://119.27.160.230:8888/resource/product/detail/";   //再加上 图片数量的 .png
+    public final static String DETAIL_PICTURE_URL = serverUrl + "/resource/product/detail/";   //再加上 图片数量的 .png
     public final static String DETAIL_PICTURE_URL_END = ".jpg";   //再加上 图片数量的 .png
 
     /** 通用状态 */
