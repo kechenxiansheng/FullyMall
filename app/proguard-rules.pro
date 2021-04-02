@@ -14,7 +14,7 @@
 ## 混淆时不记录日志
 #-verbose
 # 忽略警告
--ignorewarning
+-ignorewarnings
 ## 代码优化
 #-dontshrink
 ## 不优化输入的类文件
@@ -87,6 +87,8 @@
 # fastjson 混淆
 -dontwarn com.alibaba.fastjson.**
 -keep class com.alibaba.fastjson.**{*; }
+-keepattributes Signature
+-keepattributes *Annotation*
 
 # banner 混淆
 -keep class com.youth.banner.** {
@@ -125,3 +127,11 @@
     public <init>(android.content.Context, android.util.AttributeSet);
     public <init>(android.content.Context, android.util.AttributeSet, int);
 }
+
+#litepal 数据库
+-dontwarn org.litepal.*
+-keep class org.litepal.** { *; }
+-keep enum org.litepal.**
+-keep interface org.litepal.** { *; }
+-keep public class * extends org.litepal.**
+-keepclassmembers class * extends org.litepal.crud.DataSupport{*;}

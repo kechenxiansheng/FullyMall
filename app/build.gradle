@@ -35,15 +35,17 @@ android {
     }
     buildTypes {
         debug {
+
+            //签名
             signingConfig signingConfigs.config
         }
         release {
             //Zipalign优化
             zipAlignEnabled true
-            // 移除无用的resource文件
-            shrinkResources false
+            // 移除无用的resource文件（项目没有用反射获取资源的情况下可用）
+            shrinkResources true
             //是否混淆
-            minifyEnabled true
+            minifyEnabled false
             //默认的混淆配置
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //签名
@@ -70,7 +72,7 @@ android {
     }
 }
 
-def releaseTime() {
+static def releaseTime() {
     return new Date().format("yyyyMMddHHmmss", TimeZone.getTimeZone("UTC+8"))
 }
 
@@ -86,6 +88,7 @@ dependencies {
 
     implementation 'com.android.support:recyclerview-v7:29.0.0'
     implementation 'com.android.support:design:29.0.0'
+    //litepal 数据库
     implementation 'org.litepal.android:core:1.6.1'
     //图片加载框架
     implementation 'com.github.bumptech.glide:glide:4.8.0'
@@ -94,7 +97,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.12.6'
     //分包
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.alibaba:fastjson:1.2.47'
+    implementation 'com.alibaba:fastjson:1.2.58'
     //轮播图
     implementation 'com.youth.banner:banner:1.4.8'
     //权限处理框架

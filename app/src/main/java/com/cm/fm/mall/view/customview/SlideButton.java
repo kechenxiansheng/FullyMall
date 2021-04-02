@@ -237,6 +237,7 @@ public class SlideButton extends View {
 
     /**
      * 开始绘图
+     * canvas.drawRect();       画矩形
      * canvas.drawArc();        画弧
      * canvas.drawText();       画文本
      * canvas.drawCircle();     画圆

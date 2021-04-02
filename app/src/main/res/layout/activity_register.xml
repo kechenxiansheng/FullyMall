@@ -52,23 +52,24 @@
             android:layout_height="60dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/icon_account"
+                android:layout_gravity="center"
                 android:layout_marginStart="10dp"
-                android:textColor="#000"
-                android:text="账号："
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <EditText
+                />
+            <com.cm.fm.mall.view.customview.CustomEditTextClear
                 android:id="@+id/et_register_account"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1"
+                android:hint="QQ、手机号码、邮箱"
+                android:textSize="14sp"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:theme="@style/CustomEditTextTipStyle"
                 />
         </LinearLayout>
 
@@ -77,32 +78,32 @@
             android:layout_height="60dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/icon_password"
+                android:layout_gravity="center"
                 android:layout_marginStart="10dp"
-                android:textColor="#000"
-                android:text="密码："
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <EditText
+                />
+            <com.cm.fm.mall.view.customview.CustomEditTextClear
                 android:id="@+id/et_register_password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:inputType="numberPassword"
-                android:layout_weight="1" />
-
+                android:layout_weight="1"
+                android:textCursorDrawable="@drawable/edittext_cursor"
+                android:theme="@style/CustomEditTextTipStyle"
+                android:hint="6-8位字母、数字密码"
+                android:textSize="14sp"
+                />
             <ImageView
                 android:id="@+id/iv_register_imageView_lock"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:background="@mipmap/ic_secure"
+                android:layout_marginEnd="10dp"
+                android:background="@mipmap/icon_pwd_hide"
                 android:padding="5dp" />
         </LinearLayout>
 
@@ -119,15 +120,15 @@
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
                 >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:padding="3dp"
-                    android:gravity="start"
-                    android:layout_marginStart="10dp"
-                    android:text="已有账号？ "
-                    />
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_alignParentStart="true"-->
+<!--                    android:padding="3dp"-->
+<!--                    android:gravity="start"-->
+<!--                    android:layout_marginStart="10dp"-->
+<!--                    android:text="已有账号？ "-->
+<!--                    />-->
                 <TextView
                     android:id="@+id/tv_register_login"
                     android:layout_width="wrap_content"
@@ -136,9 +137,8 @@
                     android:padding="3dp"
                     android:gravity="end"
                     android:textSize="14sp"
-
                     android:layout_marginEnd="10dp"
-                    android:text="直接登陆>>"
+                    android:text="已有账号？直接登陆>>"
                     />
 
             </RelativeLayout>

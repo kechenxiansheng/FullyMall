@@ -9,7 +9,7 @@ buildscript {
 //        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.4.2'
         // 注册MobSDK
         classpath "com.mob.sdk:MobSDK:2018.0319.1724"
 

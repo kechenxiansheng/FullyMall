@@ -25,7 +25,7 @@ public class ClassifyModel implements ClassifyContract.Model {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return stringBuilder.toString();
+        return stringBuilder.toString().trim();
 
     }
 }

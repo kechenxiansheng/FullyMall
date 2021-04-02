@@ -2,13 +2,16 @@ package com.cm.fm.mall.model.bean;
 
 import java.util.List;
 
-/** json解析bean
+/**
+ *  json解析bean
  *  参数需要和json文件的字段对应，否则 工具解析时找不到
  */
-//TODO
 public class ClassifyCategory{
     int code;
     List<DataBean> data;
+
+    public ClassifyCategory() {
+    }
 
     public int getCode() {
         return code;
@@ -26,11 +29,21 @@ public class ClassifyCategory{
         this.data = data;
     }
 
+    @Override
+    public String toString() {
+        return "ClassifyCategory{" +
+                "code=" + code +
+                ", data=" + data +
+                '}';
+    }
 
     //TODO 类别信息bean
     public static class DataBean{
         String type;
         List<DataListBean> dataList;
+
+        public DataBean() {
+        }
 
         public String getType() {
             return type;
@@ -60,6 +73,9 @@ public class ClassifyCategory{
         public static class DataListBean{
             String name;        //子类名
             String image;       //子类图片
+
+            public DataListBean() {
+            }
 
             public String getName() {
                 return name;

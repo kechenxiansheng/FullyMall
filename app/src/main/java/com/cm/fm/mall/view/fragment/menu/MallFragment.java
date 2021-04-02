@@ -185,14 +185,14 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
                 //点击了购物车
                 Utils.getInstance().startActivity(context,ShoppingCartActivity.class);
                 break;
-            case R.id.ll_menu_all_product:
-                //点击首页，展示所有商品
-                //这一步重新加载全部商品
-                initProducts("clear");
-//                //允许刷新框架加载更多
-//                refresh_layout.setEnableLoadMore(true);
-                adapter.notifyDataSetChanged();
-                break;
+//            case R.id.ll_menu_all_product:
+//                //点击首页，展示所有商品
+//                //这一步重新加载全部商品
+//                initProducts("clear");
+////                //允许刷新框架加载更多
+////                refresh_layout.setEnableLoadMore(true);
+//                adapter.notifyDataSetChanged();
+//                break;
             case R.id.iv_classify_bt:
                 //点击顶部菜单栏的 分类图标
                 Utils.getInstance().startActivity(context,ClassifyButtonJumpActivity.class);

@@ -120,4 +120,11 @@
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
     </style>
+
+
+    <!--  自定义输入框的style，修改下划线颜色  -->
+    <style name="CustomEditTextTipStyle" parent="Theme.AppCompat.Light">
+        <!--        <item name="colorControlNormal">@color/colorBlueLight4</item>-->
+        <item name="colorControlActivated">@color/colorLightBlue10</item>
+    </style>
 </resources>

@@ -150,12 +150,12 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 if(TypeIsPassword){
                     //如果当前 密码框 是密文类型，就替换为 文本明文 类型，并替换背景图片
                     editText_password.setInputType( InputType.TYPE_CLASS_TEXT);
-                    imageView_lock.setBackground(getResources().getDrawable(R.mipmap.ic_partial_secure));
+                    imageView_lock.setBackground(getResources().getDrawable(R.mipmap.icon_pwd_show));
                     TypeIsPassword = false;
                 }else {
                     //设置为文本密码类型，并替换背景图片
                     editText_password.setInputType( InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    imageView_lock.setBackground(getResources().getDrawable(R.mipmap.ic_secure));
+                    imageView_lock.setBackground(getResources().getDrawable(R.mipmap.icon_pwd_hide));
                     TypeIsPassword = true;
                 }
                 break;

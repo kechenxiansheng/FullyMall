@@ -53,14 +53,19 @@ public class ClassifyFragment extends BaseMVPFragment<ClassifyPresenter> impleme
         }
         //拿到初级解析结果（code，data）
         ClassifyCategory classifyCategory = JSONObject.parseObject(json,ClassifyCategory.class);
-        for (int i = 0; i < classifyCategory.getData().size(); i++) {
-            //获取分类主条目数据（type，dataList）
-            ClassifyCategory.DataBean dataBean = classifyCategory.getData().get(i);
-            //将type 放入左侧分类集合中
-            leftMenuList.add(dataBean.getType());
-            //存储左侧分类选项的索引
-            showTitle.add(i);
-            rightDataList.add(dataBean);
+
+        LogUtil.d(tag,"classifyCategory : " + classifyCategory.toString());
+        List<ClassifyCategory.DataBean> data = classifyCategory.getData();
+        if(data != null){
+            for (int i = 0; i < data.size(); i++) {
+                //获取分类主条目数据（type，dataList）
+                ClassifyCategory.DataBean dataBean = data.get(i);
+                //将type 放入左侧分类集合中
+                leftMenuList.add(dataBean.getType());
+                //存储左侧分类选项的索引
+                showTitle.add(i);
+                rightDataList.add(dataBean);
+            }
         }
         LogUtil.d(tag,"left:"+leftMenuList +",right:"+rightDataList +",title:"+showTitle);
     }
