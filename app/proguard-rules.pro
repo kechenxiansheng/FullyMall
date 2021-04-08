@@ -90,6 +90,31 @@
 -keepattributes Signature
 -keepattributes *Annotation*
 
+
+# Gson 混淆
+-keepattributes Signature
+# For using GSON @Expose annotation
+-keepattributes *Annotation*
+# Gson specific classes
+-dontwarn sun.misc.**
+#-keep class com.google.gson.stream.** { *; }
+# Application classes that will be serialized/deserialized over Gson
+# 注意这里只是谷歌的一个示例，具体需要替换成你自己的各种data、entity、bean等类
+-keep class com.cm.fm.mall.model.bean.** { <fields>; }
+# Prevent proguard from stripping interface information from TypeAdapterFactory,
+# JsonSerializer, JsonDeserializer instances (so they can be used in @JsonAdapter)
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
+# Prevent R8 from leaving Data object members always null
+-keepclassmembers,allowobfuscation class * {
+  @com.google.gson.annotations.SerializedName <fields>;
+}
+
+
+
+
+
 # banner 混淆
 -keep class com.youth.banner.** {
     *;

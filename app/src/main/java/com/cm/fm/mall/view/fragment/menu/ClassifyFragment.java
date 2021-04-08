@@ -6,7 +6,6 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.alibaba.fastjson.JSONObject;
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.model.adapter.ClassifyLeftMenuAdapter;
 import com.cm.fm.mall.model.adapter.ClassifyRightDataAdapter;
@@ -14,6 +13,7 @@ import com.cm.fm.mall.model.bean.ClassifyCategory;
 import com.cm.fm.mall.base.BaseMVPFragment;
 import com.cm.fm.mall.presenter.fragment.ClassifyPresenter;
 import com.cm.fm.mall.common.util.LogUtil;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,8 +51,11 @@ public class ClassifyFragment extends BaseMVPFragment<ClassifyPresenter> impleme
         if(json.isEmpty()){
             return;
         }
-        //拿到初级解析结果（code，data）
-        ClassifyCategory classifyCategory = JSONObject.parseObject(json,ClassifyCategory.class);
+        //Gson 拿到初级解析结果（code，data）
+        Gson gson = new Gson();
+        ClassifyCategory classifyCategory = gson.fromJson(json, ClassifyCategory.class);
+        //fastjson混淆后解析list会解析失败
+//        ClassifyCategory classifyCategory = JSONObject.parseObject(json,ClassifyCategory.class);
 
         LogUtil.d(tag,"classifyCategory : " + classifyCategory.toString());
         List<ClassifyCategory.DataBean> data = classifyCategory.getData();

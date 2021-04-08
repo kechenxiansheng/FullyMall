@@ -17,7 +17,7 @@ android {
         targetSdkVersion 29
         versionCode 1
 //        versionName "1.3.04"    //规则，10进1
-        versionName "2.1.01"    //规则，10进1
+        versionName "2.1.02"    //规则，10进1
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
         //ndk指定适配的CPU架构。不配置时，默认支持所有cpu
@@ -35,17 +35,24 @@ android {
     }
     buildTypes {
         debug {
-
+            //Zipalign优化
+            zipAlignEnabled true
+            // 移除无用的resource文件（项目没有用反射获取资源的情况下可用，并且必须打开混淆）
+            shrinkResources true
+            //是否混淆
+            minifyEnabled true
+            //默认的混淆配置
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //签名
             signingConfig signingConfigs.config
         }
         release {
             //Zipalign优化
             zipAlignEnabled true
-            // 移除无用的resource文件（项目没有用反射获取资源的情况下可用）
+            // 移除无用的resource文件（项目没有用反射获取资源的情况下可用，并且必须打开混淆）
             shrinkResources true
             //是否混淆
-            minifyEnabled false
+            minifyEnabled true
             //默认的混淆配置
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             //签名
@@ -97,7 +104,10 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.12.6'
     //分包
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.alibaba:fastjson:1.2.58'
+    //fastjson、gson
+//    implementation 'com.alibaba:fastjson:1.2.58'
+    implementation 'com.google.code.gson:gson:2.8.5'
+
     //轮播图
     implementation 'com.youth.banner:banner:1.4.8'
     //权限处理框架

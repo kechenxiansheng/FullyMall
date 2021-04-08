@@ -10,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import com.alibaba.fastjson.JSONObject;
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BaseActivity;
 import com.cm.fm.mall.model.adapter.ClassifyLeftMenuAdapter;
@@ -18,6 +17,7 @@ import com.cm.fm.mall.model.adapter.ClassifyRightDataAdapter;
 import com.cm.fm.mall.model.bean.ClassifyCategory;
 import com.cm.fm.mall.common.util.LogUtil;
 import com.cm.fm.mall.common.util.Utils;
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -115,7 +115,7 @@ public class ClassifyButtonJumpActivity extends BaseActivity {
     public void initData() {
         String json = getJson(context,"category.json");
         //拿到初级解析结果（code，data）
-        ClassifyCategory classifyCategory = JSONObject.parseObject(json,ClassifyCategory.class);
+        ClassifyCategory classifyCategory = new Gson().fromJson(json, ClassifyCategory.class);
 
         for (int i = 0; i < classifyCategory.getData().size(); i++) {
             //获取分类主条目数据（type，dataList）
