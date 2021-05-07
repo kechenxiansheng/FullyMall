@@ -3,12 +3,11 @@ package com.cm.fm.mall.model.model.activity;
 import com.cm.fm.mall.common.Callback;
 import com.cm.fm.mall.common.HttpCallback;
 import com.cm.fm.mall.common.MallConstant;
-import com.cm.fm.mall.common.util.VerifyTask;
+import com.cm.fm.mall.common.task.VerifyTask;
 import com.cm.fm.mall.contract.activity.BindPhoneContract;
 import com.cm.fm.mall.model.bean.UserInfo;
 import com.cm.fm.mall.common.util.LogUtil;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.litepal.crud.DataSupport;
 

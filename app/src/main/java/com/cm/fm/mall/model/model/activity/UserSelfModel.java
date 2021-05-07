@@ -1,13 +1,10 @@
 package com.cm.fm.mall.model.model.activity;
 
-import android.text.TextUtils;
-
 import com.cm.fm.mall.common.Callback;
 import com.cm.fm.mall.common.HttpCallback;
 import com.cm.fm.mall.common.MallConstant;
-import com.cm.fm.mall.common.util.HttpUtils;
 import com.cm.fm.mall.common.util.LogUtil;
-import com.cm.fm.mall.common.util.VerifyTask;
+import com.cm.fm.mall.common.task.VerifyTask;
 import com.cm.fm.mall.contract.activity.UserSelfContract;
 import com.cm.fm.mall.model.bean.UserInfo;
 

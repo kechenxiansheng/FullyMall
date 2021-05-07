@@ -67,7 +67,7 @@ public class AddressDetailActivity extends BaseMVPActivity<AddressDetailPresente
     protected void activityAnim() {
         super.activityAnim();
         //告知页面，使用动画
-        Utils.getInstance().actUseAnim(context,R.transition.fade);
+        Utils.actUseAnim(context,R.transition.fade);
     }
 
     @Override
@@ -223,8 +223,8 @@ public class AddressDetailActivity extends BaseMVPActivity<AddressDetailPresente
                 String phone =  et_consignee_phone.getText().toString();
                 String address =  et_consignee_address.getText().toString();
                 String street =  et_consignee_street.getText().toString();
-                if(!Utils.getInstance().checkParameter(name,phone,address,street)){
-                    Utils.getInstance().tips(context,"收货人信息不完整，请认真填写！");
+                if(!Utils.checkParameter(name,phone,address,street)){
+                    Utils.tips(context,"收货人信息不完整，请认真填写！");
                     return;
                 }
                 LogUtil.d(tag,"tagMap"+tagMap);
@@ -236,8 +236,8 @@ public class AddressDetailActivity extends BaseMVPActivity<AddressDetailPresente
                 break;
             case R.id.rl_position:
                 //点击定位
-                Utils.getInstance().tips(context,"此功能未开放");
-//                Utils.getInstance().startActivity(context,LocationActivity.class);
+                Utils.tips(context,"此功能未开放");
+//                Utils.startActivity(context,LocationActivity.class);
                 break;
 
         }

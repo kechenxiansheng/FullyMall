@@ -215,7 +215,7 @@ public class ProductInfoFragment extends BaseMVPFragment<ProductInfoPresenter> i
                 break;
             case R.id.tv_buy_now:
                 //立即购买
-                Utils.getInstance().tips(context,"点击了立即购买");
+                Utils.tips(context,"点击了立即购买");
                 break;
         }
     }

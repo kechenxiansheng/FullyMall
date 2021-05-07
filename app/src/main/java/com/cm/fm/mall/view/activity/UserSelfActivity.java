@@ -43,7 +43,7 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
     protected void activityAnim() {
         super.activityAnim();
         //使用动画
-        Utils.getInstance().actUseAnim(context,R.transition.fade);
+        Utils.actUseAnim(context,R.transition.explode);
     }
 
     @Override
@@ -113,7 +113,7 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
                 this.finish();
                 break;
             case MallConstant.FAIL:
-                Utils.getInstance().tips(context,msg);
+                Utils.tips(context,msg);
                 break;
         }
     }
@@ -168,7 +168,7 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
                 //点击确认修改按钮之后，隐藏确认修改按钮，并让账号、昵称不可编辑，失去焦点
                 String nickName = et_userself_nickname.getText().toString();
                 if(TextUtils.isEmpty(nickName.trim())){
-                    Utils.getInstance().tips(context,"提示：昵称不能为空！");
+                    Utils.tips(context,"提示：昵称不能为空！");
                     return;
                 }
                 UserInfo userInfo = userInfoList.get(0);
@@ -188,6 +188,12 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
     protected void onDestroy() {
         super.onDestroy();
         setResult(RESULT_OK);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        Utils.actUseAnim(this,R.transition.explode,R.transition.fade);
     }
 
     private void queryUserInfo(){

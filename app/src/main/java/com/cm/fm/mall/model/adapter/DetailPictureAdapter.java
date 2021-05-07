@@ -56,7 +56,7 @@ public class DetailPictureAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         //根据屏幕宽度设置图片大小
-        List<Integer> size = Utils.getInstance().getSize(context);
+        List<Integer> size = Utils.getSize(context);
         int width = size.get(0);
         ViewGroup.LayoutParams layoutParams = holder.iv_detail_picture.getLayoutParams();
         layoutParams.width = (int) (width*0.95);

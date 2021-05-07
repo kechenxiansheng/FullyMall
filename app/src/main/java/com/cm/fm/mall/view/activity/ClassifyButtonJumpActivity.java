@@ -107,7 +107,7 @@ public class ClassifyButtonJumpActivity extends BaseActivity {
 //                Intent intent = new Intent(context,SearchActivity.class);
 //                intent.putExtra("activityId",PERMISSION_REQUEST_CODE);
 //                startActivityForResult(intent,101);
-                Utils.getInstance().tips(context,"本页搜索功能未添加");
+                Utils.tips(context,"本页搜索功能未添加");
             }
         });
     }

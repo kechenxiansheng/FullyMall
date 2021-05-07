@@ -103,8 +103,8 @@ public class HeadPortraitPresenter extends BasePresenter<HeadPortraitContract.Mo
     public Uri takePhoto(Activity activity, int code) {
         if(isViewBind()){
             //存储拍好的照片
-            if(!Utils.getInstance().hasCamera(activity)){
-                Utils.getInstance().tips(activity,"当前设备不支持拍照");
+            if(!Utils.hasCamera(activity)){
+                Utils.tips(activity,"当前设备不支持拍照");
                 return null;
             }
             Uri imageUri;

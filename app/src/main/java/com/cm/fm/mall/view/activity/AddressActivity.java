@@ -39,7 +39,7 @@ public class AddressActivity extends BaseMVPActivity<AddressPresenter> implement
     @Override
     protected void activityAnim() {
         //告知页面，使用动画
-        Utils.getInstance().actUseAnim(context,R.transition.fade);
+        Utils.actUseAnim(context,R.transition.fade);
     }
 
     @Override
@@ -93,6 +93,13 @@ public class AddressActivity extends BaseMVPActivity<AddressPresenter> implement
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        Utils.actUseAnim(this,R.transition.explode,R.transition.fade);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -103,7 +110,7 @@ public class AddressActivity extends BaseMVPActivity<AddressPresenter> implement
         switch (v.getId()){
             case R.id.ll_add_address:
                 //新加地址
-                Utils.getInstance().startActivityForResultAnimation(context,AddressDetailActivity.class,MallConstant.ADDRESS_ACTIVITY_REQUEST_CODE);
+                Utils.startActivityForResultAnimation(context,AddressDetailActivity.class,MallConstant.ADDRESS_ACTIVITY_REQUEST_CODE);
                 break;
             case R.id.address_back:
                 context.finish();

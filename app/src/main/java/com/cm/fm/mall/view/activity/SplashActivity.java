@@ -38,7 +38,7 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 LogUtil.d(tag,"splash end");
-                Utils.getInstance().startActivityClose(SplashActivity.this,MainActivity.class);
+                Utils.startActivityClose(SplashActivity.this,MainActivity.class);
             }
 
             @Override

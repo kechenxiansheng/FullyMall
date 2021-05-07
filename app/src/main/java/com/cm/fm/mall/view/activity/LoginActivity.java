@@ -78,7 +78,7 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
     @Override
     protected void activityAnim() {
         //动画
-        Utils.getInstance().actUseAnim(activity,R.transition.fade);
+        Utils.actUseAnim(activity,R.transition.fade);
     }
 
     @Override
@@ -105,15 +105,15 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
             }else if( activityId == MallConstant.SHOPPING_CART_ACTIVITY_ACTIVITY_ID){
                 /** 购物车界面过来的请求（只是未登录），登陆成功直接关闭*/
 //                ActivityCollector.finishOneActivity(ShoppingCartActivity.class.getName());
-//                Utils.getInstance().startActivityClose(this,ShoppingCartActivity.class);
+//                Utils.startActivityClose(this,ShoppingCartActivity.class);
                 this.finish();
                 return;
             }
             /** 其他登陆 */
-            Utils.getInstance().startActivityClose(this,MainActivity.class);
-//            Utils.getInstance().startActivityWithData(activity,MainActivity.class,"fragmentId", String.valueOf(3));
+            Utils.startActivityClose(this,MainActivity.class);
+//            Utils.startActivityWithData(activity,MainActivity.class,"fragmentId", String.valueOf(3));
         }else if(code == MallConstant.FAIL){
-            Utils.getInstance().tips(activity,msg);
+            Utils.tips(activity,msg);
         }
 
     }
@@ -140,7 +140,7 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 String account = editText_account.getText().toString();
                 String password = editText_password.getText().toString();
                 if(TextUtils.isEmpty(account) || TextUtils.isEmpty(password)){
-                    Utils.getInstance().tips(this,"账号密码不能为空！");
+                    Utils.tips(this,"账号密码不能为空！");
                     return;
                 }
                 mPresenter.loginP(account,password);
@@ -163,14 +163,14 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 //修改密码，前提是账号已录入
                 String account2 = editText_account.getText().toString();
                 if(TextUtils.isEmpty(account2)){
-                    Utils.getInstance().tips(this,"请先完善账号");
+                    Utils.tips(this,"请先完善账号");
                     return;
                 }
-                Utils.getInstance().startActivityWithData(this,UpdatePwdActivity.class,"account",account2);
+                Utils.startActivityWithData(this,UpdatePwdActivity.class,"account",account2);
                 break;
             case R.id.tv_login_register:
                 //点击了注册。回传UserFragment ，让fragmrnt自己拉起注册页面
-//                Utils.getInstance().startActivityClose(this,RegisterActivity.class);
+//                Utils.startActivityClose(this,RegisterActivity.class);
                 Intent intent = new Intent();
                 intent.putExtra("type","register");
                 setResult(RESULT_OK,intent);

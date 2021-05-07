@@ -1,8 +1,10 @@
-package com.cm.fm.mall.common.util;
+package com.cm.fm.mall.common.task;
 
 import android.os.AsyncTask;
 
 import com.cm.fm.mall.common.HttpCallback;
+import com.cm.fm.mall.common.util.HttpUtils;
+import com.cm.fm.mall.common.util.LogUtil;
 
 import java.util.HashMap;
 import java.util.Map;

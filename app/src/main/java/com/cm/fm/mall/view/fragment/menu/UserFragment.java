@@ -221,36 +221,41 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
             case R.id.iv_head_portrait:
                 //点击头像
                 if(userInfos.size()==0 || userInfos.get(0).getUserType()==0){
-                    Utils.getInstance().tips(context,"请登陆！");
+                    Utils.tips(context,"请登陆！");
                     return;
                 }
                 Intent intent_head = new Intent(context,HeadPortraitActivity.class);
                 intent_head.putExtra("account",account);
-                //最后一个参数是 activity切换动画使用
-                startActivityForResult(intent_head,MallConstant.USER_FRAGMENT_HEAD_PORTRAIT_REQUEST_CODE,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
+                startActivityForResult(intent_head,MallConstant.USER_FRAGMENT_HEAD_PORTRAIT_REQUEST_CODE);
+                Utils.actUseAnim(context,R.transition.explode,R.transition.fade);
                 break;
             case R.id.ll_user_info:
                 //资料
                 refreshUserInfo();
                 if(userInfos.size()!=0 && userInfos.get(0).getUserType()==1){
-                    Intent intent_upate = new Intent(getActivity(),UserSelfActivity.class);
-                    //最后一个参数是 activity切换动画使用
-                    startActivityForResult(intent_upate,MallConstant.USER_FRAGMENT_USER_SELF_REQUEST_CODE,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
+                    Intent intent_update = new Intent(getActivity(),UserSelfActivity.class);
+                    startActivity(intent_update);
+                    Utils.actUseAnim(context,R.transition.explode,R.transition.fade);
                     return;
                 }
-                Utils.getInstance().tips(context,"请登录！");
+                Utils.tips(context,"请登录！");
                 break;
             case R.id.ll_user_shopping_cart:
                 //购物车
-                Utils.getInstance().startActivity(context,ShoppingCartActivity.class);
+//                Utils.startActivity(context,ShoppingCartActivity.class);
+                Intent intent_shopping = new Intent(context,ShoppingCartActivity.class);
+                startActivity(intent_shopping);
+                Utils.actUseAnim(getActivity(),R.transition.explode,R.transition.fade);
                 break;
             case R.id.ll_user_order:
                 //我的订单
-                Utils.getInstance().tips(context,"点击了订单！");
+                Utils.tips(context,"点击了订单！");
                 break;
             case R.id.ll_user_address:
                 //地址信息
-                Utils.getInstance().startActivityAnimation(context,AddressActivity.class);
+                Intent intent_address = new Intent(context,AddressActivity.class);
+                startActivity(intent_address);
+                Utils.actUseAnim(getActivity(),R.transition.explode,R.transition.fade);
                 break;
             case R.id.ll_user_agreement:
                 //用户协议
@@ -262,7 +267,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
              case R.id.ll_user_check:
                 //检查更新
                 if(!NetWorkUtil.getInstance().isNetworkConnected()){
-                    Utils.getInstance().tips(context,"请打开网络");
+                    Utils.tips(context,"请打开网络");
                     return;
                 }
                  CheckUpdateUtil.getInstance().checkUpdate(context,MallConstant.USER_FRAGMENT_ACTIVITY_ID);
@@ -286,6 +291,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                 }else {
                     //登陆状态，切换为注销状态，清空昵称，替换为默认头像
                     LogUtil.d(tag,"点击了注销");
+
                     tv_nick_name.setText("");
                     userInfos.get(0).setUserType(0);    // 0 游客
                     userInfos.get(0).save();

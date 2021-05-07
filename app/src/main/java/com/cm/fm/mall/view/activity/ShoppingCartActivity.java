@@ -72,7 +72,7 @@ public class ShoppingCartActivity extends BaseMVPActivity<ShoppingCartPresenter>
         manager.setOrientation(RecyclerView.VERTICAL);
         rv_shopping_cart_list.setLayoutManager(manager);
         rv_shopping_cart_list.setAdapter(shoppingAdapter);
-        //给RecycleView item设置分割线
+        //给RecycleView item设置分割线（divider：分割物）
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this,DividerItemDecoration.VERTICAL);
         Drawable drawable = ContextCompat.getDrawable(this,R.drawable.my_divider);
         if (drawable != null) {
@@ -92,11 +92,11 @@ public class ShoppingCartActivity extends BaseMVPActivity<ShoppingCartPresenter>
         switch (code){
             case -1:
                 //说明是首次使用app，去注册
-                Utils.getInstance().startActivity(this,RegisterActivity.class);
+                Utils.startActivity(this,RegisterActivity.class);
                 break;
             case 1:
                 //游客状态去登陆
-                Utils.getInstance().startActivity(this,LoginActivity.class,MallConstant.SHOPPING_CART_ACTIVITY_ACTIVITY_ID);
+                Utils.startActivity(this,LoginActivity.class,MallConstant.SHOPPING_CART_ACTIVITY_ACTIVITY_ID);
                 break;
             case 0:
                 //购买成功,删除购物车数据
@@ -113,8 +113,8 @@ public class ShoppingCartActivity extends BaseMVPActivity<ShoppingCartPresenter>
                     tv_sum_money.setText("￥0.0");
 //                    return;
                 }
-//                Utils.getInstance().tips(context,"提示：购买成功！");
-                Utils.getInstance().sendNotification(context,"订单发货提醒","FullyMall","您的订单已发货！",400);
+//                Utils.tips(context,"提示：购买成功！");
+                Utils.sendNotification(context,"订单发货提醒","FullyMall","您的订单已发货！",400);
                 break;
         }
     }
@@ -127,6 +127,13 @@ public class ShoppingCartActivity extends BaseMVPActivity<ShoppingCartPresenter>
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        Utils.actUseAnim(this,R.transition.explode,R.transition.fade);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -139,7 +146,7 @@ public class ShoppingCartActivity extends BaseMVPActivity<ShoppingCartPresenter>
 
                 Double sum_money = Double.parseDouble(tv_sum_money.getText().toString().replace("￥",""));
                 if(sum_money == 0){
-                    Utils.getInstance().tips(context,"购物车空空如也！");
+                    Utils.tips(context,"购物车空空如也！");
                     return;
                 }
                 //检验用户是否注册/登陆，在根据回调结果做结算处理

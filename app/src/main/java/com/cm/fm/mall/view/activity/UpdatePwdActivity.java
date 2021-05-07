@@ -40,7 +40,7 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
     @Override
     protected void activityAnim() {
         //告知页面，使用动画
-        Utils.getInstance().actUseAnim(context,R.transition.fade);
+        Utils.actUseAnim(context,R.transition.fade);
     }
 
     @Override
@@ -92,10 +92,10 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
     public void OnCheckResult(int code, String msg) {
         switch (code){
             case MallConstant.SUCCESS:
-                Utils.getInstance().startActivityClose(context,LoginActivity.class);
+                Utils.startActivityClose(context,LoginActivity.class);
                 break;
             case MallConstant.FAIL:
-                Utils.getInstance().tips(context,msg);
+                Utils.tips(context,msg);
                 break;
         }
     }

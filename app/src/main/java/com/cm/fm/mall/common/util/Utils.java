@@ -36,6 +36,7 @@ import com.cm.fm.mall.view.activity.ShoppingCartActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class Utils {
         return utils;
     }
     //activity跳转
-    public void startActivityCloseSelf(Activity curAct, Class targetAct){
+    public static void startActivityCloseSelf(Activity curAct, Class targetAct){
         Intent intent = new Intent(curAct, targetAct);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         curAct.startActivity(intent);
@@ -61,14 +62,14 @@ public class Utils {
     }
     //activity跳转
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public void startActivity(Activity curAct, Class targetAct){
+    public static void startActivity(Activity curAct, Class targetAct){
         Intent intent = new Intent(curAct,targetAct);
         curAct.startActivity(intent);
     }
 
     //activity跳转
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public void startActivityWithData(Activity curAct, Class targetAct,String key,String data){
+    public static void startActivityWithData(Activity curAct, Class targetAct,String key,String data){
         Bundle bundle = new Bundle();
         bundle.putString(key,data);
         Intent intent = new Intent(curAct,targetAct);
@@ -78,45 +79,45 @@ public class Utils {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public void startActivityAnimation(Activity curAct, Class targetAct){
+    public static void startActivityAnimation(Activity curAct, Class targetAct){
         Intent intent = new Intent(curAct,targetAct);
         curAct.startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(curAct).toBundle());
     }
     //activity跳转 携带activityId 用于区分activity
-    public void startActivity(Activity curAct, Class targetAct,int activityId){
+    public static void startActivity(Activity curAct, Class targetAct,int activityId){
         Intent intent = new Intent(curAct,targetAct);
         intent.putExtra("activityId",activityId);
         curAct.startActivity(intent);
     }
     //activity跳转,并携带数据
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public void startActivityData(Activity curAct, Class targetAct, ProductMsg productMsg){
+    public static void startActivityData(Activity curAct, Class targetAct, ProductMsg productMsg){
         Intent intent = new Intent(curAct,targetAct);
         intent.putExtra("product",productMsg);
         curAct.startActivity(intent,ActivityOptions.makeSceneTransitionAnimation(curAct).toBundle());
     }
     //activity 携带数据跳转，需要回传
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public void startActivityDataForResult(Activity curAct, Class targetAct, int requestCode, AddressInfo info){
+    public static void startActivityDataForResult(Activity curAct, Class targetAct, int requestCode, AddressInfo info){
         Intent intent = new Intent(curAct,targetAct);
         intent.putExtra("addressInfo",info);
         curAct.startActivityForResult(intent,requestCode,ActivityOptions.makeSceneTransitionAnimation(curAct).toBundle());
     }
     //activity跳转需要回传
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public void startActivityForResultAnimation(Activity curAct, Class targetAct, int requestCode){
+    public static void startActivityForResultAnimation(Activity curAct, Class targetAct, int requestCode){
         Intent intent = new Intent(curAct,targetAct);
         curAct.startActivityForResult(intent,requestCode,ActivityOptions.makeSceneTransitionAnimation(curAct).toBundle());
     }
 
     //activity跳转,并关闭发起跳转的activity
-    public void startActivityClose(Activity curAct, Class targetAct){
+    public static void startActivityClose(Activity curAct, Class targetAct){
         Intent intent = new Intent(curAct,targetAct);
         curAct.startActivity(intent);
         curAct.finish();
     }
     /** 跳转,并关闭其他所有的activity */
-    public void startActivityCloseAll(Activity curAct, Class targetAct){
+    public static void startActivityCloseAll(Activity curAct, Class targetAct){
         Intent intent = new Intent(curAct,targetAct);
         /** Intent.FLAG_ACTIVITY_CLEAR_TASK 会清除之前所有的activity，并且需要搭配 Intent.FLAG_ACTIVITY_NEW_TASK 一起使用
          *  Intent.FLAG_ACTIVITY_NEW_TASK 其实是将activity 的启动模式定义为 singleTask 模式
@@ -126,12 +127,12 @@ public class Utils {
         curAct.finish();
     }
     //activity跳转,并关闭发起跳转的activity
-    public void startActivityCloseAnimation(Activity curAct, Class targetAct){
+    public static void startActivityCloseAnimation(Activity curAct, Class targetAct){
         Intent intent = new Intent(curAct,targetAct);
         curAct.startActivity(intent);
         curAct.finish();
     }
-    public void tips(Context activity,String msg) {
+    public static void tips(Context activity,String msg) {
         if(!isMainThread()){
             Looper.prepare();
         }
@@ -141,7 +142,7 @@ public class Utils {
         }
     }
     /** 通知 */
-    public void sendNotification(Context context, String channelId, String title, String contentText, int notificationId ){
+    public static void sendNotification(Context context, String channelId, String title, String contentText, int notificationId ){
         NotificationManager manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification.Builder builder = null;
         if(Build.VERSION.SDK_INT >= 26){
@@ -176,13 +177,12 @@ public class Utils {
     }
 
 
-
     /**
      * 检测参数是否有空
      * @param params
      * @return 检测结果 true（没有空值）false（有空值）
      */
-    public boolean checkParameter(String ... params){
+    public static boolean checkParameter(String ... params){
         boolean result = true;
         for (String param : params) {
             if(TextUtils.isEmpty(param) || param.trim().length()==0){
@@ -194,19 +194,37 @@ public class Utils {
     }
 
     /**
-     * activity 进入，退出，再次进入使用动画
+     * activity 切换动画。进入，退出，再次进入使用动画
      * @param activity 当前activity
      * @param transitionId 动画资源id （R.transition.fade）
      */
-    public void actUseAnim(Activity activity,int transitionId){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activity.getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
-            Transition slide = TransitionInflater.from(activity).inflateTransition(transitionId);
-            activity.getWindow().setExitTransition(slide);    //退出
-            activity.getWindow().setEnterTransition(slide);   //进入
-            activity.getWindow().setReenterTransition(slide); //再次进入
+    public static void actUseAnim(Activity activity,int transitionId){
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+                Transition slide = TransitionInflater.from(activity).inflateTransition(transitionId);
+                activity.getWindow().setExitTransition(slide);    //退出
+                activity.getWindow().setEnterTransition(slide);   //进入
+                activity.getWindow().setReenterTransition(slide); //再次进入
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
 
+    /**
+     *  activity 切换动画
+     * @param activity      当前activity
+     * @param enterAnimId   activity进入时动画资源
+     * @param exitAnimId    activity退出时动画资源
+     * ！！！overridePendingTransition 必须在 startActivity 和 finish 之后执行，否则无效！！！
+     */
+    public static void actUseAnim(Activity activity,int enterAnimId,int exitAnimId){
+        try {
+            activity.overridePendingTransition(enterAnimId,exitAnimId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -214,7 +232,7 @@ public class Utils {
      * @param context
      * @return
      */
-    public List<Integer> getSize(Activity context){
+    public static List<Integer> getSize(Activity context){
         List<Integer> list = new ArrayList<>();
         //TODO 获取手机的宽高
         Display display = context.getWindowManager().getDefaultDisplay();
@@ -237,7 +255,7 @@ public class Utils {
     /**
      * 判断是否在主线程中
      */
-    public boolean isMainThread(){
+    public static boolean isMainThread(){
         return Looper.getMainLooper() == Looper.myLooper();
     }
 
@@ -246,7 +264,7 @@ public class Utils {
      * @param activity
      * @return
      */
-    public boolean hasCamera(Activity activity){
+    public static boolean hasCamera(Activity activity){
         PackageManager pm = activity.getPackageManager();
         boolean hasACamera = pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)         //后置摄像头
                 || pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_FRONT)             //前置摄像头
@@ -268,17 +286,6 @@ public class Utils {
         return hasACamera;
     }
 
-    /**
-     * 时间格式
-     * @param format    转换的格式
-     * @param date      需要转换的时间
-     * @return          指定格式的时间字符串
-     */
-    public static String convertDate(String format,Date date){
-        if(TextUtils.isEmpty(format)){
-            return "";
-        }
-        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
-        return dateFormat.format(date);
-    }
+
+
 }

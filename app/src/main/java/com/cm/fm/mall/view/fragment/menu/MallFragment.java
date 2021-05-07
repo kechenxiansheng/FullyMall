@@ -183,7 +183,7 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
                 break;
             case R.id.bt_shopping_cart:
                 //点击了购物车
-                Utils.getInstance().startActivity(context,ShoppingCartActivity.class);
+                Utils.startActivity(context,ShoppingCartActivity.class);
                 break;
 //            case R.id.ll_menu_all_product:
 //                //点击首页，展示所有商品
@@ -195,7 +195,7 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
 //                break;
             case R.id.iv_classify_bt:
                 //点击顶部菜单栏的 分类图标
-                Utils.getInstance().startActivity(context,ClassifyButtonJumpActivity.class);
+                Utils.startActivity(context,ClassifyButtonJumpActivity.class);
                 break;
             case R.id.iv_close_honey:
                 //点击今日蜜语的关闭
@@ -226,7 +226,7 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
                 adapter.notifyDataSetChanged();
                 break;
             default:
-                Utils.getInstance().tips(context,"点击了"+ title);
+                Utils.tips(context,"点击了"+ title);
                 break;
         }
 
@@ -271,7 +271,7 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
 //        headerView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Utils.getInstance().tips(context,"点击了头部");
+//                Utils.tips(context,"点击了头部");
 //            }
 //        });
 
@@ -333,7 +333,7 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
                 }else {
                     //没找到商品时，进行提示
                     products.clear();
-                    Utils.getInstance().tips(context,"未找到符合的商品！");
+                    Utils.tips(context,"未找到符合的商品！");
                 }
                 break;
             case MallConstant.FAIL:

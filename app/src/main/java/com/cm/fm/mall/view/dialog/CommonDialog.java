@@ -14,15 +14,14 @@ import com.cm.fm.mall.common.util.LogUtil;
 import com.cm.fm.mall.common.util.ResourceUtils;
 
 /**
- * TODO 暂时用不到了，删除功能加载底薪详情页面了
- * 删除地址 确认弹框
+ * 通用dialog
  */
-public class AddressDeleteDialog extends Dialog implements View.OnClickListener {
+public class CommonDialog extends Dialog implements View.OnClickListener {
     Context context;
     TextView tv_mobile_network,tv_cancel_update,tv_sure_update;
     MyOnClickListener listener;
     private final String tag = "TAG_AddressDeleteDialog";
-    public AddressDeleteDialog(Context context, int style,MyOnClickListener listener){
+    public CommonDialog(Context context, int style,MyOnClickListener listener){
         super(context,style);
         this.context = context;
         this.listener = listener;
@@ -60,12 +59,12 @@ public class AddressDeleteDialog extends Dialog implements View.OnClickListener 
         switch (v.getId()){
             case R.id.tv_cancel_update:
                 LogUtil.d(tag,"点击了取消");
-                AddressDeleteDialog.this.dismiss();
+                CommonDialog.this.dismiss();
                 listener.cancel();
                 break;
             case R.id.tv_sure_update:
                 LogUtil.d(tag,"点击了继续");
-                AddressDeleteDialog.this.dismiss();
+                CommonDialog.this.dismiss();
                 listener.sure();
                 break;
         }

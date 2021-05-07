@@ -41,8 +41,8 @@
 //                //TODO 获取到具体商品后跳转到商品详情界面
 //                int position =  viewHolder.getLayoutPosition(); //获取当前item的id
 //                ProductMsg product = productLists.get(position);
-//                Utils.getInstance().startActivityData(context,ProductActivity.class,product);
-////                Utils.getInstance().tips(context,"点击了："+ product.getProductName());
+//                Utils.startActivityData(context,ProductActivity.class,product);
+////                Utils.tips(context,"点击了："+ product.getProductName());
 //            }
 //        });
 //        return viewHolder;

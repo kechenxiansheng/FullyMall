@@ -8,13 +8,12 @@ import com.cm.fm.mall.contract.activity.RegisterContract;
 import com.cm.fm.mall.model.bean.UserInfo;
 import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.common.util.LogUtil;
-import com.cm.fm.mall.common.util.VerifyTask;
+import com.cm.fm.mall.common.task.VerifyTask;
 
 import org.json.JSONObject;
 import org.litepal.crud.DataSupport;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 

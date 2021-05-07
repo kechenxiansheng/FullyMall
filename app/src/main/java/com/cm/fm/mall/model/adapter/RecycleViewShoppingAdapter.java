@@ -142,7 +142,7 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
                     LogUtil.d(tag, "cur_product:" + product.toString());
                     ProductMsg productMsg = new ProductMsg(product.getProductID(), product.getProductName(), product.getProductDescription(), product.getType(),
                             product.getPrice(), product.getInventory(), product.getExtension());
-                    Utils.getInstance().startActivityData(context, CommodityActivity.class, productMsg);
+                    Utils.startActivityData(context, CommodityActivity.class, productMsg);
                     break;
             }
         }

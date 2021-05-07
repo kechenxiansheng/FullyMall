@@ -83,7 +83,7 @@ public class ClassifyRightDataItemAdapter extends BaseAdapter {
         viewHold.ll_item_title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.getInstance().tips(context,"尚未配置此类商品："+dataListBean.getName());
+                Utils.tips(context,"尚未配置此类商品："+dataListBean.getName());
             }
         });
 

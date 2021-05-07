@@ -7,6 +7,7 @@ import android.widget.ImageView;
 
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BaseMVPActivity;
+import com.cm.fm.mall.common.util.Utils;
 import com.cm.fm.mall.contract.activity.CommodityContract;
 import com.cm.fm.mall.model.adapter.ViewPagerProductAdapter;
 import com.cm.fm.mall.model.bean.ProductMsg;
@@ -56,6 +57,12 @@ public class CommodityActivity extends BaseMVPActivity<CommodityPresenter> imple
         tl_product_title.setupWithViewPager(vp_product_content);
         //设置模式：固定
         tl_product_title.setTabMode(TabLayout.MODE_FIXED);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        Utils.actUseAnim(this,R.transition.explode,R.transition.fade);
     }
 
     @Override

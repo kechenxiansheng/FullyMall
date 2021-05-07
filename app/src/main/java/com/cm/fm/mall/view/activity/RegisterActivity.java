@@ -37,7 +37,7 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPresenter> impleme
     @Override
     protected void activityAnim() {
         //告知页面，使用动画
-        Utils.getInstance().actUseAnim(context,R.transition.fade);
+        Utils.actUseAnim(context,R.transition.fade);
     }
 
     @Override
@@ -76,13 +76,13 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPresenter> impleme
     public void OnRegisterResult(int code, String msg) {
         switch (code){
             case MallConstant.SUCCESS:
-//                Utils.getInstance().startActivityClose(context,LoginActivity.class);
+//                Utils.startActivityClose(context,LoginActivity.class);
                 //注册成功，直接回传 UserFragment 状态
                 setResult(RESULT_OK);
                 this.finish();
                 break;
             case MallConstant.FAIL:
-                Utils.getInstance().tips(context,msg);
+                Utils.tips(context,msg);
                 break;
         }
 
@@ -123,7 +123,7 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPresenter> impleme
                 String password = et_register_password.getText().toString();
 //                if(TextUtils.isEmpty(account) || TextUtils.isEmpty(password)){
                 if(account.isEmpty() || password.isEmpty()){
-                    Utils.getInstance().tips (context,"提示：账号密码不能为空！");
+                    Utils.tips (context,"提示：账号密码不能为空！");
                     return;
                 }
                 mPresenter.registerP(account,password);

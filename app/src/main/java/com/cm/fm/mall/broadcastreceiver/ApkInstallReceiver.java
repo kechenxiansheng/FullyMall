@@ -57,7 +57,7 @@ public class ApkInstallReceiver extends BroadcastReceiver {
             boolean haveInstallPermission = context.getPackageManager().canRequestPackageInstalls();
             if (!haveInstallPermission) {
                 LogUtil.e(tag, "更新安装失败，请打开安装文件权限");
-                Utils.getInstance().tips(context,"提示：更新安装失败，请打开安装文件权限");
+                Utils.tips(context,"提示：更新安装失败，请打开安装文件权限");
             }else {
                 File file = new File(local_apk_url);
                 //参数1 上下文, 参数2 Provider主机地址 和配置文件中保持一致   参数3  共享的文件

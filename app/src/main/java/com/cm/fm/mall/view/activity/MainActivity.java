@@ -227,7 +227,7 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
 
     private void exit() {
         if ((System.currentTimeMillis() - clickTime) > 2000) {
-            Utils.getInstance().tips(context,"再次点击退出");
+            Utils.tips(context,"再次点击退出");
             clickTime = System.currentTimeMillis();
         } else {
             LogUtil.e(tag, "exit");

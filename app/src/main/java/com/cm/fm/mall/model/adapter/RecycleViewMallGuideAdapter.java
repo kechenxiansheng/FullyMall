@@ -95,7 +95,7 @@ public class RecycleViewMallGuideAdapter extends RecyclerView.Adapter<RecycleVie
             super(itemView);
             tv_guide_title = itemView.findViewById(R.id.tv_guide_title);
             //获取屏幕高宽
-            List<Integer> sizeList= Utils.getInstance().getSize(context);
+            List<Integer> sizeList= Utils.getSize(context);
             if(sizeList.size() != 0){
                 int needWidth = 0;
                 int width = sizeList.get(0);

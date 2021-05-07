@@ -36,7 +36,7 @@ public class ProductInfoPresenter extends BasePresenter<ProductInfoContract.Mode
     @Override
     public int getScreenSize(Activity activity) {
         //TODO 获取手机的宽高
-        List<Integer> sizeList = Utils.getInstance().getSize(activity);
+        List<Integer> sizeList = Utils.getSize(activity);
         int needWidth = 0;
         if (sizeList.size() != 0) {
             int width = sizeList.get(0);

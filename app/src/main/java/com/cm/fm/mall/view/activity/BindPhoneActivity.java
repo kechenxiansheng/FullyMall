@@ -45,7 +45,7 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
     @Override
     protected void activityAnim() {
         //使用进出场动画
-        Utils.getInstance().actUseAnim(context,R.transition.fade);
+        Utils.actUseAnim(context,R.transition.fade);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
                 context.finish();
                 break;
             case MallConstant.FAIL:
-                Utils.getInstance().tips(context,"绑定失败");
+                Utils.tips(context,"绑定失败");
                 break;
 
         }
@@ -96,7 +96,7 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
             case R.id.tv_register_get_yzm:
                 //点击 验证码
                 if(phoneNum.isEmpty()){
-                    Utils.getInstance().tips(context,"号码不能为空");
+                    Utils.tips(context,"号码不能为空");
                     return;
                 }
                 /** 获取验证码 */
@@ -111,7 +111,7 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
                 //点击绑定
                 String yzm = et_register_yzm.getText().toString();
                 if(TextUtils.isEmpty(yzm)){
-                    Utils.getInstance().tips (context,"验证码为空");
+                    Utils.tips (context,"验证码为空");
                     return;
                 }
                 /** 校验拿到的验证码 */

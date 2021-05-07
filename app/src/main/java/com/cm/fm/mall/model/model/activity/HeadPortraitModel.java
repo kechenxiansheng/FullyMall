@@ -8,7 +8,7 @@ import com.cm.fm.mall.common.HttpCallback;
 import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.common.util.ImageUtil;
 import com.cm.fm.mall.common.util.LogUtil;
-import com.cm.fm.mall.common.util.VerifyTask;
+import com.cm.fm.mall.common.task.VerifyTask;
 import com.cm.fm.mall.contract.activity.HeadPortraitContract;
 
 import org.json.JSONObject;

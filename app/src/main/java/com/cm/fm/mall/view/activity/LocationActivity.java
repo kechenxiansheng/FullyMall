@@ -47,7 +47,7 @@ public class LocationActivity extends AppCompatActivity {
 //    protected void onCreate(Bundle savedInstanceState) {
 //        super.onCreate(savedInstanceState);
 //        //告知页面，使用动画
-//Utils.getInstance().actUseAnim(context);
+//Utils.actUseAnim(context);
 //
 //        //百度定位sdk初始化，setContentView 之前调用
 //        client = new LocationClient(MyApplication.getContext());
@@ -139,7 +139,7 @@ public class LocationActivity extends AppCompatActivity {
 //                LogUtil.i(tag,"权限");
 //                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //                    if(grantResults.length > 0 && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-//                        Utils.getInstance().tips(MyApplication.getContext(),"定位权限未同意，无法使用定位功能！");
+//                        Utils.tips(MyApplication.getContext(),"定位权限未同意，无法使用定位功能！");
 //                        LocationActivity.this.finish();
 //                        return;
 //                    }

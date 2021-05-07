@@ -3,7 +3,7 @@
     <!--
      gradient 渐变：设置颜色梯度，即渐变色
      corners radius 设置四个角的角度，也可使用其他属性分开设置四个角的角度
-     angle 角度：指渐变色旋转角度(只能以 90 递增，比如：0,90,180)
+     angle 角度：指渐变色旋转角度(默认为 0，必须是 45 的倍数)
      -->
     <corners android:radius="90dp"/>
     <gradient

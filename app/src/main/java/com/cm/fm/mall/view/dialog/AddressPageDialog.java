@@ -115,7 +115,7 @@ public class AddressPageDialog extends Dialog implements View.OnClickListener {
                 break;
             case R.id.tv_other_address:
                 //跳转到地址页
-                Utils.getInstance().startActivityAnimation((Activity) context,AddressActivity.class);
+                Utils.startActivityAnimation((Activity) context,AddressActivity.class);
                 //TODO 跳转后隐藏dialog（）
                 this.dismiss();
                 break;

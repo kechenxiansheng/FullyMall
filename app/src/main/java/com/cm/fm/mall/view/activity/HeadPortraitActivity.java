@@ -71,7 +71,7 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
     protected void activityAnim() {
         super.activityAnim();
         //使用动画
-        Utils.getInstance().actUseAnim(context,R.transition.fade);
+        Utils.actUseAnim(context,R.transition.fade);
     }
 
     @Override
@@ -122,7 +122,7 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
                 context.finish();
                 break;
             case MallConstant.FAIL:
-                Utils.getInstance().tips(context,msg);
+                Utils.tips(context,msg);
                 break;
         }
     }
@@ -205,6 +205,13 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        Utils.actUseAnim(context,R.transition.explode,R.transition.fade);
+    }
+
     @Override
     protected void onDestroy() {
         setResult(RESULT_OK);

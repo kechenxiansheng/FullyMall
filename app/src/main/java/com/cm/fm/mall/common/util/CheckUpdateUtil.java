@@ -49,7 +49,7 @@ public class CheckUpdateUtil {
     public void checkUpdate(final Context context, final int actId){
         LogUtil.d(tag,"checkUpdate start");
         //handler 在子线程中使用，需要创建 Looper 环境：Looper.prepare() Looper.loop();
-        if(!Utils.getInstance().isMainThread()){
+        if(!Utils.isMainThread()){
             Looper.prepare();
         }
         handler = new Handler(new Handler.Callback() {
@@ -94,7 +94,7 @@ public class CheckUpdateUtil {
             }
         }).start();
 
-        if(!Utils.getInstance().isMainThread()){
+        if(!Utils.isMainThread()){
             Looper.loop();
         }
 
@@ -131,7 +131,7 @@ public class CheckUpdateUtil {
                 }else if(vName >= Integer.valueOf(newVersionName.replace(".",""))){
                     //用户中心界面点击检查更新，最新版本时弹一个提示
                     if(actId == 150){
-                        Utils.getInstance().tips(context,"已是最新版本");
+                        Utils.tips(context,"已是最新版本");
                     }
                 }
             }

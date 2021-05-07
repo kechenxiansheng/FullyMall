@@ -95,7 +95,7 @@ public class AddressAdapter extends BaseAdapter {
         holder.iv_edit_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.getInstance().startActivityDataForResult(context,AddressDetailActivity.class,MallConstant.ADDRESS_ACTIVITY_REQUEST_CODE_EDIT,addressInfo);
+                Utils.startActivityDataForResult(context,AddressDetailActivity.class,MallConstant.ADDRESS_ACTIVITY_REQUEST_CODE_EDIT,addressInfo);
             }
         });
         return view;
