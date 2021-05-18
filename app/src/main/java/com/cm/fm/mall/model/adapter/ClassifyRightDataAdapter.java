@@ -22,7 +22,7 @@ public class ClassifyRightDataAdapter extends BaseAdapter {
 
     private Context context;
     private List<ClassifyCategory.DataBean> dataBeans;  //type 和 datalist 层级
-    private String tag = "TAG_RightDataAdapter";
+    private final String TAG = "FM_RightDataAdapter";
 
     public ClassifyRightDataAdapter(Context context, List<ClassifyCategory.DataBean> dataBeans) {
         this.context = context;
@@ -31,7 +31,7 @@ public class ClassifyRightDataAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        LogUtil.d(tag,"dataBeans:"+dataBeans);
+        LogUtil.d(TAG,"dataBeans:"+dataBeans);
         if (dataBeans != null) {
             return dataBeans.size();
         } else {
@@ -52,13 +52,13 @@ public class ClassifyRightDataAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LogUtil.d(tag,"position:"+position);
+        LogUtil.d(TAG,"position:"+position);
         //获取当前类别的信息（type，datalist）
         ClassifyCategory.DataBean dataBean = dataBeans.get(position);
-        LogUtil.d(tag,"dataBean:"+dataBean.toString());
+        LogUtil.d(TAG,"dataBean:"+dataBean.toString());
         //获取当前分类别（childType，childDatalists）信息
         List<ClassifyCategory.DataBean.DataListBean> dataListBeans = dataBean.getDatalist();
-        LogUtil.d(tag,"dataListBeans:"+dataListBeans);
+        LogUtil.d(TAG,"dataListBeans:"+dataListBeans);
         ViewHold viewHold = null;
         if (convertView == null) {
             convertView = View.inflate(context, R.layout.layout_item_right_data, null);

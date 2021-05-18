@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class LocationActivity extends AppCompatActivity {
-//    private String tag = "TAG_LocationActivity";
+//    private final String TAG = "FM_LocationActivity";
 //    private final int SDK_PERMISSION_REQUEST = 800;
 //    private String permissionInfo = "";
 //    private LocationClient client;
@@ -86,11 +86,11 @@ public class LocationActivity extends AppCompatActivity {
 //             */
 //            // 定位精确位置
 //            if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                LogUtil.d(tag,"定位权限获取失败：Manifest.permission.ACCESS_FINE_LOCATION");
+//                LogUtil.d(TAG,"定位权限获取失败：Manifest.permission.ACCESS_FINE_LOCATION");
 //                permissions.add(Manifest.permission.ACCESS_FINE_LOCATION);
 //            }
 //            if (checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                LogUtil.d(tag,"定位权限获取失败：Manifest.permission.ACCESS_COARSE_LOCATION");
+//                LogUtil.d(TAG,"定位权限获取失败：Manifest.permission.ACCESS_COARSE_LOCATION");
 //                permissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
 //            }
 //
@@ -100,9 +100,9 @@ public class LocationActivity extends AppCompatActivity {
 //            // 读写权限
 //            if (addPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
 //                permissionInfo += "Manifest.permission.WRITE_EXTERNAL_STORAGE Deny \n";
-//                LogUtil.d(tag,permissionInfo);
+//                LogUtil.d(TAG,permissionInfo);
 //            }
-//            LogUtil.d(tag,"permission list : " + permissions.size());
+//            LogUtil.d(TAG,"permission list : " + permissions.size());
 //            //有需要申请的权限，进行申请
 //            if (permissions.size() > 0) {
 //                requestPermissions(permissions.toArray(new String[permissions.size()]), SDK_PERMISSION_REQUEST);
@@ -136,7 +136,7 @@ public class LocationActivity extends AppCompatActivity {
 //        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 //        switch (requestCode){
 //            case SDK_PERMISSION_REQUEST:
-//                LogUtil.i(tag,"权限");
+//                LogUtil.i(TAG,"权限");
 //                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //                    if(grantResults.length > 0 && checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
 //                        Utils.tips(MyApplication.getContext(),"定位权限未同意，无法使用定位功能！");
@@ -144,7 +144,7 @@ public class LocationActivity extends AppCompatActivity {
 //                        return;
 //                    }
 //                }
-//                LogUtil.i(tag,"开始定位");
+//                LogUtil.i(TAG,"开始定位");
 //                requestLocation();
 //                break;
 //        }
@@ -183,7 +183,7 @@ public class LocationActivity extends AppCompatActivity {
 //    public class  MyLocationListener extends BDAbstractLocationListener {
 //        @Override
 //        public void onReceiveLocation(BDLocation location) {
-////            LogUtil.d(tag,"location is null? " + (location==null));
+////            LogUtil.d(TAG,"location is null? " + (location==null));
 //            //此处的 BDLocation 为定位结果信息类，通过它的各种get方法可获取定位相关的全部结果
 //            if(location != null){
 //                StringBuilder sb = new StringBuilder();
@@ -201,7 +201,7 @@ public class LocationActivity extends AppCompatActivity {
 //                }else if(location.getLocType() == BDLocation.TypeNetWorkLocation){
 //                    sb.append("移动网络");
 //                }
-//                LogUtil.d(tag,sb.toString());
+//                LogUtil.d(TAG,sb.toString());
 //
 //                //输出当前经纬度地图 以及 输出我的位置信息
 //                if(isFirstLocate){
@@ -225,7 +225,7 @@ public class LocationActivity extends AppCompatActivity {
 //                baiduMap.setMyLocationData(data);
 //                //获取位置描述信息
 //                String locationDescribe = location.getLocationDescribe();
-//                LogUtil.d(tag,"locationDescribe: " + locationDescribe);
+//                LogUtil.d(TAG,"locationDescribe: " + locationDescribe);
 //            }
 //
 //

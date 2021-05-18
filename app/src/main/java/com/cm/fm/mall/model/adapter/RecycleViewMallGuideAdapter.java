@@ -24,7 +24,7 @@ public class RecycleViewMallGuideAdapter extends RecyclerView.Adapter<RecycleVie
     private Activity context;
     private int selectItem = 0;     //当前选中的item
     private GuideItemListener listener;
-    private String tag = "TAG_MallGuideAdapter";
+    private final String TAG = "FM_MallGuideAdapter";
 
     public RecycleViewMallGuideAdapter(List<String> titles, Activity context,GuideItemListener listener) {
         this.titles = titles;
@@ -38,14 +38,14 @@ public class RecycleViewMallGuideAdapter extends RecyclerView.Adapter<RecycleVie
 
     public void setSelectItem(int selectItem) {
         this.selectItem = selectItem;
-        LogUtil.d(tag,"selectItem : "+selectItem);
+        LogUtil.d(TAG,"selectItem : "+selectItem);
     }
 
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-//        LogUtil.d(tag,"onCreateViewHolder viewType : " + viewType);
+//        LogUtil.d(TAG,"onCreateViewHolder viewType : " + viewType);
         /** 加载子view视图，创建 viewholder */
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_recycleview_item_guide,viewGroup,false);
         final MyViewHolder viewHolder = new MyViewHolder(view);
@@ -71,7 +71,7 @@ public class RecycleViewMallGuideAdapter extends RecyclerView.Adapter<RecycleVie
             public void onClick(View v) {
                 //获取当前item的id
                 int position =  viewHolder.getLayoutPosition();
-                LogUtil.d(tag,"cur_position : " + position);
+                LogUtil.d(TAG,"cur_position : " + position);
                 //通知给 MallFragment 当前点击了哪项
                 listener.onClick(position);
                 notifyDataSetChanged();

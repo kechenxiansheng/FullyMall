@@ -43,7 +43,7 @@
                        android:layout_width="30dp"
                        android:layout_height="30dp"
                        android:layout_alignParentEnd="true"
-                       android:src="@mipmap/bt_classify2"
+                       android:src="@mipmap/menubar_classify"
                        />
                 </RelativeLayout>
             </com.google.android.material.appbar.AppBarLayout>

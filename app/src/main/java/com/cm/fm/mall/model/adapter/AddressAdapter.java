@@ -22,7 +22,7 @@ public class AddressAdapter extends BaseAdapter {
 
     private Activity context;
     private List<AddressInfo> list;
-    private String tag = "TAG_AddressAdapter";
+    private final String TAG = "FM_AddressAdapter";
 
     public AddressAdapter(Activity context, List<AddressInfo> list) {
         this.list = list;
@@ -31,7 +31,7 @@ public class AddressAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-//        LogUtil.d(tag,"地址数量：" + list.size());
+//        LogUtil.d(TAG,"地址数量：" + list.size());
         return list.size();
     }
 
@@ -64,7 +64,7 @@ public class AddressAdapter extends BaseAdapter {
         }
         final AddressInfo addressInfo = list.get(position);
 
-//        LogUtil.d(tag,"当前地址 : " + addressInfo.toString());
+//        LogUtil.d(TAG,"当前地址 : " + addressInfo.toString());
         holder.tv_user_name.setText(addressInfo.getUsername());
         //隐藏手机号的中间4位
         String phoneNum = addressInfo.getPhone();

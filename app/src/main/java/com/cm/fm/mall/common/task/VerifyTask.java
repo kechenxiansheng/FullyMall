@@ -13,7 +13,7 @@ import java.util.Map;
  * 注册，登陆验证异步类
  */
 public class VerifyTask extends AsyncTask<Void,Void,String> {
-    private String tag = "TAG_VerifyTask";
+    private final String TAG = "FM_VerifyTask";
     private String url;
     private Map<String,String> params;
     private HttpCallback callback;
@@ -29,7 +29,7 @@ public class VerifyTask extends AsyncTask<Void,Void,String> {
         try {
             return HttpUtils.httpPost(url, params);
         }catch (Exception e){
-            LogUtil.e(tag,"VerifyTask error");
+            LogUtil.e(TAG,"VerifyTask error");
             e.printStackTrace();
         }
         return "";

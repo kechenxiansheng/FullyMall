@@ -13,7 +13,7 @@ import com.cm.fm.mall.common.util.Utils;
 import java.util.List;
 
 public class ProductInfoPresenter extends BasePresenter<ProductInfoContract.Model,ProductInfoContract.View> implements ProductInfoContract.Presenter {
-    private String tag = "TAG_ProductInfoPresenter";
+    private final String TAG = "FM_ProductInfoPresenter";
 
     @Override
     protected ProductInfoContract.Model createModule() {
@@ -46,9 +46,9 @@ public class ProductInfoPresenter extends BasePresenter<ProductInfoContract.Mode
             } else {
                 needWidth = (int) (height * 0.6);
             }
-            LogUtil.d(tag, "width:" + width + "  height:" + height);
+            LogUtil.d(TAG, "width:" + width + "  height:" + height);
         }
-        LogUtil.d(tag, "needWidth:" + needWidth);
+        LogUtil.d(TAG, "needWidth:" + needWidth);
         return needWidth;
     }
 }

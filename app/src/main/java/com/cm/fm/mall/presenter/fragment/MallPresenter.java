@@ -14,7 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class MallPresenter extends BasePresenter<MallContract.Model,MallContract.View> implements MallContract.Presenter {
-    private String tag = "TAG_MallPresenter";
+    private final String TAG = "FM_MallPresenter";
 
     @Override
     protected MallContract.Model createModule() {
@@ -39,8 +39,8 @@ public class MallPresenter extends BasePresenter<MallContract.Model,MallContract
                     iterator.remove();
                 }
             }
-            LogUtil.d(tag,"productMsgs size:"+productMsgs.size());
-            LogUtil.d(tag,"productMsgs:"+productMsgs);
+            LogUtil.d(TAG,"productMsgs size:"+productMsgs.size());
+            LogUtil.d(TAG,"productMsgs:"+productMsgs);
 
             getView().OnSearchResult(MallConstant.SUCCESS, productMsgs);
         }else {

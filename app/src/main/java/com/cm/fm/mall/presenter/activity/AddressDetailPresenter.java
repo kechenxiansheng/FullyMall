@@ -17,7 +17,7 @@ import java.util.List;
 
 public class AddressDetailPresenter extends BasePresenter<AddressDetailContract.Model,AddressDetailContract.View> implements AddressDetailContract.Presenter {
 
-    private String tag = "TAG_AddressDetailPresenter";
+    private final String TAG = "FM_AddressDetailPresenter";
 
     @Override
     protected AddressDetailContract.Model createModule() {

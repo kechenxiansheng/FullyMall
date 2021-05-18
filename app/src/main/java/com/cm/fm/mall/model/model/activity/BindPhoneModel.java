@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BindPhoneModel implements BindPhoneContract.Model {
-    private String tag = "TAG_BindPhoneModel";
+    private final String TAG = "FM_BindPhoneModel";
     @Override
     public void savePhoneM(String account,final String phoneNum, final Callback callback) {
         /** 账号绑定手机：保存手机号，并通过回调返回结果 */
@@ -28,7 +28,7 @@ public class BindPhoneModel implements BindPhoneContract.Model {
             VerifyTask verifyTask = new VerifyTask(MallConstant.UPDATE_USER_INFO_URL, params, new HttpCallback() {
                 @Override
                 public void response(String response) {
-                    LogUtil.d(tag,"response : " + response);
+                    LogUtil.d(TAG,"response : " + response);
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         int code = jsonObject.getInt("code");
@@ -38,8 +38,8 @@ public class BindPhoneModel implements BindPhoneContract.Model {
                             if(userInfos.size()!=0){
                                 userInfos.get(0).setPhoneNumber(phoneNum);
                                 boolean res = userInfos.get(0).save();
-                                LogUtil.d(tag,"save result: "+res);
-                                LogUtil.d(tag,"cur_userInfo: "+userInfos.get(0).toString());
+                                LogUtil.d(TAG,"save result: "+res);
+                                LogUtil.d(TAG,"cur_userInfo: "+userInfos.get(0).toString());
                             }
                             callback.success("绑定成功");
                             return;
@@ -55,7 +55,7 @@ public class BindPhoneModel implements BindPhoneContract.Model {
 
 
         } catch (Exception e) {
-            LogUtil.d(tag,"其他错误");
+            LogUtil.d(TAG,"其他错误");
             callback.fail("绑定失败");
             e.printStackTrace();
 

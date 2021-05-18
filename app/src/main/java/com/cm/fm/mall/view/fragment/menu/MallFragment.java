@@ -58,7 +58,7 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
     private List<String> titles = new ArrayList<>();
     private List<String> talks = new ArrayList<>();
 
-    private final String tag = "TAG_MallFragment";
+    private final String TAG = "FM_MallFragment";
     private Activity context;
     private int times = 0;  //加载的次数
     private String[] nameArray = {"华为nova7 se","荣耀30 Pro","荣耀30","荣耀30S","荣耀20青春版"};
@@ -79,13 +79,13 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
     }
     @Override
     public int initLayout() {
-        LogUtil.d(tag,"getResource");
+        LogUtil.d(TAG,"getResource");
         return R.layout.fragment_mall;
     }
 
     @Override
     public void initView(View view) {
-        LogUtil.d(tag,"init");
+        LogUtil.d(TAG,"init");
         context = getActivity();
         //初始化视图
         iv_close_honey = view.findViewById(R.id.iv_close_honey);
@@ -208,7 +208,7 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
         //允许框架刷新加载更多
         refresh_layout.setEnableLoadMore(true);
         String title = titles.get(position);
-        LogUtil.d(tag,"showData cur_title : " + title);
+        LogUtil.d(TAG,"showData cur_title : " + title);
         switch (position){
             case 0:
                 //首页
@@ -322,14 +322,14 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
     //内部用的迭代器删除数据，用 == 号，equals 判断两个对象，都是true
     @Override
     public void OnSearchResult(int code, List<ProductMsg> products) {
-        LogUtil.d(tag,"code: "+code +",products: " + products );
+        LogUtil.d(TAG,"code: "+code +",products: " + products );
         switch (code){
             case MallConstant.SUCCESS:
-                LogUtil.d(tag,"搜索成功");
+                LogUtil.d(TAG,"搜索成功");
                 if(products.size()!=0){
                     //这里只显示搜索到的商品，不允许刷新框架继续刷新
                     refresh_layout.setEnableLoadMore(false);
-                    LogUtil.d(tag,"notifyDataSetChanged");
+                    LogUtil.d(TAG,"notifyDataSetChanged");
                 }else {
                     //没找到商品时，进行提示
                     products.clear();
@@ -337,7 +337,7 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
                 }
                 break;
             case MallConstant.FAIL:
-                LogUtil.e(tag,"搜索失败，view未绑定");
+                LogUtil.e(TAG,"搜索失败，view未绑定");
                 break;
         }
         adapter.notifyDataSetChanged();
@@ -345,7 +345,7 @@ public class MallFragment extends BaseMVPFragment<MallPresenter> implements View
     //搜索
     public void search(String searchContent){
         //删除之前用户搜索的商品，并重新加载商品
-        LogUtil.d(tag,"searchContent:" + searchContent);
+        LogUtil.d(TAG,"searchContent:" + searchContent);
         if(TextUtils.isEmpty(searchContent)){
             return;
         }

@@ -13,12 +13,12 @@ import org.litepal.tablemanager.Connector;
 import java.util.List;
 
 public class ProductInfoModel implements ProductInfoContract.Model {
-    private String tag = "TAG_ProductInfoModel";
+    private final String TAG = "FM_ProductInfoModel";
     @Override
     public boolean saveProductData(ProductMsg productMsg,int buyNum) {
         //创建数据库和表
         Connector.getDatabase();
-        LogUtil.d(tag,"saveProductData productMsg :"+productMsg.toString());
+        LogUtil.d(TAG,"saveProductData productMsg :"+productMsg.toString());
         //保存购买的商品(正常情况下应该保存在服务器)
         ShoppingProduct product = new ShoppingProduct();
         product.setProductID(productMsg.getProductID());
@@ -32,29 +32,29 @@ public class ProductInfoModel implements ProductInfoContract.Model {
                 ("id","productID","productName","productDescription","type","price","inventory","buyNum","extension")
                 .where("productID=?",productMsg.getProductID()+"").find(ShoppingProduct.class);
         //总的购买数量
-        LogUtil.d(tag,"saveProductData buyNum :"+buyNum);
+        LogUtil.d(TAG,"saveProductData buyNum :"+buyNum);
         int curBuyProductNum = buyNum;
-        LogUtil.d(tag,"saveProductData size: "+savedShoppingProducts.size());
+        LogUtil.d(TAG,"saveProductData size: "+savedShoppingProducts.size());
         if(savedShoppingProducts.size() > 0){
             //加上商品在数据库已保存的购买数量
             for (ShoppingProduct product1 :savedShoppingProducts) {
-                LogUtil.d(tag,"saveProductData 当前数据 :"+ product1.toString());
+                LogUtil.d(TAG,"saveProductData 当前数据 :"+ product1.toString());
                 curBuyProductNum += product1.getBuyNum();
             }
             product.setBuyNum(curBuyProductNum);
             ContentValues values = new ContentValues();
             values.put("buyNum",curBuyProductNum);
             DataSupport.update(ShoppingProduct.class,values,savedShoppingProducts.get(0).getId());
-            LogUtil.d(tag,"saveProductData update buyNum :"+curBuyProductNum);
+            LogUtil.d(TAG,"saveProductData update buyNum :"+curBuyProductNum);
         }else {
             //数据库没有当前商品，直接保存购买数量及相关信息
             product.setBuyNum(buyNum);
             if(product.save()){
                 return false;
             }
-            LogUtil.d(tag,"saveProductData save buyNum success");
+            LogUtil.d(TAG,"saveProductData save buyNum success");
         }
-        LogUtil.d(tag,"saveProductData product info : "+product.toString());
+        LogUtil.d(TAG,"saveProductData product info : "+product.toString());
         return true;
     }
 }

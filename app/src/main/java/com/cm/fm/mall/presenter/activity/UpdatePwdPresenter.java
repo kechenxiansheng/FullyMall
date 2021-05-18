@@ -9,7 +9,7 @@ import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.model.model.activity.UpdatePwdModel;
 
 public class UpdatePwdPresenter extends BasePresenter<UpdatePwdContract.Model,UpdatePwdContract.View> implements UpdatePwdContract.Presenter{
-    private String tag = "TAG_UpdatePwdPresenter";
+    private final String TAG = "FM_UpdatePwdPresenter";
 
     @Override
     protected UpdatePwdContract.Model createModule() {
@@ -30,7 +30,7 @@ public class UpdatePwdPresenter extends BasePresenter<UpdatePwdContract.Model,Up
                 @Override
                 public void success(Object response) {
                     getView().hideLoading();
-                    Log.d(tag,"response : " + response.toString());
+                    Log.d(TAG,"response : " + response.toString());
                     //通知activity 密码已修改，并保存成功
                     getView().OnCheckResult(MallConstant.SUCCESS,"");
                 }

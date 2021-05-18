@@ -43,7 +43,7 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
     private VideoView vv_video;
     private ImageButton ib_play,ib_cycle;
     private TextView tv_cur_time,tv_max_time;
-    private String tag = "TAG_FoundFragment";
+    private final String TAG = "FM_FoundFragment";
     private boolean isLoaded = false;   //是否加载完成
     private List<Integer> imagePath = new ArrayList<>();
     private List<String> textLists = new ArrayList<>();
@@ -126,28 +126,28 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
     @Override
     public void onStart() {
         super.onStart();
-        Log.d(tag,"onStart");
+        Log.d(TAG,"onStart");
     }
 
     @Override
     public void onResume() {
         super.onResume();
         //此时此方法只会在所属 activity 的执行onResume时才会调用。
-        Log.d(tag,"onResume");
+        Log.d(TAG,"onResume");
     }
 
     @Override
     public void onPause() {
         super.onPause();
         //此时此方法只会在所属 activity 的执行onResume时才会调用。所以不可在此处暂停视频播放
-        Log.d(tag,"onPause");
+        Log.d(TAG,"onPause");
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         /** 如果当前fragment不可见了（切换走了），则暂停播放视频 */
-        Log.d(tag,"onHiddenChanged,hidden : " + hidden);
+        Log.d(TAG,"onHiddenChanged,hidden : " + hidden);
         if(hidden){
             if(vv_video.isPlaying()){
                 vv_video.pause();
@@ -159,7 +159,7 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
     @Override
     public void onStop() {
         super.onStop();
-        Log.d(tag,"onStop");
+        Log.d(TAG,"onStop");
     }
 
     @Override
@@ -236,7 +236,7 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
         display.getSize(point);
         int width = point.x;
         int height = (int) (width/1.765);   //1.765 视频的宽高比率
-        LogUtil.d(tag,"screen size:  "+width+"   "+height);
+        LogUtil.d(TAG,"screen size:  "+width+"   "+height);
         ViewGroup.LayoutParams params = vv_video.getLayoutParams();
         params.width = width;
         params.height = height;
@@ -255,7 +255,7 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
             public void onPrepared(MediaPlayer mp) {
                 isLoaded = true;
                 String max_time = timeFormat(vv_video.getDuration());
-                LogUtil.d(tag,"max_time:"+max_time);
+                LogUtil.d(TAG,"max_time:"+max_time);
                 tv_max_time.setText(max_time);
                 //加载完自动播放
                 playVideo();

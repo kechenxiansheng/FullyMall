@@ -12,13 +12,13 @@ import com.cm.fm.mall.common.util.Utils;
 
 public class SplashActivity extends BaseActivity {
 
-    private String tag = "TAG_SplashActivity";
+    private final String TAG = "FM_SplashActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        LogUtil.d(tag,"splash start");
+        LogUtil.d(TAG,"splash start");
         appendAnimation();
     }
     //给闪屏图片添加一个2秒的动画
@@ -37,7 +37,7 @@ public class SplashActivity extends BaseActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                LogUtil.d(tag,"splash end");
+                LogUtil.d(TAG,"splash end");
                 Utils.startActivityClose(SplashActivity.this,MainActivity.class);
             }
 

@@ -38,7 +38,7 @@ public class AddressPageDialog extends Dialog implements View.OnClickListener {
     List<AddressInfo> infoList = new ArrayList<>();
     ChooseListener listener;
 
-    private String tag = "TAG_AddressPageDialog";
+    private final String TAG = "FM_AddressPageDialog";
 
     public AddressPageDialog(Context context, int themeResId, AddressInfo choosedInfo, ChooseListener listener) {
         super(context, themeResId);
@@ -103,7 +103,7 @@ public class AddressPageDialog extends Dialog implements View.OnClickListener {
             }
             infoList.addAll(list);
         }
-//        LogUtil.d(tag,"infoList size : " + infoList.size());
+//        LogUtil.d(TAG,"infoList size : " + infoList.size());
     }
 
     @Override

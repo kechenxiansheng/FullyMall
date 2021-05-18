@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class UpdatePwdModel implements UpdatePwdContract.Model {
-    private String tag = "TAG_UpdatePwdModel";
+    private final String TAG = "FM_UpdatePwdModel";
 
     @Override
     public void savePwdM(String account, final String password, final Callback callback) {
@@ -38,17 +38,17 @@ public class UpdatePwdModel implements UpdatePwdContract.Model {
                             userInfos.get(0).setPassword(password);
                             userInfos.get(0).save();
                             boolean res = userInfos.get(0).save();
-                            LogUtil.d(tag, "save result : " + res);
-                            LogUtil.d(tag, "cur_userInfo : " + userInfos.get(0).toString());
+                            LogUtil.d(TAG, "save result : " + res);
+                            LogUtil.d(TAG, "cur_userInfo : " + userInfos.get(0).toString());
                         }
                         callback.success("修改成功");
                         return;
                     }
                     callback.fail("修改密码失败");
-                    LogUtil.e(tag,"修改密码失败");
+                    LogUtil.e(TAG,"修改密码失败");
                 } catch (Exception e) {
                     callback.fail("修改密码失败");
-                    LogUtil.e(tag,"修改密码失败");
+                    LogUtil.e(TAG,"修改密码失败");
                     e.printStackTrace();
                 }
             }

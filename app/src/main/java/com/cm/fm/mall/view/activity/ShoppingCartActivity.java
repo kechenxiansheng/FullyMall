@@ -33,7 +33,7 @@ public class ShoppingCartActivity extends BaseMVPActivity<ShoppingCartPresenter>
     private ImageView iv_tip_des;
     private RecyclerView rv_shopping_cart_list;
     private RecycleViewShoppingAdapter shoppingAdapter;
-    private final String tag = "TAG_ShoppingCart";
+    private final String TAG = "FM_ShoppingCart";
 
     private List<ShoppingProduct> products = new ArrayList<>();
     @Override
@@ -65,7 +65,7 @@ public class ShoppingCartActivity extends BaseMVPActivity<ShoppingCartPresenter>
         }
         //计算总价格
         double total = mPresenter.calculateTotals(products);
-        LogUtil.d(tag,"queryTotals: " + total);
+        LogUtil.d(TAG,"queryTotals: " + total);
         tv_sum_money.setText("￥"+total);
         shoppingAdapter = new RecycleViewShoppingAdapter(products,this);
         LinearLayoutManager manager = new LinearLayoutManager(this);
@@ -88,7 +88,7 @@ public class ShoppingCartActivity extends BaseMVPActivity<ShoppingCartPresenter>
 
     @Override
     public void OnLoginCheckResult(int code, String msg) {
-        LogUtil.d(tag,"OnLoginCheckResult code : " + code + ",msg : "+ msg);
+        LogUtil.d(TAG,"OnLoginCheckResult code : " + code + ",msg : "+ msg);
         switch (code){
             case -1:
                 //说明是首次使用app，去注册

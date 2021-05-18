@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ShoppingCartModel implements ShoppingCartContract.Model {
 
-    private String tag = "TAG_ShoppingCartModel";
+    private final String TAG = "FM_ShoppingCartModel";
     @Override
     public List<ShoppingProduct> queryAllShoppingCartProducts() {
         return DataSupport.findAll(ShoppingProduct.class);

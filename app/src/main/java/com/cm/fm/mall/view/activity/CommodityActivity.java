@@ -29,7 +29,7 @@ public class CommodityActivity extends BaseMVPActivity<CommodityPresenter> imple
     ViewPagerProductAdapter productAdapter;
 
     String[] titles = {"商品","详情","评价"};
-    private String tag = "TAG_CommodityActivity";
+    private final String TAG = "FM_CommodityActivity";
 
 
     @Override
@@ -48,7 +48,7 @@ public class CommodityActivity extends BaseMVPActivity<CommodityPresenter> imple
 
         productMsg = getIntent().getParcelableExtra("product");
         if(productMsg != null){
-            LogUtil.d(tag,"productMsg : " + productMsg.toString());
+            LogUtil.d(TAG,"productMsg : " + productMsg.toString());
             //适配器
             productAdapter = new ViewPagerProductAdapter(getSupportFragmentManager(),activity,titles,productMsg);
             vp_product_content.setAdapter(productAdapter);

@@ -52,7 +52,7 @@ public class ProductInfoFragment extends BaseMVPFragment<ProductInfoPresenter> i
     private List<ShoppingProduct> shoppingProducts = new ArrayList<>();
     private ProductMsg productMsg; //当前展示的商品实体类
     private AddressPageDialog dialog;
-    private String tag ="TAG_ProductInfoFragment";
+    private final String TAG = "FM_ProductInfoFragment";
     @Override
     public int initLayout() {
         return R.layout.fragment_product_info;
@@ -64,9 +64,9 @@ public class ProductInfoFragment extends BaseMVPFragment<ProductInfoPresenter> i
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //获取传过来的具体商品
-        LogUtil.d(tag,"getArguments() is null ? " + (getArguments()==null));
+        LogUtil.d(TAG,"getArguments() is null ? " + (getArguments()==null));
         productMsg = getArguments().getParcelable("productMsg");
-        LogUtil.d(tag,"productMsg is null ? " + (productMsg==null));
+        LogUtil.d(TAG,"productMsg is null ? " + (productMsg==null));
     }
     @Override
     protected ProductInfoPresenter createPresenter() {
@@ -109,7 +109,7 @@ public class ProductInfoFragment extends BaseMVPFragment<ProductInfoPresenter> i
         tv_inventory.setText("");
         //获取传过来的具体商品
         if(productMsg != null){
-            LogUtil.d(tag,"productMsg " + productMsg.toString());
+            LogUtil.d(TAG,"productMsg " + productMsg.toString());
             tv_product_msg.setText(productMsg.getProductDescription());
             tv_price.setText("￥"+productMsg.getPrice());
             tv_inventory.setText(String.valueOf(productMsg.getInventory()));
@@ -154,7 +154,7 @@ public class ProductInfoFragment extends BaseMVPFragment<ProductInfoPresenter> i
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        LogUtil.d(tag,"requestCode : " + requestCode +",resultCode : " + resultCode);
+        LogUtil.d(TAG,"requestCode : " + requestCode +",resultCode : " + resultCode);
         switch (requestCode){
             case MallConstant.PRODUCT_INFO_FRAGMENT_SHOPPING_CART_REQUEST_CODE:
                 if(resultCode == Activity.RESULT_OK){
@@ -179,7 +179,7 @@ public class ProductInfoFragment extends BaseMVPFragment<ProductInfoPresenter> i
                 tv_buyNum.setText(String.valueOf(buyNum));
                 //变量值更新为最新的购买数量
                 buyNum = Integer.parseInt(tv_buyNum.getText().toString());
-                LogUtil.d(tag,"buyNum_reduce"+buyNum);
+                LogUtil.d(TAG,"buyNum_reduce"+buyNum);
                 break;
             case R.id.bt_add:
                 buyNum = Integer.parseInt(tv_buyNum.getText().toString());
@@ -187,7 +187,7 @@ public class ProductInfoFragment extends BaseMVPFragment<ProductInfoPresenter> i
                 tv_buyNum.setText(String.valueOf(buyNum));
                 //变量值更新为最新的购买数量
                 buyNum = Integer.parseInt(tv_buyNum.getText().toString());
-                LogUtil.d(tag,"buyNum_add:"+buyNum);
+                LogUtil.d(TAG,"buyNum_add:"+buyNum);
                 break;
             case R.id.bt_choose_address:
                 /** 点击选择地址按钮 */
@@ -200,10 +200,10 @@ public class ProductInfoFragment extends BaseMVPFragment<ProductInfoPresenter> i
                 /** 加入购物车 */
                 //用户选择的当前商品的购买数量
                 buyNum = Integer.parseInt(tv_buyNum.getText().toString());
-                LogUtil.d(tag,"buyNum : "+buyNum);
+                LogUtil.d(TAG,"buyNum : "+buyNum);
                 //保存数据
                 boolean res = mPresenter.saveProductData(productMsg, buyNum);
-                LogUtil.d(tag,"saveProductData result : " + res);
+                LogUtil.d(TAG,"saveProductData result : " + res);
                 //重新查询加入购物车的商品
                 showNumOfType(true);
 
@@ -233,7 +233,7 @@ public class ProductInfoFragment extends BaseMVPFragment<ProductInfoPresenter> i
     }
     //添加商品图片，显示默认地址
     public void initData(ProductMsg productMsg){
-        LogUtil.d(tag,"initData");
+        LogUtil.d(TAG,"initData");
         /** 商品数据初始化 */
         ViewPager.LayoutParams layoutParams = new ViewPager.LayoutParams();
         //长宽继承父布局的值
@@ -251,7 +251,7 @@ public class ProductInfoFragment extends BaseMVPFragment<ProductInfoPresenter> i
             //将图片放进viewpager
             views.add(imageView);
         }
-        LogUtil.d(tag,"initPicture views size :" + views.size());
+        LogUtil.d(TAG,"initPicture views size :" + views.size());
 
         /** 显示默认地址 */
         List<AddressInfo> addressInfos = DataSupport.findAll(AddressInfo.class);

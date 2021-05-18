@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class UserSelfModel implements UserSelfContract.Model {
-    private String tag = "TAG_UserSelfModel";
+    private final String TAG = "FM_UserSelfModel";
 
     @Override
     public List<UserInfo> queryUserInfo() {
@@ -34,7 +34,7 @@ public class UserSelfModel implements UserSelfContract.Model {
             @Override
             public void response(String response) {
                 try {
-                    LogUtil.d(tag,"response : " + response);
+                    LogUtil.d(TAG,"response : " + response);
                     JSONObject jsonObject = new JSONObject(response);
                     int code = jsonObject.getInt("code");
                     String msg = jsonObject.getString("msg");
@@ -44,10 +44,10 @@ public class UserSelfModel implements UserSelfContract.Model {
                         callback.success("保存成功");
                         return;
                     }
-                    LogUtil.e(tag,"请求失败");
+                    LogUtil.e(TAG,"请求失败");
                     callback.fail("保存失败");
                 } catch (Exception e) {
-                    LogUtil.e(tag,"解析失败");
+                    LogUtil.e(TAG,"解析失败");
                     callback.fail("保存失败");
                     e.printStackTrace();
                 }

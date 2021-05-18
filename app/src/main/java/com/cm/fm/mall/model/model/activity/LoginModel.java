@@ -23,7 +23,7 @@ import java.util.Map;
  * 登陆的数据模型类
  */
 public class LoginModel implements LoginContract.Model {
-    private String tag = "TAG_LoginModel";
+    private final String TAG = "FM_LoginModel";
 
     @Override
     public void loginM(final String account,final String password, final Callback callback) {
@@ -34,7 +34,7 @@ public class LoginModel implements LoginContract.Model {
         VerifyTask verifyTask = new VerifyTask(MallConstant.LOGIN_VERIFY_URL,map, new HttpCallback() {
             @Override
             public void response(String response) {
-                LogUtil.d(tag,"login verify: " + response);
+                LogUtil.d(TAG,"login verify: " + response);
                 if(TextUtils.isEmpty(response)){
                     callback.fail("登陆失败");
                     return;
@@ -55,7 +55,7 @@ public class LoginModel implements LoginContract.Model {
                         List<UserInfo> userInfos = DataSupport.select("name","password")
                                 .where("name=?",account)
                                 .find(UserInfo.class);
-                        LogUtil.d(tag,"login userInfos size:"+userInfos.size());
+                        LogUtil.d(TAG,"login userInfos size:"+userInfos.size());
                         if(userInfos.size()!=0){
                             /* 当前账号有缓存，修改状态为在线 */
                             UserInfo userInfo = userInfos.get(0);
@@ -67,7 +67,7 @@ public class LoginModel implements LoginContract.Model {
                         }else {
                             /* 当前账号本地没有缓存，先清除之前的缓存，在将当前账号缓存在本地 */
                             int deleteAll = DataSupport.deleteAll(UserInfo.class);
-                            LogUtil.d(tag,"last user cache delete: " + deleteAll);
+                            LogUtil.d(TAG,"last user cache delete: " + deleteAll);
                             UserInfo userInfo = new UserInfo();
                             userInfo.setName(account);
                             userInfo.setNickName(TextUtils.isEmpty(nickName)?account:nickName);
@@ -76,7 +76,7 @@ public class LoginModel implements LoginContract.Model {
                             userInfo.setPassword(password);
                             userInfo.setUserType(MallConstant.USER_TYPE_IS_LOGIN);
                             boolean res = userInfo.save();
-                            LogUtil.d(tag,"login cache: " + res);
+                            LogUtil.d(TAG,"login cache: " + res);
                         }
                         if(!TextUtils.isEmpty(headPortrait)){
                             ImageUtil.saveHeadCache(ImageUtil.stringToBitmap(headPortrait));

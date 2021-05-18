@@ -37,7 +37,7 @@ public class ClassifyButtonJumpActivity extends BaseActivity {
     private List<Integer> showTitle = new ArrayList<>();                        //左侧分类的索引
     private int currentItem;            //当前的选项索引
 
-    private String tag = "TAG_ClassifyButtonJumpActivity";
+    private final String TAG = "FM_ClassifyButtonJumpActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +89,7 @@ public class ClassifyButtonJumpActivity extends BaseActivity {
                 if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
                     return;
                 }
-                LogUtil.d(tag,firstVisibleItem +","+visibleItemCount +","+totalItemCount);
+                LogUtil.d(TAG,firstVisibleItem +","+visibleItemCount +","+totalItemCount);
                 //右侧第一条数据 对应在左侧菜单分类的定位
                 int current = showTitle.indexOf(firstVisibleItem);
                 if (currentItem != current && current >= 0) {
@@ -126,7 +126,7 @@ public class ClassifyButtonJumpActivity extends BaseActivity {
             showTitle.add(i);
             rightDataList.add(dataBean);
         }
-        LogUtil.d(tag,"left:"+leftMenuList +",right:"+rightDataList +",title:"+showTitle);
+        LogUtil.d(TAG,"left:"+leftMenuList +",right:"+rightDataList +",title:"+showTitle);
 
     }
     //解析json文件中的数据

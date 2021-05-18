@@ -55,7 +55,7 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
     private Bitmap bitmap;      //新头像位图
     private String account;
 
-    private final String tag = "TAG_HeadActivity";
+    private final String TAG = "FM_HeadActivity";
 
     private Uri imageUri;
     List<UserInfo> userInfos;       //用户信息，暂时未使用
@@ -64,7 +64,7 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
     protected void onStart() {
         super.onStart();
         account = getIntent().getStringExtra("account");
-        LogUtil.d(tag,"cur_account : " + account);
+        LogUtil.d(TAG,"cur_account : " + account);
     }
 
     @Override
@@ -100,7 +100,7 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(!isChecked){
                     //点击了 确认更换，保存头像。提示变回更换头像，并隐藏相机和相册
-                    LogUtil.d(tag,"点击了 确认更换,bitmap is null? "+(bitmap==null));
+                    LogUtil.d(TAG,"点击了 确认更换,bitmap is null? "+(bitmap==null));
                     ll_change_method.setVisibility(View.GONE);
                     /** 保存图片 */
                     if(bitmap != null){
@@ -117,7 +117,7 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
     public void OnSavePhotoResult(int code, String msg) {
         switch (code){
             case MallConstant.SUCCESS:
-                LogUtil.d(tag,"头像更换成功");
+                LogUtil.d(TAG,"头像更换成功");
                 setResult(RESULT_OK);
                 context.finish();
                 break;
@@ -158,7 +158,7 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        LogUtil.d(tag,"requestCode:"+requestCode+"  resultCode:"+resultCode+"  data:"+(data==null));
+        LogUtil.d(TAG,"requestCode:"+requestCode+"  resultCode:"+resultCode+"  data:"+(data==null));
         switch (requestCode ){
             case MallConstant.HEAD_PORTRAIT_ACTIVITY_TAKE_PHOTO:
                 if(resultCode == Activity.RESULT_OK){
@@ -166,7 +166,7 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
                     if(imageUri != null){
                         bitmap = createCircleBitmap(imageUri);
                     }
-                    LogUtil.d(tag,"head image bitmap is null ? " + (bitmap==null));
+                    LogUtil.d(TAG,"head image bitmap is null ? " + (bitmap==null));
                     if(bitmap != null){
                         iv_show_head.setImageBitmap(bitmap);
                     }
@@ -223,12 +223,12 @@ public class HeadPortraitActivity extends BaseMVPActivity<HeadPortraitPresenter>
         switch (v.getId()){
             case R.id.tv_take_photo:
                 //TODO 拍照
-                LogUtil.d(tag,"start checkPermission : takePhoto");
+                LogUtil.d(TAG,"start checkPermission : takePhoto");
                 checkCameraPermission();
                 break;
             case R.id.tv_photo_album:
                 //TODO 相册
-                LogUtil.d(tag,"start checkPermission : album");
+                LogUtil.d(TAG,"start checkPermission : album");
                 checkAlbumPermission();
                 break;
             case R.id.tv_head_back:

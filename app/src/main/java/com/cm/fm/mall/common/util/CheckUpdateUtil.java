@@ -35,7 +35,7 @@ public class CheckUpdateUtil {
 
     private Handler handler;
 
-    private final String tag = "TAG_CheckUpdateUtil";
+    private final String TAG = "FM_CheckUpdateUtil";
 
     private static CheckUpdateUtil updateUtil;
 
@@ -47,7 +47,7 @@ public class CheckUpdateUtil {
     }
     //请求服务器获取版本信息
     public void checkUpdate(final Context context, final int actId){
-        LogUtil.d(tag,"checkUpdate start");
+        LogUtil.d(TAG,"checkUpdate start");
         //handler 在子线程中使用，需要创建 Looper 环境：Looper.prepare() Looper.loop();
         if(!Utils.isMainThread()){
             Looper.prepare();
@@ -73,16 +73,16 @@ public class CheckUpdateUtil {
                     response = client.newCall(request).execute();
                 } catch (IOException e) {
                     e.printStackTrace();
-                    LogUtil.e(tag,"response exception");
+                    LogUtil.e(TAG,"response exception");
 //                    System.out.println(tag+"response exception");
                 }finally {
-                    LogUtil.e(tag,"response is null?"+(response==null));
+                    LogUtil.e(TAG,"response is null?"+(response==null));
                 }
                 if(response!=null){
                     //服务器的版本信息
                     try {
                         String response_result = response.body().string();
-                        LogUtil.e(tag,"server response result:"+response_result);
+                        LogUtil.e(TAG,"server response result:"+response_result);
                         Message message = new Message();
                         message.obj = response_result;
                         handler.sendMessage(message);
@@ -90,7 +90,7 @@ public class CheckUpdateUtil {
                         e.printStackTrace();
                     }
                 }
-                LogUtil.e(tag,"checkUpdate end");
+                LogUtil.e(TAG,"checkUpdate end");
             }
         }).start();
 
@@ -108,17 +108,17 @@ public class CheckUpdateUtil {
      *      replaceAll 两个参数都支持正则表达式
      */
     public void showUpdateDialog(Context context,String res,int actId){
-        LogUtil.d(tag,"showUpdateDialog");
+        LogUtil.d(TAG,"showUpdateDialog");
         try {
             //当前的版本号信息
             int vName = Integer.valueOf(BuildConfig.VERSION_NAME.replace(".",""));
             int vCode = BuildConfig.VERSION_CODE;
-            LogUtil.d(tag,"cur_version_code:"+ vCode +",cur_version_name:"+ vName);
+            LogUtil.d(TAG,"cur_version_code:"+ vCode +",cur_version_name:"+ vName);
             JSONObject jsonObject = new JSONObject(res);
             if(jsonObject.has("fullymall")){
                 //服务器版本信息
                 JSONObject fullymall_json = jsonObject.getJSONObject("fullymall");
-                LogUtil.d(tag,"fullymall_json:"+fullymall_json);
+                LogUtil.d(TAG,"fullymall_json:"+fullymall_json);
                 String newVersionCode = fullymall_json.getString("newVersionCode");
                 String newVersionName = fullymall_json.getString("newVersionName");
                 String oldVersionCode = fullymall_json.getString("oldVersionCode");
@@ -148,7 +148,7 @@ public class CheckUpdateUtil {
 
         //File.separator 分隔符
         String local_apk_url = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS) + File.separator +"FullyMall.apk";
-        LogUtil.d(tag,"local_apk_url:"+local_apk_url);  // /storage/emulated/0/Android/data/com.cm.fm.mall/files/Download/FullyMall.apk
+        LogUtil.d(TAG,"local_apk_url:"+local_apk_url);  // /storage/emulated/0/Android/data/com.cm.fm.mall/files/Download/FullyMall.apk
         File apk_file = new File(local_apk_url);//删除旧的apk
         if(apk_file.exists()){
             apk_file.delete();

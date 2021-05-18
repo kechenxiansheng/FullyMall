@@ -21,7 +21,7 @@ import java.util.Map;
  * 注册的数据模型类
  */
 public class RegisterModel implements RegisterContract.Model {
-    private String tag = "TAG_RegisterModel";
+    private final String TAG = "FM_RegisterModel";
 
     @Override
     public void registerM(final String account, final String password, final Callback callback) {
@@ -32,7 +32,7 @@ public class RegisterModel implements RegisterContract.Model {
         VerifyTask verifyTask = new VerifyTask(MallConstant.REGISTER_VERIFY_URL,map, new HttpCallback() {
             @Override
             public void response(String response) {
-                LogUtil.d(tag,"register verify: " + response);
+                LogUtil.d(TAG,"register verify: " + response);
                 if(TextUtils.isEmpty(response)){
                     callback.fail("注册失败");
                     return;
@@ -47,21 +47,21 @@ public class RegisterModel implements RegisterContract.Model {
                          * 新账号注册后，直接登陆，状态改为在线
                          * */
                         int deleteAll = DataSupport.deleteAll(UserInfo.class);
-                        LogUtil.d(tag,"last user cache delete: " + deleteAll);
+                        LogUtil.d(TAG,"last user cache delete: " + deleteAll);
                         UserInfo userInfo = new UserInfo();
                         userInfo.setName(account);
                         userInfo.setNickName(account);      //注册时昵称默认为账号
                         userInfo.setPassword(password);
                         userInfo.setUserType(MallConstant.USER_TYPE_IS_LOGIN);
                         boolean res = userInfo.save();
-                        LogUtil.d(tag,"register cache: " + res);
+                        LogUtil.d(TAG,"register cache: " + res);
                         callback.success(MallConstant.SUCCESS);
                         return;
                     }
                     //注册失败
                     callback.fail(msg);
                 }catch (Exception e){
-                    LogUtil.e(tag,"其他错误");
+                    LogUtil.e(TAG,"其他错误");
                     callback.fail("注册失败");
                     e.printStackTrace();
                 }

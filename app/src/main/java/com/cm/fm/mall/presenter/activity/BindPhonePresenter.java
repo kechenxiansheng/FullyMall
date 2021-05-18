@@ -10,7 +10,7 @@ import com.cm.fm.mall.model.model.activity.BindPhoneModel;
 
 public class BindPhonePresenter extends BasePresenter<BindPhoneContract.Model,BindPhoneContract.View> implements BindPhoneContract.Presenter {
 
-    private String tag = "TAG_BindPhonePresenter";
+    private final String TAG = "FM_BindPhonePresenter";
 
     @Override
     protected BindPhoneContract.Model createModule() {
@@ -31,7 +31,7 @@ public class BindPhonePresenter extends BasePresenter<BindPhoneContract.Model,Bi
                 @Override
                 public void success(Object response) {
                     getView().hideLoading();
-                    Log.d(tag,"response : " + response.toString());
+                    Log.d(TAG,"response : " + response.toString());
                     //通知activity 手机已绑定，并保存成功
                     getView().OnSaveResult(MallConstant.SUCCESS,"");
                 }

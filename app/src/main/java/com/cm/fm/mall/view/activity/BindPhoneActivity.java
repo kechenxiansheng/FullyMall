@@ -32,13 +32,13 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
     private String account;
     private String phone;
 
-    private final String tag = "TAG_BindPhoneActivity";
+    private final String TAG = "FM_BindPhoneActivity";
     private final String USER_COUNTRY = "86";
     @Override
     protected int initLayout() {
         context = this;
         account = getIntent().getStringExtra("account");
-        LogUtil.d(tag,"account : " + account);
+        LogUtil.d(TAG,"account : " + account);
         return R.layout.activity_bind_phone;
     }
 
@@ -161,7 +161,7 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
                 //回调完成
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     //提交验证码成功
-                    LogUtil.d(tag,"回调成功，data: " + data);
+                    LogUtil.d(TAG,"回调成功，data: " + data);
                     /** 验证成功的结果（ data: {phone=182xxxx2850, country=86} ） */
                     // 如果验证失败（会包含有 error 的信息：
                     // java.lang.Throwable: {"detail":"用户提交校验的验证码错误。","description":"需要校验的验证码错误","httpStatus":400,"status":468,
@@ -170,7 +170,7 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
                     try {
                         phoneMap = (HashMap<String, Object>) data;
                     } catch (Exception e) {
-                        LogUtil.d(tag,e.getMessage());
+                        LogUtil.d(TAG,e.getMessage());
                     }
                     if(phoneMap != null){
                         // 国家代码，如“86”
@@ -180,14 +180,14 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
                         //保存手机号
                         mPresenter.savePhoneP(account,phone);
                     }else {
-                        LogUtil.d(tag,"验证码错误");
+                        LogUtil.d(TAG,"验证码错误");
                         tv_code_tip.setText("验证码错误");
                         tv_code_tip.setTextColor(getResources().getColor(R.color.colorAccent));
 
                     }
                 }else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
                     //获取验证码成功
-                    LogUtil.d(tag,"获取验证码成功");
+                    LogUtil.d(TAG,"获取验证码成功");
                 }else if (event ==SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES){
                     //返回支持发送验证码的国家列表
                 }

@@ -15,7 +15,7 @@ import com.cm.fm.mall.view.activity.LoginActivity;
  */
 public class LoginPresenter extends BasePresenter<LoginContract.Model,LoginContract.View> implements LoginContract.Presenter {
 
-    private String tag = "TAG_LoginPresenter";
+    private final String TAG = "FM_LoginPresenter";
 
     @Override
     public void loginP(final String account, final String password) {
@@ -26,7 +26,7 @@ public class LoginPresenter extends BasePresenter<LoginContract.Model,LoginContr
                 @Override
                 public void success(Object response) {
                     getView().hideLoading();
-                    Log.d(tag,"response : " + response.toString());
+                    Log.d(TAG,"response : " + response.toString());
                     //通知activity 登陆检验成功
                     getView().OnLoginResult(MallConstant.SUCCESS,account);
                 }

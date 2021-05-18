@@ -35,7 +35,7 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
     private String account;
 
     private boolean TypeIsPassword = true;
-    private final String tag = "TAG_UpdatepwdActivity";
+    private final String TAG = "FM_UpdatepwdActivity";
     private final String USER_COUNTRY = "86";
     @Override
     protected void activityAnim() {
@@ -56,7 +56,7 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
     protected int initLayout() {
         context = this;
         account = getIntent().getStringExtra("account");
-        LogUtil.d(tag,"account : "+account);
+        LogUtil.d(TAG,"account : "+account);
         return R.layout.activity_updatepwd;
     }
     @Override
@@ -184,7 +184,7 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
                 //回调完成
                 if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
                     //回调完成（不代表验证成功）
-                    LogUtil.d(tag,"回调成功，data: " + data);
+                    LogUtil.d(TAG,"回调成功，data: " + data);
                     if(data.toString().contains("error")){
                         tv_update_tips.setText("验证码错误");
                     }else {
@@ -194,7 +194,7 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
 
                 }else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
                     //获取验证码成功
-                    LogUtil.d(tag,"获取验证码成功");
+                    LogUtil.d(TAG,"获取验证码成功");
                 }else if (event ==SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES){
                     //返回支持发送验证码的国家列表
                 }

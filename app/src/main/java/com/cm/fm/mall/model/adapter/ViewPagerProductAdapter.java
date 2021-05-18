@@ -27,7 +27,7 @@ public class ViewPagerProductAdapter extends FragmentStatePagerAdapter {
     ProductInfoFragment infoFragment;
     ProductDetailFragment detailFragment;
     ProductCommentFragment commentFragment;
-    private String tag = "TAG_VPProductAdapter";
+    private final String TAG = "FM_VPProductAdapter";
 
     public ViewPagerProductAdapter(FragmentManager manager,Activity context, String[] titles) {
         super(manager);
@@ -52,7 +52,7 @@ public class ViewPagerProductAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int i) {
         switch (i){
             case 0:
-                LogUtil.d(tag,"show ProductInfoFragment");
+                LogUtil.d(TAG,"show ProductInfoFragment");
                 if(infoFragment == null){
                     infoFragment = new ProductInfoFragment();
                 }
@@ -62,19 +62,19 @@ public class ViewPagerProductAdapter extends FragmentStatePagerAdapter {
                 infoFragment.setArguments(bundle);
                 return infoFragment;
             case 1:
-                LogUtil.d(tag,"show ProductDetailFragment");
+                LogUtil.d(TAG,"show ProductDetailFragment");
                 if(detailFragment == null){
                     detailFragment = new ProductDetailFragment();
                 }
                 return detailFragment;
             case 2:
-                LogUtil.d(tag,"show ProductCommentFragment");
+                LogUtil.d(TAG,"show ProductCommentFragment");
                 if(commentFragment == null){
                     commentFragment = new ProductCommentFragment();
                 }
                 return commentFragment;
             default:
-                LogUtil.d(tag,"show default");
+                LogUtil.d(TAG,"show default");
                 if(infoFragment == null){
                     infoFragment = new ProductInfoFragment();
                 }

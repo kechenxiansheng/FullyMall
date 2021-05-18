@@ -25,7 +25,7 @@ public class ClassifyRightDataItemAdapter extends BaseAdapter {
 
     private Context context;
     private List<ClassifyCategory.DataBean.DataListBean> dataListBeans;
-    private String tag = "TAG_RightDataItemAdapter";
+    private final String TAG = "FM_RightDataItemAdapter";
     public ClassifyRightDataItemAdapter(Context context, List<ClassifyCategory.DataBean.DataListBean> dataListBeans) {
         this.context = context;
         this.dataListBeans = dataListBeans;
@@ -34,7 +34,7 @@ public class ClassifyRightDataItemAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        LogUtil.d(tag,"dataListBeans:"+dataListBeans);
+        LogUtil.d(TAG,"dataListBeans:"+dataListBeans);
         if (dataListBeans != null) {
             return dataListBeans.size();
         } else {
@@ -55,10 +55,10 @@ public class ClassifyRightDataItemAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-//        LogUtil.d(tag,"position:"+position);
+//        LogUtil.d(TAG,"position:"+position);
         //获取子类别信息
         final ClassifyCategory.DataBean.DataListBean dataListBean = dataListBeans.get(position);
-//        LogUtil.d(tag,"dataListBean:"+dataListBean.toString());
+//        LogUtil.d(TAG,"dataListBean:"+dataListBean.toString());
         ViewHold viewHold = null;
         if (convertView == null) {
 
@@ -76,7 +76,7 @@ public class ClassifyRightDataItemAdapter extends BaseAdapter {
         RequestOptions options = new RequestOptions()
                 .placeholder(R.mipmap.loading)      //加载前的占位图
 //                .diskCacheStrategy(DiskCacheStrategy.NONE)  //禁用Glide的缓存功能
-                .error(R.mipmap.error_bg);        //错误展示图
+                .error(R.mipmap.image_load_error);        //错误展示图
 
         Glide.with(context).load(MallConstant.CLASSIFY_ICON).apply(options).into(viewHold.iv_item_album);
 

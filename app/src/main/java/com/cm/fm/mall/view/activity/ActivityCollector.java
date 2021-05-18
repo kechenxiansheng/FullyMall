@@ -13,7 +13,7 @@ import java.util.List;
  * 管理所有activity
  */
 public class ActivityCollector {
-    public static final String TAG = "TAG_ActivityCollector";
+    public static final String TAG = "FM_ActivityCollector";
     public static List<Activity> activityList = new ArrayList<>();
 
     public static void addActivity(Activity activity){

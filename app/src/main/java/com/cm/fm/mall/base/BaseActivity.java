@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    public static final String TAG = "TAG_BaseActivity";
+    public static final String TAG = "FM_BaseActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

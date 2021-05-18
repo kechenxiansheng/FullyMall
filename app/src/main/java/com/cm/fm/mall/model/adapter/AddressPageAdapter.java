@@ -20,7 +20,7 @@ public class AddressPageAdapter extends BaseAdapter {
     private Activity context;
     private List<AddressInfo> list;
     private AddressInfo choosedInfo;
-    private String tag = "TAG_AddressPageAdapter";
+    private final String TAG = "FM_AddressPageAdapter";
 
     public AddressPageAdapter(Activity context,AddressInfo info, List<AddressInfo> list) {
         this.list = list;
@@ -62,8 +62,8 @@ public class AddressPageAdapter extends BaseAdapter {
         }
         final AddressInfo addressInfo = list.get(position);
 
-//        LogUtil.d(tag,"cur_addressInfo: " + addressInfo.toString());
-//        LogUtil.d(tag,"choosedInfo: " + (choosedInfo==null));
+//        LogUtil.d(TAG,"cur_addressInfo: " + addressInfo.toString());
+//        LogUtil.d(TAG,"choosedInfo: " + (choosedInfo==null));
         holder.tv_user_name_bottom.setText(addressInfo.getUsername());
         holder.tv_address_detail_bottom.setText(addressInfo.getAddress()+addressInfo.getStreet());
         if(choosedInfo!=null){

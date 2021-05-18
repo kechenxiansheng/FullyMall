@@ -21,7 +21,7 @@ public class DetailPictureAdapter extends BaseAdapter {
 
     private Activity context;
     private List<String> list;
-    private String tag = "TAG_DetailPictureAdapter";
+    private final String TAG = "FM_DetailPictureAdapter";
 
     public DetailPictureAdapter(Activity context, List<String> list) {
         this.list = list;
@@ -67,7 +67,7 @@ public class DetailPictureAdapter extends BaseAdapter {
         RequestOptions options = new RequestOptions()
                 .placeholder(R.mipmap.loading)      //加载前的占位图
                 .diskCacheStrategy(DiskCacheStrategy.NONE)  //禁用Glide的缓存功能
-                .error(R.mipmap.error_bg);        //错误展示图
+                .error(R.mipmap.image_load_error);        //错误展示图
         String uri = list.get(position);
         Glide.with(context).load(uri).apply(options).into(holder.iv_detail_picture);
         return convertView;

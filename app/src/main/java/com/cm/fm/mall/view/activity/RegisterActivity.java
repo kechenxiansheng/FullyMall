@@ -33,7 +33,7 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPresenter> impleme
     private ImageView iv_register_imageView_lock;
 
     private boolean TypeIsPassword = true;
-    private final String tag = "TAG_RegisterActivity";
+    private final String TAG = "FM_RegisterActivity";
     @Override
     protected void activityAnim() {
         //告知页面，使用动画
@@ -118,7 +118,7 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPresenter> impleme
                 break;
             case R.id.bt_register_btn:
                 //点击了注册按钮
-                LogUtil.d(tag,"onClick");
+                LogUtil.d(TAG,"onClick");
                 String account = et_register_account.getText().toString();
                 String password = et_register_password.getText().toString();
 //                if(TextUtils.isEmpty(account) || TextUtils.isEmpty(password)){

@@ -38,7 +38,7 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
     private TextView tv_login_register,tv_forget_pwd,tv_login_back;
 
     private boolean TypeIsPassword = true;
-    private final String tag = "TAG_LoginActivity";
+    private final String TAG = "FM_LoginActivity";
 
     @Override
     protected LoginPresenter createPresenter() {
@@ -59,7 +59,7 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
         btn_login = findViewById(R.id.btn_login);
         imageView_lock = findViewById(R.id.imageView_lock);
         btn_login = findViewById(R.id.btn_login);
-        LogUtil.d(tag,"onCreate");
+        LogUtil.d(TAG,"onCreate");
 
         tv_login_back.setOnClickListener(this);
         imageView_lock.setOnClickListener(this);
@@ -94,7 +94,7 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
     public void OnLoginResult(int code,String msg) {
         if(code == MallConstant.SUCCESS){
             int activityId = getIntent().getIntExtra("activityId", 0);
-            LogUtil.d(tag,"activityId:"+ activityId);
+            LogUtil.d(TAG,"activityId:"+ activityId);
             if (activityId == MallConstant.USER_FRAGMENT_ACTIVITY_ID) {
                 /** UserFragment 检测到本地有缓存时，点击的登陆
                  * 以及在注册页直接点击登陆过来的请求
@@ -136,7 +136,7 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
         switch (v.getId()){
             case R.id.btn_login:
                 //登陆验证
-                LogUtil.d(tag,"onClick login_btn");
+                LogUtil.d(TAG,"onClick login_btn");
                 String account = editText_account.getText().toString();
                 String password = editText_password.getText().toString();
                 if(TextUtils.isEmpty(account) || TextUtils.isEmpty(password)){

@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 public class MallModel implements MallContract.Model {
-    private String tag = "TAG_MallModel";
+    private final String TAG = "FM_MallModel";
 
     @Override
     public List<ProductMsg> search(List<ProductMsg> productMsgs,String searchContent) {
@@ -22,8 +22,8 @@ public class MallModel implements MallContract.Model {
                 iterator.remove();
             }
         }
-        LogUtil.d(tag,"productMsgs size:"+productMsgs.size());
-        LogUtil.d(tag,"productMsgs:"+productMsgs);
+        LogUtil.d(TAG,"productMsgs size:"+productMsgs.size());
+        LogUtil.d(TAG,"productMsgs:"+productMsgs);
         return productMsgs;
     }
 }

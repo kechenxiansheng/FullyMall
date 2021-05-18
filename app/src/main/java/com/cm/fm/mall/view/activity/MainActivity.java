@@ -47,9 +47,9 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
     private TabLayout.Tab tab;
 
     String[] titles = {"商城","分类","发现","我的"};
-    int[] menuIcon = {R.mipmap.bt_mall1,R.mipmap.bt_classify2,R.mipmap.bt_explore,R.mipmap.bt_user};
+    int[] menuIcon = {R.mipmap.menubar_mall,R.mipmap.menubar_classify,R.mipmap.menubar_explore,R.mipmap.menubar_user};
 
-    private final String tag = "TAG_MainActivity";
+    private final String TAG = "FM_MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,13 +95,13 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
     @Override
     protected void onPause() {
         super.onPause();
-        LogUtil.d(tag,"onPause");
+        LogUtil.d(TAG,"onPause");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        LogUtil.d(tag,"onResume");
+        LogUtil.d(TAG,"onResume");
     }
 
     private void appUpdate(){
@@ -151,7 +151,7 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
         switch (position) {
             case 0:
                 if (mallFragment != null) {
-                    LogUtil.d(tag,"show mallFragment");
+                    LogUtil.d(TAG,"show mallFragment");
                     transaction.show(mallFragment);
                 }else {
                     mallFragment = new MallFragment();
@@ -160,7 +160,7 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
                 break;
             case 1:
                 if (classifyFragment != null) {
-                    LogUtil.d(tag,"show classifyFragment");
+                    LogUtil.d(TAG,"show classifyFragment");
                     transaction.show(classifyFragment);
                 }else {
                     classifyFragment = new ClassifyFragment();
@@ -169,7 +169,7 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
                 break;
             case 2:
                 if (foundFragment != null) {
-                    LogUtil.d(tag,"show foundFragment");
+                    LogUtil.d(TAG,"show foundFragment");
                     transaction.show(foundFragment);
                 }else {
                     foundFragment = new FoundFragment();
@@ -178,7 +178,7 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
                 break;
             case 3:
                 if (userFragment != null) {
-                    LogUtil.d(tag,"show userFragment");
+                    LogUtil.d(TAG,"show userFragment");
                     transaction.show(userFragment);
                 }else {
                     userFragment = new UserFragment();
@@ -230,7 +230,7 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
             Utils.tips(context,"再次点击退出");
             clickTime = System.currentTimeMillis();
         } else {
-            LogUtil.e(tag, "exit");
+            LogUtil.e(TAG, "exit");
             this.finish();
             android.os.Process.killProcess(android.os.Process.myPid());
         }

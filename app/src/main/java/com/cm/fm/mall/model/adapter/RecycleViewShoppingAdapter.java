@@ -30,7 +30,7 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
     private Activity context;
     private MyViewHolder viewHolder;
 
-    private final String tag = "TAG_RVShoppingAdapter";
+    private final String TAG = "FM_RVShoppingAdapter";
 
 
     public RecycleViewShoppingAdapter(List<ShoppingProduct> productLists, Activity context) {
@@ -51,7 +51,7 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
     public void onBindViewHolder(@NonNull final MyViewHolder viewHolder, final int i) {
         //当前商品
         final ShoppingProduct product = productLists.get(i);
-//        LogUtil.d(tag,"product : " + product.toString());
+//        LogUtil.d(TAG,"product : " + product.toString());
         viewHolder.iv_shopping_product_image.setImageResource(ResourceUtils.getMipmapId(context,product.getExtension()));
         viewHolder.tv_shopping_product_name.setText(product.getProductName());
         viewHolder.tv_shopping_product_description.setText(product.getProductDescription());
@@ -112,26 +112,26 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
             switch (v.getId()) {
                 case R.id.iv_shopping_reduce:
                     //点击减
-                    LogUtil.d(tag,"减-购买数量：" + curBuyNum);
+                    LogUtil.d(TAG,"减-购买数量：" + curBuyNum);
                     curBuyNum--;
                     if (curBuyNum <= 1) {
                         curBuyNum = 1;
                     }
                     viewHolder.tv_shopping_buyNum.setText(String.valueOf(curBuyNum));
-                    LogUtil.d(tag,"减-购买数量修改后：" + curBuyNum);
+                    LogUtil.d(TAG,"减-购买数量修改后：" + curBuyNum);
                     saveNewBuyNum(curBuyNum, product.getId());
                     break;
                 case R.id.iv_shopping_add:
                     //点击加
-                    LogUtil.d(tag,"加-购买数量：" + curBuyNum);
+                    LogUtil.d(TAG,"加-购买数量：" + curBuyNum);
                     curBuyNum++;
                     viewHolder.tv_shopping_buyNum.setText(String.valueOf(curBuyNum));
-                    LogUtil.d(tag,"加-购买数量修改后：" + curBuyNum);
+                    LogUtil.d(TAG,"加-购买数量修改后：" + curBuyNum);
                     saveNewBuyNum(curBuyNum, product.getId());
                     break;
                 case R.id.bt_shopping_delete:
                     //点击删除
-                    LogUtil.d(tag, "del_product:" + product.toString());
+                    LogUtil.d(TAG, "del_product:" + product.toString());
                     DataSupport.delete(ShoppingProduct.class, product.getId());
                     //更新adapter
                     update();
@@ -139,7 +139,7 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
                     break;
                 case R.id.rl_shopping_product:
                     //点击item跳转
-                    LogUtil.d(tag, "cur_product:" + product.toString());
+                    LogUtil.d(TAG, "cur_product:" + product.toString());
                     ProductMsg productMsg = new ProductMsg(product.getProductID(), product.getProductName(), product.getProductDescription(), product.getType(),
                             product.getPrice(), product.getInventory(), product.getExtension());
                     Utils.startActivityData(context, CommodityActivity.class, productMsg);
@@ -157,7 +157,7 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
     }
 
     public void saveNewBuyNum(int curBuyNum,int id){
-        LogUtil.d(tag,"saveNewBuyNum,curBuyNum:"+curBuyNum+",id:"+id);
+        LogUtil.d(TAG,"saveNewBuyNum,curBuyNum:"+curBuyNum+",id:"+id);
 
         //并同步修改数据库中当前商品的购买数量
         ContentValues values = new ContentValues();
@@ -181,7 +181,7 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
             rv_shopping_cart_list.setVisibility(View.GONE);
             iv_tip_des.setVisibility(View.VISIBLE);
         }
-        LogUtil.d(tag,"updateTotal: " + total);
+        LogUtil.d(TAG,"updateTotal: " + total);
         //通过context设置显示总额的textview
         TextView tv_sum_money = context.findViewById(R.id.tv_sum_money);
 

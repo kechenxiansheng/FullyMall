@@ -9,7 +9,7 @@ import org.litepal.crud.DataSupport;
 import java.util.List;
 
 public class AddressDetailModel implements AddressDetailContract.Model {
-    private String tag = "TAG_AddressDetailModel";
+    private final String TAG = "FM_AddressDetailModel";
 
     @Override
     public void saveOrUpdateAddressInfoM(AddressInfo curAddressInfo,String name,
@@ -29,7 +29,7 @@ public class AddressDetailModel implements AddressDetailContract.Model {
         info.setStreet(street);
         info.setDefault(isDefaultAddress);
         info.setTag(selectedTagText);
-        LogUtil.d(tag,info.toString());
+        LogUtil.d(TAG,info.toString());
         //不管是新加还是修改，先直接保存
         info.save();
         updateDefaultAddress(type,info,isDefaultAddress);

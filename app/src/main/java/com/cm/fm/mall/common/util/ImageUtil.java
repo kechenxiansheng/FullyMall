@@ -25,7 +25,7 @@ import static com.cm.fm.mall.MyApplication.getContext;
  * 图片工具类
  */
 public class ImageUtil {
-    private static String tag = "TAG_ImageUtil";
+    private static final String TAG = "FM_ImageUtil";
 
     /** bitmap 转为 string */
     public static String bitmapToString(Bitmap bitmap){
@@ -79,24 +79,24 @@ public class ImageUtil {
     /** 将图片缓存本地 */
     public static void saveHeadCache(Bitmap bitmap){
         if(bitmap == null){
-            LogUtil.e(tag,"save error.bitmap is null");
+            LogUtil.e(TAG,"save error.bitmap is null");
             return;
         }
         //本地缓存路径（缓存在外部存储的-External）
         String path = getContext().getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + MallConstant.PHOTO_NAME;
         //path: /storage/emulated/0/Android/data/com.cm.fm.mall/files/Pictures/head_photo.jpg
-        LogUtil.d(tag,"savePhoto path:"+path);
+        LogUtil.d(TAG,"savePhoto path:"+path);
         File headPhoto = new File(path);
         if(headPhoto.exists()){
             boolean delete = headPhoto.delete();
-            LogUtil.d(tag,"savePhoto delete old photo : " + delete);
+            LogUtil.d(TAG,"savePhoto delete old photo : " + delete);
         }
         BufferedOutputStream outputStream = null;
         try {
             outputStream = new BufferedOutputStream(new FileOutputStream(headPhoto));
             //第二个参数 压缩比重，图片存储在磁盘上的大小会根据这个值变化。值越小存储在磁盘的图片文件越小（如果是 PNG 格式，第二个参数无效）
             bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-            LogUtil.d(tag,"savePhoto end");
+            LogUtil.d(TAG,"savePhoto end");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }finally {

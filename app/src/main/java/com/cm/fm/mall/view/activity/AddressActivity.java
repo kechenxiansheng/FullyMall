@@ -34,7 +34,7 @@ public class AddressActivity extends BaseMVPActivity<AddressPresenter> implement
     Activity context;
     AddressAdapter adapter;
     List<AddressInfo> list = new ArrayList<>();
-    private String tag = "TAG_AddressActivity";
+    private final String TAG = "FM_AddressActivity";
 
     @Override
     protected void activityAnim() {
@@ -128,6 +128,6 @@ public class AddressActivity extends BaseMVPActivity<AddressPresenter> implement
                 list.add(data.get(i));
             }
         }
-        LogUtil.d(tag,"addressList size : " + list.size());
+        LogUtil.d(TAG,"addressList size : " + list.size());
     }
 }

@@ -31,7 +31,7 @@ import androidx.appcompat.widget.AppCompatEditText;
  *
  */
 public class CustomEditTextClear extends AppCompatEditText implements View.OnFocusChangeListener, TextWatcher {
-    private static final String TAG = "TAG_CustomEditTextTipV";
+    private static final String TAG = "FM_CustomEditTextTipV";
     //删除按钮的引用
     private Drawable clearDrawable;
     private boolean hasFocus;

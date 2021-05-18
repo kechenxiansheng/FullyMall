@@ -3,62 +3,63 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/check_update_network_bg"
+    android:background="@drawable/common_group_background_drawable"
     >
     <TextView
+        android:id="@+id/tv_dialog_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="5dp"
-        android:background="@drawable/check_update_title_bg"
+        android:background="@drawable/common_group_background_drawable2"
         android:textSize="18sp"
         android:textStyle="bold"
         android:text="提示"
         />
     <!--  android:scrollbars="vertical"  告知内容过多时可以垂直滑动 -->
     <TextView
-        android:id="@+id/tv_mobile_network"
+        android:id="@+id/tv_dialog_content"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
+        android:background="@color/colorLightBlue"
         android:layout_margin="5dp"
         android:padding="5dp"
         android:textSize="18sp"
         android:gravity="center"
-        android:text="非wifi网路环境，是否继续更新？"
+        android:text="弹窗默认内容"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
+        android:background="@color/colorLightBlue"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
         android:layout_marginBottom="5dp"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/tv_cancel_update"
+            android:id="@+id/tv_cancel_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="16sp"
             android:padding="5dp"
-            android:background="@drawable/check_update_button_bg"
+            android:background="@drawable/common_button_bg"
             android:layout_weight="1"
             android:layout_margin="5dp"
             android:text="取消"
             />
 
         <TextView
-            android:id="@+id/tv_sure_update"
+            android:id="@+id/tv_sure_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="16sp"
             android:layout_weight="1"
             android:layout_margin="5dp"
-            android:background="@drawable/check_update_button_bg"
+            android:background="@drawable/common_button_bg"
             android:padding="5dp"
             android:text="继续"
             />

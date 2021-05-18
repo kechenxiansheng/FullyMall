@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
  * 模板方法设计模式
  */
 public abstract class BaseMVPFragment<P extends BasePresenter> extends Fragment implements IBaseView {
-    private String tag = "TAG_BaseMVPFragment";
+    private final String TAG = "FM_BaseMVPFragment";
     protected P mPresenter;
     protected View curView;
 
@@ -35,7 +35,7 @@ public abstract class BaseMVPFragment<P extends BasePresenter> extends Fragment 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //加载视图
         curView = LayoutInflater.from(getActivity()).inflate(initLayout(), container, false);
-        LogUtil.d(tag,"cur view is null ? " + (curView==null));
+        LogUtil.d(TAG,"cur view is null ? " + (curView==null));
         mPresenter = createPresenter();
         if(mPresenter != null){
             mPresenter.bindView(this);

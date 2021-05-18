@@ -62,7 +62,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
 
     private TextView tv_nick_name,tv_tips_login_logout;          //昵称、点击登陆(注销)、绑定电话的描述、绑定手机
     private LinearLayout ll_user_info,ll_user_order,ll_user_address,ll_user_check,ll_user_shopping_cart,ll_user_agreement;    //个人信息、订单信息、地址信息、检查更新、购物车/用户协议
-    private final String tag = "TAG_UserFragment";
+    private final String TAG = "FM_UserFragment";
 
 
     @Override
@@ -125,7 +125,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        LogUtil.d(tag,"onActivityResult requestCode:"+requestCode+",resultCode:"+resultCode+",data:"+data);
+        LogUtil.d(TAG,"onActivityResult requestCode:"+requestCode+",resultCode:"+resultCode+",data:"+data);
         switch (requestCode){
             case MallConstant.USER_FRAGMENT_HEAD_PORTRAIT_REQUEST_CODE:
                 /** 头像页回调 */
@@ -137,7 +137,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                 /** 个人资料回调 */
                 if(resultCode == RESULT_OK){
                     refreshUserInfo();
-                    LogUtil.d(tag,"change nickname. userInfos:"+userInfos);
+                    LogUtil.d(TAG,"change nickname. userInfos:"+userInfos);
                     tv_nick_name.setText(userInfos.get(0).getNickName());
                 }
                 break;
@@ -147,7 +147,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                     if(data!=null){
                         //登陆页点击了注册场景走这步
                         String type = data.getStringExtra("type");
-                        LogUtil.d(tag,"type : " + type);
+                        LogUtil.d(TAG,"type : " + type);
                         if("register".equals(type)){
                             //打开注册页面
                             Intent intent = new Intent(context,RegisterActivity.class);
@@ -157,7 +157,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                     }else{
                         //直接登陆场景走这步
                         refreshUserInfo();
-                        LogUtil.d(tag,"login success. userInfos:"+userInfos);
+                        LogUtil.d(TAG,"login success. userInfos:"+userInfos);
                         //显示头像、昵称
                         tv_nick_name.setText(userInfos.get(0).getNickName());
                         //已经登录，文本显示修改为注销
@@ -174,7 +174,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                     if(data!=null){
                         //点击了登陆场景走这步
                         String type = data.getStringExtra("type");
-                        LogUtil.d(tag,"type : " + type);
+                        LogUtil.d(TAG,"type : " + type);
                         if("login".equals(type)){
                             //打开登陆页面
                             Intent intent = new Intent(context,LoginActivity.class);
@@ -199,12 +199,12 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
     private void showHeadPhoto(){
         // File.separator 文件目录间隔符
         String path = context.getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + MallConstant.PHOTO_NAME;
-        LogUtil.d(tag,"get photo path : " + path);
+        LogUtil.d(TAG,"get photo path : " + path);
         File file = new File(path);
         Bitmap bitmap;
         if(userInfos.size()!=0 && userInfos.get(0).getUserType()==1 && file.exists()){
             //已经登录，有头像直接展示
-            LogUtil.d(tag,"photo name :"+file.getName());
+            LogUtil.d(TAG,"photo name :"+file.getName());
             bitmap = BitmapFactory.decodeFile(path);
             bitmap = ImageUtil.createCircleBitmap(bitmap);
         }else {
@@ -275,7 +275,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
             case R.id.tv_tips_login_logout:
                 if(!typeOflogin){
                     //注销状态，根据注册/登陆结果切换为登录状态
-                    LogUtil.d(tag,"点击了登陆");
+                    LogUtil.d(TAG,"点击了登陆");
                     if(userInfos.size()==0){
                         //没有用户数据先注册
                         Intent intent = new Intent(context,RegisterActivity.class);
@@ -290,7 +290,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                     }
                 }else {
                     //登陆状态，切换为注销状态，清空昵称，替换为默认头像
-                    LogUtil.d(tag,"点击了注销");
+                    LogUtil.d(TAG,"点击了注销");
 
                     tv_nick_name.setText("");
                     userInfos.get(0).setUserType(0);    // 0 游客
@@ -315,7 +315,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
         }
         userInfos = DataSupport.findAll(UserInfo.class);
         if(userInfos.size()!=0){
-            LogUtil.d(tag,"cur_user : " + userInfos.get(0));
+            LogUtil.d(TAG,"cur_user : " + userInfos.get(0));
             account = userInfos.get(0).getName();
         }
 

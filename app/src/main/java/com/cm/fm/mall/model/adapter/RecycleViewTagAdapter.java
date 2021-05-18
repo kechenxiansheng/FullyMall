@@ -24,7 +24,7 @@ public class RecycleViewTagAdapter extends RecyclerView.Adapter<RecycleViewTagAd
     private Activity context;
     private String choosed_tag_text = "";     //修改和增加都会传，增加默认空字符，修改没选择标签也是空字符
     private int choose_tag = -1;              //新选择的标签的id
-    private String tag = "TAG_TagAdapter";
+    private final String TAG = "FM_TagAdapter";
     private MyTagClickListener listener;
 
     public RecycleViewTagAdapter(List<String> list, Activity context) {
@@ -34,12 +34,12 @@ public class RecycleViewTagAdapter extends RecyclerView.Adapter<RecycleViewTagAd
 
     public void setChoose_tag(Integer choose_tag) {
         this.choose_tag = choose_tag;
-        LogUtil.d(tag,"choose_tag : " + choose_tag);
+        LogUtil.d(TAG,"choose_tag : " + choose_tag);
     }
 
     public void setChoosed_tag_text(String choosed_tag_text) {
         this.choosed_tag_text = choosed_tag_text;
-        LogUtil.d(tag,"choosed_tag_text : " + choosed_tag_text);
+        LogUtil.d(TAG,"choosed_tag_text : " + choosed_tag_text);
     }
 
     @NonNull

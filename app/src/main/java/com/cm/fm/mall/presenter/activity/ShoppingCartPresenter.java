@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ShoppingCartPresenter extends BasePresenter<ShoppingCartContract.Model,ShoppingCartContract.View> implements ShoppingCartContract.Presenter {
 
-    private String tag = "TAG_ShoppingCartPresenter";
+    private final String TAG = "FM_ShoppingCartPresenter";
 
     @Override
     protected ShoppingCartContract.Model createModule() {

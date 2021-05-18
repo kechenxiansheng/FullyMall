@@ -28,7 +28,7 @@ import java.util.List;
  */
 public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> implements UserSelfContract.View,View.OnClickListener {
     private Activity context;
-    private final String tag = "TAG_UserSelfActivity";
+    private final String TAG = "FM_UserSelfActivity";
     private String phoneNum;
 
     private EditText et_userself_name,et_userself_nickname;
@@ -83,7 +83,7 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton radioButton = group.findViewById(checkedId);
                 String sex = radioButton.getText().toString();
-                LogUtil.d(tag,"sex : " +sex);
+                LogUtil.d(TAG,"sex : " +sex);
                 if("男".equals(sex)){
                     sexNum[0] = 2;
                 }else if("女".equals(sex)){
@@ -100,7 +100,7 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
 
     @Override
     public void OnUpdateResult(int code, String msg) {
-        LogUtil.d(tag,"OnUpdateResult : " + code + " , " + msg );
+        LogUtil.d(TAG,"OnUpdateResult : " + code + " , " + msg );
         switch (code){
             case MallConstant.SUCCESS:
                 tv_userself_sure_update.setVisibility(View.GONE);
@@ -121,7 +121,7 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        LogUtil.d(tag, "onActivityResult requestCode:" + requestCode + ",resultCode:" + resultCode + ",data:" + data);
+        LogUtil.d(TAG, "onActivityResult requestCode:" + requestCode + ",resultCode:" + resultCode + ",data:" + data);
         switch (requestCode) {
             case MallConstant.BIND_PHONE_ACTIVITY_REQUEST_CODE:
                 //TODO 显示手机号
@@ -200,12 +200,12 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
         userInfoList = mPresenter.queryUserInfo();
         if(userInfoList != null && userInfoList.size() != 0){
             UserInfo userInfo = userInfoList.get(0);
-            LogUtil.d(tag,"query userInfo:"+userInfo.toString());
+            LogUtil.d(TAG,"query userInfo:"+userInfo.toString());
             //给视图填充数据
             et_userself_name.setText(userInfo.getName());
             et_userself_nickname.setText(userInfo.getNickName());
             phoneNum = userInfo.getPhoneNumber();
-            LogUtil.d(tag,"phoneNum:"+phoneNum);
+            LogUtil.d(TAG,"phoneNum:"+phoneNum);
             String maskNumber = "";
             if(!TextUtils.isEmpty(phoneNum)){
                 tv_bind_phone_num.setText("更改");

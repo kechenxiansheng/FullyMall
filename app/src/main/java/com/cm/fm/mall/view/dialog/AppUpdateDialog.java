@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -15,6 +16,7 @@ import com.cm.fm.mall.R;
 import com.cm.fm.mall.common.util.CheckUpdateUtil;
 import com.cm.fm.mall.common.util.LogUtil;
 import com.cm.fm.mall.common.util.NetWorkUtil;
+import com.cm.fm.mall.common.util.Utils;
 
 /**
  * 更新弹框
@@ -24,7 +26,7 @@ public class AppUpdateDialog extends Dialog implements View.OnClickListener {
     TextView tv_cur_version_name,tv_new_version_name,tv_update_content,tv_next_update,tv_now_update;
     String newVersionName;
     String updateContent;
-    private final String tag = "TAG_UpdateTipDialog";
+    private final String TAG = "FM_UpdateTipDialog";
     public AppUpdateDialog(Context context,int style,String newVersionName,String updateContent){
         super(context,style);
         this.context = context;
@@ -71,16 +73,31 @@ public class AppUpdateDialog extends Dialog implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_next_update:
-                LogUtil.d(tag,"点击了下次再说");
+                LogUtil.d(TAG,"点击了下次再说");
                 AppUpdateDialog.this.dismiss();
                 break;
             case R.id.tv_now_update:
-                LogUtil.d(tag,"点击了现在更新");
+                LogUtil.d(TAG,"点击了现在更新");
                 AppUpdateDialog.this.dismiss();
 
                 if(NetWorkUtil.getConnectedType() == 0){
                     //如果是移动网络，弹框提示
-                    MobileNetworkDialog dialog = new MobileNetworkDialog(context,R.style.DialogTheme);
+                    CommonDialog dialog = new CommonDialog.Builder(context)
+                            .setContentTxt("非wifi网路环境，是否继续更新？")
+                            .setChooseListener(new CommonDialog.ChooseListener() {
+                                @Override
+                                public void sure() {
+                                    //开始下载
+                                    CheckUpdateUtil.getInstance().downloadApk(context);
+                                }
+                                @Override
+                                public void cancel() {
+                                    //取消更新
+                                    Log.w(TAG, "update canceled");
+                                }
+                            })
+                            .build();
+                    dialog.setCanceledOnTouchOutside(false);
                     dialog.show();
                 }else if(NetWorkUtil.getConnectedType() == 1){
                     //wifi 直接下载

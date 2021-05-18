@@ -23,7 +23,7 @@ public class ProductDetailFragment extends BaseMVPFragment {
     ListView lv_detail_picture;
     DetailPictureAdapter adapter;
     List<String> list = new ArrayList<>();
-    private String tag = "TAG_ProductDetailFragment";
+    private final String TAG = "FM_ProductDetailFragment";
 
     @Override
     public int initLayout() {
@@ -46,7 +46,7 @@ public class ProductDetailFragment extends BaseMVPFragment {
         for (int i = 1 ; i < 7 ;i++){
             list.add(MallConstant.DETAIL_PICTURE_URL + "P_ProductDetail" + i + MallConstant.DETAIL_PICTURE_URL_END);
         }
-        LogUtil.d(tag,"list data 1 : "+list.get(0));
+        LogUtil.d(TAG,"list data 1 : "+list.get(0));
     }
 
     @Override

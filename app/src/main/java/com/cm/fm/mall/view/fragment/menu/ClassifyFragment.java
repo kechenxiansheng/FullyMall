@@ -31,7 +31,7 @@ public class ClassifyFragment extends BaseMVPFragment<ClassifyPresenter> impleme
     private List<Integer> showTitle = new ArrayList<>();                        //左侧分类的索引
     private int currentItem;            //当前的选项索引
 
-    private String tag = "TAG_ClassifyFragment";
+    private final String TAG = "FM_ClassifyFragment";
 
     @Override
     public int initLayout() {
@@ -47,7 +47,7 @@ public class ClassifyFragment extends BaseMVPFragment<ClassifyPresenter> impleme
         super.initDataEnd();
         //初始化数据
         String json = mPresenter.getJsonData("category.json");
-        LogUtil.d(tag,"json 解析结果：" + json);
+        LogUtil.d(TAG,"json 解析结果：" + json);
         if(json.isEmpty()){
             return;
         }
@@ -57,7 +57,7 @@ public class ClassifyFragment extends BaseMVPFragment<ClassifyPresenter> impleme
         //fastjson混淆后解析list会解析失败
 //        ClassifyCategory classifyCategory = JSONObject.parseObject(json,ClassifyCategory.class);
 
-        LogUtil.d(tag,"classifyCategory : " + classifyCategory.toString());
+        LogUtil.d(TAG,"classifyCategory : " + classifyCategory.toString());
         List<ClassifyCategory.DataBean> data = classifyCategory.getData();
         if(data != null){
             for (int i = 0; i < data.size(); i++) {
@@ -70,7 +70,7 @@ public class ClassifyFragment extends BaseMVPFragment<ClassifyPresenter> impleme
                 rightDataList.add(dataBean);
             }
         }
-        LogUtil.d(tag,"left:"+leftMenuList +",right:"+rightDataList +",title:"+showTitle);
+        LogUtil.d(TAG,"left:"+leftMenuList +",right:"+rightDataList +",title:"+showTitle);
     }
     @Override
     public void initView(View view) {
@@ -122,7 +122,7 @@ public class ClassifyFragment extends BaseMVPFragment<ClassifyPresenter> impleme
                 if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
                     return;
                 }
-                LogUtil.d(tag,firstVisibleItem +","+visibleItemCount +","+totalItemCount);
+                LogUtil.d(TAG,firstVisibleItem +","+visibleItemCount +","+totalItemCount);
                 //右侧第一条数据 对应在左侧菜单分类的定位
                 int current = showTitle.indexOf(firstVisibleItem);
                 if (currentItem != current && current >= 0) {

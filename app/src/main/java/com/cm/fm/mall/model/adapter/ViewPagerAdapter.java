@@ -15,7 +15,7 @@ import androidx.viewpager.widget.PagerAdapter;
  */
 public class ViewPagerAdapter extends PagerAdapter {
     private List<View> views;
-    private String tag = "TAG_ViewPagerAdapter";
+    private final String TAG = "FM_ViewPagerAdapter";
     public ViewPagerAdapter(List<View> views) {
         this.views = views;
 
@@ -30,7 +30,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     @Override
     // instantiate　实例化。功能是往PageView里添加自己需要的page。返回值object，就是 isViewFromObject 的id。
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
-//        LogUtil.d(tag," addView position: "+ position);
+//        LogUtil.d(TAG," addView position: "+ position);
         //将每个页卡view都加进容器中
         container.addView(views.get(position));
         return views.get(position);

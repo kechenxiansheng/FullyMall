@@ -17,7 +17,7 @@ import com.cm.fm.mall.R;
 public class AgreementDialog extends Dialog {
     Context context;
     TextView tv_msg;
-    private final String tag = "TAG_AgreementDialog";
+    private final String TAG = "FM_AgreementDialog";
     public AgreementDialog(Context context,int style){
         super(context,style);
         this.context = context;

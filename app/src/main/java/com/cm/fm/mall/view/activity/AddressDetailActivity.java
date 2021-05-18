@@ -56,7 +56,7 @@ public class AddressDetailActivity extends BaseMVPActivity<AddressDetailPresente
     private String selected_tag_text = "";                  //当前选择的标签
     private boolean isDefaultAddress = false;               //是否是默认地址
 
-    private String tag = "TAG_AddressDetailAct";
+    private final String TAG = "FM_AddressDetailAct";
     @Override
     protected int initLayout() {
         context = this;
@@ -108,7 +108,7 @@ public class AddressDetailActivity extends BaseMVPActivity<AddressDetailPresente
     protected void initDataEnd() {
         super.initDataEnd();
         addressInfo = getIntent().getParcelableExtra("addressInfo");
-        LogUtil.d(tag, addressInfo==null ? "添加收货人" : "修改信息");
+        LogUtil.d(TAG, addressInfo==null ? "添加收货人" : "修改信息");
         sb_default_address.setChecked(false);
         if(addressInfo != null){
             tv_address_title.setText(ResourceUtils.getStringId(context,"address_title_update"));
@@ -133,8 +133,8 @@ public class AddressDetailActivity extends BaseMVPActivity<AddressDetailPresente
                 }
             }
         }
-        LogUtil.d(tag,"cur selected_tag_text : "+selected_tag_text);
-        LogUtil.d(tag,"cur tagMap : "+tagMap);
+        LogUtil.d(TAG,"cur selected_tag_text : "+selected_tag_text);
+        LogUtil.d(TAG,"cur tagMap : "+tagMap);
         //标签的适配器
         tagAdapter = new RecycleViewTagAdapter(tagList, context);
         tagAdapter.setChoosed_tag_text(selected_tag_text);
@@ -142,9 +142,9 @@ public class AddressDetailActivity extends BaseMVPActivity<AddressDetailPresente
         tagAdapter.setListener(new RecycleViewTagAdapter.MyTagClickListener() {
             @Override
             public void selected(int position) {
-                LogUtil.d(tag,"selected position: " + position);
+                LogUtil.d(TAG,"selected position: " + position);
                 selected_tag_text = tagList.get(position);
-                LogUtil.d(tag,"selected selected_tag_text: " + selected_tag_text);
+                LogUtil.d(TAG,"selected selected_tag_text: " + selected_tag_text);
                 boolean isChoose = tagMap.get(selected_tag_text);
                 int selected_id = position;
                 if(isChoose){
@@ -163,13 +163,13 @@ public class AddressDetailActivity extends BaseMVPActivity<AddressDetailPresente
                         tagMap.put(entry.getKey(),false);
                     }
                 }
-                LogUtil.d(tag,"selected_tag_text2 : "+ selected_tag_text);
+                LogUtil.d(TAG,"selected_tag_text2 : "+ selected_tag_text);
                 //设置新选中的标签,并刷新适配器
                 tagAdapter.setChoose_tag(selected_id);
                 tagAdapter.notifyDataSetChanged();
             }
         });
-        LogUtil.d(tag,"selected_tag_text : "+ selected_tag_text);
+        LogUtil.d(TAG,"selected_tag_text : "+ selected_tag_text);
         //设置 LayoutManager
         GridLayoutManager manager = new GridLayoutManager(context,4);   //显示4列
         rv_tag_list.setLayoutManager(manager);
@@ -227,7 +227,7 @@ public class AddressDetailActivity extends BaseMVPActivity<AddressDetailPresente
                     Utils.tips(context,"收货人信息不完整，请认真填写！");
                     return;
                 }
-                LogUtil.d(tag,"tagMap"+tagMap);
+                LogUtil.d(TAG,"tagMap"+tagMap);
                 //保存信息 以及 修改默认地址
                 mPresenter.saveOrUpdateAddressInfoM(addressInfo,name,phone,address,street,isDefaultAddress,selected_tag_text);
                 //保存后，直接关闭页面
@@ -277,7 +277,7 @@ public class AddressDetailActivity extends BaseMVPActivity<AddressDetailPresente
     @Override
     public void onCheckedChangeListener(boolean isChecked) {
         isDefaultAddress = isChecked;
-        LogUtil.d(tag,"isDefaultAddress : " + isDefaultAddress);
+        LogUtil.d(TAG,"isDefaultAddress : " + isDefaultAddress);
     }
 
     private void checkPermission(){

@@ -33,7 +33,7 @@ import androidx.core.content.FileProvider;
 import static android.os.Environment.DIRECTORY_PICTURES;
 
 public class HeadPortraitPresenter extends BasePresenter<HeadPortraitContract.Model,HeadPortraitContract.View> implements HeadPortraitContract.Presenter {
-    private String tag = "TAG_HeadPresenter";
+    private final String TAG = "FM_HeadPresenter";
 
     @Override
     protected HeadPortraitContract.Model createModule() {
@@ -64,7 +64,7 @@ public class HeadPortraitPresenter extends BasePresenter<HeadPortraitContract.Mo
             /** api>=19 */
             String imagePath = "";
             Uri uri = data.getData();
-            LogUtil.d(tag,"相册选择的图片 uri:"+ uri);
+            LogUtil.d(TAG,"相册选择的图片 uri:"+ uri);
             //如果是Document 类型的uri，则用DocumentsContract 处理
             if(DocumentsContract.isDocumentUri(getContext(),uri)){
                 String docId = DocumentsContract.getDocumentId(uri);
@@ -85,7 +85,7 @@ public class HeadPortraitPresenter extends BasePresenter<HeadPortraitContract.Mo
                 imagePath = uri.getPath();
             }
             // /storage/emulated/0/DCIM/Camera/IMG_20200712_175717.jpg
-            LogUtil.d(tag,"imagePath:"+imagePath);
+            LogUtil.d(TAG,"imagePath:"+imagePath);
             //根据路径显示图片
             displayImage(imagePath);
         }
@@ -112,31 +112,31 @@ public class HeadPortraitPresenter extends BasePresenter<HeadPortraitContract.Mo
                 /** android 10 以上获取uri */
                 String status = Environment.getExternalStorageState();
                 // 判断是否有SD卡,优先使用SD卡存储,当没有SD卡时使用手机存储
-                LogUtil.d(tag,"外部存储 ？" + (status.equals(Environment.MEDIA_MOUNTED)));
+                LogUtil.d(TAG,"外部存储 ？" + (status.equals(Environment.MEDIA_MOUNTED)));
                 if (status.equals(Environment.MEDIA_MOUNTED)) {
                     imageUri = activity.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new ContentValues());
                 } else {
                     imageUri = activity.getContentResolver().insert(MediaStore.Images.Media.INTERNAL_CONTENT_URI, new ContentValues());
                 }
-                LogUtil.d(tag,"android 10,imageUri : " + imageUri);
+                LogUtil.d(TAG,"android 10,imageUri : " + imageUri);
                 //content://media/external/images/media/368231
             }else {
-                LogUtil.d(tag,"takephoto,path:"+Objects.requireNonNull(activity.getExternalFilesDir(DIRECTORY_PICTURES)).getAbsolutePath());
+                LogUtil.d(TAG,"takephoto,path:"+Objects.requireNonNull(activity.getExternalFilesDir(DIRECTORY_PICTURES)).getAbsolutePath());
                 //创建目录
                 File storageDir = activity.getExternalFilesDir(DIRECTORY_PICTURES);
                 if (storageDir != null && !storageDir.exists()) {
                     storageDir.mkdir();
                 }
                 File imageFile = new File(storageDir,"tp_head_image.jpg");
-                LogUtil.d(tag,"imageFile:"+imageFile);
+                LogUtil.d(TAG,"imageFile:"+imageFile);
                 //如果头像已存在，先删除
                 if(imageFile.exists()){
                     boolean delete = imageFile.delete();
-                    LogUtil.d(tag,"图片删除结果："+ delete);
+                    LogUtil.d(TAG,"图片删除结果："+ delete);
                 }
                 try {
                     boolean create = imageFile.createNewFile();
-                    LogUtil.d(tag,"图片创建结果："+ create);
+                    LogUtil.d(TAG,"图片创建结果："+ create);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -144,7 +144,7 @@ public class HeadPortraitPresenter extends BasePresenter<HeadPortraitContract.Mo
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
                     /** android 7 到 9 */
                     //7.0 需要配置文件共享：内容提供器，所以需要在manifest注册
-                    LogUtil.d(tag,"packageName : " + activity.getPackageName());
+                    LogUtil.d(TAG,"packageName : " + activity.getPackageName());
                     imageUri = FileProvider.getUriForFile(activity,activity.getPackageName()+".photo.provider",imageFile);
                 }else {
                     /** android 6 及以下 */
@@ -158,7 +158,7 @@ public class HeadPortraitPresenter extends BasePresenter<HeadPortraitContract.Mo
             intent.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
             intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             activity.startActivityForResult(intent,code);
-            LogUtil.d(tag,"takephoto,imageUri:"+imageUri);
+            LogUtil.d(TAG,"takephoto,imageUri:"+imageUri);
             return imageUri;
         }
         return null;
@@ -170,20 +170,20 @@ public class HeadPortraitPresenter extends BasePresenter<HeadPortraitContract.Mo
         getModel().saveHeadPortrait(account, bitmap, new Callback() {
             @Override
             public void success(Object response) {
-                Log.d(tag,"response : " + response.toString());
+                Log.d(TAG,"response : " + response.toString());
 //                String path = getContext().getExternalFilesDir(DIRECTORY_PICTURES) + File.separator + MallConstant.PHOTO_NAME;
-//                LogUtil.d(tag,"savePhoto path:"+path);
+//                LogUtil.d(TAG,"savePhoto path:"+path);
 //                File headPhoto = new File(path);
 //                if(headPhoto.exists()){
 //                    boolean delete = headPhoto.delete();
-//                    LogUtil.d(tag,"savePhoto delete old photo : " + delete);
+//                    LogUtil.d(TAG,"savePhoto delete old photo : " + delete);
 //                }
 //                BufferedOutputStream outputStream = null;
 //                try {
 //                    outputStream = new BufferedOutputStream(new FileOutputStream(headPhoto));
 //                    //第二个参数 压缩比重，图片存储在磁盘上的大小会根据这个值变化。值越小存储在磁盘的图片文件越小（如果是 PNG 格式，第二个参数无效）
 //                    bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream);
-//                    LogUtil.d(tag,"savePhoto end");
+//                    LogUtil.d(TAG,"savePhoto end");
 //                } catch (FileNotFoundException e) {
 //                    e.printStackTrace();
 //                }finally {
@@ -223,24 +223,24 @@ public class HeadPortraitPresenter extends BasePresenter<HeadPortraitContract.Mo
             }
             cursor.close();
         }
-        LogUtil.d(tag,"getImagePath,path:"+path);
+        LogUtil.d(TAG,"getImagePath,path:"+path);
         return path;
     }
     /** 通知 activity 显示头像 */
     public void displayImage(String imagePath) {
-        LogUtil.d(tag,"imagePath : " + imagePath);
+        LogUtil.d(TAG,"imagePath : " + imagePath);
         //   /storage/emulated/0/Pictures/WeiXin/mmexport1600852419852.jpg
         if(!imagePath.isEmpty()){
             //新头像位图 (此步读取文件需要申请读写权限，否则返回 null)
             Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-            LogUtil.d(tag,"bitmap is null ? " + (bitmap==null));
+            LogUtil.d(TAG,"bitmap is null ? " + (bitmap==null));
             //设置固定大小
             bitmap = ThumbnailUtils.extractThumbnail(bitmap,300,300);
-            LogUtil.d(tag,"bitmap is null ? " + (bitmap==null));
+            LogUtil.d(TAG,"bitmap is null ? " + (bitmap==null));
             bitmap = ImageUtil.createCircleBitmap(bitmap);
             getView().OnShowImage(bitmap);
         }else {
-            LogUtil.d(tag,"imagePath 为空");
+            LogUtil.d(TAG,"imagePath 为空");
         }
     }
     /** api<19，处理图片方式 */

@@ -34,7 +34,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     //TODO 一定要保证 adapter 的 数据list 是同一个集合对象，否则刷新不生效。此时直接 new 一个list
     List<SearchHistory> histories = new ArrayList<>();
     RecycleViewHistoryAdapter historyAdapter;
-    String tag = "TAG_SearchActivity";
+    private final String TAG = "FM_SearchActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +50,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         //查询搜索历史记录
         histories = DataSupport.findAll(SearchHistory.class);
 
-        LogUtil.d(tag,"histories size:" + histories.size());
+        LogUtil.d(TAG,"histories size:" + histories.size());
         historyAdapter = new RecycleViewHistoryAdapter(histories,context);
         GridLayoutManager manager = new GridLayoutManager(context,2);  //网格布局，显示2列
         rv_search_history.setLayoutManager(manager);
@@ -67,7 +67,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 
-                LogUtil.d(tag,"actionId:"+actionId + "event: " + (event==null));
+                LogUtil.d(TAG,"actionId:"+actionId + "event: " + (event==null));
                 if(actionId == KeyEvent.KEYCODE_HOME){
                     //隐藏软键盘
                     ((InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE))
@@ -92,10 +92,10 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
                 comesBack();
                 break;
             case R.id.ib_delete_all:
-                LogUtil.d(tag,"删除所有历史记录");
+                LogUtil.d(TAG,"删除所有历史记录");
                 DataSupport.deleteAll(SearchHistory.class);
                 histories.clear();
-                LogUtil.d(tag,histories.hashCode()+"");
+                LogUtil.d(TAG,histories.hashCode()+"");
                 //TODO 如果此时刷新不生效，看下 histories 还跟之前是不是同一个 list
                 historyAdapter.notifyDataSetChanged();
                 break;

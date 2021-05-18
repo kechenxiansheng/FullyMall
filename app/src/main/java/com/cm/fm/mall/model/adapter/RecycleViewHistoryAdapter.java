@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RecycleViewHistoryAdapter extends RecyclerView.Adapter<RecycleViewHistoryAdapter.MyViewHolder> {
     private List<SearchHistory> histories;
     private Activity context;
-    private String tag = "TAG_HistoryAdapter";
+    private final String TAG = "FM_HistoryAdapter";
 
 
     public RecycleViewHistoryAdapter(List<SearchHistory> histories, Activity context) {
@@ -74,7 +74,7 @@ public class RecycleViewHistoryAdapter extends RecyclerView.Adapter<RecycleViewH
 
     @Override
     public int getItemCount() {
-//        LogUtil.d(tag,"histories: " + histories.size());
+//        LogUtil.d(TAG,"histories: " + histories.size());
         return histories.size();
     }
 

@@ -9,7 +9,7 @@ import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.model.model.activity.RegisterModel;
 
 public class RegisterPresenter extends BasePresenter<RegisterContract.Model,RegisterContract.View> implements RegisterContract.Presenter {
-    private String tag = "TAG_RegisterPresenter";
+    private final String TAG = "FM_RegisterPresenter";
 
     @Override
     protected RegisterContract.Model createModule() {
@@ -30,7 +30,7 @@ public class RegisterPresenter extends BasePresenter<RegisterContract.Model,Regi
                 @Override
                 public void success(Object response) {
                     getView().hideLoading();
-                    Log.d(tag,"response : " + response.toString());
+                    Log.d(TAG,"response : " + response.toString());
                     //通知activity 注册成功
                     getView().OnRegisterResult(MallConstant.SUCCESS,account);
                 }

@@ -20,7 +20,7 @@ public class HttpUtils {
 
 	private final static String PARAMETER_SEPARATOR = "&";
 	private final static String NAME_VALUE_SEPARATOR = "=";
-	private static String tag = "HttpUtils";
+	private static final String TAG = "HttpUtils";
 	/**
 	 * Http GET 请求
 	 * @param urlStr
@@ -46,7 +46,7 @@ public class HttpUtils {
 			else
 				fullUrl = urlStr;
 
-			Log.d(tag, "the fullUrl is " + fullUrl);
+			Log.d(TAG, "the fullUrl is " + fullUrl);
 
 			url = new URL(fullUrl);
 			Object connection = url.openConnection();
@@ -63,7 +63,7 @@ public class HttpUtils {
 					}
 					result = strBuffer.toString();
 				} else {
-					Log.e(tag, "get connection failed. code:" + httpsURLConnection.getResponseCode() + ";url:" + fullUrl);
+					Log.e(TAG, "get connection failed. code:" + httpsURLConnection.getResponseCode() + ";url:" + fullUrl);
 				}
 			} else {
 				httpURLConnection = (HttpURLConnection) connection;
@@ -78,7 +78,7 @@ public class HttpUtils {
 					}
 					result = strBuffer.toString();
 				} else {
-					Log.e(tag, "get connection failed. code:" + httpURLConnection.getResponseCode() + ";url:" + fullUrl);
+					Log.e(TAG, "get connection failed. code:" + httpURLConnection.getResponseCode() + ";url:" + fullUrl);
 				}
 			}
 		} catch (Exception e) {
@@ -148,7 +148,7 @@ public class HttpUtils {
 					}
 					result = strBuffer.toString();
 				} else {
-					Log.e(tag, "post connection failed. code:" + httpsURLConnection.getResponseCode() + ";url:" + urlStr);
+					Log.e(TAG, "post connection failed. code:" + httpsURLConnection.getResponseCode() + ";url:" + urlStr);
 				}
 			} else {
 				httpURLConnection = (HttpURLConnection) connection;
@@ -173,7 +173,7 @@ public class HttpUtils {
 					}
 					result = strBuffer.toString();
 				} else {
-					Log.e(tag, "post connection failed. code:" + httpURLConnection.getResponseCode() + ";url:" + urlStr);
+					Log.e(TAG, "post connection failed. code:" + httpURLConnection.getResponseCode() + ";url:" + urlStr);
 				}
 			}
 
@@ -249,7 +249,7 @@ public class HttpUtils {
 			}
 		}
 		sb.append("}");
-		LogUtil.d(tag,"params : " + sb.toString());
+		LogUtil.d(TAG,"params : " + sb.toString());
 		return sb.toString();
 	}
 }
