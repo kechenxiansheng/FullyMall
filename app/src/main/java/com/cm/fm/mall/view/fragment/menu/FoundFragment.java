@@ -22,6 +22,8 @@ import com.cm.fm.mall.base.BaseMVPFragment;
 import com.cm.fm.mall.base.BasePresenter;
 import com.cm.fm.mall.common.util.LogUtil;
 import com.cm.fm.mall.common.MallConstant;
+import com.cm.fm.mall.common.util.NetWorkUtil;
+import com.cm.fm.mall.common.util.Utils;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
@@ -241,6 +243,11 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
         params.width = width;
         params.height = height;
         vv_video.setLayoutParams(params);
+        
+        if(!NetWorkUtil.getInstance().isNetworkConnected()){
+            Log.e(TAG, "Video playback error : NetWork Exception!");
+            return;
+        }
 
         //根据路径加载视频,直接播放
         vv_video.setVideoPath(MallConstant.VIDEO_URL);
@@ -272,6 +279,7 @@ public class FoundFragment extends BaseMVPFragment implements View.OnClickListen
     }
     //播放视频（调用start先加载视频显示画面，然后暂停，让用户主动点击播放）
     public void playVideo(){
+
         vv_video.start();
         handler.postDelayed(runnable,0);    //立即执行
         //设置进度条的最大值

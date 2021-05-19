@@ -267,7 +267,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
              case R.id.ll_user_check:
                 //检查更新
                 if(!NetWorkUtil.getInstance().isNetworkConnected()){
-                    Utils.tips(context,"请打开网络");
+                    Utils.tips(context,"网络异常");
                     return;
                 }
                  CheckUpdateUtil.getInstance().checkUpdate(context,MallConstant.USER_FRAGMENT_ACTIVITY_ID);
