@@ -28,12 +28,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ShoppingCartActivity extends BaseMVPActivity<ShoppingCartPresenter> implements ShoppingCartContract.View,View.OnClickListener {
-    public static Activity context;
+    private static final String TAG = "FM_ShoppingCart";
+    private Activity context;
     private TextView tv_settlement,tv_sum_money;
     private ImageView iv_tip_des;
     private RecyclerView rv_shopping_cart_list;
     private RecycleViewShoppingAdapter shoppingAdapter;
-    private final String TAG = "FM_ShoppingCart";
+
 
     private List<ShoppingProduct> products = new ArrayList<>();
     @Override

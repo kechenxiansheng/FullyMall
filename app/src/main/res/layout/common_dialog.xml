@@ -29,7 +29,6 @@
         android:gravity="center"
         android:text="弹窗默认内容"
         />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,7 +49,6 @@
             android:layout_margin="5dp"
             android:text="取消"
             />
-
         <TextView
             android:id="@+id/tv_sure_button"
             android:layout_width="wrap_content"
@@ -63,8 +61,5 @@
             android:padding="5dp"
             android:text="继续"
             />
-
-
     </LinearLayout>
-
 </LinearLayout>

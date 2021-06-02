@@ -31,6 +31,7 @@ import com.cm.fm.mall.common.util.CheckUpdateUtil;
 import com.cm.fm.mall.common.util.LogUtil;
 import com.cm.fm.mall.common.util.NetWorkUtil;
 import com.cm.fm.mall.common.util.Utils;
+import com.cm.fm.mall.view.dialog.CommonDialog;
 
 import org.litepal.crud.DataSupport;
 
@@ -61,7 +62,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
     private String account;             //当前用户账号
 
     private TextView tv_nick_name,tv_tips_login_logout;          //昵称、点击登陆(注销)、绑定电话的描述、绑定手机
-    private LinearLayout ll_user_info,ll_user_order,ll_user_address,ll_user_check,ll_user_shopping_cart,ll_user_agreement;    //个人信息、订单信息、地址信息、检查更新、购物车/用户协议
+    private LinearLayout ll_user_info,ll_user_order,ll_user_address,ll_user_check,ll_user_shopping_cart,ll_user_agreement,ll_exception_test;    //个人信息、订单信息、地址信息、检查更新、购物车/用户协议
     private final String TAG = "FM_UserFragment";
 
 
@@ -89,6 +90,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
         ll_user_check = view.findViewById(R.id.ll_user_check);
         ll_user_shopping_cart = view.findViewById(R.id.ll_user_shopping_cart);
         ll_user_agreement = view.findViewById(R.id.ll_user_agreement);
+        ll_exception_test = view.findViewById(R.id.ll_exception_test);
 
         iv_head_portrait.setOnClickListener(this);
         ll_user_info.setOnClickListener(this);
@@ -98,6 +100,7 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
         ll_user_check.setOnClickListener(this);
         ll_user_shopping_cart.setOnClickListener(this);
         ll_user_agreement.setOnClickListener(this);
+        ll_exception_test.setOnClickListener(this);
 
         //先查询玩家信息
         refreshUserInfo();
@@ -264,13 +267,34 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                 dialog.setCanceledOnTouchOutside(true);
                 dialog.show();
                 break;
-             case R.id.ll_user_check:
+            case R.id.ll_user_check:
                 //检查更新
                 if(!NetWorkUtil.getInstance().isNetworkConnected()){
                     Utils.tips(context,"网络异常");
                     return;
                 }
                  CheckUpdateUtil.getInstance().checkUpdate(context,MallConstant.USER_FRAGMENT_ACTIVITY_ID);
+                break;
+            case R.id.ll_exception_test:
+                //异常模拟
+                CommonDialog exceptionTest = new CommonDialog.Builder(context)
+                        .setContentTxt("此功能会导致应用闪退：模拟程序出现未知异常时，进行异常信息抓取并上报给开发者，是否继续？")
+                        .setContentTxtColor(getResources().getColor(R.color.colorAccent))
+                        .setSureText("继续")
+                        .setCancelText("不了")
+                        .setChooseListener(new CommonDialog.ChooseListener() {
+                            @Override
+                            public void sure() {
+                                Log.w(TAG, "点击了继续异常模拟 ");
+                                throw new RuntimeException("自定义异常：模拟异常！");
+                            }
+                            @Override
+                            public void cancel() {
+                                Log.w(TAG, "点击了取消异常模拟 ");
+                            }
+                        })
+                        .build();
+                exceptionTest.show();
                 break;
             case R.id.tv_tips_login_logout:
                 if(!typeOflogin){

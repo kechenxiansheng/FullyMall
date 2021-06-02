@@ -101,7 +101,7 @@
                     android:id="@+id/iv_user_info"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@mipmap/ic_userself_bg2"/>
+                    android:src="@mipmap/userself_info"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:src="@mipmap/ic_shopp_cart"/>
+                    android:src="@mipmap/userself_shopping_cart"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -161,7 +161,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center"
-                    android:src="@mipmap/ic_order_bg"/>
+                    android:src="@mipmap/userself_order"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
                     android:id="@+id/iv_address_msg"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@mipmap/ic_address_bg"/>
+                    android:src="@mipmap/userself_address"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -221,7 +221,7 @@
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@mipmap/ic_user_agreement"/>
+                    android:src="@mipmap/userself_agreement"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -239,14 +239,31 @@
                     android:id="@+id/iv_check_update"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@mipmap/ic_check_update"/>
+                    android:src="@mipmap/userself_update"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="检查更新"
                     />
             </LinearLayout>
-
+            <LinearLayout
+                android:id="@+id/ll_exception_test"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+                <ImageView
+                    android:id="@+id/iv_exception"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@mipmap/userself_exception_test"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="异常模拟"
+                    />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 

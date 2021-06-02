@@ -21,15 +21,12 @@ import com.cm.fm.mall.R;
 public class CommonDialog extends Dialog implements View.OnClickListener {
     private Context mContext;
     private int mLayoutId;
-    private String mContentTxt;
-    private String mSureTxt;
-    private String mCancelTxt;
-    private String mTitleTxt;
-    private TextView tv_dialog_content;
-    private TextView tv_cancel_button;
-    private TextView tv_sure_button;
-    private TextView tv_dialog_title;
-    private ChooseListener mChooseListener;
+    private final int mContentTxtColor;
+    private final String mContentTxt;
+    private final String mSureTxt;
+    private final String mCancelTxt;
+    private final String mTitleTxt;
+    private final ChooseListener mChooseListener;
     private final String TAG = "FM_CommonDialog";
 
     public CommonDialog(Builder builder) {
@@ -38,6 +35,7 @@ public class CommonDialog extends Dialog implements View.OnClickListener {
         this.mLayoutId = builder.layoutId;
         this.mTitleTxt = builder.titleTxt;
         this.mContentTxt = builder.contentTxt;
+        this.mContentTxtColor = builder.contentTxtColor;
         this.mSureTxt = builder.sureTxt;
         this.mCancelTxt = builder.cancelTxt;
         this.mChooseListener = builder.chooseListener;
@@ -63,10 +61,10 @@ public class CommonDialog extends Dialog implements View.OnClickListener {
             window.setAttributes(params);
         }
 
-        tv_dialog_title = tip_view.findViewById(R.id.tv_dialog_title);
-        tv_dialog_content = tip_view.findViewById(R.id.tv_dialog_content);
-        tv_cancel_button = tip_view.findViewById(R.id.tv_cancel_button);
-        tv_sure_button = tip_view.findViewById(R.id.tv_sure_button);
+        TextView tv_dialog_title = tip_view.findViewById(R.id.tv_dialog_title);
+        TextView tv_dialog_content = tip_view.findViewById(R.id.tv_dialog_content);
+        TextView tv_cancel_button = tip_view.findViewById(R.id.tv_cancel_button);
+        TextView tv_sure_button = tip_view.findViewById(R.id.tv_sure_button);
         if(!TextUtils.isEmpty(mTitleTxt)){
             tv_dialog_title.setText(mTitleTxt);
         }
@@ -77,7 +75,9 @@ public class CommonDialog extends Dialog implements View.OnClickListener {
             tv_cancel_button.setText(mCancelTxt);
         }
         tv_dialog_content.setText(mContentTxt);
-
+        if(mContentTxtColor != -1){
+            tv_dialog_content.setTextColor(mContentTxtColor);
+        }
         //取消删除
         tv_cancel_button.setOnClickListener(this);
         //确认删除
@@ -108,6 +108,7 @@ public class CommonDialog extends Dialog implements View.OnClickListener {
         private String cancelTxt;
         private ChooseListener chooseListener;
         private int styleId;
+        private int contentTxtColor = -1;
         private int layoutId;
 
         public Builder(Context context){
@@ -128,6 +129,10 @@ public class CommonDialog extends Dialog implements View.OnClickListener {
         }
         public Builder setContentTxt(String contentTxt){
             this.contentTxt = contentTxt;
+            return this;
+        }
+        public Builder setContentTxtColor(int contentTxtColor){
+            this.contentTxtColor = contentTxtColor;
             return this;
         }
         public Builder setSureText(String sureText){

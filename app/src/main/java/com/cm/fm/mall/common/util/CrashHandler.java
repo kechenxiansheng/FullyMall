@@ -1,14 +1,21 @@
 package com.cm.fm.mall.common.util;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Process;
+import android.provider.Settings;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.view.dialog.CommonDialog;
+
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,8 +23,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 
 import androidx.annotation.NonNull;
 
@@ -31,6 +42,8 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     private static CrashHandler sInstance = new CrashHandler();
     private static final boolean DEBUG = true;
     private Context mContext;
+
+    private String time;
     private String logFilePath;
     private static final String FILE_NAME = "crash";
     private static final String FILE_NAME_SUFFIX = ".trace";
@@ -51,6 +64,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      */
     public void init(Context context){
         mDefaultExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+        //设置为线程默认的异常处理器
         Thread.setDefaultUncaughtExceptionHandler(this);
         mContext = context;
     }
@@ -60,16 +74,23 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
     @Override
     public void uncaughtException(@NonNull Thread thread, @NonNull Throwable exception) {
         Log.d(TAG, "uncaughtException ");
-        dumpExceptionToSDCard(exception);
+        try {
+            dumpExceptionToSDCard(exception);
+            //异常日志上传至服务器
+//            uploadExceptionToServer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         exception.printStackTrace();
-        showTip();
+
         //如果系统提供了默认的异常处理器，则交给系统去结束程序，否则自己结束程序
         if(mDefaultExceptionHandler != null){
+            Log.d(TAG, "uncaughtException 2");
             mDefaultExceptionHandler.uncaughtException(thread,exception);
         }else {
+            Log.d(TAG, "uncaughtException 3");
             Process.killProcess(Process.myPid());
         }
-
     }
 
     //导出异常信息到sd卡中
@@ -81,15 +102,15 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 return;
             }
         }
-        String mPath = mContext.getExternalCacheDir().getPath()+"/CrashTest/log/";
+        String mPath = mContext.getExternalFilesDir("CrashTest").getPath()+"/log/";
         File dir = new File(mPath);
         if(!dir.exists()){
             dir.mkdirs();
         }
         long timeMillis = System.currentTimeMillis();
-        String time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(timeMillis));
+        time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(timeMillis));
         logFilePath = mPath + FILE_NAME + time + FILE_NAME_SUFFIX;
-        // logFile : /storage/emulated/0/Android/data/com.cm.adp.demo/cache/CrashTest/log/crash2021-05-19 14:49:34.trace
+        // logFile : /storage/emulated/0/Android/data/com.cm.adp.demo/file/CrashTest/log/crash2021-05-19 14:49:34.trace
         Log.d(TAG, "logFile : " + logFilePath);
         File file = new File(logFilePath);
         //将crash信息和设备信息都放入log（时间+\n+设备信息+\n+异常信息）
@@ -119,12 +140,12 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 .append("OS Version: ").append(Build.VERSION.RELEASE).append(",TargetSdkVersion: ").append(Build.VERSION.SDK_INT).append("\n")
                 .append("Vendor: ").append(Build.MANUFACTURER).append("\n")
                 .append("Model: ").append(Build.MODEL).append("\n")
-                .append("CPU ABI: ").append(Build.CPU_ABI).append(",ABI2: ").append(Build.CPU_ABI2).append("\n");
+                .append("CPU ABI: ").append(Build.CPU_ABI).append(",ABI2: ").append(Build.CPU_ABI2);
         Log.w(TAG, "write : "+builder.toString());
         pw.println(builder.toString());
     }
 
-    //将异常信息上传至服务器
+    //在合适的时机，将异常信息上传至服务器
     private void uploadExceptionToServer(){
         Log.d(TAG, "uploadExceptionToServer ");
         File logFile = new File(logFilePath);
@@ -137,24 +158,36 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 while ((line = reader.readLine())!=null){
                     sb.append(line).append("\n");
                 }
-                Log.w(TAG, "read : " + sb.toString());
+//                Log.w(TAG, "read : " + sb.toString());
+                final Map<String,String> data = new HashMap<>();
+                data.put("deviceId",generateDeviceID());
+                data.put("logInfo",sb.toString());
+
+                //TODO 请求没有执行，待处理
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        String response = HttpUtils.httpPost(MallConstant.CRASH_LOG_SUBMIT_URL, data);
+                        Log.w(TAG, "crash log send result : "+response);
+                    }
+                }).start();
+                Log.d(TAG, "uploadExceptionToServer 2");
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
         Log.d(TAG, "uploadExceptionToServer end");
     }
 
+    //由于application中dialog弹窗无效，所以这个方法没用
     private void showTip(){
         CommonDialog dialog = new CommonDialog.Builder(mContext)
-                .setContentTxt("程序出现内部异常！对您的使用带来不便，开发者深表歉意！为尽快解决问题，优化应用后续体验，是否将异常信息通知给开发者？")
-                .setSureText("通知")
-                .setCancelText("不通知")
+                .setContentTxt(time+":程序出现异常！给您带来的不便，深表歉意！为尽快优化解决问题，是否将异常信息发送给开发者？")
+                .setSureText("发送")
+                .setCancelText("不发送")
                 .setChooseListener(new CommonDialog.ChooseListener() {
                     @Override
                     public void sure() {
-                        uploadExceptionToServer();
                         Utils.tips(mContext,"感谢您的反馈！");
                         Log.w(TAG, "exception info has sent. ");
                     }
@@ -165,5 +198,31 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
                 })
                 .build();
         dialog.show();
+    }
+
+    //安装一次，只缓存一个设备id
+    private String generateDeviceID() {
+        String uuid = "";
+        if (uuid == null) {
+            SharedPreferences prefs = mContext.getSharedPreferences("g_device_id.xml", 0);
+            String id = prefs.getString("device_id", "");
+            if (!TextUtils.isEmpty(id)) {
+                uuid = id;
+            } else {
+                String androidId = Settings.Secure.getString(mContext.getContentResolver(), "android_id");
+                try {
+                    if (!"9774d56d682e549c".equals(androidId)) {
+                        uuid = UUID.nameUUIDFromBytes(androidId.getBytes("utf8")).toString();
+                    } else {
+                        String deviceId = ((TelephonyManager)mContext.getSystemService(Context.TELEPHONY_SERVICE)).getDeviceId();
+                        uuid = deviceId != null ? UUID.nameUUIDFromBytes(deviceId.getBytes("utf8")).toString() : UUID.randomUUID().toString();
+                    }
+                } catch (UnsupportedEncodingException e) {
+                    throw new RuntimeException(e);
+                }
+                prefs.edit().putString("device_id", uuid).apply();
+            }
+        }
+        return uuid;
     }
 }

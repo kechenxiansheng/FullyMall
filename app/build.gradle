@@ -126,4 +126,7 @@ dependencies {
 
     //官方推荐的磁盘缓存工具 DiskLruCache
     implementation 'com.jakewharton:disklrucache:2.0.2'
+
+    //内存泄露检测工具（只会在debug状态下检测）
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
 }

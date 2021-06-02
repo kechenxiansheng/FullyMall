@@ -49,14 +49,7 @@ import androidx.core.app.NotificationCompat;
 
 
 public class Utils {
-    private static Utils utils;
 
-    public static Utils getInstance(){
-        if(utils==null){
-            utils = new Utils();
-        }
-        return utils;
-    }
     //activity跳转
     public static void startActivityCloseSelf(Activity curAct, Class targetAct){
         Intent intent = new Intent(curAct, targetAct);

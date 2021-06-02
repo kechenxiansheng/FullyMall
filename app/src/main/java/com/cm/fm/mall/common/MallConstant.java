@@ -23,6 +23,8 @@ public class MallConstant {
     public final static String LOGIN_VERIFY_URL = serverUrl + "/fmserver/user/login";
     /** 更新用户信息 */
     public final static String UPDATE_USER_INFO_URL = serverUrl + "/fmserver/user/updateUserInfo";
+    /** 异常信息上报 */
+    public final static String CRASH_LOG_SUBMIT_URL = serverUrl + "/fmserver/crash/submit";
 
     /** 商品详情图片地址 */
     public final static String DETAIL_PICTURE_URL = serverUrl + "/resource/product/detail/";   //再加上 图片数量的 .png

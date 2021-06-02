@@ -21,12 +21,7 @@ import androidx.viewpager.widget.ViewPager;
  * 新的 商品页
  */
 public class CommodityActivity extends BaseMVPActivity<CommodityPresenter> implements CommodityContract.View,View.OnClickListener {
-    ImageView iv_product_back;
-    TabLayout tl_product_title;
-    ViewPager vp_product_content;
-    Activity activity;
-    ProductMsg productMsg; //当前展示的商品实体类
-    ViewPagerProductAdapter productAdapter;
+    private Activity activity;
 
     String[] titles = {"商品","详情","评价"};
     private final String TAG = "FM_CommodityActivity";
@@ -40,17 +35,18 @@ public class CommodityActivity extends BaseMVPActivity<CommodityPresenter> imple
 
     @Override
     protected void initView() {
-        iv_product_back = findViewById(R.id.iv_product_back);
-        tl_product_title = findViewById(R.id.tl_product_title);
-        vp_product_content = findViewById(R.id.vp_product_content);
+        ImageView iv_product_back = findViewById(R.id.iv_product_back);
+        TabLayout tl_product_title = findViewById(R.id.tl_product_title);
+        ViewPager vp_product_content = findViewById(R.id.vp_product_content);
 
         iv_product_back.setOnClickListener(this);
 
-        productMsg = getIntent().getParcelableExtra("product");
+        //当前展示的商品实体类
+        ProductMsg productMsg = getIntent().getParcelableExtra("product");
         if(productMsg != null){
             LogUtil.d(TAG,"productMsg : " + productMsg.toString());
             //适配器
-            productAdapter = new ViewPagerProductAdapter(getSupportFragmentManager(),activity,titles,productMsg);
+            ViewPagerProductAdapter productAdapter = new ViewPagerProductAdapter(getSupportFragmentManager(), activity, titles, productMsg);
             vp_product_content.setAdapter(productAdapter);
         }
         //TabLayout 关联 viewpager
@@ -79,4 +75,8 @@ public class CommodityActivity extends BaseMVPActivity<CommodityPresenter> imple
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
