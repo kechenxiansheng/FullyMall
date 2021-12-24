@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BaseMVPActivity;
@@ -19,8 +20,8 @@ import com.cm.fm.mall.common.util.Utils;
 
 import java.util.HashMap;
 
-import cn.smssdk.EventHandler;
-import cn.smssdk.SMSSDK;
+//import cn.smssdk.EventHandler;
+//import cn.smssdk.SMSSDK;
 
 public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> implements BindPhoneContract.View,View.OnClickListener {
     private Activity context;
@@ -28,7 +29,7 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
     private TextView tv_bind_phone_bt,tv_bind_back;
     private TextView tv_register_get_yzm,tv_code_tip;
     private Handler mHandler;
-    private EventHandler eventHandler;
+//    private EventHandler eventHandler;
     private String account;
     private String phone;
 
@@ -39,6 +40,7 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
         context = this;
         account = getIntent().getStringExtra("account");
         LogUtil.d(TAG,"account : " + account);
+        getContext();
         return R.layout.activity_bind_phone;
     }
 
@@ -51,7 +53,7 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
     @Override
     protected void initDataEnd() {
         //smssdk注册回调监听
-        smssdkResgist();
+//        smssdkResgist();
     }
 
     @Override
@@ -100,7 +102,9 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
                     return;
                 }
                 /** 获取验证码 */
-                SMSSDK.getVerificationCode(USER_COUNTRY,phoneNum);
+//                SMSSDK.getVerificationCode(USER_COUNTRY,phoneNum);
+                Toast.makeText(context,"获取验证码功能已屏蔽",Toast.LENGTH_SHORT).show();
+
                 //清空提示
                 tv_code_tip.setText("");
                 //倒计时(单位：毫秒)
@@ -115,7 +119,7 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
                     return;
                 }
                 /** 校验拿到的验证码 */
-                SMSSDK.submitVerificationCode(USER_COUNTRY,phoneNum,yzm);
+//                SMSSDK.submitVerificationCode(USER_COUNTRY,phoneNum,yzm);
                 break;
             case R.id.tv_bind_back:
                 context.finish();
@@ -127,7 +131,7 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
     protected void onDestroy() {
         super.onDestroy();
         //取消监听，防止内存泄露
-        SMSSDK.unregisterEventHandler(eventHandler);
+//        SMSSDK.unregisterEventHandler(eventHandler);
     }
 
     /** 验证码倒计时60秒 */
@@ -151,60 +155,60 @@ public class BindPhoneActivity extends BaseMVPActivity<BindPhonePresenter> imple
         }
     }
 
-    public void smssdkResgist(){
-        mHandler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                int event = msg.arg1;
-                int result = msg.arg2;
-                Object data = msg.obj;
-                //回调完成
-                if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                    //提交验证码成功
-                    LogUtil.d(TAG,"回调成功，data: " + data);
-                    /** 验证成功的结果（ data: {phone=182xxxx2850, country=86} ） */
-                    // 如果验证失败（会包含有 error 的信息：
-                    // java.lang.Throwable: {"detail":"用户提交校验的验证码错误。","description":"需要校验的验证码错误","httpStatus":400,"status":468,
-                    // "error":"The user submits the validation verification code error."}）
-                    HashMap<String,Object> phoneMap = null;
-                    try {
-                        phoneMap = (HashMap<String, Object>) data;
-                    } catch (Exception e) {
-                        LogUtil.d(TAG,e.getMessage());
-                    }
-                    if(phoneMap != null){
-                        // 国家代码，如“86”
-                        String country = (String) phoneMap.get("country");
-                        // 手机号码，如“13800138000”
-                        phone = (String) phoneMap.get("phone");
-                        //保存手机号
-                        mPresenter.savePhoneP(account,phone);
-                    }else {
-                        LogUtil.d(TAG,"验证码错误");
-                        tv_code_tip.setText("验证码错误");
-                        tv_code_tip.setTextColor(getResources().getColor(R.color.colorAccent));
-
-                    }
-                }else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
-                    //获取验证码成功
-                    LogUtil.d(TAG,"获取验证码成功");
-                }else if (event ==SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES){
-                    //返回支持发送验证码的国家列表
-                }
-                return false;
-            }
-        });
-        //smssdk注册回调监听
-        eventHandler = new EventHandler(){
-            @Override
-            public void afterEvent(int event, int result, Object data) {
-                Message msg = new Message();
-                msg.arg1 = event;
-                msg.arg2 = result;
-                msg.obj = data;
-                mHandler.sendMessage(msg);
-            }
-        };
-        SMSSDK.registerEventHandler(eventHandler);
-    }
+//    public void smssdkResgist(){
+//        mHandler = new Handler(new Handler.Callback() {
+//            @Override
+//            public boolean handleMessage(Message msg) {
+//                int event = msg.arg1;
+//                int result = msg.arg2;
+//                Object data = msg.obj;
+//                //回调完成
+//                if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+//                    //提交验证码成功
+//                    LogUtil.d(TAG,"回调成功，data: " + data);
+//                    /** 验证成功的结果（ data: {phone=182xxxx2850, country=86} ） */
+//                    // 如果验证失败（会包含有 error 的信息：
+//                    // java.lang.Throwable: {"detail":"用户提交校验的验证码错误。","description":"需要校验的验证码错误","httpStatus":400,"status":468,
+//                    // "error":"The user submits the validation verification code error."}）
+//                    HashMap<String,Object> phoneMap = null;
+//                    try {
+//                        phoneMap = (HashMap<String, Object>) data;
+//                    } catch (Exception e) {
+//                        LogUtil.d(TAG,e.getMessage());
+//                    }
+//                    if(phoneMap != null){
+//                        // 国家代码，如“86”
+//                        String country = (String) phoneMap.get("country");
+//                        // 手机号码，如“13800138000”
+//                        phone = (String) phoneMap.get("phone");
+//                        //保存手机号
+//                        mPresenter.savePhoneP(account,phone);
+//                    }else {
+//                        LogUtil.d(TAG,"验证码错误");
+//                        tv_code_tip.setText("验证码错误");
+//                        tv_code_tip.setTextColor(getResources().getColor(R.color.colorAccent));
+//
+//                    }
+//                }else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
+//                    //获取验证码成功
+//                    LogUtil.d(TAG,"获取验证码成功");
+//                }else if (event ==SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES){
+//                    //返回支持发送验证码的国家列表
+//                }
+//                return false;
+//            }
+//        });
+//        //smssdk注册回调监听
+//        eventHandler = new EventHandler(){
+//            @Override
+//            public void afterEvent(int event, int result, Object data) {
+//                Message msg = new Message();
+//                msg.arg1 = event;
+//                msg.arg2 = result;
+//                msg.obj = data;
+//                mHandler.sendMessage(msg);
+//            }
+//        };
+//        SMSSDK.registerEventHandler(eventHandler);
+//    }
 }

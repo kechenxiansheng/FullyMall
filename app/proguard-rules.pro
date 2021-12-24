@@ -55,17 +55,17 @@
 #}
 
 
-# 短信验证sdk混淆（SMSDK）
+# 短信验证sdk混淆过滤（SMSDK）
 -keep class com.mob.**{*;}
 -keep class cn.smssdk.**{*;}
 -dontwarn com.mob.**
 
-# okhttp3 混淆
+# okhttp3 混淆过滤
 -dontwarn com.squareup.okhttp3.**
 -keep class com.squareup.okhttp3.** { *;}
 -dontwarn okio.**
 
-# fresco 混淆
+# fresco 混淆过滤
 -keep,allowobfuscation @interface com.facebook.common.internal.DoNotStrip
 -keep,allowobfuscation @interface com.facebook.soloader.DoNotOptimize
 -keep @com.facebook.common.internal.DoNotStrip class *
@@ -84,14 +84,14 @@
 -dontwarn com.android.volley.toolbox.**
 -dontwarn com.facebook.infer.**
 
-# fastjson 混淆
+# fastjson 混淆过滤
 -dontwarn com.alibaba.fastjson.**
 -keep class com.alibaba.fastjson.**{*; }
 -keepattributes Signature
 -keepattributes *Annotation*
 
 
-# Gson 混淆
+# Gson 混淆过滤
 -keepattributes Signature
 # For using GSON @Expose annotation
 -keepattributes *Annotation*
@@ -115,12 +115,12 @@
 
 
 
-# banner 混淆
+# banner 混淆过滤
 -keep class com.youth.banner.** {
     *;
  }
 
-# Glide 4 混淆
+# Glide 4 混淆过滤
 -keep public class * implements com.bumptech.glide.module.AppGlideModule
 -keep public class * implements com.bumptech.glide.module.LibraryGlideModule
 -keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
@@ -128,23 +128,23 @@
   public *;
 }
 
-# support design库 混淆
+# support design库 混淆过滤
 -keep class android.support.design.** { *; }
 -keep interface android.support.design.** { *; }
 -keep public class android.support.design.R$* { *; }
 
-# v4、v7包 混淆
+# v4、v7包 混淆过滤
 -keep public class * extends android.support.v4.**
 -keep public class * extends android.support.v7.**
 -keep public class * extends android.support.annotation.**
 
-# androidx 混淆
+# androidx 混淆过滤
 -keep class androidx.** {*;}
 -keep interface androidx.** {*;}
 -keep public class * extends androidx.**
 -dontwarn androidx.**
 
-#自定义组件 不被混淆
+#自定义组件 混淆过滤
 -keep public class * extends android.view.View{
     *** get*();
     void set*(***);
@@ -153,7 +153,7 @@
     public <init>(android.content.Context, android.util.AttributeSet, int);
 }
 
-#litepal 数据库
+#litepal 数据库混淆过滤
 -dontwarn org.litepal.*
 -keep class org.litepal.** { *; }
 -keep enum org.litepal.**

@@ -65,7 +65,7 @@ public class DetailPictureAdapter extends BaseAdapter {
 
         /** 使用 Glide 加载图片 */
         RequestOptions options = new RequestOptions()
-                .placeholder(R.mipmap.loading)      //加载前的占位图
+                .placeholder(R.mipmap.image_loading)      //加载前的占位图
                 .diskCacheStrategy(DiskCacheStrategy.NONE)  //禁用Glide的缓存功能
                 .error(R.mipmap.image_load_error);        //错误展示图
         String uri = list.get(position);

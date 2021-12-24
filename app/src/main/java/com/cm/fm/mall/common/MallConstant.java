@@ -7,7 +7,8 @@ public class MallConstant {
     /** 头像名称 */
     public final static String PHOTO_NAME = "head_photo.jpg";
     /** 服务器url */
-    public static final String serverUrl = "http://119.27.160.230:8888";
+//    public static final String serverUrl = "http://119.27.160.230:8888";
+    public static final String serverUrl = "http://www.chenmmingtx.xyz";
     /** apk下载地址 */
     public final static String APK_URL = serverUrl + "/apk/FullyMall.apk";
     /** 版本检测地址 */

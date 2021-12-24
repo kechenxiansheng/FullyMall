@@ -13,7 +13,8 @@ preferExternal：优先安装在SD卡中
     <!-- 相机权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
 
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- api8.0以上需要，安装文件权限 -->
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />

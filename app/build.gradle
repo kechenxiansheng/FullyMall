@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.mob.sdk'
+//apply plugin: 'com.mob.sdk'
 
 //SMSSDK 短信验证框架
-MobSDK {
-    appKey "30372cad57f9c"
-    appSecret "6196be020b19b998b3c984704792276c"
-    SMSSDK {
-        autoSMS true
-    }
-}
+//MobSDK {
+//    appKey "30372cad57f9c"
+//    appSecret "6196be020b19b998b3c984704792276c"
+//    SMSSDK {
+//        autoSMS true
+//    }
+//}
 android {
     compileSdkVersion 29
     defaultConfig {
@@ -97,7 +97,7 @@ dependencies {
     implementation 'com.android.support:design:29.0.0'
     //litepal 数据库
     implementation 'org.litepal.android:core:1.6.1'
-    //图片加载框架
+    //图片加载框架（Glide/fresco）
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     implementation 'com.facebook.fresco:fresco:0.12.0'
     //网络请求框架
@@ -114,6 +114,7 @@ dependencies {
     implementation 'com.permissionx.guolindev:permissionx:1.4.0'
 //    implementation 'com.permissionx.guolindev:permission-support:1.4.0'
 
+    // SmartRefreshLayout
     // 注意：分包之后不会有默认的Header和Footer需要手动添加！还是原来的三种方法！
     implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'      //核心必须依赖
     implementation  'com.scwang.smart:refresh-header-classics:2.0.1'    //经典刷新头
@@ -128,5 +129,5 @@ dependencies {
     implementation 'com.jakewharton:disklrucache:2.0.2'
 
     //内存泄露检测工具（只会在debug状态下检测）
-    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.3'
 }

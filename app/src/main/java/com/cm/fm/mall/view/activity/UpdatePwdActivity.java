@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BaseMVPActivity;
@@ -21,8 +22,8 @@ import com.cm.fm.mall.common.util.LogUtil;
 import com.cm.fm.mall.common.util.Utils;
 
 
-import cn.smssdk.EventHandler;
-import cn.smssdk.SMSSDK;
+//import cn.smssdk.EventHandler;
+//import cn.smssdk.SMSSDK;
 
 public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> implements UpdatePwdContract.View,View.OnClickListener {
     private Activity context;
@@ -31,7 +32,7 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
     EditText et_update_phoneNum,et_update_yzm;
     Button bt_update_sure_and_login;
     private Handler mHandler;
-    private EventHandler eventHandler;
+//    private EventHandler eventHandler;
     private String account;
 
     private boolean TypeIsPassword = true;
@@ -45,7 +46,7 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
 
     @Override
     protected void initDataEnd() {
-        smssdkResgist();
+//        smssdkResgist();
     }
 
     @Override
@@ -86,7 +87,7 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
     protected void onDestroy() {
         super.onDestroy();
         //取消监听，防止内存泄露
-        SMSSDK.unregisterEventHandler(eventHandler);
+//        SMSSDK.unregisterEventHandler(eventHandler);
     }
     @Override
     public void OnCheckResult(int code, String msg) {
@@ -123,8 +124,9 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
                     tv_update_tips.setText("号码不能为空");
                     return;
                 }
+                Toast.makeText(context,"获取验证码功能已屏蔽",Toast.LENGTH_SHORT).show();
                 //发送获取验证码请求
-                SMSSDK.getVerificationCode(USER_COUNTRY,phoneNum);
+//                SMSSDK.getVerificationCode(USER_COUNTRY,phoneNum);
                 //倒计时开始
                 UpdatePwdActivity.TimeCount timeCount = new UpdatePwdActivity.TimeCount(60000,1000);
                 timeCount.start();
@@ -146,7 +148,7 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
                 tv_update_tips.setTextColor(getResources().getColor(R.color.colorPrimary));
 
                 //校验验证码
-                SMSSDK.submitVerificationCode(USER_COUNTRY,phoneNum,yzm);
+//                SMSSDK.submitVerificationCode(USER_COUNTRY,phoneNum,yzm);
                 break;
             case R.id.tv_update_back:
                 context.finish();
@@ -174,44 +176,44 @@ public class UpdatePwdActivity extends BaseMVPActivity<UpdatePwdPresenter> imple
         }
     }
 
-    public void smssdkResgist(){
-        mHandler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                int event = msg.arg1;
-                int result = msg.arg2;
-                Object data = msg.obj;
-                //回调完成
-                if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
-                    //回调完成（不代表验证成功）
-                    LogUtil.d(TAG,"回调成功，data: " + data);
-                    if(data.toString().contains("error")){
-                        tv_update_tips.setText("验证码错误");
-                    }else {
-                        /** 修改并保存新密码 */
-                        mPresenter.savePwdP(account,et_update_password1.getText().toString());
-                    }
-
-                }else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
-                    //获取验证码成功
-                    LogUtil.d(TAG,"获取验证码成功");
-                }else if (event ==SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES){
-                    //返回支持发送验证码的国家列表
-                }
-                return false;
-            }
-        });
-        //smssdk注册回调监听
-        eventHandler = new EventHandler(){
-            @Override
-            public void afterEvent(int event, int result, Object data) {
-                Message msg = new Message();
-                msg.arg1 = event;
-                msg.arg2 = result;
-                msg.obj = data;
-                mHandler.sendMessage(msg);
-            }
-        };
-        SMSSDK.registerEventHandler(eventHandler);
-    }
+//    public void smssdkResgist(){
+//        mHandler = new Handler(new Handler.Callback() {
+//            @Override
+//            public boolean handleMessage(Message msg) {
+//                int event = msg.arg1;
+//                int result = msg.arg2;
+//                Object data = msg.obj;
+//                //回调完成
+//                if (event == SMSSDK.EVENT_SUBMIT_VERIFICATION_CODE) {
+//                    //回调完成（不代表验证成功）
+//                    LogUtil.d(TAG,"回调成功，data: " + data);
+//                    if(data.toString().contains("error")){
+//                        tv_update_tips.setText("验证码错误");
+//                    }else {
+//                        /** 修改并保存新密码 */
+//                        mPresenter.savePwdP(account,et_update_password1.getText().toString());
+//                    }
+//
+//                }else if (event == SMSSDK.EVENT_GET_VERIFICATION_CODE){
+//                    //获取验证码成功
+//                    LogUtil.d(TAG,"获取验证码成功");
+//                }else if (event ==SMSSDK.EVENT_GET_SUPPORTED_COUNTRIES){
+//                    //返回支持发送验证码的国家列表
+//                }
+//                return false;
+//            }
+//        });
+//        //smssdk注册回调监听
+//        eventHandler = new EventHandler(){
+//            @Override
+//            public void afterEvent(int event, int result, Object data) {
+//                Message msg = new Message();
+//                msg.arg1 = event;
+//                msg.arg2 = result;
+//                msg.obj = data;
+//                mHandler.sendMessage(msg);
+//            }
+//        };
+//        SMSSDK.registerEventHandler(eventHandler);
+//    }
 }

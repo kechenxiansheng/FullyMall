@@ -35,6 +35,7 @@ import android.widget.Toast;
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.model.bean.AddressInfo;
 import com.cm.fm.mall.model.bean.ProductMsg;
+import com.cm.fm.mall.view.activity.MainActivity;
 import com.cm.fm.mall.view.activity.ShoppingCartActivity;
 
 import java.io.Closeable;
@@ -161,16 +162,16 @@ public class Utils {
         builder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(),R.mipmap.icon_dog));
         builder.setAutoCancel(true);
         builder.setDefaults(NotificationCompat.DEFAULT_ALL);    //通知使用系统默认配置（音效，震动，呼吸灯等）
-
+        builder.setPriority(Notification.PRIORITY_MAX);         //重要级别（共5个。此处设置了最大）
         //设置点击跳转
-        Intent intent = new Intent(context,ShoppingCartActivity.class);
+        Intent intent = new Intent(context, ShoppingCartActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK); //相当于将activity设置为 singleTask
         PendingIntent hangPendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+        builder.setContentIntent(hangPendingIntent);    //点击跳转
         /** 大于21，使用悬挂式通知 */
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
             builder.setFullScreenIntent(hangPendingIntent, true);
         }
-        assert manager != null;
         manager.notify(notificationId,builder.build());
     }
 

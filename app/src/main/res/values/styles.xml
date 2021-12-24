@@ -11,7 +11,7 @@
     <style name="ApplicationStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-        <!--Toolbar颜色-->
+        <!--标题栏Toolbar颜色-->
         <!--<item name="colorPrimary">@android:color/holo_blue_bright</item>-->
         <!-- 状态栏颜色 -->
         <item name="colorPrimaryDark">@color/colorLightBlue8</item>
