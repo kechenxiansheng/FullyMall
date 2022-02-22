@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FullyMall</string>
+    <string name="app_name">满意商城</string>
     <string name="user_login_des">点击登陆>></string>
     <string name="user_logout_des">点击注销>></string>
     <string name="user_bind_phone_des">绑定手机(已绑定)</string>

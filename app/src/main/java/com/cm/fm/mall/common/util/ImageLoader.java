@@ -115,7 +115,7 @@ public class ImageLoader {
     public ImageLoader(Context context) {
         //建议使用应用上下文，如果是activity上下文用在 ImageLoader 中，如果ImageLoader采用单例模式，容易导致内存泄露
         this.mContext = context.getApplicationContext();
-        /* 初始化LruCache和DiskLruCache  */
+        /* 初始化LruCache 和 DiskLruCache  */
         initCache();
     }
 
@@ -357,7 +357,7 @@ public class ImageLoader {
 
 
     /*
-     * 将图片url转为key
+     * 将图片url转为md5 key
      * 图片url可能包含很多特殊字符，会影响url在android中使用，一般采用url的md5值作为key
      * */
     private String hashKeyFormUrl(String url) {
@@ -371,6 +371,7 @@ public class ImageLoader {
         }
         return cacheKey;
     }
+
     private String bytesToHexString(byte[] bytes) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < bytes.length; i++) {

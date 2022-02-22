@@ -147,7 +147,7 @@ public class UserSelfActivity extends BaseMVPActivity<UserSelfPresenter> impleme
                     tv_userself_sure_update.setVisibility(View.VISIBLE);
                     //提示语更改为取消
                     tv_userself_update.setText("取消");
-                    et_userself_nickname.setBackgroundColor(getResources().getColor(R.color.smssdk_white));
+                    et_userself_nickname.setBackgroundColor(getResources().getColor(R.color.colorWhite));
                     et_userself_nickname.setFocusableInTouchMode(true);
                     et_userself_nickname.setFocusable(true);//获取焦点
 

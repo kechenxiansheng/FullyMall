@@ -7,7 +7,6 @@ import android.content.Context;
 //import com.baidu.mapapi.SDKInitializer;
 import com.cm.fm.mall.common.util.CrashHandler;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.mob.MobSDK;
 
 import org.litepal.LitePal;
 
@@ -24,7 +23,7 @@ public class MyApplication extends Application {
         //初始化litepal
         LitePal.initialize(context);
         //smssdk 回传隐私授权结果（应用应该有个变量控制用户隐私授权的结果，将该变量的结果作为下面接口的第一个参数传递给SDK）
-        MobSDK.submitPolicyGrantResult(true,null);
+//        MobSDK.submitPolicyGrantResult(true,null);
         //加载图片的框架
         Fresco.initialize(context);
         //异常捕获工具初始化
