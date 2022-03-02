@@ -1,28 +1,22 @@
 package com.cm.fm.mall.adapter;
 
 import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.activity.ProductActivity;
-import com.cm.fm.mall.bean.ProductMsg;
-import com.cm.fm.mall.bean.SearchHistory;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.ResourceUtils;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.model.bean.SearchHistory;
 
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 搜索历史记录适配器

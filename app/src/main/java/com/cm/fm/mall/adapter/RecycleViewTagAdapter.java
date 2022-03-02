@@ -3,25 +3,18 @@ package com.cm.fm.mall.adapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.bean.SearchHistory;
-import com.cm.fm.mall.util.LogUtil;
+import com.cm.fm.mall.common.util.LogUtil;
 
-import org.litepal.crud.DataSupport;
-
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 地址 tag 适配器

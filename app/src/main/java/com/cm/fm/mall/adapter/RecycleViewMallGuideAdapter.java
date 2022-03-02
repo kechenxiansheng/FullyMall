@@ -2,18 +2,19 @@ package com.cm.fm.mall.adapter;
 
 import android.app.Activity;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.Utils;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * 商城页导航栏适配器
@@ -94,7 +95,7 @@ public class RecycleViewMallGuideAdapter extends RecyclerView.Adapter<RecycleVie
             super(itemView);
             tv_guide_title = itemView.findViewById(R.id.tv_guide_title);
             //获取屏幕高宽
-            List<Integer> sizeList= Utils.getInstance().getSize(context);
+            List<Integer> sizeList= Utils.getSize(context);
             if(sizeList.size() != 0){
                 int needWidth = 0;
                 int width = sizeList.get(0);

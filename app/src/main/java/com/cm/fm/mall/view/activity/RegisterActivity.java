@@ -18,6 +18,9 @@ import com.cm.fm.mall.common.MallConstant;
 import com.cm.fm.mall.presenter.activity.RegisterPresenter;
 import com.cm.fm.mall.common.util.LogUtil;
 import com.cm.fm.mall.common.util.Utils;
+
+import static com.cm.fm.mall.common.MallConstant.USER_FRAGMENT_PAGE;
+
 /**
  * 注册页面
  *  1、activityId : 3
@@ -78,8 +81,12 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPresenter> impleme
             case MallConstant.SUCCESS:
 //                Utils.startActivityClose(context,LoginActivity.class);
                 //注册成功，直接回传 UserFragment 状态
-                setResult(RESULT_OK);
-                this.finish();
+//                setResult(RESULT_OK);
+//                this.finish();
+                Intent intent = new Intent(context,MainActivity.class);
+                intent.putExtra("fragmentId", 3);
+                startActivity(intent);
+                finish();
                 break;
             case MallConstant.FAIL:
                 Utils.tips(context,msg);
@@ -107,12 +114,12 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPresenter> impleme
                 if(TypeIsPassword){
                     //如果当前 密码框 是密文类型，就替换为 文本明文 类型，并替换背景图片
                     et_register_password.setInputType( InputType.TYPE_CLASS_TEXT);
-                    iv_register_imageView_lock.setBackground(getResources().getDrawable(R.mipmap.ic_partial_secure));
+                    iv_register_imageView_lock.setBackground(getResources().getDrawable(R.mipmap.icon_pwd_show));
                     TypeIsPassword = false;
                 }else {
                     //设置为文本密码类型，并替换背景图片
                     et_register_password.setInputType( InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                    iv_register_imageView_lock.setBackground(getResources().getDrawable(R.mipmap.ic_secure));
+                    iv_register_imageView_lock.setBackground(getResources().getDrawable(R.mipmap.icon_pwd_hide));
                     TypeIsPassword = true;
                 }
                 break;
@@ -133,9 +140,11 @@ public class RegisterActivity extends BaseMVPActivity<RegisterPresenter> impleme
                 /**先将结果返回给 UserFragment ，让fragment自行拉起 loginActivity。
                  * 否则直接在注册页拉起登录页，暂时没法将结果通知给fragment
                  */
-                Intent intent = new Intent();
-                intent.putExtra("type","login");
-                setResult(RESULT_OK,intent);
+//                Intent intent = new Intent();
+//                intent.putExtra("type","login");
+//                setResult(RESULT_OK,intent);
+                Utils.startActivityClose(context,LoginActivity.class);
+//                Utils.startActivityWithData(context,LoginActivity.class,"page_flag",USER_FRAGMENT_PAGE+"");
                 context.finish();
             case R.id.tv_register_back:
                 context.finish();

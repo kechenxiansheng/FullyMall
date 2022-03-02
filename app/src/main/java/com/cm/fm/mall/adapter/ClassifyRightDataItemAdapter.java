@@ -13,9 +13,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.bean.ClassifyCategory;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.model.bean.ClassifyCategory;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.Utils;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
@@ -76,7 +76,7 @@ public class ClassifyRightDataItemAdapter extends BaseAdapter {
         viewHold.tv_child_title.setText(dataListBean.getName());
         /** 使用 Glide 加载图片 */
         RequestOptions options = new RequestOptions()
-                .placeholder(R.mipmap.loading)      //加载前的占位图
+                .placeholder(R.mipmap.image_loading)      //加载前的占位图
 //                .diskCacheStrategy(DiskCacheStrategy.NONE)  //禁用Glide的缓存功能
                 .error(R.mipmap.error_bg);        //错误展示图
         String uri ="http://119.27.160.230:8080/image/icon/icon_dog.png";
@@ -85,14 +85,10 @@ public class ClassifyRightDataItemAdapter extends BaseAdapter {
         viewHold.ll_item_title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.getInstance().tips(context,"尚未配置此类商品："+dataListBean.getName());
+                Utils.tips(context,"尚未配置此类商品："+dataListBean.getName());
             }
         });
-
-
         return convertView;
-
-
     }
 
     private static class ViewHold {

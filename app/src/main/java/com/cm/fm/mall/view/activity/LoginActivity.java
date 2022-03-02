@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -92,17 +93,19 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
      */
     @Override
     public void OnLoginResult(int code,String msg) {
+        LogUtil.d(TAG, "OnLoginResult: code="+code+",msg="+msg);
         if(code == MallConstant.SUCCESS){
             int activityId = getIntent().getIntExtra("activityId", 0);
             LogUtil.d(TAG,"activityId:"+ activityId);
-            if (activityId == MallConstant.USER_FRAGMENT_ACTIVITY_ID) {
-                /** UserFragment 检测到本地有缓存时，点击的登陆
-                 * 以及在注册页直接点击登陆过来的请求
-                 * */
-                setResult(RESULT_OK);
-                this.finish();
-                return;
-            }else if( activityId == MallConstant.SHOPPING_CART_ACTIVITY_ACTIVITY_ID){
+//            if (activityId == MallConstant.USER_FRAGMENT_ACTIVITY_ID) {
+//                /** UserFragment 检测到本地有缓存时，点击的登陆
+//                 * 以及在注册页直接点击登陆过来的请求
+//                 * */
+//                setResult(RESULT_OK);
+//                this.finish();
+//                return;
+//            }else
+            if( activityId == MallConstant.SHOPPING_CART_ACTIVITY_ACTIVITY_ID){
                 /** 购物车界面过来的请求（只是未登录），登陆成功直接关闭*/
 //                ActivityCollector.finishOneActivity(ShoppingCartActivity.class.getName());
 //                Utils.startActivityClose(this,ShoppingCartActivity.class);
@@ -110,8 +113,11 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 return;
             }
             /** 其他登陆 */
-            Utils.startActivityClose(this,MainActivity.class);
-//            Utils.startActivityWithData(activity,MainActivity.class,"fragmentId", String.valueOf(3));
+//            Utils.startActivityClose(this,MainActivity.class);
+            Intent intent = new Intent(activity,MainActivity.class);
+            intent.putExtra("fragmentId", 3);
+            startActivity(intent);
+            finish();
         }else if(code == MallConstant.FAIL){
             Utils.tips(activity,msg);
         }
@@ -170,11 +176,11 @@ public class LoginActivity extends BaseMVPActivity<LoginPresenter> implements Lo
                 break;
             case R.id.tv_login_register:
                 //点击了注册。回传UserFragment ，让fragmrnt自己拉起注册页面
-//                Utils.startActivityClose(this,RegisterActivity.class);
-                Intent intent = new Intent();
-                intent.putExtra("type","register");
-                setResult(RESULT_OK,intent);
-                this.finish();
+                Utils.startActivityClose(this,RegisterActivity.class);
+//                Intent intent = new Intent();
+//                intent.putExtra("type","register");
+//                setResult(RESULT_OK,intent);
+//                this.finish();
                 break;
             case R.id.tv_login_back:
                 this.finish();

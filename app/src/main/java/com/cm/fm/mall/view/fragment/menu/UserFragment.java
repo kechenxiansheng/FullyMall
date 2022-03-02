@@ -209,12 +209,11 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
             //已经登录，有头像直接展示
             LogUtil.d(TAG,"photo name :"+file.getName());
             bitmap = BitmapFactory.decodeFile(path);
-            bitmap = ImageUtil.createCircleBitmap(bitmap);
         }else {
             //使用默认图片
             bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.head_photo);
-            bitmap = ImageUtil.createCircleBitmap(bitmap);
         }
+        bitmap = ImageUtil.createCircleBitmap(bitmap);
         iv_head_portrait.setImageBitmap(bitmap);
     }
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -303,14 +302,14 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
                     if(userInfos.size()==0){
                         //没有用户数据先注册
                         Intent intent = new Intent(context,RegisterActivity.class);
-                        startActivityForResult(intent,MallConstant.USER_FRAGMENT_REGISTER_REQUEST_CODE,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
+//                        startActivityForResult(intent,MallConstant.USER_FRAGMENT_REGISTER_REQUEST_CODE,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
+                        startActivity(intent);
                     }else {
                         //有用户数据，但是没登陆，进行登录
                         //这里的文本显示处理 已在ActivityForResult中处理
                         Intent intent2 = new Intent(context,LoginActivity.class);
                         intent2.putExtra("activityId",MallConstant.USER_FRAGMENT_ACTIVITY_ID);
-                        //最后一个参数是 activity切换动画使用
-                        startActivityForResult(intent2,MallConstant.USER_FRAGMENT_LOGIN_REQUEST_CODE,ActivityOptions.makeSceneTransitionAnimation(context).toBundle());
+                        startActivity(intent2);
                     }
                 }else {
                     //登陆状态，切换为注销状态，清空昵称，替换为默认头像
@@ -342,6 +341,18 @@ public class UserFragment extends BaseMVPFragment<UserPresenter> implements View
             LogUtil.d(TAG,"cur_user : " + userInfos.get(0));
             account = userInfos.get(0).getName();
         }
+    }
 
+    public void loginRefresh(){
+        //直接登陆场景走这步
+        refreshUserInfo();
+        LogUtil.d(TAG,"login success. userInfos:"+userInfos);
+        //显示头像、昵称
+        tv_nick_name.setText(userInfos.get(0).getNickName());
+        //已经登录，文本显示修改为注销
+        typeOflogin = true;
+        //展示头像
+        showHeadPhoto();
+        tv_tips_login_logout.setText(getResources().getString(R.string.user_logout_des));
     }
 }

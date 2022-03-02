@@ -1,7 +1,6 @@
 package com.cm.fm.mall.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -9,17 +8,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.activity.AddressActivity;
-import com.cm.fm.mall.activity.AddressDetailActivity;
-import com.cm.fm.mall.bean.AddressInfo;
-import com.cm.fm.mall.dialog.AddressDeleteDialog;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.ResourceUtils;
-import com.cm.fm.mall.util.Utils;
-
-import org.litepal.crud.DataSupport;
+import com.cm.fm.mall.common.util.Utils;
+import com.cm.fm.mall.model.bean.AddressInfo;
+import com.cm.fm.mall.view.activity.AddressActivity;
+import com.cm.fm.mall.view.activity.AddressDetailActivity;
 
 import java.util.List;
+
+import static com.cm.fm.mall.common.MallConstant.ADDRESS_ACTIVITY_REQUEST_CODE_EDIT;
 
 /**
  * 地址页面 ListView 适配器
@@ -101,7 +97,7 @@ public class AddressAdapter extends BaseAdapter {
         holder.iv_edit_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.getInstance().startActivityDataForResult(context,AddressDetailActivity.class,AddressActivity.REQUEST_CODE_EDIT,addressInfo);
+                Utils.startActivityDataForResult(context, AddressDetailActivity.class, ADDRESS_ACTIVITY_REQUEST_CODE_EDIT,addressInfo);
             }
         });
         return view;

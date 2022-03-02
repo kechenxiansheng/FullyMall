@@ -2,8 +2,6 @@ package com.cm.fm.mall.adapter;
 
 import android.app.Activity;
 import android.content.ContentValues;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +11,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.activity.CommodityActivity;
-import com.cm.fm.mall.bean.ProductMsg;
-import com.cm.fm.mall.bean.ShoppingProduct;
-import com.cm.fm.mall.util.LogUtil;
-import com.cm.fm.mall.util.ResourceUtils;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.ResourceUtils;
+import com.cm.fm.mall.model.bean.ProductMsg;
+import com.cm.fm.mall.model.bean.ShoppingProduct;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.common.util.Utils;
+import com.cm.fm.mall.view.activity.CommodityActivity;
 
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleViewShoppingAdapter.MyViewHolder> {
     private List<ShoppingProduct> productLists;
@@ -141,7 +142,7 @@ public class RecycleViewShoppingAdapter extends RecyclerView.Adapter<RecycleView
                     LogUtil.d(tag, "cur_product:" + product.toString());
                     ProductMsg productMsg = new ProductMsg(product.getProductID(), product.getProductName(), product.getProductDescription(), product.getType(),
                             product.getPrice(), product.getInventory(), product.getExtension());
-                    Utils.getInstance().startActivityData(context, CommodityActivity.class, productMsg);
+                    Utils.startActivityData(context, CommodityActivity.class, productMsg);
                     break;
             }
         }

@@ -5,16 +5,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.activity.AddressActivity;
-import com.cm.fm.mall.activity.AddressDetailActivity;
-import com.cm.fm.mall.bean.AddressInfo;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.Utils;
 
 import java.util.List;
 
@@ -60,7 +56,7 @@ public class DetailPictureAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         //根据屏幕宽度设置图片大小
-        List<Integer> size = Utils.getInstance().getSize(context);
+        List<Integer> size = Utils.getSize(context);
         int width = size.get(0);
         ViewGroup.LayoutParams layoutParams = holder.iv_detail_picture.getLayoutParams();
         layoutParams.width = (int) (width*0.95);
@@ -69,7 +65,7 @@ public class DetailPictureAdapter extends BaseAdapter {
 
         /** 使用 Glide 加载图片 */
         RequestOptions options = new RequestOptions()
-                .placeholder(R.mipmap.loading)      //加载前的占位图
+                .placeholder(R.mipmap.image_loading)      //加载前的占位图
                 .diskCacheStrategy(DiskCacheStrategy.NONE)  //禁用Glide的缓存功能
                 .error(R.mipmap.error_bg);        //错误展示图
         String uri = list.get(position);

@@ -1,17 +1,12 @@
 package com.cm.fm.mall.adapter;
 
-import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-
-import com.cm.fm.mall.R;
-import com.cm.fm.mall.util.LogUtil;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
 
 /**
  * 商品页，图片适配器

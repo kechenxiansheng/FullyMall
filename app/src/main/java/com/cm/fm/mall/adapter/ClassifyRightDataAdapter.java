@@ -7,9 +7,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.bean.ClassifyCategory;
-import com.cm.fm.mall.customview.GridViewForScrollView;
-import com.cm.fm.mall.util.LogUtil;
+import com.cm.fm.mall.model.bean.ClassifyCategory;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.view.customview.GridViewForScrollView;
 
 import java.util.List;
 

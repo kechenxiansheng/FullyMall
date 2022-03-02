@@ -1,9 +1,7 @@
 package com.cm.fm.mall.view.activity;
 
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,14 +11,14 @@ import android.widget.TextView;
 
 import com.cm.fm.mall.R;
 import com.cm.fm.mall.base.BaseActivity;
-import com.cm.fm.mall.view.fragment.menu.ClassifyFragment;
-import com.cm.fm.mall.view.fragment.menu.FoundFragment;
-import com.cm.fm.mall.view.fragment.menu.MallFragment;
-import com.cm.fm.mall.view.fragment.menu.UserFragment;
 import com.cm.fm.mall.common.util.CheckUpdateUtil;
 import com.cm.fm.mall.common.util.LogUtil;
 import com.cm.fm.mall.common.util.NetWorkUtil;
 import com.cm.fm.mall.common.util.Utils;
+import com.cm.fm.mall.view.fragment.menu.ClassifyFragment;
+import com.cm.fm.mall.view.fragment.menu.FoundFragment;
+import com.cm.fm.mall.view.fragment.menu.MallFragment;
+import com.cm.fm.mall.view.fragment.menu.UserFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.fragment.app.FragmentManager;
@@ -34,7 +32,7 @@ import androidx.fragment.app.FragmentTransaction;
  */
 public class MainActivity extends BaseActivity implements TabLayout.OnTabSelectedListener {
 
-    public static MainActivity context;
+    public MainActivity context;
 
     MallFragment mallFragment;
     ClassifyFragment classifyFragment;
@@ -43,7 +41,9 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
     TabLayout tl_menu_bar;
     FrameLayout fl_data_center;
 
-    private FragmentManager fragmentManager;
+    private int pageId = -1;
+
+    private FragmentManager fragmentManager = getSupportFragmentManager();
     private TabLayout.Tab tab;
 
     String[] titles = {"商城","分类","发现","我的"};
@@ -53,14 +53,26 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LogUtil.d(TAG, "onCreate ");
         //防止软键盘吧布局向上顶的问题，setContentView 之前设置（突然无效了。。）
 //        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_MODE_CHANGED);
         setContentView(R.layout.activity_main);
         context = this;
-        fragmentManager = getSupportFragmentManager();
         initView();
-
+        if(savedInstanceState != null){
+            int fragmentId = savedInstanceState.getInt("fragmentId");
+            LogUtil.d(TAG, "fragmentId: "+fragmentId);
+            //直接显示用户页面
+            if(fragmentId ==3 && userFragment!=null){
+                userFragment.loginRefresh();
+                showFragment(fragmentId);
+            }
+        }else {
+            //默认展示商城
+            showFragment(0);
+        }
     }
+
     public void initView(){
         fl_data_center = findViewById(R.id.fl_data_center);       //内容布局
         tl_menu_bar = findViewById(R.id.tl_menu_bar);             //底部菜单
@@ -83,12 +95,8 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
             }
             tl_menu_bar.addTab(tab);
         }
-
-        //默认展示商城
-        showFragment(0);
         //点击监听
         tl_menu_bar.addOnTabSelectedListener(this);
-
         appUpdate();
     }
 
@@ -101,7 +109,21 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
     @Override
     protected void onResume() {
         super.onResume();
-        LogUtil.d(TAG,"onResume");
+        LogUtil.d(TAG,"onResume ");
+        if(pageId == 3){
+            if(userFragment!=null){
+                userFragment.loginRefresh();
+                showFragment(pageId);
+            }
+        }
+    }
+
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        LogUtil.d(TAG,"onRestart");
     }
 
     private void appUpdate(){
@@ -118,6 +140,7 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
+        pageId = tab.getPosition();
         //改变背景色
         View tabview = (View)tab.getCustomView().getParent();
         tabview.setBackgroundColor(getResources().getColor(R.color.colorLightBlue11));
@@ -186,11 +209,7 @@ public class MainActivity extends BaseActivity implements TabLayout.OnTabSelecte
                 }
                 break;
         }
-
-        transaction.commit();     //需搭配 executePendingTransactions() 一起使用，来保证立即执行
-        fragmentManager.executePendingTransactions();
-
-//        transaction.commitAllowingStateLoss();
+        transaction.commitNow();
     }
     //隐藏fragment
     private void hideFragment(FragmentTransaction transaction) {

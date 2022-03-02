@@ -1,9 +1,6 @@
 package com.cm.fm.mall.adapter;
 
 import android.app.Activity;
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +9,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.activity.CommodityActivity;
-import com.cm.fm.mall.activity.ProductActivity;
-import com.cm.fm.mall.bean.ProductMsg;
-import com.cm.fm.mall.util.ResourceUtils;
-import com.cm.fm.mall.util.Utils;
+import com.cm.fm.mall.common.util.ResourceUtils;
+import com.cm.fm.mall.model.bean.ProductMsg;
+import com.cm.fm.mall.common.util.Utils;
+import com.cm.fm.mall.view.activity.CommodityActivity;
 
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class RecycleViewMallAdapter extends RecyclerView.Adapter<RecycleViewMallAdapter.MyViewHolder> {
     private List<ProductMsg> productLists;
@@ -43,9 +42,9 @@ public class RecycleViewMallAdapter extends RecyclerView.Adapter<RecycleViewMall
                 //TODO 获取到具体商品后跳转到商品详情界面
                 int position =  viewHolder.getLayoutPosition(); //获取当前item的id
                 ProductMsg product = productLists.get(position);
-//                Utils.getInstance().startActivityData(context,ProductActivity.class,product);
-                Utils.getInstance().startActivityData(context,CommodityActivity.class,product);
-//                Utils.getInstance().tips(context,"点击了："+ product.getProductName());
+//                Utils.startActivityData(context,ProductActivity.class,product);
+                Utils.startActivityData(context, CommodityActivity.class,product);
+//                Utils.tips(context,"点击了："+ product.getProductName());
             }
         });
         return viewHolder;

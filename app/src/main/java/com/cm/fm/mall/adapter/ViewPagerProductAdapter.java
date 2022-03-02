@@ -3,20 +3,21 @@ package com.cm.fm.mall.adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentStatePagerAdapter;
+
 import android.view.View;
 
-import com.cm.fm.mall.bean.ProductMsg;
-import com.cm.fm.mall.fragment.product.ProductCommentFragment;
-import com.cm.fm.mall.fragment.product.ProductDetailFragment;
-import com.cm.fm.mall.fragment.product.ProductInfoFragment;
-import com.cm.fm.mall.util.LogUtil;
+import com.cm.fm.mall.common.util.LogUtil;
+import com.cm.fm.mall.model.bean.ProductMsg;
+import com.cm.fm.mall.view.fragment.product.ProductCommentFragment;
+import com.cm.fm.mall.view.fragment.product.ProductDetailFragment;
+import com.cm.fm.mall.view.fragment.product.ProductInfoFragment;
+
 /**
  * 商品页 viewpager 适配器
  */

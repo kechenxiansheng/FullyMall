@@ -1,4 +1,4 @@
-package com.cm.fm.mall.dialog;
+package com.cm.fm.mall.view.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -9,10 +9,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.cm.fm.mall.BuildConfig;
 import com.cm.fm.mall.R;
-import com.cm.fm.mall.util.CheckUpdateUtil;
-import com.cm.fm.mall.util.LogUtil;
+import com.cm.fm.mall.common.util.CheckUpdateUtil;
+import com.cm.fm.mall.common.util.LogUtil;
 
 /**
  * 移动网络弹框
@@ -30,7 +29,7 @@ public class MobileNetworkDialog extends Dialog implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View tip_view = View.inflate(context,R.layout.layout_network_tip,null);
+        View tip_view = View.inflate(context,R.layout.common_dialog,null);
         setContentView(tip_view);
         //显示在底部
         Window window = getWindow();
@@ -42,8 +41,8 @@ public class MobileNetworkDialog extends Dialog implements View.OnClickListener 
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         window.setAttributes(params);
 
-        tv_cancel_update = tip_view.findViewById(R.id.tv_cancel_update);
-        tv_sure_update = tip_view.findViewById(R.id.tv_sure_update);
+        tv_cancel_update = tip_view.findViewById(R.id.tv_cancel_button);
+        tv_sure_update = tip_view.findViewById(R.id.tv_sure_button);
 
         //下次再说
         tv_cancel_update.setOnClickListener(this);
@@ -54,11 +53,11 @@ public class MobileNetworkDialog extends Dialog implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.tv_cancel_update:
+            case R.id.tv_cancel_button:
                 LogUtil.d(tag,"点击了取消");
                 MobileNetworkDialog.this.dismiss();
                 break;
-            case R.id.tv_sure_update:
+            case R.id.tv_sure_button:
                 LogUtil.d(tag,"点击了继续");
                 MobileNetworkDialog.this.dismiss();
                 //开始下载
